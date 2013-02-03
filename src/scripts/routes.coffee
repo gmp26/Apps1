@@ -1,26 +1,11 @@
-angular.module('app').config ['$routeProvider', ($routeProvider) ->
-	$routeProvider
-	.when '/github/:searchTerm'
-		controller: 'gitHubController'
-		reloadOnSearch: true
-		resolve:
-			changeTab: ['$rootScope', ($rootScope) ->
-				$rootScope.$broadcast 'changeTab#gitHub'
-			]
-	.when '/people/:id'
-		controller: 'personDetailsController'
-		reloadOnSearch: true
-		resolve:
-			changeTab: ['$rootScope', ($rootScope) ->
-				$rootScope.$broadcast 'changeTab#people'
-			]
-	.when '/twitter/:searchTerm'
-		controller: 'twitterController'
-		reloadOnSearch: true
-		resolve:
-			changeTab: ['$rootScope', ($rootScope) ->
-				$rootScope.$broadcast 'changeTab#twitter'
-			]
-	.otherwise
-		redirectTo: '/github/CaryLandholt'
+angular.module('app')
+	.config ['$routeProvider', '$locationProvider', ($routeProvider, $locationProvider) ->
+
+		# use /tiltedApp rather than #/tiltedApp
+		#$locationProvider.html5Mode true
+
+		$routeProvider
+			.when '/tiltedApp'
+				templateUrl: '/views/tilted1.html'
+			.otherwise redirectTo: '/tiltedApp'
 ]

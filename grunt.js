@@ -77,12 +77,12 @@ module.exports = function (grunt) {
 		template: {
 			views: {
 				files: {
-					'./temp/views/': './src/views/**/*.template'
+					'./temp/views/': './src/views/**/*.html'
 				}
 			},
 			dev: {
 				files: {
-					'./temp/index.html': './src/index.template'
+					'./temp/index.html': './src/index.html'
 				},
 				environment: 'dev'
 			},
@@ -189,7 +189,7 @@ module.exports = function (grunt) {
 					'./dist/styles/': './temp/styles/'
 				}
 			},
-			// Task is run when the watched index.template file is modified.
+			// Task is run when the watched index.html file is modified.
 			index: {
 				files: {
 					'./dist/': './temp/index.html'
@@ -273,11 +273,11 @@ module.exports = function (grunt) {
 				tasks: 'less copy:styles reload'
 			},
 			index: {
-				files: './src/index.template',
+				files: './src/index.html',
 				tasks: 'template:dev copy:index reload'
 			},
 			views: {
-				files: './src/views/**/*.template',
+				files: './src/views/**/*.html',
 				tasks: 'template:views copy:views reload'
 			}
 		},
