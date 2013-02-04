@@ -16,9 +16,9 @@ files = [
   './dist/scripts/controllers/*.js',
   './dist/scripts/directives/*.js',
   './dist/scripts/filters/*.js',
-  './dist/scripts/responseInterceptors/*.js',
   './dist/scripts/services/*.js',
 
+  './test/scripts/directives/*.js',
   './test/scripts/filters/*.js',
   './test/scripts/services/*.js',
 ];
@@ -66,4 +66,4 @@ browsers = ['Chrome'];
 
 // Continuous Integration mode
 // if true, it capture browsers, run tests and exit
-singleRun = true;
+singleRun = false;

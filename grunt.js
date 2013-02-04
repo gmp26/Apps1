@@ -2,12 +2,16 @@
 module.exports = function (grunt) {
 	grunt.initConfig({
 		/*
-			Deletes dist and temp directories.
+			Deletes dist and temp and embed directories.
 			The temp directory is used during the build process.
-			The dist directory contains the artifacts of the build.
+			The dist directory contains a standalone app
+			The NRICH directory contains site specific uploadables
 			These directories should be deleted before subsequent builds.
 		*/
 		delete: {
+			uploads: {
+				files: ['./uploads']
+			},
 			dist: {
 				files: ['./dist/']
 			},
