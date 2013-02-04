@@ -5,15 +5,15 @@ angular.module('app').directive 'tiltedSquare', ['$timeout', ($timeout) ->
 
 	directiveDef = {
 		scope:
-			along: '@'
-			down: '@'
-			spacing: '@'
-			radius: '@'
-			color: '@'
-			fill: '@'
-			ax: '@'
+			along: '@' 		# grid points along
+			down: '@'		# grid points down
+			spacing: '@'	# pixels between grid points
+			radius: '@'		# radius of grid point
+			color: '@'		# colour of grid point
+			fill: '@'		# fill colour of square
+			ax: '@'			# control point a start position
 			ay: '@'
-			bx: '@'
+			bx: '@'			# control point b start position
 			bx: '@'
 
 		restrict: 'A'
@@ -22,7 +22,12 @@ angular.module('app').directive 'tiltedSquare', ['$timeout', ($timeout) ->
 
 		link: (scope, element, attrs) ->
 
-			# default values
+			# prevent default screen touch action
+			angular.element()
+				.find('body')
+				.bind 'touchmove', (event) -> event.preventDefault()
+
+			# default values ($observe to cope with any interpolation inside attributes)
 			attrs.$observe 'along', (val) ->
 				scope.along = ~~val || 10
 			
@@ -56,21 +61,21 @@ angular.module('app').directive 'tiltedSquare', ['$timeout', ($timeout) ->
 			attrs.$observe 'tiltedSquare', (val) ->
 				scope.tiltedSquare = val
 
-			# top/left page position to/from dot row/col
+			# transforms for top/left page position to/from dot row/col
 			TOP = (row) -> Math.round((row+0.5)*scope.spacing - scope.radius/2)
 			LEFT = (col) -> Math.round((col+0.5)*scope.spacing - scope.radius/2)
 			ROW = (top) -> Math.max(0, Math.min(scope.down - 1, Math.round((top + scope.radius/2)/scope.spacing - 0.5)))
 			COL = (left) -> Math.max(0, Math.min(scope.along - 1, Math.round((left + scope.radius/2)/scope.spacing - 0.5)))
 
+			# generic make dot
 			makeDot = (col, row, options) ->
-				if options.debug
-					console.log('makeDot: ', col, row)
 				options.col = col
 				options.row = row
 				options.left = LEFT(col)
 				options.top = TOP(row)
 				new fabric.Circle (options)
 
+			# make a background grid dot
 			makeGridDots = () ->
 				dots = []
 				for row in [0..scope.down-1] by 1
@@ -84,7 +89,6 @@ angular.module('app').directive 'tiltedSquare', ['$timeout', ($timeout) ->
 						dots.push(dot)
 				return dots
 		
-			# attach fabric to the canvas
 			squareDots = () ->
 				a = scope.fixedDot
 				b = scope.activeDot
@@ -116,16 +120,23 @@ angular.module('app').directive 'tiltedSquare', ['$timeout', ($timeout) ->
 
 				return if scope.canvas?
 
+				# attach fabric display tree to the canvas
+				# the tiltedSquare attribute gets interpolated into the canvas id in templateURL
 				scope.canvas = new fabric.Canvas attrs.tiltedSquare
 
+				# we don't want group selection on this canvas
+				scope.canvas.selection = false
+
+				# not sure we will ever need to change these at run time, so watch is probably unnecessary
+				# we are already running one clock cycle after post link $digest has happened
 				scope.$watch 'down', (newVal) ->
 					scope.canvas.setHeight (scope.spacing * newVal) if newVal > 0
 
 				scope.$watch 'along', (newVal) ->
 					scope.canvas.setWidth (scope.spacing * newVal) if newVal > 0
 
+				# make the control discs
 				scope.fixedDot = makeDot scope.ax, scope.ay, {
-					debug: true
 					selectable: true
 					radius: 25,
 					fill: '#048'
@@ -135,7 +146,6 @@ angular.module('app').directive 'tiltedSquare', ['$timeout', ($timeout) ->
 				}
 
 				scope.activeDot = makeDot scope.bx, scope.by, {
-					debug:true
 					selectable: true
 					radius: 25,
 					fill: '#f00'
@@ -144,15 +154,15 @@ angular.module('app').directive 'tiltedSquare', ['$timeout', ($timeout) ->
 					hasBorders: false
 				}
 
+				# add everything to the canvas
 				scope.dots = makeGridDots()
 				scope.canvas.add dot for dot in scope.dots
-
 				scope.square = makeSquare(squareDots())
-
 				scope.canvas.add scope.square
 				scope.canvas.add scope.fixedDot
 				scope.canvas.add scope.activeDot
 
+				# add control disc drag behaviour
 				scope.canvas.on 'object:moving', (event) ->
 					dot = event.target
 					if dot == scope.activeDot || dot == scope.fixedDot
@@ -166,7 +176,7 @@ angular.module('app').directive 'tiltedSquare', ['$timeout', ($timeout) ->
 							p.y = TOP(d.row)
 						scope.canvas.renderAll()
 
-			# kick things off after current $digest
+			# draw one cycle after current $digest
 			$timeout draw, 0
 	}
 ]
