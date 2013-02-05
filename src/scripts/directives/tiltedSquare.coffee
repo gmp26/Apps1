@@ -22,10 +22,6 @@ angular.module('app').directive 'tiltedSquare', ['$timeout', ($timeout) ->
 
 		link: (scope, element, attrs) ->
 
-			# prevent default screen touch action
-			angular.element()
-				.find('body')
-				.bind 'touchmove', (event) -> event.preventDefault()
 
 			# default values ($observe to cope with any interpolation inside attributes)
 			attrs.$observe 'along', (val) ->
@@ -124,6 +120,13 @@ angular.module('app').directive 'tiltedSquare', ['$timeout', ($timeout) ->
 				# the tiltedSquare attribute gets interpolated into the canvas id in templateURL
 				scope.canvas = new fabric.Canvas attrs.tiltedSquare
 
+				# prevent default screen touch action
+				angular.element()
+					.find('body')
+					.bind 'touchmove', (event) -> event.preventDefault()
+					.bind 'scroll', (event) ->
+						console.log "scrolled"
+
 				# we don't want group selection on this canvas
 				scope.canvas.selection = false
 
@@ -142,7 +145,7 @@ angular.module('app').directive 'tiltedSquare', ['$timeout', ($timeout) ->
 					fill: '#048'
 					opacity: 0.5
 					hasControls: false
-					hasBorders: false
+					hasBorders: true
 				}
 
 				scope.activeDot = makeDot scope.bx, scope.by, {
@@ -151,7 +154,7 @@ angular.module('app').directive 'tiltedSquare', ['$timeout', ($timeout) ->
 					fill: '#f00'
 					opacity: 0.5
 					hasControls: false
-					hasBorders: false
+					hasBorders: true
 				}
 
 				# add everything to the canvas
@@ -161,6 +164,9 @@ angular.module('app').directive 'tiltedSquare', ['$timeout', ($timeout) ->
 				scope.canvas.add scope.square
 				scope.canvas.add scope.fixedDot
 				scope.canvas.add scope.activeDot
+
+				scope.canvas.on 'object:moved', (event) ->
+					scope.canvas.calcOffset()
 
 				# add control disc drag behaviour
 				scope.canvas.on 'object:moving', (event) ->
@@ -176,7 +182,16 @@ angular.module('app').directive 'tiltedSquare', ['$timeout', ($timeout) ->
 							p.y = TOP(d.row)
 						scope.canvas.renderAll()
 
+				
+				scope.recalculate = ()->
+					console.log 'r'
+					scope.canvas.calcOffset()
+					$timeout scope.recalculate, 300
+
+				scope.recalculate()
+
 			# draw one cycle after current $digest
 			$timeout draw, 0
+
 	}
 ]
