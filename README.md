@@ -1,8 +1,15 @@
-# AngularFun
+# TiltedSquares
+Originally based on AngularFun
 *By [@CaryLandholt](https://twitter.com/carylandholt)*
 
+The aim is to make this app host many single view apps with minor changes to
+the grunt.js configuration. 
+
+Templates are handled via the templateCache and the grunt-angular-templates task.
+This simplfies directive testing when templateURL is used.
+
 ## About
-AngularFun is an [AngularJS](http://angularjs.org/) large application Reference Architecture.  The intent is to provide a base for creating your own AngularJS applications with minimal boilerplate setup and ceremony.
+TiltedSquares is an [AngularJS](http://angularjs.org/) large application Reference Architecture.  The intent is to provide a base for creating your own AngularJS applications with minimal boilerplate setup and ceremony.
 
 Simply follow the patterns and you'll get a complete development workflow, including:
 
@@ -23,14 +30,14 @@ Simply follow the patterns and you'll get a complete development workflow, inclu
 * Must have [CoffeeScript](https://npmjs.org/package/coffee-script) node package installed globally.  `npm install -g coffee-script`
 * Must have [Grunt](https://github.com/gruntjs/grunt) node package installed globally.  `npm install -g grunt`
 
-## Install Angular Fun
+## Install Tilted Squares
 Enter the following commands in the terminal.
 
-1. `git clone git://github.com/CaryLandholt/AngularFun.git`
-2. `cd AngularFun`
+1. `git clone git://github.com/gmp26/TiltedSquares.git`
+2. `cd TiltedSquares`
 3. `npm install`
 
-## Compile Angular Fun
+## Compile Tilted Squares
 You have three options.
 
 1. `grunt` - will compile the app preserving individual files (when run, files will be loaded on-demand)
