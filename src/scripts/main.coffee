@@ -2,17 +2,22 @@ require
 	shim:
 		'directives/tiltedSquare':
 			deps: [
+				'libs/angular'
 				'app'
+				'libs/fabric'
 			]
 		'libs/angular-resource':
+			deps: ['libs/angular']
+		'templates':
 			deps: [
 				'libs/angular'
+				'app'
+				'directives/tiltedSquare'
 			]
 		'app':
 			deps: [
 				'libs/angular'
 				'libs/angular-resource'
-				'libs/fabric'
 			]
 		'bootstrap':
 			deps: [
@@ -21,6 +26,7 @@ require
 		'routes':
 			deps: [
 				'app'
+				'templates'
 			]
 		'run':
 			deps: [
@@ -28,7 +34,6 @@ require
 			]
 	[
 		'require'
-		'directives/tiltedSquare'
 		'routes'
 		'run'
 	], (require) ->

@@ -6,6 +6,6 @@ angular.module('app')
 
 		$routeProvider
 			.when '/tiltedApp'
-				templateUrl: '/views/tilted1.html'
+				templateUrl: 'src/views/tilted1.html'
 			.otherwise redirectTo: '/tiltedApp'
 ]

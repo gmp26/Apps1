@@ -17,7 +17,7 @@ angular.module('app').directive 'tiltedSquare', ['$timeout', ($timeout) ->
 			bx: '@'
 
 		restrict: 'A'
-		templateUrl: '/views/directives/tiltedSquare.html'
+		templateUrl: 'src/views/directives/tiltedSquare.html'
 		replace: true
 
 		link: (scope, element, attrs) ->
@@ -145,7 +145,7 @@ angular.module('app').directive 'tiltedSquare', ['$timeout', ($timeout) ->
 					fill: '#048'
 					opacity: 0.5
 					hasControls: false
-					hasBorders: true
+					hasBorders: false
 				}
 
 				scope.activeDot = makeDot scope.bx, scope.by, {
@@ -154,7 +154,7 @@ angular.module('app').directive 'tiltedSquare', ['$timeout', ($timeout) ->
 					fill: '#f00'
 					opacity: 0.5
 					hasControls: false
-					hasBorders: true
+					hasBorders: false
 				}
 
 				# add everything to the canvas
@@ -182,13 +182,6 @@ angular.module('app').directive 'tiltedSquare', ['$timeout', ($timeout) ->
 							p.y = TOP(d.row)
 						scope.canvas.renderAll()
 
-				
-				scope.recalculate = ()->
-					console.log 'r'
-					scope.canvas.calcOffset()
-					$timeout scope.recalculate, 300
-
-				scope.recalculate()
 
 			# draw one cycle after current $digest
 			$timeout draw, 0

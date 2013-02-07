@@ -1,3 +1,11 @@
+
+module.exports = (app, dir) ->
+	app.get '/', (req, res) ->
+		res.render "#{dir}/index.html"
+
+###
+ 	Leave these - useful example of server-side CRUD operations
+
 nextId = 0
 
 people = [
@@ -7,10 +15,6 @@ people = [
 
 isUniqueName = (name) ->
 	(name for person in people when person.name is name).length is 0
-
-module.exports = (app, dir) ->
-	app.get '/', (req, res) ->
-		res.render "#{dir}/index.html"
 
 	app.get '/people', (req, res) ->
 		res.json people
@@ -38,3 +42,4 @@ module.exports = (app, dir) ->
 		current = person for person in people when parseInt(person.id, 10) is parseInt(id, 10)
 
 		res.json current
+###

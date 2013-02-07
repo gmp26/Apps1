@@ -9,7 +9,7 @@
 
 		<% if (config.environment === 'prod') { %>
 			<link rel="stylesheet" href="styles/styles.min.css?_=v<%= config.uniqueVersion() %>" />
-			<%= config.include('./temp/views/views.html') %>
+
 		<% } else { %>
 			<link rel="stylesheet" href="/styles/styles.css" />
 		<% } %>
@@ -17,15 +17,7 @@
 	</head>
 	<body ng-cloak class="ng-cloak">
 		<div class="container">
-			<div>
-				<h2>Tilted Squares <a href="http://nrich.maths.org/2293">NRICH 2293</a></h2>
-				<p>Find a quick way to work out the area of the square even if it is tilted.</p>
-			</div>
-			<div class="row">
-				<div class="span12">
-					<ng:view class="view"></ng:view>
-				</div>
-			</div>
+			<ng:view class="view"></ng:view>
 		</div>
 		<% if (config.environment === 'prod') { %>
 			<script src="scripts/scripts.min.js?_=v<%= config.uniqueVersion() %>"></script>

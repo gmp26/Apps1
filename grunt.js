@@ -1,6 +1,25 @@
 // Build configurations.
 module.exports = function (grunt) {
 	grunt.initConfig({
+
+		/* 
+			ngtemplates completely defines what the app does because it dictates what the top-level
+			view is.
+
+			Provided 
+		*/
+		ngtemplates: {
+			app: {
+				options: {base: '/src/views'},
+				src: [
+					'src/views/tilted1.html',
+					'src/views/directives/tiltedSquare.html'
+					],
+				dest: 'temp/scripts/templates.js'
+			}
+		},
+
+
 		/*
 			Deletes dist and temp and embed directories.
 			The temp directory is used during the build process.
@@ -8,7 +27,7 @@ module.exports = function (grunt) {
 			The NRICH directory contains site specific uploadables
 			These directories should be deleted before subsequent builds.
 		*/
-		delete: {
+		'delete': {
 			uploads: {
 				files: ['./uploads']
 			},
@@ -64,9 +83,7 @@ module.exports = function (grunt) {
 		},
 
 		/*
-			Compile template files (.template) to HTML (.html).
-
-			.template files are essentially html; however, you can take advantage of features provided by grunt such as underscore templating.
+			Compile template html files to final html with any grunt/underscore interpolation commands resolved.
 
 			The example below demonstrates the use of the environment configuration setting.
 			In 'prod' the concatenated and minified scripts are used along with a unique QueryString parameter to address browser caching.
@@ -138,16 +155,17 @@ module.exports = function (grunt) {
 				</script>
 
 			Now the views.html file can be included in the application and avoid making requests to the server for the views.
-		*/
+
 		inlineTemplate: {
 			views: {
 				files: {
-					'./temp/views/views.html': './temp/views/**/*.html'
+//					'./temp/views/views.html': './temp/views/*.html'
 				},
 				type: 'text/ng-template',
 				trim: 'temp'
 			}
 		},
+		*/
 
 		// Copies directories and files from one location to another.
 		copy: {
@@ -233,7 +251,7 @@ module.exports = function (grunt) {
 
 					return contents;
 				},
-				optimize: 'uglify',
+				optimize: 'none', //uglify',
 				out: './temp/scripts/scripts.min.js',
 				preserveLicenseComments: false,
 				skipModuleInsertion: true,
@@ -327,6 +345,12 @@ module.exports = function (grunt) {
 	*/
 	grunt.loadNpmTasks('grunt-reload');
 
+	/* 
+		Register task to install directive templateURLs directly into the templateCache
+		from https://github.com/ericclemmons/grunt-angular-templates
+	*/
+	grunt.loadNpmTasks('grunt-angular-templates');
+
 	// A task to run unit tests in testacular.
 	grunt.registerTask('unit-tests', 'run the testacular test driver on jasmine unit tests', function () {
 		var done = this.async();
@@ -347,7 +371,7 @@ module.exports = function (grunt) {
 		'coffeeLint',
 		'coffee',
 		'less',
-		'template:views',
+		'ngtemplates',
 		'template:dev',
 		'copy:temp',
 		'copy:dev',
@@ -375,8 +399,7 @@ module.exports = function (grunt) {
 		'coffeeLint',
 		'coffee',
 		'less',
-		'template:views',
-		'inlineTemplate',
+		'ngtemplates',
 		'template:prod',
 		'copy:temp',
 		'requirejs',
