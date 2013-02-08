@@ -1,5 +1,30 @@
 require
 	shim:
+		'templates':
+			deps: [
+				'libs/angular'
+				'app'
+				'controllers/svgBoilerPlateController'
+				'directives/svgMarginConvention'
+				'directives/d3TiltedSquare'
+				'directives/tiltedSquare'
+			]
+		'controllers/svgBoilerPlateController':
+			deps: [
+				'libs/angular'
+				'app'
+			]
+		'directives/svgMarginConvention':
+			deps: [
+				'libs/angular'
+				'app'
+			]
+		'directives/d3TiltedSquare':
+			deps: [
+				'libs/angular'
+				'app'
+				'libs/d3.v3'
+			]
 		'directives/tiltedSquare':
 			deps: [
 				'libs/angular'
@@ -8,12 +33,6 @@ require
 			]
 		'libs/angular-resource':
 			deps: ['libs/angular']
-		'templates':
-			deps: [
-				'libs/angular'
-				'app'
-				'directives/tiltedSquare'
-			]
 		'app':
 			deps: [
 				'libs/angular'

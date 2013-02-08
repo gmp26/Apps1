@@ -13,7 +13,8 @@ module.exports = function (grunt) {
 				options: {base: '/src/views'},
 				src: [
 					'src/views/tilted1.html',
-					'src/views/directives/tiltedSquare.html'
+					'src/views/directives/tiltedSquare.html',
+					'src/views/directives/svgMarginConvention.html'
 					],
 				dest: 'temp/scripts/templates.js'
 			}
@@ -300,7 +301,7 @@ module.exports = function (grunt) {
 			},
 			views: {
 				files: './src/views/**/*.html',
-				tasks: 'template:views copy:views reload'
+				tasks: 'ngtemplates copy:scripts template:views copy:views reload'
 			}
 		},
 
