@@ -4471,6 +4471,9 @@ function $CompileProvider($provide) {
             interpolateFn = $interpolate(attr[name], true);
           }
 
+          if(name[0]=='s' && name[1]=='v' && name[2]=='g')
+            console.log('gotcha: ', name)
+
           attr[name] = undefined;
           ($$observers[name] || ($$observers[name] = [])).$$inter = true;
           (attr.$$observers && attr.$$observers[name].$$scope || scope).
