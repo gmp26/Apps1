@@ -7,12 +7,9 @@ angular.module('app').directive 'svgMarginConvention', ($compile) ->
 	replace: false
 	restrict: 'A'
 	compile: (element, attrs) ->
+		
+		post: (scope, element, attrs) ->
 
-		console.log(element)
-
-		(scope, element, attrs) ->
-
-			$compile(element.contents())(scope)
 
 			g = d3.select('svg').select(".space")
 
