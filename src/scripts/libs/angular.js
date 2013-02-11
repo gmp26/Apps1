@@ -4477,8 +4477,7 @@ function $CompileProvider($provide) {
             $watch(interpolateFn, function interpolateFnWatchAction(value) {
               attr.$set(name, value);
               
-              if(name[0]=='s' && name[1]=='v' && name[2]=='g') {
-                console.log('trunc: ', name, '=', value)
+              if(name.slice(0,3)=='svg') {
                 attr.$set(name.slice(3).toLowerCase(), value)
               }
               

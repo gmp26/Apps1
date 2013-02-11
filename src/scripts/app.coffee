@@ -1,4 +1,4 @@
-angular.module 'app', ['ngResource', 'app.templates']
+(angular.module 'app', ['ngResource', 'app.templates'])
 
 	#
 	# create svgXXX attributes for use in svg to avoid chrome errors
@@ -11,9 +11,9 @@ angular.module 'app', ['ngResource', 'app.templates']
 	# See https://github.com/angular/angular.js/issues/1050
 	# and https://github.com/angular/angular.js/issues/1925
 	#
-app.config () ->
+.config () ->
 	for name in ['width', 'height', 'x1', 'x2', 'y1', 'y2']
-		ngName = 'svg' + name[0].toUpperCase() + name.slice(1)
+		svgName = 'svg' + name[0].toUpperCase() + name.slice(1)
 		angular.module('app').directive svgName, () ->
 			link: (scope, element, attrs) ->
 				attrs.$observe ngName, (value) ->
