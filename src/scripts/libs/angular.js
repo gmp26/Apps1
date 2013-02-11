@@ -4478,7 +4478,7 @@ function $CompileProvider($provide) {
               attr.$set(name, value);
               
               if(name.slice(0,3)=='svg') {
-                attr.$set(name.slice(3).toLowerCase(), value)
+                attr.$set(name.slice(3), value)
               }
               
             });
