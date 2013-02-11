@@ -1,0 +1,42 @@
+<!doctype html>
+<html ng-app="sample2">
+<head>
+  <meta charset="utf-8">
+  <title>Tangle Directive(s)</title>
+
+	<!-- Tangle -->
+	
+	<!-- TangleKit (optional) -->
+	<link rel="stylesheet" href="lib/TangleKit.css" type="text/css">
+
+  <!-- not used ever?
+	<script type="text/javascript" src="Tangle.js"></script>
+  -->
+
+  <!-- not used yet
+  <script type="text/javascript" src="lib/sprintf.js"></script>
+  <script type="text/javascript" src="lib/TangleKit.js"></script>
+  -->
+
+  <script type="text/javascript" src="lib/mootools.js"></script>
+  <script type="text/javascript" src="lib/BVTouchable.js"></script>
+  <script src="http://code.angularjs.org/1.1.1/angular.js"></script>
+  <script src="tangle.js"></script>
+  <script src="sample2.js"></script>
+
+</head>
+
+<body ng-init="cookies=4; caloriesPerCookie=50" ng-controller="Sample2">
+
+  <h1>Tangle directives</h1>
+  <p>Attempting <a href="http://worrydream.com/Tangle/">Bret Victor's Tangle lib</a> in angularjs.</p>
+
+  <h2>Sample 2</h2>
+  <input type="number" ng-model="cookies">
+  <p id="example">
+  	When you eat <adjustable number="cookies" min="2" max="10" step="0.1">{{cookies | number:1}}</adjustable> cookies, you will consume {{calories() | number:0}} calories.
+  </p>
+
+</body>
+</html>
+
