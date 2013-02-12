@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+		<title>Tilted Squares</title>
+		<meta name="description" content="Tilted Squares for Pythagoras" />
+		<meta name="viewport" content="width=device-width" />
+
+		<% if (config.environment === 'prod') { %>
+			<link rel="stylesheet" href="styles/styles.min.css?_=v<%= config.uniqueVersion() %>" />
+
+		<% } else { %>
+			<link rel="stylesheet" href="/styles/styles.css" />
+		<% } %>
+
+	</head>
+	<body ng-cloak class="ng-cloak">
+		<div class="container">
+			<ng:view class="view"></ng:view>
+		</div>
+		<% if (config.environment === 'prod') { %>
+			<script src="scripts/scripts.min.js?_=v<%= config.uniqueVersion() %>"></script>
+		<% } else { %>
+			<script data-main="/scripts/main.js" src="/scripts/libs/require.js"></script>
+		<% } %>
+	</body>
+</html>

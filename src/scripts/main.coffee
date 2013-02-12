@@ -3,11 +3,24 @@ require
 		'templates':
 			deps: [
 				'libs/angular'
+				'libs/bootstrap'
 				'app'
+				'controllers/appController'
+				'controllers/todoController'
 				'controllers/svgBoilerPlateController'
 				'directives/svgMarginConvention'
 				'directives/d3TiltedSquare'
 				'directives/tiltedSquare'
+			]
+		'controllers/appController':
+			deps: [
+				'libs/angular'
+				'app'
+			]
+		'controllers/todoController':
+			deps: [
+				'libs/angular'
+				'app'
 			]
 		'controllers/svgBoilerPlateController':
 			deps: [
@@ -31,6 +44,10 @@ require
 				'app'
 				'libs/fabric'
 			]
+		'libs/angular':
+			deps: ['libs/jquery']
+		'libs/bootstrap':
+			deps: ['libs/jquery']
 		'libs/angular-resource':
 			deps: ['libs/angular']
 		'app':

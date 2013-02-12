@@ -13,6 +13,10 @@ module.exports = function (grunt) {
 				options: {base: '/src/views'},
 				src: [
 					'src/views/tilted1.html',
+					'src/views/nav.html',
+					'src/views/partial1.html',
+					'src/views/partial2.html',
+					'src/views/todo.html',
 					'src/views/directives/tiltedSquare.html',
 					'src/views/directives/svgMarginConvention.html'
 					],
