@@ -1,9 +1,10 @@
-# TiltedSquares
+# Apps1
+A collection of Apps for [NRICH](http://nrich.maths.org)
+
 Originally based on AngularFun
 *By [@CaryLandholt](https://twitter.com/carylandholt)*
 
-The aim is to make this app host many single view apps with minor changes to
-the grunt.js configuration. 
+The aim is to make this app host a few related apps and for the basis for similar collections.
 
 Templates are handled via the templateCache and the grunt-angular-templates task.
 This simplfies directive testing when templateURL is used.
