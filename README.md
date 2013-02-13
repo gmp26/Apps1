@@ -1,6 +1,5 @@
 # Apps1
 A collection of Apps for [NRICH](http://nrich.maths.org)
-
 Originally based on AngularFun
 *By [@CaryLandholt](https://twitter.com/carylandholt)*
 
@@ -31,14 +30,14 @@ Simply follow the patterns and you'll get a complete development workflow, inclu
 * Must have [CoffeeScript](https://npmjs.org/package/coffee-script) node package installed globally.  `npm install -g coffee-script`
 * Must have [Grunt](https://github.com/gruntjs/grunt) node package installed globally.  `npm install -g grunt`
 
-## Install Tilted Squares
+## Install Apps1
 Enter the following commands in the terminal.
 
 1. `git clone git://github.com/gmp26/TiltedSquares.git`
 2. `cd TiltedSquares`
 3. `npm install`
 
-## Compile Tilted Squares
+## Compile Apps1
 You have three options.
 
 1. `grunt` - will compile the app preserving individual files (when run, files will be loaded on-demand)
