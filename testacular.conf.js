@@ -18,6 +18,7 @@ files = [
   './dist/scripts/filters/*.js',
   './dist/scripts/services/*.js',
 
+  './test/scripts/controllers/*.js',
   './test/scripts/directives/*.js',
   './test/scripts/filters/*.js',
   './test/scripts/services/*.js',

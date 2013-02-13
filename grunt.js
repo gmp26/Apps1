@@ -11,15 +11,7 @@ module.exports = function (grunt) {
 		ngtemplates: {
 			app: {
 				options: {base: '/src/views'},
-				src: [
-					'src/views/tilted1.html',
-					'src/views/nav.html',
-					'src/views/partial1.html',
-					'src/views/partial2.html',
-					'src/views/todo.html',
-					'src/views/directives/tiltedSquare.html',
-					'src/views/directives/svgMarginConvention.html'
-					],
+				src: 'src/views/**/*.html',
 				dest: 'temp/scripts/templates.js'
 			}
 		},
