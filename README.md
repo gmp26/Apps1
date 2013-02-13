@@ -33,9 +33,10 @@ Simply follow the patterns and you'll get a complete development workflow, inclu
 ## Install Apps1
 Enter the following commands in the terminal.
 
-1. `git clone git://github.com/gmp26/TiltedSquares.git`
-2. `cd TiltedSquares`
-3. `npm install`
+1. `git clone git://github.com/gmp26/Apps1.git`
+1. `cd Apps1`
+1. `git checkout d3`
+1. `npm install`
 
 ## Compile Apps1
 You have three options.
