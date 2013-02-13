@@ -8,6 +8,7 @@ require
 				'controllers/appController'
 				'controllers/todoController'
 				'controllers/svgBoilerPlateController'
+				'directives/appVersion'
 				'directives/svgMarginConvention'
 				'directives/d3TiltedSquare'
 				'directives/tiltedSquare'
@@ -44,33 +45,24 @@ require
 				'app'
 				'libs/fabric'
 			]
-		'libs/angular':
-			deps: ['libs/jquery']
-		'libs/bootstrap':
-			deps: ['libs/jquery']
-		'libs/angular-resource':
-			deps: ['libs/angular']
-		'app':
+		'directives/appVersion':
 			deps: [
+				'libs/angular'
+				'app'
+				'services/semver'
+			]
+		'services/semver': deps: ['libs/angular', 'app']
+		'libs/angular': deps: ['libs/jquery']
+		'libs/bootstrap': deps: ['libs/jquery']
+		'libs/angular-resource': deps: ['libs/angular']
+		'app': deps: [
 				'libs/angular'
 				'libs/angular-resource'
 			]
-		'bootstrap':
-			deps: [
-				'app'
-			]
-		'routes':
-			deps: [
-				'app'
-				'templates'
-			]
-		'run':
-			deps: [
-				'app'
-			]
+		'bootstrap': deps: ['app']
+		'routes': deps: ['app', 'templates']
 	[
 		'require'
 		'routes'
-		'run'
 	], (require) ->
 		require ['bootstrap']
