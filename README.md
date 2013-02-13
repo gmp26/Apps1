@@ -9,9 +9,9 @@ Templates are handled via the templateCache and the grunt-angular-templates task
 This simplfies directive testing when templateURL is used.
 
 ## About
-TiltedSquares is an [AngularJS](http://angularjs.org/) large application Reference Architecture.  The intent is to provide a base for creating your own AngularJS applications with minimal boilerplate setup and ceremony.
+Apps1 is an [AngularJS](http://angularjs.org/) app collection.
 
-Simply follow the patterns and you'll get a complete development workflow, including:
+Follow the patterns and you'll get a complete development workflow, including:
 
 * file organization
 * compilation of [CoffeeScript](http://coffeescript.org/) files
@@ -29,6 +29,7 @@ Simply follow the patterns and you'll get a complete development workflow, inclu
 * Must have [node.js (at least v0.8.1)](http://nodejs.org/) installed with npm (Node Package Manager)
 * Must have [CoffeeScript](https://npmjs.org/package/coffee-script) node package installed globally.  `npm install -g coffee-script`
 * Must have [Grunt](https://github.com/gruntjs/grunt) node package installed globally.  `npm install -g grunt`
+* Preferably have testacular installed globally too/ 'npm install -g testacular'
 
 ## Install Apps1
 Enter the following commands in the terminal.
