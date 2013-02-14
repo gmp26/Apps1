@@ -2,16 +2,12 @@ beforeEach module 'app'
 
 describe 'App', () ->
 
-	#beforeEach module 'mocks.Item'
-
+	# we want to make the scope available generally
 	scope = {}
 
 	beforeEach inject ($controller, $rootScope) ->
 
-		### store reference to scope, so that we can access it from the specs ###
 		scope = $rootScope.$new()
-
-		### make the controller we're going to test ###
 		$controller 'todoController',
 			$scope: scope
 

@@ -5,12 +5,7 @@ describe('App', function() {
   var scope;
   scope = {};
   beforeEach(inject(function($controller, $rootScope) {
-    /* store reference to scope, so that we can access it from the specs
-    */
     scope = $rootScope.$new();
-    /* make the controller we're going to test
-    */
-
     return $controller('todoController', {
       $scope: scope
     });

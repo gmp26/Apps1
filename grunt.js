@@ -2,20 +2,6 @@
 module.exports = function (grunt) {
 	grunt.initConfig({
 
-		/* 
-			ngtemplates completely defines what the app does because it dictates what the top-level
-			view is.
-
-			Provided 
-		*/
-		ngtemplates: {
-			app: {
-				options: {base: '/src/views'},
-				src: 'src/views/**/*.html',
-				dest: 'temp/scripts/templates.js'
-			}
-		},
-
 
 		/*
 			Deletes dist and temp and embed directories.
@@ -110,59 +96,20 @@ module.exports = function (grunt) {
 			}
 		},
 
-		/*
-			Creates a single file consisting of multiple views (html) files surrounded by script tags.
+		/* 
+			ngtemplates task conactenates html files into a single javacsript file which loads them
+			directly into the $templateCache, keyed on their original filenames.
 
-			For example, take the following two files:
-				<!-- /temp/views/people.html (compiled from /src/views/people.template) -->
-				<ul ng-hide="!people.length">
-					<li class="row" ng-repeat="person in people | orderBy:'name'">
-						<a ng-href="#/people/{{person.id}}" ng-bind="person.name"></a>
-					</li>
-				</ul>
-
-				<!-- /temp/views/repos.html (compiled from /src/views/repos.html) -->
-				<ul ng-hide="!repos.length">
-					<li ng-repeat="repo in repos | orderBy:'pushed_at':true">
-						<a ng-href="{{repo.url}}" ng-bind="repo.name" target="_blank"></a>
-						<div ng-bind="repo.description"></div>
-					</li>
-				</ul>
-
-			AngularJS will interpret inlined scripts with type of "text/ng-template" in lieu of retrieving the view from the server.
-			The id of the script tag must match the path requested.
-			Since the path includes the temp directory, this must be trimmed.
-
-			The output of the configuration below is:
-				<!-- /temp/views/views.html -->
-				<script id="/views/people.html" type="text/ng-template">
-					<ul ng-hide="!people.length">
-						<li class="row" ng-repeat="person in people | orderBy:'name'">
-							<a ng-href="#/people/{{person.id}}" ng-bind="person.name"></a>
-						</li>
-					</ul>
-				</script>
-				<script id="/views/repos.html" type="text/ng-template">
-					<ul ng-hide="!repos.length">
-						<li ng-repeat="repo in repos | orderBy:'pushed_at':true">
-							<a ng-href="{{repo.url}}" ng-bind="repo.name" target="_blank"></a>
-							<div ng-bind="repo.description"></div>
-						</li>
-					</ul>
-				</script>
-
-			Now the views.html file can be included in the application and avoid making requests to the server for the views.
-
-		inlineTemplate: {
-			views: {
-				files: {
-//					'./temp/views/views.html': './temp/views/*.html'
-				},
-				type: 'text/ng-template',
-				trim: 'temp'
+			The views processed in this way becomes part of the js rather than loaded by XHR at runtime. 
+		*/
+		ngtemplates: {
+			app: {
+				options: {base: '/src/views'},
+				src: 'src/views/**/*.html',
+				dest: 'temp/scripts/templates.js'
 			}
 		},
-		*/
+
 
 		// Copies directories and files from one location to another.
 		copy: {
@@ -213,13 +160,17 @@ module.exports = function (grunt) {
 				files: {
 					'./dist/': './temp/index.html'
 				}
-			},
+			}
 			// Task is run when a watched view is modified.
+			/* Change this to only target views loaded with XHR - when we have some.
+			   Till then, ignore.
+
 			views: {
 				files: {
 					'./dist/views/': './temp/views/'
 				}
 			}
+			*/
 		},
 
 		/*
@@ -293,11 +244,11 @@ module.exports = function (grunt) {
 			},
 			index: {
 				files: './src/index.html',
-				tasks: 'template:dev copy:index reload'
+				tasks: 'template:dev ngtemplates copy:index reload'
 			},
 			views: {
 				files: './src/views/**/*.html',
-				tasks: 'ngtemplates copy:scripts template:views copy:views reload'
+				tasks: 'template:views ngtemplates copy:scripts reload'
 			}
 		},
 
@@ -315,7 +266,7 @@ module.exports = function (grunt) {
 		},
 
 		/*
-			Leverages the LiveReload browser plugin to automatically reload the browser when watched files have changed.
+			Uses the LiveReload browser plugin to automatically reload the browser when watched files have changed.
 
 			As of this writing, Chrome, Firefox, and Safari are supported.
 
@@ -373,8 +324,8 @@ module.exports = function (grunt) {
 		'coffeeLint',
 		'coffee',
 		'less',
-		'ngtemplates',
 		'template:dev',
+		'ngtemplates',
 		'copy:temp',
 		'copy:dev',
 		'delete:temp'
@@ -401,8 +352,8 @@ module.exports = function (grunt) {
 		'coffeeLint',
 		'coffee',
 		'less',
-		'ngtemplates',
 		'template:prod',
+		'ngtemplates',
 		'copy:temp',
 		'requirejs',
 		'minifyHtml',
