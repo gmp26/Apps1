@@ -9,9 +9,9 @@ angular.module('app')
 				templateUrl: 'src/views/tilted1.html'
 			.when '/todo'
 				templateUrl: 'src/views/todo.html'
-			.when '/view1'
+			.when '/svgMargins'
 				templateUrl: 'src/views/svgMargins.html'
-			.when '/view2'
-				templateUrl: 'src/views/partial2.html'
+			.when '/frogs'
+				templateUrl: 'src/views/frogs.html'
 			.otherwise redirectTo: '/tiltedApp'
 ]
