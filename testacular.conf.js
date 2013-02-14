@@ -13,15 +13,17 @@ files = [
   './dist/scripts/libs/angular-resource.js',
   './test/scripts/libs/angular-mocks.js',
   './dist/scripts/app.js',
+  './dist/scripts/templates.js',
   './dist/scripts/controllers/*.js',
   './dist/scripts/directives/*.js',
-  './dist/scripts/filters/*.js',
+//  './dist/scripts/filters/*.js',
   './dist/scripts/services/*.js',
 
-  './test/scripts/controllers/*.js',
+  './test/scripts/unit/*.js'/*,
   './test/scripts/directives/*.js',
   './test/scripts/filters/*.js',
   './test/scripts/services/*.js',
+  */
 ];
 
 

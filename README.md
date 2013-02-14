@@ -1,6 +1,6 @@
 # Apps1
 A collection of Apps for [NRICH](http://nrich.maths.org)
-Originally based on AngularFun
+derived from AngularFun
 *By [@CaryLandholt](https://twitter.com/carylandholt)*
 
 The aim is to make this app host a few related apps and for the basis for similar collections.

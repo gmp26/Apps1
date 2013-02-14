@@ -351,11 +351,16 @@ module.exports = function (grunt) {
 	// A task to run unit tests in testacular.
 	grunt.registerTask('unit-tests', 'run the testacular test driver on jasmine unit tests', function () {
 		var done = this.async();
-
 		require('child_process').exec('./node_modules/testacular/bin/testacular start ./testacular.conf.js --single-run', function (err, stdout) {
 			grunt.log.write(stdout);
 			done(err);
 		});
+		/*
+		require('child_process').exec('./node_modules/testacular/bin/testacular start ./testacular.conf.js', function (err, stdout) {
+			grunt.log.write(stdout);
+			done(err);
+		});
+		*/
 	});
 
 	/*

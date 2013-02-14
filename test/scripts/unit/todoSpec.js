@@ -1,59 +1,67 @@
-beforeEach(module('todo'));
+
+beforeEach(module('app'));
 
 describe('App', function() {
-	var scope;
-
-  beforeEach(module('mocks.Item'));
-
-	beforeEach(inject(function($controller, $rootScope) {
-    // store reference to scope, so that we can access it from the specs
+  var scope;
+  scope = {};
+  beforeEach(inject(function($controller, $rootScope) {
+    /* store reference to scope, so that we can access it from the specs
+    */
     scope = $rootScope.$new();
+    /* make the controller we're going to test
+    */
 
-    // instantiate the controller
-	  $controller('App', {$scope: scope});
-	}));
-
-	describe('add', function() {
-		it('should add new task', function() {
-			scope.items = [];
-			scope.newText = 'FAKE TASK';
-			scope.add(); 
-
-			expect(scope.items.length).toBe(1);
-			expect(scope.items[0].text).toBe('FAKE TASK');
-		});
-
-
-		it('should reset newText', function() {
-			scope.newText = 'SOME TEXT';
-			scope.add();
-
-			expect(scope.newText).toBe('');
-		});
-	});
-
-
+    return $controller('todoController', {
+      $scope: scope
+    });
+  }));
+  describe('add', function() {
+    it('should add new todo', function() {
+      scope.todos = [];
+      scope.todoText = 'FAKE TODO';
+      scope.addTodo();
+      expect(scope.todos.length).toBe(1);
+      return expect(scope.todos[0].text).toBe('FAKE TODO');
+    });
+    return it('should reset newText', function() {
+      scope.todos = [];
+      scope.todoText = 'SOME TEXT';
+      scope.addTodo();
+      return expect(scope.todoText).toBe('');
+    });
+  });
   describe('remaining', function() {
-
-		it('should return number of tasks that are not done', function() {
-			scope.items = [{done: false}, {done: false}, {done: false}, {done: false}];
-			expect(scope.remaining()).toBe(4);
-
-			scope.items[0].done = true;
-			expect(scope.remaining()).toBe(3);
-		});
-	});
-
-
-	describe('archive', function() {
-
-		it('should remove tasks that are done', function() {
-      scope.items = [new MockItem({done: false}), new MockItem({done: true}), new MockItem({done: false})];
-//      scope.items = [{done: false}, {done: true}, {done: false}];
-      expect(scope.items.length).toBe(3);
-
-			scope.archive();
-			expect(scope.items.length).toBe(2);
-		});
-	});
+    return it('should return number of todos that are not done', function() {
+      scope.todos = [
+        {
+          done: false
+        }, {
+          done: false
+        }, {
+          done: false
+        }, {
+          done: false
+        }
+      ];
+      expect(scope.remaining()).toBe(4);
+      scope.todos[0].done = true;
+      return expect(scope.remaining()).toBe(3);
+    });
+  });
+  return describe('archive', function() {
+    return it('should remove todos that are done', function() {
+      scope.todos = [
+        {
+          done: false
+        }, {
+          done: true
+        }, {
+          done: false
+        }
+      ];
+      expect(scope.todos.length).toBe(3);
+      scope.archive();
+      return expect(scope.todos.length).toBe(2);
+    });
+  });
 });
