@@ -4,8 +4,19 @@
 
 ($scope) ->
 
+	$scope.padIndexes = [0,1,2,3,4,5]
+
+	$scope.jump = (index) ->
+		console.log("You clicked ", index)
+
+	$scope.getFrog = (index) ->
+		if index < 3 then "pad bluefrog" else "pad redfrog"
+
+
+
+
 	### copied from todoController
-	
+
   $scope.todos = [
     text: "learn angular"
     done: true

@@ -26,7 +26,6 @@ angular.module('app').controller('appController', [
   #
   $scope.getClass = (id) ->
 
-    console.log "id=", id
     if $scope.activeNavId && $scope.activeNavId.indexOf(id) == 0
       return 'active'
     else

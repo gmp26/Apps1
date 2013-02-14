@@ -7,6 +7,7 @@ require
 				'app'
 				'controllers/appController'
 				'controllers/todoController'
+				'controllers/frogController'
 				'controllers/svgBoilerPlateController'
 				'directives/appVersion'
 				'directives/svgMarginConvention'
@@ -19,6 +20,11 @@ require
 				'app'
 			]
 		'controllers/todoController':
+			deps: [
+				'libs/angular'
+				'app'
+			]
+		'controllers/frogController':
 			deps: [
 				'libs/angular'
 				'app'
