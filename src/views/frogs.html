@@ -2,10 +2,8 @@
   <h2>Frogs <a href="http://nrich.maths.org/1246">NRICH 1246</a></h2>
   <p>Find a way to swap the red and blue frogs.</p>
 </div>
-<div>
-	<span id="pad3" class="pad redfrog"></span>
-	<span id="pad4" class="pad redfrog"></span>
-	<span id="pad2" class="pad"></span>
-	<span id="pad0" class="pad bluefrog"></span>
-	<span id="pad1" class="pad bluefrog"></span>
+<div ng-controller="frogController">
+
+	<span ng-repeat="index in padIndexes" ng-class="getFrog($index)" ng-click="jump($index)"></span>
+
 </div>
