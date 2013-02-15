@@ -7,6 +7,8 @@ angular.module('app')
 		$routeProvider
 			.when '/tiltedApp'
 				templateUrl: 'src/views/tilted1.html'
+			.when '/d3Tilted'
+				templateUrl: 'src/views/d3Tilted.html'
 			.when '/todo'
 				templateUrl: 'src/views/todo.html'
 			.when '/svgMargins'

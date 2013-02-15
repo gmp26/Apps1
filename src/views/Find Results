@@ -1,0 +1,10 @@
+Searching 81 files for "tilted1" (case sensitive)
+
+/Users/gmp26/angular/Apps1/src/scripts/routes.coffee:
+    7  		$routeProvider
+    8  			.when '/tiltedApp'
+    9: 				templateUrl: 'src/views/fabricTilted.html'
+   10  			.when '/todo'
+   11  				templateUrl: 'src/views/todo.html'
+
+1 match in 1 file

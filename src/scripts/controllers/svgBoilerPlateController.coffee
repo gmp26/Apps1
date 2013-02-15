@@ -4,10 +4,10 @@
 angular.module('app').controller 'svgBoilerPlateController', ($scope) ->
 	
 	margin = {top: 20, right: 20, bottom: 20, left: 20}
-	padding = {top: 10, right:10, bottom: 10, left: 10}
+	padding = {top: 40, right: 40, bottom: 40, left: 40}
 	
-	outerWidth = 300 #768
-	outerHeight = 300 #1024 - 100
+	outerWidth = 400 #768
+	outerHeight = 400 #1024 - 100
 	innerWidth = outerWidth - margin.left - margin.right
 	innerHeight = outerHeight - margin.top - margin.bottom
 	width = innerWidth - padding.left - padding.right

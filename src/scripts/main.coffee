@@ -9,6 +9,7 @@ require
 				'controllers/todoController'
 				'controllers/frogController'
 				'controllers/svgBoilerPlateController'
+				'controllers/d3TiltedController'
 				'directives/appVersion'
 				'directives/svgMarginConvention'
 				'directives/d3TiltedSquare'
@@ -30,6 +31,11 @@ require
 				'app'
 			]
 		'controllers/svgBoilerPlateController':
+			deps: [
+				'libs/angular'
+				'app'
+			]
+		'controllers/d3TiltedController':
 			deps: [
 				'libs/angular'
 				'app'
