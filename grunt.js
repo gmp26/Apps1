@@ -235,7 +235,7 @@ module.exports = function (grunt) {
 		// Sets up file watchers and runs tasks when watched files are changed.
 		watch: {
 			scripts: {
-				files: './src/scripts/**/*.coffee',
+				files: ['./src/scripts/**/*.coffee','./test/scripts/**/*.coffee'],
 				tasks: 'coffeeLint:scripts coffee:scripts copy:scripts reload'
 			},
 			styles: {
@@ -303,7 +303,7 @@ module.exports = function (grunt) {
 	grunt.registerTask('unit-tests', 'run the testacular test driver on jasmine unit tests', function () {
 		var done = this.async();
 		require('child_process').exec('./node_modules/testacular/bin/testacular start ./testacular.conf.js --single-run', function (err, stdout) {
-			grunt.log.write(stdout);
+			grunt.log.writeln(stdout);
 			done(err);
 		});
 		/*

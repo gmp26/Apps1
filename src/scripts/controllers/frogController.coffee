@@ -10,7 +10,7 @@
 		console.log("You clicked ", index)
 
 	$scope.getFrog = (index) ->
-		if index < 3 then "pad bluefrog" else "pad redfrog"
+		if index < 3 then "pad redfrog" else "pad bluefrog"
 
 
 

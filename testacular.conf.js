@@ -9,6 +9,8 @@ basePath = '';
 files = [
   JASMINE,
   JASMINE_ADAPTER,
+  './dist/scripts/libs/jquery.js',
+  './dist/scripts/libs/d3.v3.js',
   './dist/scripts/libs/angular.js',
   './dist/scripts/libs/angular-resource.js',
   './test/scripts/libs/angular-mocks.js',
@@ -71,3 +73,8 @@ browsers = ['Chrome'];
 // Continuous Integration mode
 // if true, it capture browsers, run tests and exit
 singleRun = false;
+
+junitReporter = {
+  outputFile: 'test_out/unit.xml',
+  suite: 'unit'
+};

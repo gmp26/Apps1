@@ -8,8 +8,6 @@ angular.module('app').directive 'd3TiltedSquare', ['$timeout', ($timeout) ->
 		controller: 'd3TiltedController'
 		scope:
 			spacing: '@'	# pixels between grid points
-			along: '@' 		# grid points along
-			down: '@'		# grid points down
 			radius: '@'		# radius of grid point
 			color: '@'		# colour of grid point
 			fill: '@'		# fill colour of square

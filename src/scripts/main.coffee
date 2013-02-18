@@ -12,6 +12,7 @@ require
 				'controllers/d3TiltedController'
 				'directives/appVersion'
 				'directives/svgMarginConvention'
+				'directives/d3Vis'
 				'directives/d3TiltedSquare'
 				'directives/tiltedSquare'
 			]
@@ -52,6 +53,12 @@ require
 				'libs/d3.v3'
 			]
 		'directives/tiltedSquare':
+			deps: [
+				'libs/angular'
+				'app'
+				'libs/fabric'
+			]
+		'directives/d3Vis':
 			deps: [
 				'libs/angular'
 				'app'
