@@ -18,8 +18,9 @@
             <rect class="inner axisHelp" svg-width="{{width}}" svg-height="{{height}}">
             </rect>
             <text y="-8" class="axisHelp">
-                translate({{margin.left}}, {{margin.top}})
+                space origin (0,0)
             </text>
+            <circle class="gridDot" transform="translate(140,140)" fill="red" r="10">
         </g>
         <line class="arrow axisHelp" svg-x2="{{padding.left}}" svg-y2="{{padding.top}}" marker-end="url(#triangle-end)">
         </line>
@@ -32,9 +33,11 @@
         <line class="arrow axisHelp" svg-x1="{{innerWidth}}" svg-x2="{{innerWidth-padding.right}}" svg-y1="{{halfInnerHeight}}" svg-y2="{{halfInnerHeight}}" marker-end="url(#triangle-end)">
         </line>
         <text y="-8" class="axisHelp">
-            origin
+            origin minus padding ({{-padding.left}},{{-padding.top}})
         </text>
-        <circle class="origin axisHelp" r="4.5">
+        <circle class="origin axisHelp" transform="translate({{-margin.left}}, {{-margin.right}})" r="4.5">
+        </circle>
+        <circle class="origin axisHelp" transform="translate({{padding.left}}, {{padding.right}})" r="4.5">
         </circle>
     </g>
 </svg>
