@@ -1,4 +1,4 @@
-ddescribe 'd3Vis directive', () ->
+describe 'd3Vis directive', () ->
 
 	beforeEach module('app')
   
@@ -50,15 +50,18 @@ ddescribe 'd3Vis directive', () ->
 			#recompile with responsive
 			svg.remove()
 			el.remove()
-			el = angular.element('<div d3-vis responsive></div>')
+			el = angular.element('<div d3-vis width="550" responsive></div>')
 			compile(el)(scope)
 			scope.$digest()
 
 			svg = el.find('svg')
+
 			el.scope()
 			compile(el)(scope)
+			spyOn(el.scope(), 'makeResponsive');
 			scope.$digest()
-			expect(el.scope().responsive).toBeDefined()
+			expect(el.scope().makeResponsive).toHaveBeenCalled();
+
 
 
 

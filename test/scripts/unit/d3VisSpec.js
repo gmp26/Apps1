@@ -1,5 +1,5 @@
 
-ddescribe('d3Vis directive', function() {
+describe('d3Vis directive', function() {
   var compile, el, scope;
   beforeEach(module('app'));
   scope = {};
@@ -44,14 +44,15 @@ ddescribe('d3Vis directive', function() {
     return it("should call makeResponsive if responsive is set", function() {
       svg.remove();
       el.remove();
-      el = angular.element('<div d3-vis responsive></div>');
+      el = angular.element('<div d3-vis width="550" responsive></div>');
       compile(el)(scope);
       scope.$digest();
       svg = el.find('svg');
       el.scope();
       compile(el)(scope);
+      spyOn(el.scope(), 'makeResponsive');
       scope.$digest();
-      return expect(el.scope().responsive).toBeDefined();
+      return expect(el.scope().makeResponsive).toHaveBeenCalled();
     });
   });
 });
