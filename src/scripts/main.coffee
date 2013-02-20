@@ -10,11 +10,13 @@ require
 				'controllers/frogController'
 				'controllers/svgBoilerPlateController'
 				'controllers/d3TiltedController'
+				'controllers/boomerangController'
 				'directives/appVersion'
 				'directives/svgMarginConvention'
 				'directives/d3Vis'
 				'directives/d3TiltedSquare'
 				'directives/tiltedSquare'
+				'directives/stepper'
 			]
 		'controllers/appController':
 			deps: [
@@ -37,6 +39,11 @@ require
 				'app'
 			]
 		'controllers/d3TiltedController':
+			deps: [
+				'libs/angular'
+				'app'
+			]
+		'controllers/boomerangController':
 			deps: [
 				'libs/angular'
 				'app'
@@ -69,6 +76,11 @@ require
 				'libs/angular'
 				'app'
 				'services/semver'
+			]
+		'directives/stepper':
+			deps: [
+				'libs/angular'
+				'app'
 			]
 		'services/semver': deps: ['libs/angular', 'app']
 		'libs/angular': deps: ['libs/jquery']

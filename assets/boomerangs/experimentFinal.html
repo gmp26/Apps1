@@ -1,0 +1,17 @@
+
+
+<h2>Let's experiment</h2>
+
+<div ng-controller="boomerangController">
+	<p>Suppose Phil makes <input type="number" ng-model="small" ng-init="small=1" style="width:50px" min="0"> small and <input type="number" ng-model="large" ng-init="large=1" style="width:50px" min="0"> large boomerangs.</p>
+	<p>Carving {{small}} <em>small</em> boomerangs will take <em>{{2 * small}}</em> hours.</p>
+	<p>Carving {{large}} <em>large</em> boomerangs will take <em>{{3 *large}}</em> hours.</p>
+	<br>
+	<p class="{{ carveTimeOK() }}">Phil will need <em>{{ carveTime() }}</em> hours to carve them all.</p>
+	<p class="{{ decTimeOK() }}">Cath has to decorate <em>{{ decTime() }}</em> boomerangs.</p>
+	<br>
+	<p><em>{{small}}</em> small boomerangs will make <em>${{8*small}}</em>.</p>
+	<p><em>{{large}}</em> large boomerangs will make <em>${{10*large}}</em>.</p>
+	<br>
+	<p>Total amount made will be <em>${{ total() }}</em></p>
+</div>

@@ -15,5 +15,7 @@ angular.module('app')
 				templateUrl: 'src/views/svgMargins.html'
 			.when '/frogs'
 				templateUrl: 'src/views/frogs.html'
+			.when '/boomerangs'
+				templateUrl: 'src/views/boomerangs.html'
 			.otherwise redirectTo: '/tiltedApp'
 ]

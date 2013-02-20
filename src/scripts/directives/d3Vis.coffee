@@ -7,8 +7,11 @@
 
 	$scope.defaultWidth  = 550
 	$scope.defaultHeight = 400
+	$scope.defaultWoff = 41
+
 	$scope.ready = false
 
+	console.log $scope.$id
 ])
 .directive 'd3Vis', ['$timeout', ($timeout) ->
 
@@ -21,7 +24,7 @@
 		scope: {
 			width: '@'
 			height: '@'
-			margin: '@'
+			woff: '@' #width offset to allow for inherited margins & borders
 			padding: '@'
 			responsive: '@'
 			visible: '@'
@@ -33,44 +36,65 @@
 
 			# define handler for different window widths
 			resizeHandler = (event) =>
+				#console.log "resizing"
 				scope.setWindowWidth event.target.innerWidth
 
-			scope.svgResize = (svg, w, h) ->
-				svg.attr 'width', w
-				svg.attr 'height', h
-				console.log "svg(", w, h, ")"
+			scope.svgResize = ->
+				@svg.attr 'width', @outerWidth
+				@svg.attr 'height', @outerHeight
+				#console.log "svg(", @outerWidth, @outerHeight, ")"
+
+				g = scope.svg.select("g > rect")
+				.attr("class", "outer")
+				.attr("width", scope.outerWidth)
+				.attr("height", scope.outerHeight)
 
 			scope.setWindowWidth = (ww) ->
+				w = ww - @woff
 				@outerWidth = @width
-				if(@outerWidth <= ww)
+				if(@outerWidth <= w)
 					@outerHeight = @height
 				else
-					@outerHeight = Math.round(@height * ww / @width)
-					@outerWidth = ww
+					@outerHeight = Math.round(@height * w / @width)
+					@outerWidth = w
+				scope.svgResize()
+
+				#console.log "ow,oh=", @outerWidth, @outerHeight
 
 			scope.$watch 'width', (val) ->
 				scope.width = if val? then ~~val else scope.defaultWidth
-				console.log 'new width=', scope.width
+				#console.log 'new width=', scope.width
 
 			scope.$watch 'height', (val) ->
 				scope.height = if val? then ~~val else scope.defaultHeight
-				console.log 'new height=', scope.height
+				#console.log 'new height=', scope.height
+
+			scope.$watch 'woff', (val) ->
+				scope.woff = if val? then ~~val else scope.defaultWoff
 
 			scope.$watch 'responsive', (val) ->
 				win = angular.element(window)
 				if(val? && win?)
-					console.log 'responsive'
+					#console.log 'responsive'
 					win.bind "resize", resizeHandler
-				else
-					win.unbind "resize", resizeHandler
+
 
 			#
 			# wait a tick to ensure scope watches have fired.
 			#
-			$timeout =>
-				svg = d3.select(element[0]).append("svg")
+			$timeout (=>
+				scope.svg = d3.select(element[0])
+				.append("svg")
+				.append("g")
+				.append("rect")
+				.attr("class", "outer")
+	
 				scope.setWindowWidth angular.element(window).innerWidth()
-				scope.svgResize(svg, scope.outerWidth, scope.outerHeight)
+				scope.svgResize()
+
+				console.log("SVG created")
+
+				scope.ready = true),1
 
 	}
 ]

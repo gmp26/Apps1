@@ -1,66 +1,59 @@
-describe 'd3Vis directive', () ->
 
-	beforeEach module('app')
-  
-	#width="550" height="400" margin="20 20 20 20" padding="5 5 5 5" responsive="true"
+describe 'd3Vis directive', () ->
 
 	scope={}
 	compile={}
 	el = {}
+	svg = null
+	flag = false
 
-	#Get hold of a scope and create a helper function for setting up tests
-	beforeEach(inject( ($rootScope, $compile) ->
+	beforeEach module 'app'
+
+	beforeEach inject ($rootScope, $compile) ->
 		scope = $rootScope
 		compile = $compile
+
+  
+	#width="550" height="400" margin="20 20 20 20" padding="5 5 5 5" responsive="true"
+
+	it "should compile", ->
 		el = angular.element('<div d3-vis width="600"></div>')
-		$compile(el)(scope)
+		compile(el)(scope)
 		scope.$digest()
-	))
-
-	afterEach ->
-		el.remove()
-
-	it "should compile", () ->
 		expect(angular.isElement(el)).toBeTruthy()
 
-	it "should insert an svg element", () ->
-		svg = el.find('svg')
-		expect(svg.length).toBe 1
+	it "should wait before running tests", ->
 
-	describe 'inserted svg', () ->
+		runs ->
+			el = angular.element('<div d3-vis width="600" responsive></div>')
+			compile(el)(scope)
+			scope.$digest()
 
-		svg = {}
-		beforeEach ->
-			svg = el.find('svg')
-			#console.log("el scope is ", el.scope().$id)
+		waits 5000
 
-		it "should have a width", ->
+		runs ->
+			expect(el).toBeDefined()
+			expect(el.scope()).toBeDefined()
+			console.log(el.html())
+			expect(el.find('svg').length).toBe 100
+			svg = el.find('svg').eq(0)
 			expect(svg.attr("width")).toBeDefined()
 
-		it "should have a height", ->
-			expect(svg.attr("height")).toBeDefined()
 
-		it "has a default height set in the controller", ->
-			expect(svg.attr("height")).toBe '400'
+			###
+			it "should have a height", ->
+				svg = el.scope().svg
+				expect(svg.attr("height")).toBeDefined()
 
-		it "width can be set as attribute", ->
-			expect(svg.attr("width")).toBe '600'
+			it "has a default height set in the controller", ->
+				svg = el.scope().svg
+				expect(svg.attr("height")).toBe '400'
 
-		it "should call makeResponsive if responsive is set", ->
-			#recompile with responsive
-			svg.remove()
-			el.remove()
-			el = angular.element('<div d3-vis width="550" responsive></div>')
-			compile(el)(scope)
-			scope.$digest()
+			it "width can be set as attribute", ->
+				svg = el.scope().svg
+				expect(svg.attr("width")).toBe '600'
+			###
 
-			svg = el.find('svg')
-
-			el.scope()
-			compile(el)(scope)
-			spyOn(el.scope(), 'makeResponsive');
-			scope.$digest()
-			expect(el.scope().makeResponsive).toHaveBeenCalled();
 
 
 
