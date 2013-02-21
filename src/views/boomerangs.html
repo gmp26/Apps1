@@ -1,26 +1,5 @@
-<style>
-	input[type="number"] {
-		width:50px;
-		height: 30px;
-		font-size: 18px;
-	}
-	em {
-		font-weight:bold;
-		font-size:1.2em;
-	}
 
-	.bad {
-		color:#ee8833;
-		font-size: 1.2em;
-	}
-
-	.good {
-		color:#3388ee;
-		font-size: 1.2em;
-	}
-
-</style>
-
+<!-- question -->
 
 <h1>Boomerangs</h1>
 
@@ -45,19 +24,42 @@
 
 <p>How much money will they then make?</p>
 
+<!-- First Pass -->
 
 <h2>Let's experiment</h2>
 
 <div ng-controller="boomerangController">
-	<p>Suppose Phil makes <input type="number" ng-model="small" ng-init="small=1" style="width:50px" min="0"> small and <input type="number" ng-model="large" ng-init="large=1" style="width:50px" min="0"> large boomerangs.</p>
-	<p>Carving {{small}} <em>small</em> boomerangs will take <em>{{2 * small}}</em> hours.</p>
-	<p>Carving {{large}} <em>large</em> boomerangs will take <em>{{3 *large}}</em> hours.</p>
+	<p>Suppose Phil makes <input type="number" ng-model="small"> small and <input type="number" ng-model="large" > large boomerangs.</p>
+	<p>Carving <em>{{small}} small</em> boomerangs will take <em>{{3*small}}</em> hours.</p>
+	<p>Carving <em>{{large}} large</em> boomerangs will take <em>{{3*large}}</em> hours.</p>
 	<br>
-	<p class="{{ carveTimeOK() }}">Phil will need <em>{{ carveTime() }}</em> hours to carve them all.</p>
-	<p class="{{ decTimeOK() }}">Cath has to decorate <em>{{ decTime() }}</em> boomerangs.</p>
+	<p class="{{ carveTimeOK() }}">Phil will need <em>{{ 2*small + 3*large }}</em> hours to carve them all.</p>
+	<p class="{{ decTimeOK() }}">Cath has to decorate <em>{{ small + large }}</em> boomerangs.</p>
 	<br>
 	<p><em>{{small}}</em> small boomerangs will make <em>${{8*small}}</em>.</p>
 	<p><em>{{large}}</em> large boomerangs will make <em>${{10*large}}</em>.</p>
 	<br>
-	<p>Total amount made will be <em>${{ total() }}</em></p>
-</div>
+	<p>Total amount made will be <em>${{ 8*small + 10*large }}</em></p>
+</div><style>
+
+	input[type="number"] {
+		width:50px;
+		height: 30px;
+		font-size: 18px;
+	}
+
+	em {
+		font-style: normal;
+		font-weight:bold;
+		font-size:1.4em;
+	}
+
+	.bad {
+		color:#ee8833;
+	}
+
+	.good {
+		color:#3388ee;
+	}
+
+</style>
