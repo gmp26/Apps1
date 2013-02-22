@@ -3,49 +3,37 @@
   '$scope'
 
 ($scope) ->
+  initialState = [0,0,0,1,2,2,2]
+  $scope.padIndexes = initialState.concat()
+  doneState = initialState.concat().reverse()
+  $scope.moveCount = 0
 
-	$scope.padIndexes = [0,1,2,3,4,5]
+  equals = (a,b) ->
+    a.length == b.length && a.every (aVal, i) -> aVal == b[i]
 
-	$scope.jump = (index) ->
-		console.log("You clicked ", index)
+  $scope.done = false
 
-	$scope.getFrog = (index) ->
-		if index < 3 then "pad redfrog" else "pad bluefrog"
+  swap = (x,y) ->
+    temp = $scope.padIndexes[x]
+    $scope.padIndexes[x] = $scope.padIndexes[y]
+    $scope.padIndexes[y] = temp
+    $scope.moveCount++
+    $scope.done = equals($scope.padIndexes,doneState)
+    console.log "done=", $scope.done
 
+  $scope.jump = (index) ->
+    console.log("You clicked ", index)
+    state = $scope.padIndexes[index]
+    emptyPad = $scope.padIndexes.indexOf(1)
+    diff = Math.abs(index - emptyPad)
+    if diff == 1 or diff == 2 then swap(index, emptyPad)
 
-
-
-	### copied from todoController
-
-  $scope.todos = [
-    text: "learn angular"
-    done: true
-  ,
-    text: "build an angular app"
-    done: false
-  ]
-
-  $scope.addTodo = () ->
-    $scope.todos.push {
-      text: $scope.todoText
-      done: false
-    }
-
-    $scope.todoText = ""
-
-  $scope.remaining = ->
-    count = 0
-    angular.forEach $scope.todos, (todo) ->
-      count += (if todo.done then 0 else 1)
-
-    count
-
-  $scope.archive = ->
-    oldTodos = $scope.todos
-    $scope.todos = []
-    angular.forEach oldTodos, (todo) ->
-      $scope.todos.push todo  unless todo.done
-	###
+  $scope.getFrog = (index) ->
+    switch $scope.padIndexes[index]
+      when 0 then "pad redfrog"
+      when 1 then "pad"
+      when 2 then "pad bluefrog"
+      else throw new Error("invalid frog state")
 
 ])
 

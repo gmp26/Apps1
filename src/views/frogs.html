@@ -5,5 +5,7 @@
 <div ng-controller="frogController">
 
 	<span ng-repeat="index in padIndexes" ng-class="getFrog($index)" ng-click="jump($index)"></span>
+<p>You have made {{moveCount}} moves.</p>
+<p ng-show="done">Well done you have swapped all the frogs</p>
 
 </div>

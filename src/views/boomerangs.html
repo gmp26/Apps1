@@ -33,14 +33,16 @@
 	<p>Carving <em>{{small}} small</em> boomerangs will take <em>{{3*small}}</em> hours.</p>
 	<p>Carving <em>{{large}} large</em> boomerangs will take <em>{{3*large}}</em> hours.</p>
 	<br>
-	<p class="{{ carveTimeOK() }}">Phil will need <em>{{ 2*small + 3*large }}</em> hours to carve them all.</p>
-	<p class="{{ decTimeOK() }}">Cath has to decorate <em>{{ small + large }}</em> boomerangs.</p>
+	<p ng-class="carveTimeOK()">Phil will need <em>{{ 2*small + 3*large }}</em> hours to carve them all.</p>
+	<p ng-class="decTimeOK()">Cath has to decorate <em>{{ small + large }}</em> boomerangs.</p>
 	<br>
 	<p><em>{{small}}</em> small boomerangs will make <em>${{8*small}}</em>.</p>
 	<p><em>{{large}}</em> large boomerangs will make <em>${{10*large}}</em>.</p>
 	<br>
 	<p>Total amount made will be <em>${{ 8*small + 10*large }}</em></p>
-</div><style>
+</div>
+
+<style>
 
 	input[type="number"] {
 		width:50px;
