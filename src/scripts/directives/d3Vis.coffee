@@ -7,9 +7,12 @@
 
 	$scope.defaultWidth  = 550
 	$scope.defaultHeight = 400
+
 	$scope.defaultWoff = 41
 
 	$scope.ready = false
+
+	$scope._margin = $scope._padding = {top:0, right:0, bottom:0; left: 0}
 
 	#console.log $scope.$id
 ])
@@ -17,7 +20,7 @@
 
 	return {
 		restrict: 'A'
-		transclude: false
+		transclude: true
 		replace: true
 		controller: 'd3VisController'
 
@@ -25,6 +28,7 @@
 			width: '@'
 			height: '@'
 			woff: '@' #width offset to allow for inherited margins & borders
+			margin: '@'
 			padding: '@'
 			responsive: '@'
 			visible: '@'
@@ -39,35 +43,75 @@
 				#console.log "resizing"
 				scope.setWindowWidth event.target.innerWidth
 
+			parseBorderList = (dimensionList) ->
+				obj = {top:0, right:0, bottom:0, left:0}
+				if dimensionList?
+
+					list = dimensionList.split ///
+						\s+ 				# one or more whitespace chars
+						| \s*,\s* 	#	a comma inside optional whitespace
+					///
+
+					# convert strings to numbers
+					list = list.map (val) -> ~~val
+
+					switch list.length
+						when 1 then obj.top = obj.right = obj.left = obj.bottom = list[0]
+						when 2 then [obj.top, obj.right] = [obj.bottom, obj.left] = list
+						when 3 then [obj.top, obj.right, obj.bottom] = list; obj.left = obj.right
+						when 4 then [obj.top, obj.right, obj.bottom, obj.left] = list
+				return obj
+
 			scope.svgResize = ->
 				@svg.attr 'width', @outerWidth + 1
 				@svg.attr 'height', @outerHeight + 1
 				#console.log "svg(", @outerWidth, @outerHeight, ")"
 
-				g = @svg.select("g > rect")
+				g = @svg.select("g")
+
+				g.select("rect")
 				.attr("class", "outer")
-				.attr("width", scope.outerWidth)
-				.attr("height", scope.outerHeight)
+				.attr("width", @innerWidth)
+				.attr("height", @innerHeight)
+				.attr("transform", "translate(" + @_margin.left + "," + @_margin.top + ")")
+
+				g.select("g > rect")
+				.attr("class", "inner")
+				.attr("width", @width)
+				.attr("height", @height)
+				.attr("transform", "translate(" + @_padding.left + "," + @_padding.top + ")")
+
 
 			scope.setWindowWidth = (ww) ->
 				w = ww - @woff
-				@outerWidth = @width
+				@outerWidth = ~~@outerWidth
 				if(@outerWidth <= w)
-					@outerHeight = @height
+					@outerHeight = ~~@outerHeight
 				else
-					@outerHeight = Math.round(@height * w / @width)
+					@outerHeight = Math.round(~~@outerHeight * w / @outerWidth)
 					@outerWidth = w
+
+				@innerWidth = @outerWidth - @_margin.left - @_margin.right
+				@innerHeight = @outerHeight - @_margin.top - @_margin.bottom
+
+				console.log('iw=', scope.innerWidth)
+
+				@width = @innerWidth - @_padding.left - @_padding.right
+				@height = @innerHeight - @_padding.top - @_padding.bottom
+
+				console.log('w=', @width)
+
 				@svgResize()
 
 				#console.log "ow,oh=", @outerWidth, @outerHeight
 
-			scope.$watch 'width', (val) ->
-				scope.width = if val? then ~~val else scope.defaultWidth
-				#console.log 'new width=', scope.width
+			scope.$watch 'outerWidth', (val) ->
+				scope.outerWidth = if val? then ~~val else scope.defaultWidth
+				console.log 'new outerWidth=', scope.outerWidth
 
-			scope.$watch 'height', (val) ->
-				scope.height = if val? then ~~val else scope.defaultHeight
-				#console.log 'new height=', scope.height
+			scope.$watch 'outerHeight', (val) ->
+				scope.outerHeight = if val? then ~~val else scope.defaultHeight
+				#console.log 'new outerHeight=', scope.height
 
 			scope.$watch 'woff', (val) ->
 				scope.woff = if val? then ~~val else scope.defaultWoff
@@ -78,6 +122,13 @@
 					#console.log 'responsive'
 					win.bind "resize", resizeHandler
 
+			scope.$watch 'margin', (val) ->
+				if val?
+					scope._margin = parseBorderList(val)
+
+			scope.$watch 'padding', (val) ->
+				if val?
+					scope._padding = parseBorderList(val)
 
 			#
 			# wait a tick to ensure scope watches have fired.
@@ -90,6 +141,13 @@
 				.append("g")
 				.append("rect")
 				.attr("class", "outer")
+
+				g = scope.svg.append("g")
+					.attr("transform", "translate(" + scope._padding.left + "," + scope._padding.top + ")")
+
+				g.append("rect")
+					.attr("class", "inner")
+
 	
 				scope.setWindowWidth angular.element(window).innerWidth()
 				scope.svgResize()
