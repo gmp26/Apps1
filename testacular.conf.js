@@ -10,8 +10,8 @@ files = [
   JASMINE,
   JASMINE_ADAPTER,
   './dist/scripts/libs/jquery.js',
-  './dist/scripts/libs/d3.v3.js',
   './dist/scripts/libs/angular.js',
+  './dist/scripts/libs/d3.v3.js',
   './dist/scripts/libs/angular-resource.js',
   './test/scripts/libs/angular-mocks.js',
   './dist/scripts/app.js',
@@ -53,7 +53,7 @@ colors = true;
 
 // level of logging
 // possible values: LOG_DISABLE || LOG_ERROR || LOG_WARN || LOG_INFO || LOG_DEBUG
-logLevel = LOG_INFO;
+logLevel = LOG_DEBUG;
 
 
 // enable / disable watching file and executing tests whenever any file changes

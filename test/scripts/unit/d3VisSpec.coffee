@@ -4,58 +4,42 @@ describe 'd3Vis directive', () ->
 	scope={}
 	compile={}
 	el = {}
-	svg = null
 	flag = false
 
 	beforeEach module 'app'
 
-	beforeEach inject ($rootScope, $compile) ->
+	beforeEach inject ($rootScope, $compile, $timeout) ->
+
+		spyOn(d3, 'select').andCallThrough()
+
 		scope = $rootScope
 		compile = $compile
-
-  
-	#width="550" height="400" margin="20 20 20 20" padding="5 5 5 5" responsive="true"
-
-	it "should compile", ->
-		el = angular.element('<div d3-vis width="600"></div>')
+		el = angular.element('<div d3-vis width="600" responsive></div>')
 		compile(el)(scope)
 		scope.$digest()
-		expect(angular.isElement(el)).toBeTruthy()
 
-	it "should wait before running tests", ->
+		$timeout.flush()
 
-		runs ->
-			el = angular.element('<div d3-vis width="600" responsive></div>')
-			compile(el)(scope)
-			scope.$digest()
-
-		waits 5000
-
-		runs ->
-			expect(el).toBeDefined()
-			expect(el.scope()).toBeDefined()
-			console.log(el.html())
-			expect(el.find('svg').length).toBe 100
-			svg = el.find('svg').eq(0)
-			expect(svg.attr("width")).toBeDefined()
+	afterEach ->
+		el.remove()
 
 
-			###
-			it "should have a height", ->
-				svg = el.scope().svg
-				expect(svg.attr("height")).toBeDefined()
+	it "should have called d3.select", ->
+		expect(d3.select).toHaveBeenCalled()
 
-			it "has a default height set in the controller", ->
-				svg = el.scope().svg
-				expect(svg.attr("height")).toBe '400'
+	it "should have appended an svg", ->
+		expect(el.find('svg').length).toBe 1
 
-			it "width can be set as attribute", ->
-				svg = el.scope().svg
-				expect(svg.attr("width")).toBe '600'
-			###
+	it "svg should have width 600", ->
+		expect(el.find('svg').eq(0).attr('width')).toBeDefined()
 
+	###
+	it "should call d3Selection.append twice", ->
+		expect(d3Selection.append.calls.length).toEqual 2
 
-
+	it "should have called d3Selection.attr", ->
+		expect(d3Selection.attr).toHaveBeenCalled()
+	###
 
 
 

@@ -11,7 +11,7 @@
 
 	$scope.ready = false
 
-	console.log $scope.$id
+	#console.log $scope.$id
 ])
 .directive 'd3Vis', ['$timeout', ($timeout) ->
 
@@ -40,11 +40,11 @@
 				scope.setWindowWidth event.target.innerWidth
 
 			scope.svgResize = ->
-				@svg.attr 'width', @outerWidth
-				@svg.attr 'height', @outerHeight
+				@svg.attr 'width', @outerWidth + 1
+				@svg.attr 'height', @outerHeight + 1
 				#console.log "svg(", @outerWidth, @outerHeight, ")"
 
-				g = scope.svg.select("g > rect")
+				g = @svg.select("g > rect")
 				.attr("class", "outer")
 				.attr("width", scope.outerWidth)
 				.attr("height", scope.outerHeight)
@@ -57,7 +57,7 @@
 				else
 					@outerHeight = Math.round(@height * w / @width)
 					@outerWidth = w
-				scope.svgResize()
+				@svgResize()
 
 				#console.log "ow,oh=", @outerWidth, @outerHeight
 
@@ -82,9 +82,11 @@
 			#
 			# wait a tick to ensure scope watches have fired.
 			#
-			$timeout (=>
+			$timeout =>
 				scope.svg = d3.select(element[0])
 				.append("svg")
+
+				scope.svg
 				.append("g")
 				.append("rect")
 				.attr("class", "outer")
@@ -92,9 +94,8 @@
 				scope.setWindowWidth angular.element(window).innerWidth()
 				scope.svgResize()
 
-				console.log("SVG created")
-
-				scope.ready = true),1
+				console.log "SVG created"
+			, 1
 
 	}
 ]

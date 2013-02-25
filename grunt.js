@@ -117,7 +117,9 @@ module.exports = function (grunt) {
 			temp: {
 				files: {
 					'./temp/scripts/libs/': './src/scripts/libs/',
-					'./temp/img/': './src/img/'
+					'./temp/img/': './src/img/',
+//					'./temp/test/scripts/e2e': ['./test/scripts/e2e/*.html','./test/scripts/e2e/*.js']
+					'./temp/test/scripts/libs': './test/scripts/libs/*.js'
 				}
 			},
 			/*
