@@ -101,6 +101,22 @@ describe 'd3Vis directive', () ->
 			expect(s.innerWidth + s._margin.left + s._margin.right == s.outerWidth).toBe true
 			expect(s.width + s._padding.left + s._padding.right == s.innerWidth).toBe true
 
+	describe "visibility", ->
+		s = {}
+
+		beforeEach inject ($timeout) ->
+			el.remove()
+			el = angular.element('<div d3-vis fullwidth="600" visible="false"></div>')
+			compile(el)(scope)
+			scope.$digest()
+			s = el.scope()
+			$timeout.flush()
+
+		it "is hidden if visible is false", ->
+			r1 = s.svg.select("g > rect")
+			c1 = r1.attr("class")
+			expect(c1).toBe "hide"
+
 
 
 

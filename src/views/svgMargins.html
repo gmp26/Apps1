@@ -1,9 +1,20 @@
 <div class="header">
-	<h2>SVG margins</h2>
+	<h2>SVG container</h2>
 	<p>Use this to visualise SVG margins, padding and dimensions.</p>
-  <p>Clone and edit a new controller to change them.</p>
-  <p>Uncomment axisHelp in <code>d3.less</code> to make the help invisible.</p>
+  <p>Add d3 directives to the d3-vis SVG container to do stuff.</p>
+  <p>The origin is in the top left corner of the inner rectangle.</p>
 </div>
 
-<div svg-margin-convention ng-controller="svgBoilerPlateController" >
+ <h3>Visible margins</h3>
+<div d3-vis d3-dot-grid along="10" down="5" radius="5"
+  fullWidth="600" woff="41"
+  margin="20 20 20 20" padding="5 5 5 5" 
+  responsive="true" visible="true">
+</div>
+
+<h3>Invisible margins</h3>
+<div d3-vis d3-dot-grid along="10" down="5"
+  fullWidth="300" fullHeight="200" woff="41"
+  margin="20 20 20 20" padding="5 5 5 5" 
+  responsive="true" >
 </div>
