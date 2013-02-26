@@ -7,11 +7,15 @@ angular.module('app')
 		$routeProvider
 			.when '/tiltedApp'
 				templateUrl: 'src/views/tilted1.html'
+			.when '/d3Tilted'
+				templateUrl: 'src/views/d3Tilted.html'
 			.when '/todo'
 				templateUrl: 'src/views/todo.html'
 			.when '/svgMargins'
 				templateUrl: 'src/views/svgMargins.html'
 			.when '/frogs'
 				templateUrl: 'src/views/frogs.html'
-			.otherwise redirectTo: '/tiltedApp'
+			.when '/boomerangs'
+				templateUrl: 'src/views/boomerangs.html'
+			.otherwise redirectTo: '/d3Tilted'
 ]

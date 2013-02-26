@@ -1,0 +1,18 @@
+<!-- abstract -->
+
+<h2>Let's experiment</h2>
+
+<div ng-controller="boomerangController">
+  <p>Suppose Phil makes <input type="number" ng-model="x"> small and <input type="number" ng-model="y" > large boomerangs.</p>
+  <p>Carving <em>{{x}} small</em> boomerangs will take <em>{{smallTime(x)}}</em> hours.</p>
+  <p>Carving <em>{{y}} large</em> boomerangs will take <em>{{largeTime(x)}}</em> hours.</p>
+  <br>
+  <p class="{{ carveTimeOK(x,y) }}">Phil will need <em>{{ carveTime(x,y) }}</em> hours to carve them all.</p>
+  <p class="{{ decTimeOK(x,y) }}">Cath has to decorate <em>{{ decTime(x,y) }}</em> boomerangs.</p>
+  <br>
+  <p><em>{{x}}</em> small boomerangs will make <em>${{smallIncome(x)}}</em>.</p>
+  <p><em>{{y}}</em> large boomerangs will make <em>${{largeIncome(y)}}</em>.</p>
+  <br>
+  <p>Total amount made will be <em>${{ totalIncome(x,y) }}</em></p>
+</div>
+

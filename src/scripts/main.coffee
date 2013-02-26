@@ -8,9 +8,10 @@ require
 				'controllers/appController'
 				'controllers/todoController'
 				'controllers/frogController'
-				'controllers/svgBoilerPlateController'
+				'controllers/boomerangController'
 				'directives/appVersion'
-				'directives/svgMarginConvention'
+				'directives/d3Vis'
+				'directives/d3DotGrid'
 				'directives/d3TiltedSquare'
 				'directives/tiltedSquare'
 			]
@@ -29,12 +30,7 @@ require
 				'libs/angular'
 				'app'
 			]
-		'controllers/svgBoilerPlateController':
-			deps: [
-				'libs/angular'
-				'app'
-			]
-		'directives/svgMarginConvention':
+		'controllers/boomerangController':
 			deps: [
 				'libs/angular'
 				'app'
@@ -50,6 +46,19 @@ require
 				'libs/angular'
 				'app'
 				'libs/fabric'
+			]
+		'directives/d3Vis':
+			deps: [
+				'libs/angular'
+				'app'
+				'libs/d3.v3'
+			]
+		'directives/d3DotGrid':
+			deps: [
+				'libs/angular'
+				'app'
+				'directives/d3Vis'
+				'libs/d3.v3'
 			]
 		'directives/appVersion':
 			deps: [
