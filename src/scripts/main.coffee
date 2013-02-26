@@ -8,15 +8,12 @@ require
 				'controllers/appController'
 				'controllers/todoController'
 				'controllers/frogController'
-				'controllers/svgBoilerPlateController'
-				'controllers/d3TiltedController'
 				'controllers/boomerangController'
 				'directives/appVersion'
-				'directives/svgMarginConvention'
 				'directives/d3Vis'
+				'directives/d3DotGrid'
 				'directives/d3TiltedSquare'
 				'directives/tiltedSquare'
-				'directives/stepper'
 			]
 		'controllers/appController':
 			deps: [
@@ -33,22 +30,7 @@ require
 				'libs/angular'
 				'app'
 			]
-		'controllers/svgBoilerPlateController':
-			deps: [
-				'libs/angular'
-				'app'
-			]
-		'controllers/d3TiltedController':
-			deps: [
-				'libs/angular'
-				'app'
-			]
 		'controllers/boomerangController':
-			deps: [
-				'libs/angular'
-				'app'
-			]
-		'directives/svgMarginConvention':
 			deps: [
 				'libs/angular'
 				'app'
@@ -69,18 +51,20 @@ require
 			deps: [
 				'libs/angular'
 				'app'
-				'libs/fabric'
+				'libs/d3.v3'
+			]
+		'directives/d3DotGrid':
+			deps: [
+				'libs/angular'
+				'app'
+				'directives/d3Vis'
+				'libs/d3.v3'
 			]
 		'directives/appVersion':
 			deps: [
 				'libs/angular'
 				'app'
 				'services/semver'
-			]
-		'directives/stepper':
-			deps: [
-				'libs/angular'
-				'app'
 			]
 		'services/semver': deps: ['libs/angular', 'app']
 		'libs/angular': deps: ['libs/jquery']

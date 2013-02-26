@@ -14,11 +14,11 @@ describe 'd3Vis directive', () ->
 
 		scope = $rootScope
 		compile = $compile
-		el = angular.element('<div d3-vis outerWidth="600" responsive></div>')
+		el = angular.element('<div d3-vis fullwidth="600" responsive></div>')
 		compile(el)(scope)
 		scope.$digest()
-
 		$timeout.flush()
+
 
 	afterEach ->
 		el.remove()
@@ -40,7 +40,6 @@ describe 'd3Vis directive', () ->
 			ww = angular.element(window).innerWidth()
 			woff = 41
 			expected = if(w <= ww - woff) then 601 else (ww-woff+1)
-			console.log expected
 			expect(w).toBe expected
 
 	describe "border defaults", ->
@@ -61,15 +60,15 @@ describe 'd3Vis directive', () ->
 
 		s = {}
 
-		beforeEach ->
+		beforeEach inject ($timeout) ->
 			el.remove()
-			el = angular.element('<div d3-vis outerWidth="600" margin="1 2 3 4" padding="5,6"></div>')
+			el = angular.element('<div d3-vis fullwidth="600" margin="1 2 3 4" padding="5,6"></div>')
 			compile(el)(scope)
 			scope.$digest()
 			s = el.scope()
+			$timeout.flush()
 
 		it "can be set from attribute list", ->
-			console.log s.$id
 			expect(s._margin.top).toBe 1
 			expect(s._margin.right).toBe 2
 			expect(s._margin.bottom).toBe 3
@@ -84,18 +83,20 @@ describe 'd3Vis directive', () ->
 
 		beforeEach inject ($timeout) ->
 			el.remove()
-			el = angular.element('<div d3-vis outerWidth="600" margin="10 20 30 40" padding="5 5 5 5"></div>')
+			el = angular.element('<div d3-vis fullwidth="600" margin="10 20 30 40" padding="5 5 5 5"></div>')
 			compile(el)(scope)
 			scope.$digest()
 			s = el.scope()
 			$timeout.flush()
 
 		it "affect the width and innerWidth", ->
+			###
 			console.log "width", s.width
 			console.log "innerwidth", s.innerWidth
 			console.log "m.left", s._margin.left
 			console.log "m.right", s._margin.right
 			console.log "s.outerWidth", s.outerWidth
+			###
 
 			expect(s.innerWidth + s._margin.left + s._margin.right == s.outerWidth).toBe true
 			expect(s.width + s._padding.left + s._padding.right == s.innerWidth).toBe true

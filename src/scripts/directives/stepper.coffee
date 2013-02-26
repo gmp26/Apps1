@@ -7,7 +7,7 @@ angular.module("app").directive "stepper", ['$compile', '$timeout', ($compile, $
 		val: '@'
 	}
 	link: (scope, element, attrs) ->
-		console.log attrs
+		console.log "A transcluded link function maybe?"
 		element.attr('ng-model', attrs.name)
 		element.attr('ng-init', attrs.name+'='+attrs.val)
 		$compile(element)(scope)
