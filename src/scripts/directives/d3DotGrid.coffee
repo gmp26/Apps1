@@ -1,4 +1,4 @@
-angular.module('app').directive 'd3DotGrid', 
+angular.module('app').directive 'd3DotGrid',
 [
 	'$timeout'
 	($timeout) ->

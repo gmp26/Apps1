@@ -2,7 +2,7 @@
 # d3 visualisation wrapper
 #
 (angular.module('app')
-.controller 'd3VisController', 
+.controller 'd3VisController',
 [
 	'$scope'
 	'$transclude'
@@ -10,20 +10,16 @@
 		$scope.defaultWidth  = 550
 		$scope.defaultHeight = 400
 
-		#$scope.fullwidth = 720
-		#$scope.fullheight = 480
-
 		$scope.defaultWoff = 41
-
 		$scope.ready = false
-
-		$scope._margin = $scope._padding = {top:0, right:0, bottom:0; left: 0}
+		$scope._margin = {top:0, right:0, bottom:0; left: 0}
+		$scope._padding = {top:0, right:0, bottom:0; left: 0}
 
 ])
 .directive 'd3Vis',
 [
-	'$timeout'
-	($timeout) ->
+	'$timeout', '$window'
+	($timeout, $window) ->
 		restrict: 'A'
 		transclude: false
 		replace: false
@@ -116,7 +112,7 @@
 				scope.woff = if val? then ~~val else scope.defaultWoff
 
 			scope.$watch 'responsive', (val) ->
-				win = angular.element(window)
+				win = angular.element($window)
 				if(val? && win?)
 					win.bind "resize", resizeHandler
 
@@ -147,7 +143,7 @@
 
 				scope.$emit("draw", g)
 
-				scope.setWindowWidth angular.element(window).innerWidth()
+				scope.setWindowWidth angular.element($window).innerWidth()
 				scope.svgResize()
 			,1
 ]
