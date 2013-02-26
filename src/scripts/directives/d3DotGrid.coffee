@@ -19,9 +19,7 @@ angular.module('app').directive 'd3DotGrid',
 			scope.$on 'resize', (event, container, width, height) ->
 				console.log "drawing"
 				scope.setSpacing(container, width, height)
-				#scope.data = [{x:0,y:0},{x:20,y:20},{x:40,y:40},{x:50,y:50}]
 				draw()
-
 
 			draw = ->
 
@@ -31,12 +29,14 @@ angular.module('app').directive 'd3DotGrid',
 				
 				circles = columns.selectAll("circle")
 				.data((d,i) -> d)
+				.attr("cx", (d, i, j)->j*scope._hspace)
+				.attr("cy", (d, i, j)->i*scope._vspace)
 
 				circles.enter().append("circle")
 				.attr("r", scope.radius)
 				.attr("class", "origin")
-				.attr("cx", (d)->d.x)
-				.attr("cy", (d)->d.y)
+				.attr("cx", (d, i, j)->j*scope._hspace)
+				.attr("cy", (d, i, j)->i*scope._vspace)
 
 				circles.exit().remove()
 
@@ -65,9 +65,9 @@ angular.module('app').directive 'd3DotGrid',
 					space = Math.min(@_vspace, @_hspace)
 					@_vspace = @_hspace = space
 
-				@data = ({x:col*@_hspace, y:row*@_vspace} for row in [0..@rows-1] for col in [0..@cols-1] )
+				scope.data = ({x:col*@_hspace, y:row*@_vspace} for row in [0..@rows-1] for col in [0..@cols-1] )
 				console.log @_hspace, @width, @cols
-				console.log @data
+				console.log scope.data
 
 			###
 			draw = ->
