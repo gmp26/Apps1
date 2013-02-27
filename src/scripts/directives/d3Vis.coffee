@@ -82,7 +82,8 @@
 				scope.resizing = true
 				$timeout ->
 					scope.resizing = false
-					scope.setWindowWidth event.target.innerWidth
+					scope.svgResize event.target.innerWidth
+					scope.$broadcast "resize", scope.container, scope.width, scope.height
 				,100
 
 			parseBorderList = (dimensionList) ->
@@ -104,7 +105,7 @@
 						when 4 then [obj.top, obj.right, obj.bottom, obj.left] = list
 				return obj
 
-			scope.setWindowWidth = (ww) ->
+			scope.svgResize = (ww) ->
 				w = ww - @woff
 				@outerWidth = ~~@fullWidth
 				if(@outerWidth <= w)
@@ -119,9 +120,6 @@
 				@width = @innerWidth - @_padding.left - @_padding.right
 				@height = @innerHeight - @_padding.top - @_padding.bottom
 
-				@svgResize()
-
-			scope.svgResize = ->
 				@svg.attr 'width', @outerWidth + 1
 				@svg.attr 'height', @outerHeight + 1
 
@@ -141,7 +139,6 @@
 				.attr("width", @width)
 				.attr("height", @height)
 				r2.attr("class", if visible then "inner" else "hide")
-				scope.$broadcast "resize", scope.container, scope.width, scope.height
 
 			scope.$watch 'fullwidth', (val) ->
 				scope.fullWidth = if val? then ~~val else scope.defaultWidth
@@ -185,11 +182,9 @@
 				scope.container.append("rect")
 					.attr("class", "inner")
 
-				scope.setWindowWidth angular.element($window).innerWidth()
-				scope.svgResize()
+				scope.svgResize angular.element($window).innerWidth()
 
-				#scope.$emit("draw", scope.container)
-				#scope.$broadcast "draw", scope.container, scope.width, scope.height
+				scope.$broadcast "draw", scope.container, scope.width, scope.height
 
 			,1
 ]

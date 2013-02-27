@@ -2,53 +2,70 @@ angular.module('app').directive 'd3DotGrid',
 [
 	'$timeout'
 	($timeout) ->
+
 		data = {}
+
 		return {
 			restrict: 'A'
 			replace: true
 			template: '<span></span>'
 
 			link: (scope, element, attrs) ->
-				console.log('dot-grid')
 
 				scope.$on 'draw', (event, container, width, height) ->
-					#event.stopPropagation()
-					console.log "drawing"
 					scope.setSpacing(container, width, height)
-					#scope.data = [{x:0,y:0},{x:20,y:20},{x:40,y:40}]
 					draw()
 
 				scope.$on 'resize', (event, container, width, height) ->
-					console.log "redrawing"
 					scope.setSpacing(container, width, height)
 					draw()
+					console.log "update"
+					update()
+
 
 				draw = ->
 
-					data = ({
-						x:col*scope._hspace
-						y:row*scope._vspace
-					} for row in [0..scope.rows-1] for col in [0..scope.cols-1])
+					# Warning: not for livescript. We want coffescript's array nesting here.
+					data = ({x:c, y:r} for r in [0..scope.rows-1] for c in [0..scope.cols-1])
+
+					col = (colData) ->
+						circles = d3.select(this).selectAll("circle")
+						.data(colData)
+
+						circles.enter().append("circle")
+						.data((d, i, j)->d)
+						.attr("r", scope.radius)
+						.attr("class", "origin")
+						.attr("cx", (d)->x(d.x))
+						.attr("cy", (d)->y(d.y))
+
+						circles.exit().remove()
 
 					columns = scope.container.selectAll("g")
 					.data(data)
-					.enter().append("g")
-					
-					circles = columns.selectAll("circle")
-					.data((d) -> d)
 
-					circles.enter().append("circle")
-					.attr("r", scope.radius)
-					.attr("class", "origin")
-					.attr("cx", (d)->d.x)
-					.attr("cy", (d)->d.y)
+					columns.enter().append("g")
+					.each(col)
 
-					circles.exit().remove()
+					columns.exit().remove()
+
+				# update
+				update = ->
+					scope.container.selectAll("g circle").each(updateGrid) 
+
+				updateGrid = (data) ->
+					d3.select(this)
+					.attr("cx", (d) -> x(d.x))
+					.attr("cy", (d) -> y(d.y))
+
+				x = (col) -> (col)*scope._hspace
+				y = (row) -> (row)*scope._vspace
 
 				scope.setSpacing = (container, width, height) ->
 					@container = container
 					@width = width
 					@height = height
+					
 					@rows = @down
 					@cols = @along
 					@_vspace = @vspace
@@ -69,34 +86,7 @@ angular.module('app').directive 'd3DotGrid',
 					if @square
 						space = Math.min(@_vspace, @_hspace)
 						@_vspace = @_hspace = space
-
-					#console.log @_hspace, @width, @cols
-					#console.log scope.data
-
-				###
-				draw = ->
-					[0..scope.down-1].forEach (row) -> drawRow(row)
-
-				drawRow = (row) ->
-					[0..scope.along-1].forEach (col) ->
-						scope.container.append("circle")
-						.attr("r", scope.radius)
-						.attr("class", "origin")
-						.attr("transform", "translate(" + col*scope.hspace + "," + row*scope.vspace + ")")
-
-				scope.$on 'resize', (event, container, width, height) ->
-					console.log "drawing"
-					scope.setSpacing(container, width, height)
-					resize()
-
-
-				resize = ->
-					[0..scope.down-1].forEach (row) -> resizeRow(row)
-
-				resizeRow = ->
-					[0..scope.along-1].forEach (col) ->
-						circle
-				###
+					
 
 				attrs.$observe 'along', (val) ->
 					scope.along = if val? then ~~val else 10
