@@ -1,0 +1,17 @@
+/* d3Axis styles */
+
+@axis-stroke: #666;
+@axis-fill: none;
+@axis-width: 1.5px;
+
+.axis line,
+.axis path {
+  fill: @axis-fill;
+  stroke: @axis-stroke;
+  shape-rendering: crispEdges;
+}
+
+.arrow {
+  stroke: @axis-stroke;
+  stroke-width: @axis-width;
+}

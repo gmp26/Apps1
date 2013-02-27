@@ -1,0 +1,34 @@
+/* d3Vis styles */
+@base-font-size: 14px;
+@base-font-family: sans-serif;
+@outer-fill: none;
+@outer-stroke: #DDD;
+@inner-fill: none;
+@inner-stroke: #888;
+
+svg {
+  font: @base-font-size;
+  font-family: @base-font-family;
+}
+
+.hide {
+  display:none;
+}
+
+.outer,
+.inner {
+  shape-rendering: crispEdges;
+}
+
+.outer {
+  fill: none;
+  stroke: @outer-stroke;
+}
+
+.inner {
+  fill: @inner-fill;
+  stroke: @inner-stroke;
+  stroke-dasharray: 3, 4;
+}
+
+
