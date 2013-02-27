@@ -5,6 +5,10 @@ angular.module('app').directive 'd3DotGrid',
 
 		data = {}
 
+		X = (col) -> (col)*10
+		Y = (row) -> (row)*10
+
+
 		return {
 			restrict: 'A'
 			replace: true
@@ -16,9 +20,9 @@ angular.module('app').directive 'd3DotGrid',
 					scope.draw(container, width, height)
 
 				scope.$on 'resize', (event, container, width, height) ->
-					scope.draw(container, width, height)
 					console.log "update"
-					update()
+					scope.draw(container, width, height)
+					#update()
 
 				scope.draw = (container, width, height) ->
 
@@ -48,46 +52,35 @@ angular.module('app').directive 'd3DotGrid',
 						space = Math.min(@_vspace, @_hspace)
 						@_vspace = @_hspace = space
 
-					console.log "rows=", @rows, "cols=", @cols
+					X = (col) -> (col)*scope._hspace
+					Y = (row) -> (row)*scope._vspace
 
+					console.log "rows=", @rows, "cols=", @cols
 
 					# Warning: not for livescript. We want coffescript's array nesting here.
 					data = ({x:c, y:r} for r in [0..scope.rows-1] for c in [0..scope.cols-1])
-
-					col = (colData) ->
-						circles = d3.select(this).selectAll("circle")
-						.data(colData)
-
-						circles.enter().append("circle")
-						.data((d)->d)
-						.attr("r", scope.radius)
-						.attr("class", "origin")
-						.attr("cx", (d)->x(d.x))
-						.attr("cy", (d)->y(d.y))
-
-						#circles.exit().remove()
 
 					columns = scope.container.selectAll("g")
 					.data(data)
 
 					columns.enter().append("g")
-					.each(col)
 
 					columns.exit().remove()
 
-				# update
-				update = ->
-					columns = scope.container.selectAll("g").data(data)
-					scope.container.selectAll("g circle").each(updateGrid)
+					circles = columns.selectAll("circle")
+					.data((d)->d)
+					.each ->
+						d3.select(this)
+						.attr("cx", (d)->X(d.x))
+						.attr("cy", (d)->Y(d.y))
 
-				updateGrid = (data) ->
-					d3.select(this)
-					.attr("cx", (d) -> x(d.x))
-					.attr("cy", (d) -> y(d.y))
-
-				x = (col) -> (col)*scope._hspace
-				y = (row) -> (row)*scope._vspace
-
+					circles.enter().append("circle")
+						.data((d)->d)
+						.attr("r", scope.radius)
+						.attr("class", "origin")
+						.attr("cx", (d)->X(d.x))
+						.attr("cy", (d)->Y(d.y))
+					circles .exit().remove()
 
 				attrs.$observe 'along', (val) ->
 					scope.along = if val? then ~~val else 10
