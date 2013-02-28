@@ -14,7 +14,7 @@ angular.module('app').directive 'tiltedSquare', ['$timeout', ($timeout) ->
 			ax: '@'			# control point a start position
 			ay: '@'
 			bx: '@'			# control point b start position
-			bx: '@'
+			by: '@'
 
 		restrict: 'A'
 		templateUrl: 'src/views/directives/tiltedSquare.html'

@@ -78,6 +78,9 @@ angular.module('app').directive 'd3DotGrid', ->
 					.attr("cy", (d)->Y(d.y))
 				circles .exit().remove()
 
+				# tell any child directives that the grid has been redrawn
+				scope.$broadcast('dotGridUpdated')
+
 			#
 			# attributes must be observed in case they are interpolated
 			#
