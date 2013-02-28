@@ -45,18 +45,18 @@ angular.module('app').directive 'd3DotGrid', ->
 					space = Math.min(@_vspace, @_hspace)
 					@_vspace = @_hspace = space
 
-				X = (col) -> (col)*scope._hspace
-				Y = (row) -> (row)*scope._vspace
+				@X = (col) -> (col)*scope._hspace
+				@Y = (row) -> (row)*scope._vspace
 
 				console.log "rows=", @rows, "cols=", @cols
 
 				# Warning: not for livescript. We want coffescript's array nesting here.
-				data = ({x:c, y:r} for r in [0..scope.rows-1] for c in [0..scope.cols-1])
+				data = ({x:c, y:r} for r in [0..@rows-1] for c in [0..@cols-1])
 
 				#
 				# d3 magic starts here
 				#
-				columns = scope.container.selectAll("g")
+				columns = @container.selectAll("g")
 				.data(data)
 
 				columns.enter().append("g")
@@ -67,19 +67,19 @@ angular.module('app').directive 'd3DotGrid', ->
 				.data((d)->d)
 				.each ->
 					d3.select(this)
-					.attr("cx", (d)->X(d.x))
-					.attr("cy", (d)->Y(d.y))
+					.attr("cx", (d)->scope.X(d.x))
+					.attr("cy", (d)->scope.Y(d.y))
 
 				circles.enter().append("circle")
 					.data((d)->d)
-					.attr("r", scope.radius)
+					.attr("r", @radius)
 					.attr("class", "grid-dot")
-					.attr("cx", (d)->X(d.x))
-					.attr("cy", (d)->Y(d.y))
+					.attr("cx", (d)->scope.X(d.x))
+					.attr("cy", (d)->scope.Y(d.y))
 				circles .exit().remove()
 
 				# tell any child directives that the grid has been redrawn
-				scope.$broadcast('dotGridUpdated')
+				@$broadcast 'dotGridUpdated', @
 
 			#
 			# attributes must be observed in case they are interpolated
