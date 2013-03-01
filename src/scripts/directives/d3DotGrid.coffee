@@ -68,8 +68,8 @@ angular.module('app').directive 'd3DotGrid', ->
 
 				#set spacing
 				@container = container
-				@width = width
-				@height = height
+				#@width = width
+				#@height = height
 				
 				@rows = @down
 				@cols = @along
@@ -87,6 +87,11 @@ angular.module('app').directive 'd3DotGrid', ->
 					if !isNaN(@minspace) and @_hspace < @minspace
 						@_hspace = @minspace
 					@cols = Math.floor(width/@_hspace + 1)
+
+				@width = (@cols - 1)*@_hspace
+				@height = (@rows - 1)*@_vspace
+
+				console.log("w:h = ", @width, ":", @height)
 				
 				if @square
 					space = Math.min(@_vspace, @_hspace)
@@ -105,9 +110,23 @@ angular.module('app').directive 'd3DotGrid', ->
 				#
 				# d3 magic starts here
 				#
+				gridData = [scope.$id]
+
+				theGrid = @container.selectAll("#grid")
+				.data(gridData)
+
+				theGrid.enter().append("g")
+				.attr("id", "grid")
+
+				columns = theGrid.selectAll("g")
+					.data(data)
+					
+				###
+
 				columns = @container.selectAll("g")
 					.data(data)
 
+				###
 				columns.enter()
 					.append("g")
 
