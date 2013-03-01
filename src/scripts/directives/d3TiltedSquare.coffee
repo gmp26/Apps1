@@ -69,33 +69,31 @@ angular.module('app').directive 'd3TiltedSquare',
 				.x((d) -> gridScope.X(d.x))
 				.y((d) -> gridScope.Y(d.y))
 
-				dragMove = (d) ->
-					console.log("dragging")
-					_control = d3.select(@)
-						.attr("cx", _x = Math.max(0, Math.min(gridScope.width, d3.event.x)))
-						.attr("cy", _y = Math.max(0, Math.min(gridScope.height, d3.event.y)))
-
-					if _control.classed("tilted-control0")
-						scope.a = {x: gridScope.COL(_x), y: gridScope.ROW(_y)}
-						console.log "A = ", scope.a
-					if _control.classed("tilted-control1")
-						scope.b = {x: gridScope.COL(_x), y: gridScope.ROW(_y)}
-						console.log "B = ", scope.b
-
-					scope.update()
+				#dragMove = 
 
 				drag = d3.behavior.drag()
 					.origin((d) ->
 						origin = { x: gridScope.X(d.x), y: gridScope.Y(d.y)	}
-						console.log("origin=", origin)
 						return origin
 					)
-					.on("dragstart", (d) ->
-						console.log("dragstart")
+					.on("drag", (d) ->
+						_control = d3.select(@)
+							.attr("cx", _x = Math.max(0, Math.min(gridScope.width, d3.event.x)))
+							.attr("cy", _y = Math.max(0, Math.min(gridScope.height, d3.event.y)))
+
+						if _control.classed("tilted-control0")
+							scope.a = {x: gridScope.COL(_x), y: gridScope.ROW(_y)}
+						if _control.classed("tilted-control1")
+							scope.b = {x: gridScope.COL(_x), y: gridScope.ROW(_y)}
+
+						scope.update()
 					)
-					.on("drag", dragMove)
 					.on("dragend", ->
-						console.log("dragend")
+						scope.a.x = Math.round(scope.a.x)
+						scope.a.y = Math.round(scope.a.y)
+						scope.b.x = Math.round(scope.b.x)
+						scope.b.y = Math.round(scope.b.y)
+						scope.update()
 					)
 				
 				# create square
