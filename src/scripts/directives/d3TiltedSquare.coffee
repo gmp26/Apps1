@@ -58,6 +58,7 @@ angular.module('app').directive 'd3TiltedSquare',
 				console.log "square = ", [@a, @b, @c, @d]
 				return [@a, @b, @c, @d]
 
+
 			# listen for dotGrid events before redrawing
 			scope.$on 'dotGridUpdated', (event, gridScope) ->
 
@@ -68,11 +69,40 @@ angular.module('app').directive 'd3TiltedSquare',
 				.x((d) -> gridScope.X(d.x))
 				.y((d) -> gridScope.Y(d.y))
 
+				dragMove = (d) ->
+					console.log("dragging")
+					_control = d3.select(@)
+						.attr("cx", d.x = Math.max(scope.radius, Math.min(gridScope.width - scope.radius, d3.event.x)))
+						.attr("cy", d.y = Math.max(scope.radius, Math.min(gridScope.height - scope.radius, d3.event.y)))
+
+					if _control.classed("tilted-control0")
+						scope.a = {x: gridScope.COL(d.x), y: gridScope.ROW(d.y)}
+						console.log "A = ", scope.a
+					if _control.classed("tilted-control1")
+						scope.b = {x: gridScope.COL(d.x), y: gridScope.ROW(d.y)}
+						console.log "B = ", scope.b
+
+					scope.update()
+
+				drag = d3.behavior.drag()
+					.origin((d) ->
+						origin = { x: gridScope.X(d.x), y: gridScope.Y(d.y)	}
+						console.log("origin=", origin)
+						return origin
+					)
+					.on("dragstart", (d) ->
+						console.log("dragstart")
+					)
+					.on("drag", dragMove)
+					.on("dragend", ->
+						console.log("dragend")
+					)
+				
 				corners = [scope.squareDots()]
 
 				# create square
-				square = gridScope.container.selectAll("#square"+scope.$id)
-				square
+				scope.square = gridScope.container.selectAll("#square"+scope.$id)
+				scope.square
 				.data(corners)
 				.enter().append("path")
 				.attr("id", "square"+scope.$id)
@@ -80,36 +110,31 @@ angular.module('app').directive 'd3TiltedSquare',
 				.attr("d", (d) -> squareOutline(d) + "Z")
 
 				# create controls
-				controls = gridScope.container.selectAll(".control")
-				controls
+				scope.controls = gridScope.container.selectAll(".control")
+				scope.controls
 				.data(scope.squareDots().slice(0,2))
 				.enter().append("circle")
-				.attr("class", (d,i) -> "control tilted-control"+i)
+				.attr("class", (d,i) -> "tilted-control"+i)
+				.classed("control", true)
 				.attr("r", scope.radius)
 				.attr("cx", (d) -> gridScope.X(d.x))
 				.attr("cy", (d) -> gridScope.Y(d.y))
-				###
-				.call(
-					d3.behavior.drag()
-				  .on "dragstart", (d) ->
-				  	@__origin__ = [gridScope.X(d.x), gridScope.Y(d.y)])
-				  .on "drag", (d) ->
-						d.x = Math.min(w, Math.max(0, @__origin__[0] += d3.event.dx));
-						d.y = Math.min(h, Math.max(0, @__origin__[1] += d3.event.dy));
-						update()
-						gridScope.container.selectAll(".control")
-						.attr("cx", x)
-						.attr("cy", y);
-					.on "dragend", -> delete @__origin__
-				###
+				
+				.call(drag)
 
 				#update position of square
-				square
-				.attr("d", (d) -> squareOutline(d) + "Z")
+				scope.update = ->
+					gridScope.container.selectAll("#square"+scope.$id)
+					.data([scope.squareDots()])
+					.attr("d", (d) -> squareOutline(d) + "Z")
 
-				#and its controls
-				controls
-				.attr("cx", (d) -> gridScope.X(d.x))
-				.attr("cy", (d) -> gridScope.Y(d.y))
+					#and its controls
+				scope.updateControls = ->
+					gridScope.container.selectAll(".control")
+					.attr("cx", (d) -> gridScope.X(d.x))
+					.attr("cy", (d) -> gridScope.Y(d.y))
+
+				scope.update()
+				scope.updateControls()
 
 ]

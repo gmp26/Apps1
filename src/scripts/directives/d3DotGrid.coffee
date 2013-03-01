@@ -54,7 +54,7 @@ angular.module('app').directive 'd3DotGrid', ->
 			attrs.$observe 'square', (val) ->
 				scope.square = val? and val != "false"
 
-			# 
+			#
 			# The parent container (e.g. d3Vis) issues draw
 			# and resize events
 			#
@@ -94,6 +94,8 @@ angular.module('app').directive 'd3DotGrid', ->
 
 				@X = (col) -> (col)*scope._hspace
 				@Y = (row) -> (row)*scope._vspace
+				@COL = (x) -> (x)/scope._hspace
+				@ROW = (y) -> (y)/scope._vspace
 
 				console.log "rows=", @rows, "cols=", @cols
 
@@ -104,16 +106,17 @@ angular.module('app').directive 'd3DotGrid', ->
 				# d3 magic starts here
 				#
 				columns = @container.selectAll("g")
-				.data(data)
+					.data(data)
 
-				columns.enter().append("g")
+				columns.enter()
+					.append("g")
 
-				columns.exit().remove()
+				columns.exit()
+					.remove()
 
 				circles = columns.selectAll("circle")
 				.data((d)->d)
-				.each ->
-					d3.select(this)
+				.each -> d3.select(this)
 					.attr("cx", (d)->scope.X(d.x))
 					.attr("cy", (d)->scope.Y(d.y))
 
