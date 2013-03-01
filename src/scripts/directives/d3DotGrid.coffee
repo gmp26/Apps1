@@ -121,12 +121,6 @@ angular.module('app').directive 'd3DotGrid', ->
 				columns = theGrid.selectAll("g")
 					.data(data)
 					
-				###
-
-				columns = @container.selectAll("g")
-					.data(data)
-
-				###
 				columns.enter()
 					.append("g")
 
