@@ -69,8 +69,7 @@ angular.module('app').directive 'd3TiltedSquare',
 				.x((d) -> gridScope.X(d.x))
 				.y((d) -> gridScope.Y(d.y))
 
-				#dragMove = 
-
+				# setup control dragging behaviour
 				drag = d3.behavior.drag()
 					.origin((d) ->
 						origin = { x: gridScope.X(d.x), y: gridScope.Y(d.y)	}
@@ -96,40 +95,64 @@ angular.module('app').directive 'd3TiltedSquare',
 						scope.update()
 					)
 				
-				# create square
-				scope.square = gridScope.container.selectAll("#square"+scope.$id)
+				scope.createSquaresLayer = ->
+					# create if necessary
+					scope.squaresLayer = gridScope.container.selectAll("#tiltedSquares")
+					.data([gridScope])
+
+					scope.squaresLayer
+					.enter().append("g")
+					.attr("id", "tiltedSquares")
+
+				scope.createControlsLayer = ->
+					# create controls if necessary
+					scope.controlsLayer = gridScope.container.selectAll("#tiltedControls")
+					.data([gridScope])
+
+					scope.controlsLayer
+					.enter().append("g")
+					.attr("id", "tiltedControls")
+
+				scope.createControls = ->
+					scope.controls = scope.controlsLayer.selectAll(".control"+scope.$id)
+					scope.controls
+					.data(scope.squareDots().slice(0,2))
+					.enter().append("circle")
+					.attr("class", (d,i) -> "tilted-control"+i)
+					.classed("control"+scope.$id, true)
+					.attr("r", scope.radius)
+					.attr("cx", (d) -> gridScope.X(d.x))
+					.attr("cy", (d) -> gridScope.Y(d.y))
+					.call(drag)
+
+				scope.update = ->
+					#update position of square
+					scope.squaresLayer.selectAll("#square"+scope.$id)
+					.data([scope.squareDots()])
+					.attr("d", (d) -> squareOutline(d) + "Z")
+
+					#and its controls
+					scope.controlsLayer.selectAll(".control"+scope.$id)
+					.data(scope.squareDots().slice(0,2))
+					.attr("cx", (d) -> gridScope.X(d.x))
+					.attr("cy", (d) -> gridScope.Y(d.y))
+
+
+				# create squares and controls layers 
+				# these are to ensure controls are always above squares
+				scope.createSquaresLayer()
+				scope.createControlsLayer()
+
+				# create square if necessary
+				scope.square = scope.squaresLayer.selectAll("#square"+scope.$id)
 				scope.square
 				.data([scope.squareDots()])
 				.enter().append("path")
 				.attr("id", "square"+scope.$id)
 				.attr("class", "tilted")
 				.attr("d", (d) -> squareOutline(d) + "Z")
+				scope.createControls()
 
-				# create controls
-				scope.controls = gridScope.container.selectAll(".control")
-				scope.controls
-				.data(scope.squareDots().slice(0,2))
-				.enter().append("circle")
-				.attr("class", (d,i) -> "tilted-control"+i)
-				.classed("control", true)
-				.attr("r", scope.radius)
-				.attr("cx", (d) -> gridScope.X(d.x))
-				.attr("cy", (d) -> gridScope.Y(d.y))
-				
-				.call(drag)
-
-				scope.update = ->
-					#update position of square
-					gridScope.container.selectAll("#square"+scope.$id)
-					.data([scope.squareDots()])
-					.attr("d", (d) -> squareOutline(d) + "Z")
-
-					#and its controls
-					gridScope.container.selectAll(".control")
-					.data(scope.squareDots().slice(0,2))
-					.attr("cx", (d) -> gridScope.X(d.x))
-					.attr("cy", (d) -> gridScope.Y(d.y))
-
+				# update all if necessary
 				scope.update()
-
 ]
