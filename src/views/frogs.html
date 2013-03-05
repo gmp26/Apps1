@@ -3,7 +3,10 @@
   <p>Find a way to swap the red and blue frogs.</p>
 </div>
 <div ng-controller="frogController">
-
+	<div>
+red <input type="number" min="1" max="9" ng-model="_red"><br />
+blue <input type="number" min="1" max="9" ng-model="_blue">
+</div>
 	<span ng-repeat="index in padIndexes" ng-class="getFrog($index)" ng-click="jump($index)"></span>
 <p>You have made {{moveCount}} moves.</p>
 <p ng-show="done">Well done you have swapped all the frogs</p>
