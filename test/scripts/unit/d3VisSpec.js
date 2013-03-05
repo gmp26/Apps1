@@ -74,7 +74,7 @@ describe('d3Vis directive', function() {
       return expect(s._padding.left).toBe(6);
     });
   });
-  return describe("margins and padding", function() {
+  describe("margins and padding", function() {
     var s;
     s = {};
     beforeEach(inject(function($timeout) {
@@ -95,6 +95,24 @@ describe('d3Vis directive', function() {
       */
       expect(s.innerWidth + s._margin.left + s._margin.right === s.outerWidth).toBe(true);
       return expect(s.width + s._padding.left + s._padding.right === s.innerWidth).toBe(true);
+    });
+  });
+  return describe("visibility", function() {
+    var s;
+    s = {};
+    beforeEach(inject(function($timeout) {
+      el.remove();
+      el = angular.element('<div d3-vis fullwidth="600" visible="false"></div>');
+      compile(el)(scope);
+      scope.$digest();
+      s = el.scope();
+      return $timeout.flush();
+    }));
+    return it("is hidden if visible is false", function() {
+      var c1, r1;
+      r1 = s.svg.select("g > rect");
+      c1 = r1.attr("class");
+      return expect(c1).toBe("hide");
     });
   });
 });

@@ -1,0 +1,8 @@
+body {
+  font-family: sans-serif;
+}
+
+.chart rect {
+ fill: steelblue;
+ stroke: white;
+}
