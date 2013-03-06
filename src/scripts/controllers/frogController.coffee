@@ -6,10 +6,22 @@
   $scope._red = 2
   $scope._blue = 2
 
+
+  ### - coffeescript comprehension
+  frog = (z) -> if z < 0 then 0 else if z == 0 then 1 else 2
+  spawn = (red, blue) -> (frog(z) for z in [-red..blue])
+  ###
+  
+  # javascript array handling 2
+  frog = (z) -> if z < 0 then 0 else if z == 0 then 1 else 2
+  spawn = (red,blue) -> [-red..blue].map frog
+
+  ### javascript array handling 1
   spawn = (red,blue) ->
     [1..red].map(()-> 0).concat([1]).concat([1..blue].map(()-> 2))
-
   ###
+
+  ### - simple loop
   spawn = (red,blue) ->
     ar = []
     i=0
@@ -23,6 +35,7 @@
       ++i
     return ar
   ###
+
   doneState = []
   redraw = ->
     initialState = spawn($scope._red,$scope._blue)
