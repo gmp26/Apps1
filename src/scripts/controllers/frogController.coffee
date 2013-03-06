@@ -35,7 +35,7 @@
       ++i
     return ar
   ###
-
+  $scope.minMove = $scope._red*$scope._blue+$scope._red+$scope._blue
   doneState = []
   redraw = ->
     initialState = spawn($scope._red,$scope._blue)
@@ -43,6 +43,7 @@
     $scope.padIndexes = initialState.concat()
     doneState = initialState.concat().reverse()
     $scope.moveCount = 0
+    $scope.minMove = $scope._red*$scope._blue+$scope._red+$scope._blue
   redraw()
 
   equals = (a,b) ->
