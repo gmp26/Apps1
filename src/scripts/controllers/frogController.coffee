@@ -50,6 +50,8 @@
     a.length == b.length && a.every (aVal, i) -> aVal == b[i]
 
   $scope.done = false
+  $scope.minimum = false
+  $scope.fewer = false
 
   swap = (x,y) ->
     temp = $scope.padIndexes[x]
@@ -57,13 +59,13 @@
     $scope.padIndexes[y] = temp
     $scope.moveCount++
     $scope.done = equals($scope.padIndexes,doneState)
-    console.log "done=", $scope.done
+    if $scope.done == true && $scope.moveCount == $scope.minMove then $scope.minimum = true 
+    else if $scope.done == true && $scope.moveCount != $scope.minMove then $scope.fewer = true
 
   $scope.$watch "_red", -> redraw()
   $scope.$watch "_blue", -> redraw()
 
   $scope.jump = (index) ->
-    console.log("You clicked ", index)
     state = $scope.padIndexes[index]
     emptyPad = $scope.padIndexes.indexOf(1)
     diff = Math.abs(index - emptyPad)
