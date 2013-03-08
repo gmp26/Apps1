@@ -58,7 +58,7 @@
     $scope.padIndexes[y] = temp
     $scope.moveCount++
     $scope.done = equals($scope.padIndexes,doneState)
-    if $scope.done == true && $scope.moveCount == $scope.minMove then $scope.minimum = true 
+    if $scope.done == true && $scope.moveCount == $scope.minMove then $scope.minimum = true
     else if $scope.done == true && $scope.moveCount != $scope.minMove then $scope.fewer = true
 
   $scope.$watch "_red", -> redraw()

@@ -138,7 +138,7 @@ angular.module('app').directive 'd3TiltedSquare',
 					.attr("cy", (d) -> gridScope.Y(d.y))
 
 
-				# create squares and controls layers 
+				# create squares and controls layers
 				# these are to ensure controls are always above squares
 				scope.createSquaresLayer()
 				scope.createControlsLayer()

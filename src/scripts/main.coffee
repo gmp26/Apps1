@@ -14,6 +14,7 @@ require
 				'directives/d3DotGrid'
 				'directives/d3TiltedSquare'
 				'directives/tiltedSquare'
+				'directives/frogs'
 			]
 		'controllers/appController':
 			deps: [
@@ -31,6 +32,11 @@ require
 				'app'
 			]
 		'controllers/boomerangController':
+			deps: [
+				'libs/angular'
+				'app'
+			]
+		'directives/frogs':
 			deps: [
 				'libs/angular'
 				'app'
