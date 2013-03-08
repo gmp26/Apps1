@@ -24,7 +24,7 @@ angular.module('app').directive 'frogs', [
 			console.log("window=", $window)
 
 			win = angular.element($window)
-			#win.bind "resize", resizeHandler
-			win.bind "onpaint", resizeHandler
+			win.bind "resize", resizeHandler
+
 ]
 
