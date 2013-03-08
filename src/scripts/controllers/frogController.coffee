@@ -44,14 +44,13 @@
     doneState = initialState.concat().reverse()
     $scope.moveCount = 0
     $scope.minMove = $scope._red*$scope._blue+$scope._red+$scope._blue
+    $scope.done = false
+    $scope.minimum = false
+    $scope.fewer = false
   redraw()
 
   equals = (a,b) ->
     a.length == b.length && a.every (aVal, i) -> aVal == b[i]
-
-  $scope.done = false
-  $scope.minimum = false
-  $scope.fewer = false
 
   swap = (x,y) ->
     temp = $scope.padIndexes[x]
@@ -77,6 +76,8 @@
       when 1 then "pad"
       when 2 then "pad bluefrog"
       else throw new Error("invalid frog state")
+
+  $scope.redraw = redraw
 
 ])
 
