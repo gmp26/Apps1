@@ -7,7 +7,10 @@
 red <input type="number" min="1" max="9" ng-model="_red"><br />
 blue <input type="number" min="1" max="9" ng-model="_blue">
 </div>
-	<span ng-repeat="index in padIndexes" ng-class="getFrog($index)" ng-click="jump($index)"></span>
+<span frogs woff="55"></span>
+<!-- 
+<span ng-repeat="index in padIndexes" ng-class="getFrog($index)" ng-click="jump($index)"></span>
+-->
 <p>You have made {{moveCount}} moves.</p>
 <p ng-show="fewer">You could have swapped the frogs in fewer moves. Have another go.</p>
 <p ng-show="minimum">Well done, you have swapped all the frogs in the minimum number of moves!</p>
