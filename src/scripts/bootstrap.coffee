@@ -1,1 +1,1 @@
-angular.bootstrap document, ['app', 'ui.bootstrap.tpls']
+angular.bootstrap document, ['app', 'ui.bootstrap.collapse']
