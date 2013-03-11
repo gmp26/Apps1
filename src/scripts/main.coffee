@@ -3,7 +3,7 @@ require
 		'templates':
 			deps: [
 				'libs/angular'
-				'libs/bootstrap'
+				#'libs/bootstrap'
 				'app'
 				'controllers/appController'
 				'controllers/todoController'
@@ -73,12 +73,13 @@ require
 				'services/semver'
 			]
 		'services/semver': deps: ['libs/angular', 'app']
-		'libs/angular': deps: ['libs/jquery']
 		'libs/bootstrap': deps: ['libs/jquery']
 		'libs/angular-resource': deps: ['libs/angular']
+		'libs/ui-bootstrap-tpls': deps: ['libs/angular']
 		'app': deps: [
 				'libs/angular'
 				'libs/angular-resource'
+				'libs/ui-bootstrap-tpls'
 			]
 		'bootstrap': deps: ['app']
 		'routes': deps: ['app', 'templates']

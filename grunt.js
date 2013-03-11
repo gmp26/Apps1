@@ -65,6 +65,18 @@ module.exports = function (grunt) {
 			}
 		},
 
+		// encode images in css as data-urls
+		dataUri: {
+			dist: {
+				src: [ "./temp/styles/styles.css" ],
+				dest: "./temp/styles",
+				options: {
+					target: ["./temp/img/**/*.png"],
+					fixDirLevel: true
+				}
+			}
+		},
+
 		/*
 			Compile template html files to final html with any grunt/underscore interpolation commands resolved.
 
@@ -105,7 +117,7 @@ module.exports = function (grunt) {
 		ngtemplates: {
 			app: {
 				options: {base: '/src/views'},
-				src: 'src/views/**/*.html',
+				src: ['src/views/**/*.html','src/views/**/*.json'],
 				dest: 'temp/scripts/templates.js'
 			}
 		},
@@ -117,7 +129,7 @@ module.exports = function (grunt) {
 			temp: {
 				files: {
 					'./temp/scripts/libs/': './src/scripts/libs/',
-					'./temp/img/': './src/img/',
+					'./temp/img/': './src/img/', // inline all images with data-uris
 //					'./temp/test/scripts/e2e': ['./test/scripts/e2e/*.html','./test/scripts/e2e/*.js']
 					'./temp/test/scripts/libs': './test/scripts/libs/*.js'
 				}
@@ -138,7 +150,7 @@ module.exports = function (grunt) {
 			*/
 			prod: {
 				files: {
-					'./dist/img/': './temp/img/',
+					// './dist/img/': './temp/img/', 	//all are inlined
 					'./dist/scripts/': './temp/scripts/scripts.min.js',
 					'./dist/scripts/libs': ['./temp/scripts/libs/html5shiv-printshiv.js', './temp/scripts/libs/json2.js'],
 					'./dist/styles/': './temp/styles/styles.min.css',
@@ -201,7 +213,7 @@ module.exports = function (grunt) {
 
 					return contents;
 				},
-				optimize: 'none', //uglify',
+				optimize: 'uglify',
 				out: './temp/scripts/scripts.min.js',
 				preserveLicenseComments: false,
 				skipModuleInsertion: true,
@@ -301,6 +313,12 @@ module.exports = function (grunt) {
 	*/
 	grunt.loadNpmTasks('grunt-angular-templates');
 
+	/*
+		Register task which converts CSS referenced images to data-uris
+		Need to run it after less...
+	*/
+	grunt.loadNpmTasks('grunt-data-uri');
+
 	// A task to run unit tests in testacular.
 	grunt.registerTask('unit-tests', 'run the testacular test driver on jasmine unit tests', function () {
 		var done = this.async();
@@ -329,6 +347,7 @@ module.exports = function (grunt) {
 		'template:dev',
 		'ngtemplates',
 		'copy:temp',
+		'dataUri',
 		'copy:dev',
 		'delete:temp'
 	]);
@@ -357,6 +376,7 @@ module.exports = function (grunt) {
 		'template:prod',
 		'ngtemplates',
 		'copy:temp',
+		'dataUri',
 		'requirejs',
 		'minifyHtml',
 		'copy:prod',

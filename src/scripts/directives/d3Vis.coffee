@@ -182,7 +182,7 @@
 				scope.container.append("rect")
 					.attr("class", "inner")
 
-				scope.svgResize angular.element($window).innerWidth()
+				scope.svgResize $window.innerWidth
 
 				scope.$broadcast "draw", scope.container, scope.width, scope.height
 

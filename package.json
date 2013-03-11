@@ -6,7 +6,7 @@
 		"email": "gmp26@cam.ac.uk",
 		"url": "https://github.com/gmp26"
 	},
-	"description": "AngularJS Reference Architecture",
+	"description": "AngularJS App Reference Architecture",
 	"contributors": [
 		{
 			"name": "Cary Landholt",
@@ -33,6 +33,7 @@
 		"grunt": "~0.3.17",
 		"grunt-reload": "~0.2.0",
 		"grunt-angular-templates": "~0.1.3",
+		"grunt-data-uri": "~0.1.1",
 		"testacular": "~0.5.5"
 	},
 	"engine": "node >= 0.8.1"

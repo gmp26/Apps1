@@ -26,8 +26,8 @@
       <div class="navbar navbar-static-top">
         <div class="navbar-inner">
           <div class="container">
-            <button data-toggle="collapse" data-target=".nav-collapse" class="btn btn-navbar"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a href="/" class="brand">NRICH Apps:1 v<span app-version></span></a>
-            <div class="nav-collapse collapse">
+            <button ng-click="dropHeaderMenu = !dropHeaderMenu" class="btn btn-navbar"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a href="/" class="brand">Apps1 v<span app-version></span></a>
+            <div collapse="!dropHeaderMenu" class="nav-collapse">
               <div ng-include="'src/views/nav.html'"></div>
             </div>
           </div>
@@ -47,5 +47,5 @@
     <% } else { %>
       <script data-main="/scripts/main.js" src="/scripts/libs/require.js"></script>
     <% } %>
-  </body>
+XC  </body>
 </html>
