@@ -11,6 +11,16 @@
   frog = (z) -> if z < 0 then 0 else if z == 0 then 1 else 2
   spawn = (red, blue) -> (frog(z) for z in [-red..blue])
   ###
+
+  
+  # javascript array handling 2
+  frog = (z) -> if z < 0 then {colour:0} else if z == 0 then {colour:1} else {colour:2}
+  spawn = (red,blue) ->
+    s = [-red..blue].map(frog)
+    s.map (z, i) ->
+      z.position = i
+      return z
+
   
   # javascript array handling 2
   frog = (z) -> if z < 0 then 0 else if z == 0 then 1 else 2
