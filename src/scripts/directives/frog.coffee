@@ -1,5 +1,5 @@
 angular.module('app').directive 'frog', ->
-	restrict: 'E'
+	restrict: 'EA'
 	link: (scope, element, attrs) ->
 
 		state = null
@@ -13,7 +13,7 @@ angular.module('app').directive 'frog', ->
 		# otherwise code as before except for z-index addition
 		jump = (me) ->
 
-			#ground all the frogs while filtering out the space
+			#ground all the frogs while filtering for the space
 			emptyPad = (scope.frogs.filter (d) ->
 				d.element.css("z-index", 0)	
 				d.colour == 1)[0]
@@ -36,12 +36,23 @@ angular.module('app').directive 'frog', ->
 		# map colour to css class 
 		classBy = (colour) ->
 			switch colour
-				when 0 then "frog redfrog"
-				when 1 then "frog"
-				when 2 then "frog bluefrog"
+				when 0 then "frog red"
+				when 1 then ""
+				when 2 then "frog blue"
 				else throw new Error("invalid frog state")
 
+		state = scope.frog
+		state.element = element
+		element.addClass(classBy(state.colour))
+
+		# added to put frogs in right place on startup
+		element.css("left", X(state.x))
+
+		# see frogs.less for position and transitions
+
+
 		# see observing attributes in angular directives guide
+		###
 		attrs.$observe 'frogIndex', (index) ->
 			state = scope.frogs[index]
 			state.element = element
@@ -51,4 +62,4 @@ angular.module('app').directive 'frog', ->
 			element.css("left", X(state.x))
 
 			# see frogs.less for position and transitions
-
+		###

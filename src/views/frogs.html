@@ -1,31 +1,20 @@
 <div class="header">
   <h2>Frogs <a href="http://nrich.maths.org/1246">NRICH 1246</a></h2>
-  <p>Find a way to swap the red and blue frogs.</p>
 </div>
 <div ng-controller="frogController">
-	<div>
-		red <input type="number" min="1" max="9" ng-model="_red" class="froginput"><br />
-		blue <input type="number" min="1" max="9" ng-model="_blue" class="froginput">
-	</div>
+  <p>Find a way to swap the red and blue frogs.</p>
+	<form class="form-inline ">
+		<label class="control-label" for="reds">Reds:</label>
+    <input id="reds" type="number" min="1" max="9" ng-model="_red" class="froginput">
+		&nbsp; 
+    Blues: <input type="number" min="1" max="9" ng-model="_blue" class="froginput">&nbsp;
+    <button type="button" class="btn btn-primary" ng-click = "redraw()">reset</button>
+	</form>
 
-<!-- testing resize-from
+  <div class="frog-space well" frogs woff="20" style="width: {{(_red + _blue + 1)*100}}px"></div>
 
-<div style="padding:10px; margin:5px" resize-from="420">
-	<div style="width:400px;height:100px;border:1px solid red"></div>
-</div>
-
-<span frogs resize-from="(_red + _blue + 1)*102" ></span>
-
-<div class="frog-space">
-	<frog ng-repeat="f in frogs" frog-index="{{$index}}" f="f"></frog> 
-</div>
--->
-
-<div class="frog-space" frogs woff="55"></div>
-
-<p>You have made {{moveCount}} moves.</p>
-<p ng-show="fewer">You could have swapped the frogs in fewer moves. Have another go.</p>
-<p ng-show="minimum">Well done, you have swapped all the frogs in the minimum number of moves!</p>
-<button type="button" class="btn btn-primary" ng-click = "redraw()">reset</button>
+  <p>You have made {{moveCount}} moves.</p>
+  <p ng-show="fewer">You could have swapped the frogs in fewer moves. Have another go.</p>
+  <p ng-show="minimum">Well done, you have swapped all the frogs in the minimum number of moves!</p>
 
 </div>

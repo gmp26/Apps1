@@ -1,47 +1,43 @@
-.pad {
-	width: 100px;
-	height: 100px;
-	display: inline-block;
-	opacity:0.5;
-	background: #EEE;
-	border: 1px solid black;
-}
-
-.frog {
-	width: 100px;
-	height: 100px;
-	display: inline-block;
-	
-	position: absolute;
-	-webkit-transition-property: left;
-  	-webkit-transition-duration: 0.125s;
-  	-moz-transition-property: left;
-  	-moz-transition-duration: 0.125s;
-   	-ms-transition-property: left;
-  	-ms-transition-duration: 0.125s;
-  	transition-property: left;
-  	transition-duration: 0.125s;
-  	-webkit-transition-timing-function: ease-in;
-  	-moz-transition-timing-function: ease-in;
-  	-ms-transition-timing-function: ease-in;
-  	transition-timing-function: ease-in;
-}
-
 .frog-space {
 	position:relative;
-	height: 120px;
-}
+  height: 100px;
+  padding:10px 0px 10px 10px;
+  -webkit-border-radius:20px;
+  -moz-border-radius:20px;
+  -ms-border-radius:20px;
+  border-radius:20px;
 
-.bluefrog {
-	background-image: url("../img/blueFrog.png");
-}
+  .blue {
+  	background-image: url("../img/blueFrog.png");
+  }
 
-.redfrog {
-	background-image: url("../img/redFrog.png");
+  .red {
+  	background-image: url("../img/redFrog.png");
+  }
+
+  .frog {
+    width: 100px;
+    height: 100px;
+    display: inline-block;
+    
+    position: absolute;
+    -webkit-transition-property: left;
+      -webkit-transition-duration: 0.125s;
+      -moz-transition-property: left;
+      -moz-transition-duration: 0.125s;
+      -ms-transition-property: left;
+      -ms-transition-duration: 0.125s;
+      transition-property: left;
+      transition-duration: 0.125s;
+      -webkit-transition-timing-function: ease-in;
+      -moz-transition-timing-function: ease-in;
+      -ms-transition-timing-function: ease-in;
+      transition-timing-function: ease-in;
+  }
 }
 
 .froginput {
-	width: 50px;
+	width: 40px;
 	height: 30px;
 	font-size: 18px;
 }
