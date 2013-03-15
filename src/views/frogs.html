@@ -3,18 +3,17 @@
 </div>
 <div ng-controller="frogController">
   <p>Find a way to swap the red and blue frogs.</p>
-	<form class="form-inline ">
+	<form class="form-inline" >
 		<label class="control-label" for="reds">Reds:</label>
     <input id="reds" type="number" min="1" max="9" ng-model="_red" class="froginput">
-		&nbsp; 
-    Blues: <input type="number" min="1" max="9" ng-model="_blue" class="froginput">&nbsp;
-    <button type="button" class="btn btn-primary" ng-click = "redraw()">reset</button>
+    <label class="control-label" for="blues">&nbsp;&nbsp;&nbsp;Blues:</label>
+    <input id="blues" type="number" min="1" max="9" ng-model="_blue" class="froginput">
 	</form>
 
-  <div class="frog-space well" frogs woff="20" style="width: {{(_red + _blue + 1)*100}}px"></div>
+  <div class="frog-space well" frogs woff="20" style="width: {{(_red + _blue + 1)*100}}px" tooltip="Hello"></div>
 
   <p>You have made {{moveCount}} moves.</p>
   <p ng-show="fewer">You could have swapped the frogs in fewer moves. Have another go.</p>
   <p ng-show="minimum">Well done, you have swapped all the frogs in the minimum number of moves!</p>
-
+  <button type="button" class="btn" ng-click = "redraw()">reset</button>
 </div>
