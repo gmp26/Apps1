@@ -2,10 +2,7 @@
 	position:relative;
   height: 100px;
   padding:10px 0px 10px 10px;
-  -webkit-border-radius:20px;
-  -moz-border-radius:20px;
-  -ms-border-radius:20px;
-  border-radius:20px;
+  .border-radius(20px);
 
   .blue {
   	background-image: url("../img/blueFrog.png");
@@ -21,18 +18,7 @@
     display: inline-block;
     
     position: absolute;
-    -webkit-transition-property: left;
-      -webkit-transition-duration: 0.125s;
-      -moz-transition-property: left;
-      -moz-transition-duration: 0.125s;
-      -ms-transition-property: left;
-      -ms-transition-duration: 0.125s;
-      transition-property: left;
-      transition-duration: 0.125s;
-      -webkit-transition-timing-function: ease-in;
-      -moz-transition-timing-function: ease-in;
-      -ms-transition-timing-function: ease-in;
-      transition-timing-function: ease-in;
+    .transition(.2s ease-in-out left);
 
     &:hover {
       cursor: pointer;
