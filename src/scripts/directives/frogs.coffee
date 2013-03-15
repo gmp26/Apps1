@@ -5,7 +5,6 @@ angular.module('app').directive 'frogs', [
 		replace: false
 		link: (scope,element,attrs) ->
 
-			###
 			console.log "woff=", ~~attrs.woff
 
 			rescale = (winSize, padCount) ->
@@ -26,7 +25,6 @@ angular.module('app').directive 'frogs', [
 
 			win = angular.element($window)
 			win.bind "resize", resizeHandler
-			###
 
 ]
 

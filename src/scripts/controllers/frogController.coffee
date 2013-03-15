@@ -6,49 +6,28 @@
   $scope._red = 2
   $scope._blue = 2
 
-
-  ### - coffeescript comprehension
-  frog = (z) -> if z < 0 then 0 else if z == 0 then 1 else 2
-  spawn = (red, blue) -> (frog(z) for z in [-red..blue])
-  ###
-
   
   # javascript array handling 2
   frog = (z) -> if z < 0 then {colour:0} else if z == 0 then {colour:1} else {colour:2}
   spawn = (red,blue) ->
     s = [-red..blue].map(frog)
     s.map (z, i) ->
-      z.position = i
+      z.x = i
       return z
-
   
+  colour = (d) -> d.colour
+
   # javascript array handling 2
+  ###
   frog = (z) -> if z < 0 then 0 else if z == 0 then 1 else 2
   spawn = (red,blue) -> [-red..blue].map frog
-
-  ### javascript array handling 1
-  spawn = (red,blue) ->
-    [1..red].map(()-> 0).concat([1]).concat([1..blue].map(()-> 2))
   ###
 
-  ### - simple loop
-  spawn = (red,blue) ->
-    ar = []
-    i=0
-    while i<red
-      ar.push(0)
-      ++i
-    ar.push(1)
-    i=0
-    while i<blue
-      ar.push(2)
-      ++i
-    return ar
-  ###
   $scope.minMove = $scope._red*$scope._blue+$scope._red+$scope._blue
   doneState = []
   redraw = ->
-    initialState = spawn($scope._red,$scope._blue)
+    $scope.frogs = spawn($scope._red,$scope._blue)
+    initialState = $scope.frogs.map colour
 
     $scope.padIndexes = initialState.concat()
     doneState = initialState.concat().reverse()
@@ -88,6 +67,12 @@
       else throw new Error("invalid frog state")
 
   $scope.redraw = redraw
+
+  $scope.hop = (frog, space) ->
+    console.log frog.x, space.x
+    t = frog.x
+    frog.x = space.x
+    space.x = t
 
 ])
 

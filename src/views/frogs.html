@@ -17,9 +17,12 @@ blue <input type="number" min="1" max="9" ng-model="_blue" class="froginput">
 <span frogs resize-from="(_red + _blue + 1)*102" ></span>
 -->
 
- 
-<span frogs></span>
+<div class="frog-space">
+	<frog ng-repeat="f in frogs" frog-index="{{$index}}" f="f"></frog> 
+</div>
+
 <!--
+<span frogs woff="55"></span>
 <span ng-repeat="index in padIndexes" ng-class="getFrog($index)" ng-click="jump($index)"></span>
 -->
 <p>You have made {{moveCount}} moves.</p>
