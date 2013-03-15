@@ -1,10 +1,30 @@
 .pad {
 	width: 100px;
 	height: 100px;
-	background: #EEE;
 	display: inline-block;
+	opacity:0.5;
+	background: #EEE;
 	border: 1px solid black;
+}
+
+.frog {
+	width: 100px;
+	height: 100px;
+	display: inline-block;
+	
 	position: absolute;
+	-webkit-transition-property: left;
+  	-webkit-transition-duration: 0.125s;
+  	-moz-transition-property: left;
+  	-moz-transition-duration: 0.125s;
+   	-ms-transition-property: left;
+  	-ms-transition-duration: 0.125s;
+  	transition-property: left;
+  	transition-duration: 0.125s;
+  	-webkit-transition-timing-function: ease-in;
+  	-moz-transition-timing-function: ease-in;
+  	-ms-transition-timing-function: ease-in;
+  	transition-timing-function: ease-in;
 }
 
 .frog-space {
@@ -19,6 +39,7 @@
 .redfrog {
 	background-image: url("../img/redFrog.png");
 }
+
 .froginput {
 	width: 50px;
 	height: 30px;

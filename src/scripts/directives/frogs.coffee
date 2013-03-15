@@ -1,7 +1,7 @@
 angular.module('app').directive 'frogs', [
 	'$window'
 	($window) ->
-		template: '<span ng-repeat="index in padIndexes" ng-class="getFrog($index)" ng-click="jump($index)"></span>'
+		template: '<frog ng-repeat="f in frogs" frog-index="{{$index}}" f="f"></frog>'
 		replace: false
 		link: (scope,element,attrs) ->
 

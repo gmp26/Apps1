@@ -50,8 +50,8 @@
     if $scope.done == true && $scope.moveCount == $scope.minMove then $scope.minimum = true
     else if $scope.done == true && $scope.moveCount != $scope.minMove then $scope.fewer = true
 
-  $scope.$watch "_red", -> redraw()
-  $scope.$watch "_blue", -> redraw()
+  $scope.$watch "_red", redraw
+  $scope.$watch "_blue", redraw
 
   $scope.jump = (index) ->
     state = $scope.padIndexes[index]

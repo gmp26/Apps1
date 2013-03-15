@@ -4,9 +4,9 @@
 </div>
 <div ng-controller="frogController">
 	<div>
-red <input type="number" min="1" max="9" ng-model="_red" class="froginput"><br />
-blue <input type="number" min="1" max="9" ng-model="_blue" class="froginput">
-</div>
+		red <input type="number" min="1" max="9" ng-model="_red" class="froginput"><br />
+		blue <input type="number" min="1" max="9" ng-model="_blue" class="froginput">
+	</div>
 
 <!-- testing resize-from
 
@@ -15,16 +15,14 @@ blue <input type="number" min="1" max="9" ng-model="_blue" class="froginput">
 </div>
 
 <span frogs resize-from="(_red + _blue + 1)*102" ></span>
--->
 
 <div class="frog-space">
 	<frog ng-repeat="f in frogs" frog-index="{{$index}}" f="f"></frog> 
 </div>
-
-<!--
-<span frogs woff="55"></span>
-<span ng-repeat="index in padIndexes" ng-class="getFrog($index)" ng-click="jump($index)"></span>
 -->
+
+<div class="frog-space" frogs woff="55"></div>
+
 <p>You have made {{moveCount}} moves.</p>
 <p ng-show="fewer">You could have swapped the frogs in fewer moves. Have another go.</p>
 <p ng-show="minimum">Well done, you have swapped all the frogs in the minimum number of moves!</p>
