@@ -15,6 +15,7 @@ require
 				'directives/d3TiltedSquare'
 				'directives/tiltedSquare'
 				'directives/frogs'
+				'directives/resizeFrom'
 			]
 		'controllers/appController':
 			deps: [
@@ -37,6 +38,11 @@ require
 				'app'
 			]
 		'directives/frogs':
+			deps: [
+				'libs/angular'
+				'app'
+			]
+		'directives/resizeFrom':
 			deps: [
 				'libs/angular'
 				'app'

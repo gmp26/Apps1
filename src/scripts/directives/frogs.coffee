@@ -1,10 +1,11 @@
 angular.module('app').directive 'frogs', [
 	'$window'
-	($window) -> 
+	($window) ->
 		template: '<span ng-repeat="index in padIndexes" ng-class="getFrog($index)" ng-click="jump($index)"></span>'
 		replace: false
 		link: (scope,element,attrs) ->
 
+			###
 			console.log "woff=", ~~attrs.woff
 
 			rescale = (winSize, padCount) ->
@@ -25,6 +26,7 @@ angular.module('app').directive 'frogs', [
 
 			win = angular.element($window)
 			win.bind "resize", resizeHandler
+			###
 
 ]
 

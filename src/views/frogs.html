@@ -7,8 +7,19 @@
 red <input type="number" min="1" max="9" ng-model="_red" class="froginput"><br />
 blue <input type="number" min="1" max="9" ng-model="_blue" class="froginput">
 </div>
-<span frogs woff="55"></span>
-<!-- 
+
+<!-- testing resize-from
+
+<div style="padding:10px; margin:5px" resize-from="420">
+	<div style="width:400px;height:100px;border:1px solid red"></div>
+</div>
+
+<span frogs resize-from="(_red + _blue + 1)*102" ></span>
+-->
+
+ 
+<span frogs></span>
+<!--
 <span ng-repeat="index in padIndexes" ng-class="getFrog($index)" ng-click="jump($index)"></span>
 -->
 <p>You have made {{moveCount}} moves.</p>
