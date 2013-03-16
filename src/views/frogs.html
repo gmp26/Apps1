@@ -10,10 +10,13 @@
     <input id="blues" type="number" min="1" max="9" ng-model="_blue" class="froginput">
 	</form>
 
-  <div class="frog-space well" frogs woff="20" style="width: {{(_red + _blue + 1)*100}}px" tooltip="Hello"></div>
+  <div frogs woff="20"
+    class="frog-space well" 
+    style="width: {{(_red + _blue + 1)*100}}px"
+  ></div>
 
   <p>You have made {{moveCount}} moves.</p>
   <p ng-show="fewer">You could have swapped the frogs in fewer moves. Have another go.</p>
   <p ng-show="minimum">Well done, you have swapped all the frogs in the minimum number of moves!</p>
-  <button type="button" class="btn" ng-click = "redraw()">reset</button>
+  <button type="button" class="btn" ng-click = "reset()">reset</button>
 </div>

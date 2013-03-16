@@ -1,65 +1,57 @@
-angular.module('app').directive 'frog', ->
-	restrict: 'EA'
-	link: (scope, element, attrs) ->
+angular.module('app').directive 'frog', [
+	'$timeout'
+	($timeout) ->
+		restrict: 'EA'
+		link: (scope, element, attrs) ->
 
-		state = null
+			console.log "froggy element ", element
 
-		console.log "froggy element ", element
+			# we forgot the "px"; and browsers simply ignore unitless properties!!!
+			X = (x) -> 100*x + "px"
 
-		# we forgot the "px"; and browsers simply ignore unitless properties!!!
-		X = (x) -> 100*x + "px"
-
-		# $apply and $digest deleted since there are no longer any watches
-		# otherwise code as before except for z-index addition
-		jump = (me) ->
-
-			#ground all the frogs while filtering for the space
-			emptyPad = (scope.frogs.filter (d) ->
-				d.element.css("z-index", 0)	
-				d.colour == 1)[0]
-
-			# can we hop?
-			diff = Math.abs(me.x - emptyPad.x)
-			if diff == 1 or diff == 2
-
-				# yes! update the model
-				scope.hop(me, emptyPad)
-
-				# update the screen
-				element.css("left", X(me.x))
+			move = (frog, space) ->
+				element.css("left", X(frog.x))
 				element.css("z-index", 1)
-				emptyPad.element.css("left", X(emptyPad.x))
+				space.element.css("left", X(space.x))
 
-		# set up a click handler
-		element.bind "click", (event) -> jump(state)
+			# $apply and $digest deleted since there are no longer any watches
+			# otherwise code as before except for z-index addition
+			jump = (me) ->
 
-		# map colour to css class 
-		classBy = (colour) ->
-			switch colour
-				when 0 then "frog red"
-				when 1 then ""
-				when 2 then "frog blue"
-				else throw new Error("invalid frog state")
+				# ground all the frogs while filtering for the empty pad
+				emptyPad = (scope.frogs.filter (d) ->
+					d.element.css("z-index", 0)
+					d.colour == 1
+				)[0]
 
-		state = scope.frog
-		state.element = element
-		element.addClass(classBy(state.colour))
+				# can we hop?
+				diff = Math.abs(me.x - emptyPad.x)
+				if diff == 1 or diff == 2
 
-		# added to put frogs in right place on startup
-		element.css("left", X(state.x))
+					# yes! update the model
+					scope.hop(me, emptyPad)
 
-		# see frogs.less for position and transitions
+					# update the screen
+					move(me, emptyPad)
 
 
-		# see observing attributes in angular directives guide
-		###
-		attrs.$observe 'frogIndex', (index) ->
-			state = scope.frogs[index]
-			state.element = element
-			element.addClass(classBy(state.colour))
+			# map colour to css class
+			classBy = (colour) ->
+				switch colour
+					when 0 then "frog red"
+					when 1 then ""
+					when 2 then "frog blue"
+					else throw new Error("invalid frog colour")
+
+			element.addClass(classBy(scope.frog.colour))
 
 			# added to put frogs in right place on startup
-			element.css("left", X(state.x))
+			element.css("left", X(scope.frog.x))
 
-			# see frogs.less for position and transitions
-		###
+			# set up a click handler on the frog
+			element.bind "click", (event) -> jump(scope.frog)
+
+			scope.frog = scope.frog
+			scope.frog.element = element
+
+]
