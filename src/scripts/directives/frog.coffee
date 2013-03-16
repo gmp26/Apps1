@@ -4,13 +4,13 @@ angular.module('app').directive 'frog', [
 		restrict: 'EA'
 		link: (scope, element, attrs) ->
 
-			console.log "froggy element ", element
+			# console.log "froggy element ", element
 
 			# we forgot the "px"; and browsers simply ignore unitless properties!!!
 			X = (x) -> 100*x + "px"
 
-			move = (frog, space) ->
-				element.css("left", X(frog.x))
+			scope.frog.move = (space) ->
+				element.css("left", X(this.x))
 				element.css("z-index", 1)
 				space.element.css("left", X(space.x))
 
@@ -31,15 +31,15 @@ angular.module('app').directive 'frog', [
 					# yes! update the model
 					scope.hop(me, emptyPad)
 
-					# update the screen
-					move(me, emptyPad)
+					# & update the screen
+					me.move(emptyPad)
 
 
 			# map colour to css class
 			classBy = (colour) ->
 				switch colour
 					when 0 then "frog red"
-					when 1 then ""
+					when 1 then "frog"
 					when 2 then "frog blue"
 					else throw new Error("invalid frog colour")
 

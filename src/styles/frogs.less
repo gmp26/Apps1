@@ -9,19 +9,21 @@
   }
 
   .red {
-  	background-image: url("../img/redFrog.png");
+    background-image: url("../img/redFrog.png");
   }
 
   .frog {
     width: 100px;
     height: 100px;
     display: inline-block;
+    opacity: 0.7;
     
     position: absolute;
     .transition(.2s ease-in-out left);
 
     &:hover {
       cursor: pointer;
+      opacity:1;
     }
   }
 }

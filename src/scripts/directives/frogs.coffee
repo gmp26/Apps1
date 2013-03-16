@@ -8,9 +8,9 @@ angular.module('app').directive 'frogs', [
 			console.log "woff=", ~~attrs.woff
 
 			rescale = (winSize, padCount) ->
-				zoom = (winSize - ~~attrs.woff)/(110*padCount)
+				zoom = (winSize )/(130*padCount)
 				#console.log "zoom=", zoom
-				element.css("zoom", Math.min(1, zoom))
+				element.css("zoom", zoom)
 
 			resizeHandler = (event) ->
 				#console.log "innerWidth =", $window.innerWidth

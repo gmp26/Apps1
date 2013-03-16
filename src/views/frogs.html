@@ -1,22 +1,30 @@
 <div class="header">
   <h2>Frogs <a href="http://nrich.maths.org/1246">NRICH 1246</a></h2>
 </div>
-<div ng-controller="frogController">
-  <p>Find a way to swap the red and blue frogs.</p>
-	<form class="form-inline" >
-		<label class="control-label" for="reds">Reds:</label>
-    <input id="reds" type="number" min="1" max="9" ng-model="_red" class="froginput">
-    <label class="control-label" for="blues">&nbsp;&nbsp;&nbsp;Blues:</label>
-    <input id="blues" type="number" min="1" max="9" ng-model="_blue" class="froginput">
-	</form>
+<div ng-controller="frogController" class="row-fluid">
+  <div class="span12"
+    <p  class="span12">Find a way to swap the red and blue frogs.</p>
+  	<form class="form-inline"  class="span12">
+  		<label class="control-label" for="reds">Reds:</label>
+      <input id="reds" type="number" min="1" max="9" ng-model="_red" class="froginput">
+      <label class="control-label" for="blues">&nbsp;&nbsp;&nbsp;Blues:</label>
+      <input id="blues" type="number" min="1" max="9" ng-model="_blue" class="froginput">
+  	</form>
 
-  <div frogs woff="20"
-    class="frog-space well" 
-    style="width: {{(_red + _blue + 1)*100}}px"
-  ></div>
+    <div frogs woff="20"
+      class="frog-space well span12" 
+      style="width: {{(_red + _blue + 1)*100}}px"
+    ></div>
 
-  <p>You have made {{moveCount}} moves.</p>
-  <p ng-show="fewer">You could have swapped the frogs in fewer moves. Have another go.</p>
-  <p ng-show="minimum">Well done, you have swapped all the frogs in the minimum number of moves!</p>
-  <button type="button" class="btn" ng-click = "reset()">reset</button>
+    <p  class="span12">You have made {{moveCount}} moves.</p>
+    <p ng-show="fewer" class="span12">You could have swapped the frogs in fewer moves. Have another go.</p>
+    <p ng-show="minimum" class="span12">Well done, you have swapped all the frogs in the minimum number of moves!</p>
+      <button type="button" class="btn span3" ng-click = "reset()">Start again</button>
+      <button type="button" class="btn span3" ng-click = "replay()">Replay moves so far</button>
+      <button type="button" class="btn span3" ng-click = "save()">Save this set of moves</button>
+    </div>
+    <div class="moves-saved well span12">
+      <button ng-repeat="moves in savedMoves" class="btn" ng-click = "play(moves)">set {{$index}}</button>
+    </div>
+  </div>
 </div>
