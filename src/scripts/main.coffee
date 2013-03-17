@@ -17,6 +17,7 @@ require
 				'directives/frogs'
 				'directives/frog'
 				'directives/resizeFrom'
+				'directives/svgCheck'
 			]
 		'controllers/appController':
 			deps: [
@@ -76,6 +77,12 @@ require
 				'libs/angular'
 				'app'
 				'directives/d3Vis'
+				'libs/d3.v3'
+			]
+		'directives/svgCheck':
+			deps: [
+				'libs/angular'
+				'app'
 				'libs/d3.v3'
 			]
 		'directives/appVersion':

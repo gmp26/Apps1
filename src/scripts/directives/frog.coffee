@@ -14,25 +14,29 @@ angular.module('app').directive 'frog', [
 				element.css("z-index", 1)
 				space.element.css("left", X(space.x))
 
-			# $apply and $digest deleted since there are no longer any watches
-			# otherwise code as before except for z-index addition
+			# respond to a click on a frog
 			jump = (me) ->
+				# currently in browser event context
 
-				# ground all the frogs while filtering for the empty pad
-				emptyPad = (scope.frogs.filter (d) ->
-					d.element.css("z-index", 0)
-					d.colour == 1
-				)[0]
+				# apply this function in angular context
+				# remove this line and moveCount fails to update
+				scope.$apply ->
 
-				# can we hop?
-				diff = Math.abs(me.x - emptyPad.x)
-				if diff == 1 or diff == 2
+					# ground all the frogs while filtering for the empty pad
+					emptyPad = (scope.frogs.filter (d) ->
+						d.element.css("z-index", 0)
+						d.colour == 1
+					)[0]
 
-					# yes! update the model
-					scope.hop(me, emptyPad)
+					# can we hop?
+					diff = Math.abs(me.x - emptyPad.x)
+					if diff == 1 or diff == 2
 
-					# & update the screen
-					me.move(emptyPad)
+						# yes! update the model
+						scope.hop(me, emptyPad)
+
+						# & update the screen
+						me.move(emptyPad)
 
 
 			# map colour to css class

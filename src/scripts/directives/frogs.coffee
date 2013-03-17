@@ -14,9 +14,9 @@ angular.module('app').directive 'frogs', [
 
 			resizeHandler = (event) ->
 				#console.log "innerWidth =", $window.innerWidth
-				rescale($window.innerWidth, scope.padIndexes.length)
+				rescale($window.innerWidth, scope.frogs.length)
 
-			scope.$watch 'padIndexes', (val) ->
+			scope.$watch 'frogs', (val) ->
 				#console.log("pads =", val.length)
 				rescale($window.innerWidth, val.length)
 				

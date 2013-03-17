@@ -2,41 +2,64 @@ angular.module('app').controller 'frogController', [
   '$scope'
   '$timeout'
   ($scope, $timeout) ->
+
     $scope._red = 2
     $scope._blue = 2
+    $scope.minMove = 8
+    $scope.savedMoves = []
 
-  	# spawn an array of frog objects containing colour and pad index
+    # spawn an array of frog objects containing colour and pad index
     spawn = (red,blue) ->
       [-red..blue].map (d,i) ->
-      	colour: if d < 0 then 0 else if d == 0 then 1 else 2
-      	x: i
+        colour: if d < 0 then 0 else if d == 0 then 1 else 2
+        x: i
 
-    $scope.minMove = $scope._red*$scope._blue+$scope._red+$scope._blue
+    initialState = null
     doneState = []
-
     promises = []
 
+    ###
+    # class MoveList 
+    #   an easy to clone list of moves annotated with a tag string
+    #   and the current red and blue counts.
+    ###
+    class MoveList
+      constructor: (@list, @tag, @red, @blue) ->
+      clone: ->
+        new MoveList @list.concat(), @tag, @red, @blue
+
     reset = ->
-      $scope.frogs = spawn($scope._red,$scope._blue)
-      initialState = (d.colour for d in $scope.frogs)
 
-      $scope.padIndexes = initialState.concat()
-      doneState = initialState.concat().reverse()
+      # this will be constant
+      initialState = spawn($scope._red, $scope._blue)
 
-      # create a move stack
-      $scope.moves = []
+      # this will change
+      $scope.frogs = spawn($scope._red, $scope._blue)
 
-      $scope.moveCount = 0
+      # create a move list for current frog counts
+      $scope.moves = new MoveList(
+        [],
+        undefined,
+        $scope._red,
+        $scope._blue
+      )
+
       $scope.minMove = $scope._red*$scope._blue+$scope._red+$scope._blue
       $scope.done = false
       $scope.minimum = false
-      $scope.fewer = false
 
       promises.forEach (p) -> $timeout.cancel p
+
     reset()
 
     equals = (a,b) ->
       a.length == b.length && a.every (aVal, i) -> aVal == b[i]
+
+    # check whether frog states a and b are mirrored
+    reversed = (a, b) ->
+      a.every (d, i) ->
+        mirrorx = a.length - d.x - 1
+        d.colour == b[mirrorx].colour 
 
     $scope.$watch "_red", reset
     $scope.$watch "_blue", reset
@@ -44,71 +67,64 @@ angular.module('app').controller 'frogController', [
 
     $scope.hop = (frog, space) ->
       console.log frog.x, space.x
+
       # save the move
-      $scope.moves.push
+      $scope.moves.list.push
       	frogx: frog.x
       	spacex: space.x
 
       # and swap places
       [frog.x, space.x] = [space.x, frog.x]
 
-    $scope.replay = ->
-      console.log "replay"
-      moves = $scope.moves.concat()
+      # check for end
+      state = (d.colour for d in $scope.frogs)
+
+      $scope.done = reversed($scope.frogs, initialState)
+
+      $scope.minimum = $scope.done && $scope.moves.list.length == $scope.minMove
+
+    $scope.replay = (index = null) ->
+      console.log "replay(", index, ")"
+
+      # replay saved moves if indicated, or the current moves
+      if index?
+        moves = $scope.savedMoves[index].clone()
+      else
+        moves = $scope.moves.clone()
+
+      # reset before replay using saved frog counts
+      $scope._red = moves.red
+      $scope._blue = moves.blue
       reset()
 
-      moves.forEach (d, i) ->
-        promises.push $timeout ->
-          frog = (f for f in $scope.frogs when f.x == d.frogx)[0]
-          space = (f for f in $scope.frogs when f.x == d.spacex)[0]
-          $scope.hop(frog, space)
-          frog.move(space)
-        , 800*(i+0.2)
+      $timeout ->
+        moves.list.forEach (d, i) ->
+          # schedule each move for playback, saving
+          # the promised timeouts in case we have to cancel them
+          promises.push $timeout ->
+            frog = (f for f in $scope.frogs when f.x == d.frogx)[0]
+            space = (f for f in $scope.frogs when f.x == d.spacex)[0]
+            $scope.hop(frog, space)
+            frog.move(space)
+          , 800*(i+0.2)
+      ,0
 
-    savedMoves = []
 
-    $scope.noOfSaves = 0
-    $scope.currentSave = 3
-    $scope.maxSize = 10
-    $scope.setPage = (saveNo) ->
-      $scope.currentSave = saveNo
+    newTag = ->
+      "try " + ($scope.savedMoves.length + 1)
 
     $scope.save = ->
-      $scope.currentSave = $scope.noOfSaves
-      savedMoves[$scope.noOfSaves++] = $scope.moves
+      saved = $scope.moves.clone()
+      saved.tag = if $scope.moves.tag then $scope.moves.tag else newTag()
+      $scope.moves.tag = undefined
+      $scope.savedMoves.push(saved)
+
+    $scope.forget = (index) ->
+      $scope.savedMoves.splice(index, 1)
 
     $scope.clear = ->
-      savedMoves = []
-      $scope.noOfSaves = 0
-
-
-
-    ###
-  	#
-  	# no longer called
-  	#
-    swap = (x,y) ->
-      temp = $scope.padIndexes[x]
-      $scope.padIndexes[x] = $scope.padIndexes[y]
-      $scope.padIndexes[y] = temp
-      $scope.moveCount++
-      $scope.done = equals($scope.padIndexes,doneState)
-      if $scope.done == true && $scope.moveCount == $scope.minMove then $scope.minimum = true
-      else if $scope.done == true && $scope.moveCount != $scope.minMove then $scope.fewer = true
-
-    $scope.jump = (index) ->
-      state = $scope.padIndexes[index]
-      emptyPad = $scope.padIndexes.indexOf(1)
-      diff = Math.abs(index - emptyPad)
-      if diff == 1 or diff == 2 then swap(index, emptyPad)
-
-    $scope.getFrog = (index) ->
-      switch $scope.padIndexes[index]
-        when 0 then "pad redfrog"
-        when 1 then "pad"
-        when 2 then "pad bluefrog"
-        else throw new Error("invalid frog state")
-     ###
+      $scope.savedMoves = []
+      reset()
 
 ]
 
