@@ -1,4 +1,4 @@
-(angular.module 'app', ['ngResource', 'app.templates'])
+(angular.module 'app', ['ngResource', 'app.templates', 'ui.bootstrap'])
 .run ['$rootScope', '$log', ($rootScope, $log) ->
 
 	# fire an event related to the current route

@@ -14,7 +14,6 @@ angular.module('app').controller 'frogController', [
     $scope.minMove = $scope._red*$scope._blue+$scope._red+$scope._blue
     doneState = []
 
-    # promises stores timeouts that are currently playing
     promises = []
 
     reset = ->
@@ -33,9 +32,7 @@ angular.module('app').controller 'frogController', [
       $scope.minimum = false
       $scope.fewer = false
 
-      # cancel any ongoing playback
-      promises.forEach (d) -> $timeout.cancel(d)
-
+      promises.forEach (p) -> $timeout.cancel p
     reset()
 
     equals = (a,b) ->
@@ -49,14 +46,11 @@ angular.module('app').controller 'frogController', [
       console.log frog.x, space.x
       # save the move
       $scope.moves.push
-        frog: frog
-        frogx: frog.x
-        space: space
-        spacex: space.x
+      	frogx: frog.x
+      	spacex: space.x
 
       # and swap places
       [frog.x, space.x] = [space.x, frog.x]
-
 
     $scope.replay = ->
       console.log "replay"
@@ -65,12 +59,29 @@ angular.module('app').controller 'frogController', [
 
       moves.forEach (d, i) ->
         promises.push $timeout ->
+          frog = (f for f in $scope.frogs when f.x == d.frogx)[0]
+          space = (f for f in $scope.frogs when f.x == d.spacex)[0]
           $scope.hop(frog, space)
           frog.move(space)
-        , 1000*(i+0.2)
+        , 800*(i+0.2)
 
-    # savedMoves stores moves saved for later playback
-    $scope.savedMoves = [0,1,2,3]
+    savedMoves = []
+
+    $scope.noOfSaves = 0
+    $scope.currentSave = 3
+    $scope.maxSize = 10
+    $scope.setPage = (saveNo) ->
+      $scope.currentSave = saveNo
+
+    $scope.save = ->
+      $scope.currentSave = $scope.noOfSaves
+      savedMoves[$scope.noOfSaves++] = $scope.moves
+
+    $scope.clear = ->
+      savedMoves = []
+      $scope.noOfSaves = 0
+
+
 
     ###
   	#
