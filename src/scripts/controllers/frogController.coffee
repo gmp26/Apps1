@@ -7,6 +7,7 @@ angular.module('app').controller 'frogController', [
     $scope._blue = 2
     $scope.minMove = 8
     $scope.savedMoves = []
+    $scope.showReplay = false
 
     # spawn an array of frog objects containing colour and pad index
     spawn = (red,blue) ->
@@ -47,6 +48,7 @@ angular.module('app').controller 'frogController', [
       $scope.minMove = $scope._red*$scope._blue+$scope._red+$scope._blue
       $scope.done = false
       $scope.minimum = false
+      $scope.showReplay = $scope.savedMoves.length > 0
 
       promises.forEach (p) -> $timeout.cancel p
 
@@ -80,8 +82,8 @@ angular.module('app').controller 'frogController', [
       state = (d.colour for d in $scope.frogs)
 
       $scope.done = reversed($scope.frogs, initialState)
-
       $scope.minimum = $scope.done && $scope.moves.list.length == $scope.minMove
+      $scope.showReplay |= $scope.done
 
     $scope.replay = (index = null) ->
       console.log "replay(", index, ")"
