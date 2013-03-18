@@ -40,7 +40,7 @@ angular.module('app').controller 'frogController', [
       $scope.frogs = spawn($scope._red, $scope._blue)
 
       # tell the container how much room we need
-      $scope.container.width = 130*$scope.frogs.length if $scope.container?
+      # $scope.container.width = 130*$scope.frogs.length if $scope.container?
 
       # create a move list for current frog counts
       $scope.moves = new MoveList(
@@ -55,12 +55,10 @@ angular.module('app').controller 'frogController', [
       $scope.minimum = false
       $scope.showReplay = $scope.savedMoves.length > 0
 
+      # cancel any moves that are outstanding
       promises.forEach (p) -> $timeout.cancel p
 
     reset()
-
-    equals = (a,b) ->
-      a.length == b.length && a.every (aVal, i) -> aVal == b[i]
 
     # check whether frog states a and b are mirrored
     reversed = (a, b) ->
@@ -84,11 +82,9 @@ angular.module('app').controller 'frogController', [
       [frog.x, space.x] = [space.x, frog.x]
 
       # check for end
-      state = (d.colour for d in $scope.frogs)
-
       $scope.done = reversed($scope.frogs, initialState)
       $scope.minimum = $scope.done && $scope.moves.list.length == $scope.minMove
-      $scope.showReplay |= $scope.done
+      $scope.showReplay ||= $scope.done
 
     $scope.replay = (index = null) ->
       #console.log "replay(", index, ")"
