@@ -20,7 +20,7 @@ angular.module('app').controller 'frogController', [
     promises = []
 
     ###
-    # class MoveList 
+    # class MoveList
     #   an easy to clone list of moves annotated with a tag string
     #   and the current red and blue counts.
     ###
@@ -61,7 +61,7 @@ angular.module('app').controller 'frogController', [
     reversed = (a, b) ->
       a.every (d, i) ->
         mirrorx = a.length - d.x - 1
-        d.colour == b[mirrorx].colour 
+        d.colour == b[mirrorx].colour
 
     $scope.$watch "_red", reset
     $scope.$watch "_blue", reset

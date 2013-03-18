@@ -20,8 +20,8 @@ angular.module('app').directive 'frogs', [
 				#console.log("pads =", val.length)
 				rescale($window.innerWidth, val.length)
 				
-			console.log("scope=",scope.$id)
-			console.log("window=", $window)
+			#console.log("scope=",scope.$id)
+			#console.log("window=", $window)
 
 			win = angular.element($window)
 			win.bind "resize", resizeHandler
