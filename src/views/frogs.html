@@ -12,6 +12,13 @@
       <label class="control-label">blue frogs.</label>
   	</form>
 
+
+<!--
+    <div resize-from="(_red + _blue + 1)*105" woff="100" class="frog-space well">
+      <div frog ng-repeat="frog in frogs"></div>
+    </div>
+-->
+
     <div frogs woff="20"
       class="frog-space well" 
       style="width: {{(_red + _blue + 1)*100}}px"
@@ -42,7 +49,7 @@
         <button type="button" class="btn" 
           ng-click = "save()"
           ng-disabled = "!done"
-          tooltip="Add to playlist" tooltip-placement="bottom">
+          tooltip="Add moves to replay list" tooltip-placement="bottom">
           <i class="icon-plus"></i>
         </button>
       </div>

@@ -5,10 +5,10 @@ angular.module('app').directive 'frogs', [
 		replace: false
 		link: (scope,element,attrs) ->
 
-			console.log "woff=", ~~attrs.woff
+			#console.log "woff=", ~~attrs.woff
 
 			rescale = (winSize, padCount) ->
-				zoom = (winSize )/(130*padCount)
+				zoom = (winSize)/(130*padCount)
 				#console.log "zoom=", zoom
 				element.css("zoom", zoom)
 

@@ -5,6 +5,7 @@ angular.module('app').controller 'frogController', [
 
     $scope._red = 2
     $scope._blue = 2
+    $scope.container.width = 650 if $scope.container?
     $scope.minMove = 8
     $scope.savedMoves = []
     $scope.showReplay = false
@@ -31,11 +32,15 @@ angular.module('app').controller 'frogController', [
 
     reset = ->
 
+
       # this will be constant
       initialState = spawn($scope._red, $scope._blue)
 
       # this will change
       $scope.frogs = spawn($scope._red, $scope._blue)
+
+      # tell the container how much room we need
+      $scope.container.width = 130*$scope.frogs.length if $scope.container?
 
       # create a move list for current frog counts
       $scope.moves = new MoveList(
@@ -68,7 +73,7 @@ angular.module('app').controller 'frogController', [
     $scope.reset = reset
 
     $scope.hop = (frog, space) ->
-      console.log frog.x, space.x
+      #console.log frog.x, space.x
 
       # save the move
       $scope.moves.list.push
@@ -86,7 +91,7 @@ angular.module('app').controller 'frogController', [
       $scope.showReplay |= $scope.done
 
     $scope.replay = (index = null) ->
-      console.log "replay(", index, ")"
+      #console.log "replay(", index, ")"
 
       # replay saved moves if indicated, or the current moves
       if index?
