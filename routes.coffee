@@ -1,10 +1,11 @@
-
 module.exports = (app, dir) ->
 	app.get '/', (req, res) ->
 		res.render "#{dir}/index.html"
 
 ###
- 	Leave these - useful example of server-side CRUD operations
+#
+# Original AngularFun app server - useful reference
+#
 
 nextId = 0
 
@@ -42,4 +43,4 @@ isUniqueName = (name) ->
 		current = person for person in people when parseInt(person.id, 10) is parseInt(id, 10)
 
 		res.json current
-###
+	###
