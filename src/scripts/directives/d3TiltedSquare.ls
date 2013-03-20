@@ -1,4 +1,4 @@
-###
+/*
  	Tilted Square in d3 using svg.
 
 	This directive supplies the square with its controls,
@@ -14,7 +14,7 @@
   styles:
   	see AppTiltedSquares.less
 
-###
+*/
 angular.module('app').directive 'd3TiltedSquare',
 [
 	'$timeout'
@@ -50,7 +50,7 @@ angular.module('app').directive 'd3TiltedSquare',
 			scope.$watch 'radius', (val) ->
 				scope.radius = ~~val || 22
 
-			scope.squareDots = () ->
+			scope.squareDots = ->
 				dx = @b.x - @a.x
 				dy = @b.y - @a.y
 				@c = {x: @b.x + dy, y:@b.y - dx}
@@ -97,7 +97,7 @@ angular.module('app').directive 'd3TiltedSquare',
 				
 				scope.createSquaresLayer = ->
 					# create if necessary
-					scope.squaresLayer = gridScope.container.selectAll("#tiltedSquares")
+					scope.squaresLayer = gridScope.container.selectAll(\#tiltedSquares)
 					.data([gridScope])
 
 					scope.squaresLayer
@@ -106,7 +106,7 @@ angular.module('app').directive 'd3TiltedSquare',
 
 				scope.createControlsLayer = ->
 					# create controls if necessary
-					scope.controlsLayer = gridScope.container.selectAll("#tiltedControls")
+					scope.controlsLayer = gridScope.container.selectAll(\#tiltedControls)
 					.data([gridScope])
 
 					scope.controlsLayer
@@ -114,7 +114,7 @@ angular.module('app').directive 'd3TiltedSquare',
 					.attr("id", "tiltedControls")
 
 				scope.createControls = ->
-					scope.controls = scope.controlsLayer.selectAll(".control"+scope.$id)
+					scope.controls = scope.controlsLayer.selectAll(\.control +scope.$id)
 					scope.controls
 					.data(scope.squareDots().slice(0,2))
 					.enter().append("circle")
@@ -127,12 +127,12 @@ angular.module('app').directive 'd3TiltedSquare',
 
 				scope.update = ->
 					#update position of square
-					scope.squaresLayer.selectAll("#square"+scope.$id)
+					scope.squaresLayer.selectAll(\#square + scope.$id)
 					.data([scope.squareDots()])
 					.attr("d", (d) -> squareOutline(d) + "Z")
 
 					#and its controls
-					scope.controlsLayer.selectAll(".control"+scope.$id)
+					scope.controlsLayer.selectAll(\.control + scope.$id)
 					.data(scope.squareDots().slice(0,2))
 					.attr("cx", (d) -> gridScope.X(d.x))
 					.attr("cy", (d) -> gridScope.Y(d.y))
@@ -144,7 +144,7 @@ angular.module('app').directive 'd3TiltedSquare',
 				scope.createControlsLayer()
 
 				# create square if necessary
-				scope.square = scope.squaresLayer.selectAll("#square"+scope.$id)
+				scope.square = scope.squaresLayer.selectAll(\#square + scope.$id)
 				scope.square
 				.data([scope.squareDots()])
 				.enter().append("path")

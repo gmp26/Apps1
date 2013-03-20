@@ -8,6 +8,7 @@ angular.module('app').directive 'd3DotGrid', ->
 	return {
 		restrict: 'A'
 
+
 		link: (scope, element, attrs) ->
 
 			#
@@ -112,7 +113,7 @@ angular.module('app').directive 'd3DotGrid', ->
 				#
 				gridData = [scope.$id]
 
-				theGrid = @container.selectAll("#grid")
+				theGrid = @container.selectAll(\#grid)
 				.data(gridData)
 
 				theGrid.enter().append("g")

@@ -76,7 +76,7 @@
 
 			# define handler for different window widths
 			# use timer to avoid too many redraws
-			resizeHandler = (event) =>
+			resizeHandler = (event) ->
 				if scope.resizing
 					return
 				scope.resizing = true
@@ -90,10 +90,10 @@
 				obj = {top:0, right:0, bottom:0, left:0}
 				if dimensionList?
 
-					list = dimensionList.split ///
+					list = dimensionList.split //
 						\s+ 				# on one or more whitespace chars
 						| \s*,\s* 	#	or a comma inside optional whitespace
-					///
+					//
 
 					# convert strings to numbers
 					list = list.map (val) -> ~~val

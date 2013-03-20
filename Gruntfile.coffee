@@ -346,6 +346,7 @@ module.exports = (grunt) ->
 				tasks: [
 					'coffeelint:scripts'
 					'coffee:scripts'
+					'livescript:scripts'
 					'copy:js'
 					'copy:scripts'
 				]
