@@ -5,10 +5,13 @@ A collection of Apps for [NRICH](http://nrich.maths.org)
 Derived from AngularFun
 *By [@CaryLandholt](https://twitter.com/carylandholt)*
 
-The aim is to make this app host a few related apps and for the basis for similar collections.
+The aim is to make this app host a few related apps and form the basis of similar collections. Some app extraction tasks still needed
+as publication is currently a manual process.
 
-Templates are handled via the templateCache and the grunt-angular-templates task.
-This simplfies directive testing when templateURL is used.
+Updated to grunt-0.4 in all but the playlist branch which is
+still at grunt-0.3.
+
+Moving to livescript shortly.
 
 ## About
 Apps1 is an [AngularJS](http://angularjs.org/) app collection.
