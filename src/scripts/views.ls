@@ -2,3 +2,4 @@
 # this file needs to be here for the dev build
 # it is effectively ignored
 # views will be loaded as html files
+0

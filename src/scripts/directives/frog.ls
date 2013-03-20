@@ -42,10 +42,10 @@ angular.module('app').directive 'frog', [
 			# map colour to css class
 			classBy = (colour) ->
 				switch colour
-					when 0 then "frog red"
-					when 1 then "frog"
-					when 2 then "frog blue"
-					else throw new Error("invalid frog colour")
+				| 0 => "frog red"
+				| 1 => "frog"
+				| 2 => "frog blue"
+				else throw new Error("invalid frog colour")
 
 			element.addClass(classBy(scope.frog.colour))
 

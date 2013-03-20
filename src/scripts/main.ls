@@ -1,4 +1,4 @@
-require
+shim = 
 	shim:
 		'controllers/appController':
 			deps: [
@@ -21,10 +21,6 @@ require
 				'app'
 			]
 		'directives/frog':
-			deps: [
-				'app'
-			]
-		'directives/resizeFrom':
 			deps: [
 				'app'
 			]
@@ -64,30 +60,31 @@ require
 		'libs/bootstrap': deps: ['libs/jquery']
 		'libs/angular-resource': deps: ['libs/angular']
 		'libs/ui-bootstrap-tpls': deps: ['libs/angular']
-		'app': deps: [
+		'app': 
+			deps: [
 				'libs/angular'
 				'libs/angular-resource'
 				'libs/ui-bootstrap-tpls'
 			]
-		'bootstrap': deps: ['app']
 		'routes': deps: ['app']
 		'views': deps: ['app']
-	[
-		'require'
-		'controllers/appController'
-		'controllers/todoController'
-		'controllers/frogController'
-		'controllers/boomerangController'
-		'directives/appVersion'
-		'directives/d3Vis'
-		'directives/d3DotGrid'
-		'directives/d3TiltedSquare'
-		'directives/tiltedSquare'
-		'directives/frogs'
-		'directives/frog'
-		'directives/resizeFrom'
-		'directives/svgCheck'
-		'routes'
-		'views'
-	], (require) ->
-		require ['bootstrap']
+
+configure = [
+	'require'
+	'controllers/appController'
+	'controllers/todoController'
+	'controllers/frogController'
+	'controllers/boomerangController'
+	'directives/appVersion'
+	'directives/d3Vis'
+	'directives/d3DotGrid'
+	'directives/d3TiltedSquare'
+	'directives/tiltedSquare'
+	'directives/frogs'
+	'directives/frog'
+	'directives/svgCheck'
+	'routes'
+	'views'
+]
+
+require shim, configure, (require) -> require ['bootstrap']

@@ -72,10 +72,10 @@ angular.module('app').directive 'tiltedSquare', ['$timeout', ($timeout) ->
 				new fabric.Circle (options)
 
 			# make a background grid dot
-			makeGridDots = () ->
+			makeGridDots = ->
 				dots = []
-				for row in [0..scope.down-1] by 1
-					for col in [0..scope.along-1] by 1
+				for row in [0 til scope.down] by 1
+					for col in [0 til scope.along] by 1
 						dot = makeDot col, row, {
 							debug: false
 							selectable: false
@@ -85,7 +85,7 @@ angular.module('app').directive 'tiltedSquare', ['$timeout', ($timeout) ->
 						dots.push(dot)
 				return dots
 		
-			squareDots = () ->
+			squareDots = ->
 				a = scope.fixedDot
 				b = scope.activeDot
 				throw new Error('control dots outside canvas') unless (
@@ -104,15 +104,16 @@ angular.module('app').directive 'tiltedSquare', ['$timeout', ($timeout) ->
 			# make a filled tilted square given a set of dots with rows and cols
 			#
 			makeSquare = (dots) ->
-				points = (new fabric.Point LEFT(dot.col), TOP(dot.row) \
-					for dot in dots)
+				points = []
+				for dot in dots
+					points.push new fabric.Point(LEFT(dot.col), TOP(dot.row))
 				return new fabric.Polygon(points, {
 					fill: scope.fill
 					opacity:0.5
 					selectable: false
 				})
 
-			draw = () ->
+			draw = ->
 
 				return if scope.canvas?
 
@@ -159,7 +160,7 @@ angular.module('app').directive 'tiltedSquare', ['$timeout', ($timeout) ->
 
 				# add everything to the canvas
 				scope.dots = makeGridDots()
-				scope.canvas.add dot for dot in scope.dots
+				[scope.canvas.add dot for dot in scope.dots]
 				scope.square = makeSquare(squareDots())
 				scope.canvas.add scope.square
 				scope.canvas.add scope.fixedDot
