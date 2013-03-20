@@ -33,10 +33,7 @@ module.exports = (grunt) ->
 		coffeelint:
 			scripts: 
 				files:
-					src: './src/scripts/**/*.coffee'
-			tests:
-				files:
-					src: ['/src/test/**/*.coffee']
+					src: ['./src/**/*.coffee', './test/**/*.coffee']
 			options:
 				no_trailing_whitespace:
 					level: 'error'
@@ -406,6 +403,7 @@ module.exports = (grunt) ->
 	# grunt
 	grunt.registerTask 'default', [
 		'clean:working'
+		'coffeelint:scripts'
 		'coffee:scripts'
 		'copy:js'
 		'less'
