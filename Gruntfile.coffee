@@ -48,6 +48,27 @@ module.exports = (grunt) ->
 				no_tabs:
 					level: 'ignore'
 
+		#compile livescript (.ls) files to javascript (.js)
+		livescript:
+			scripts:
+				files: [
+					cwd: './src/'
+					src: 'scripts/**/*.ls'
+					dest: './.temp/'
+					expand: true
+					ext: '.js'
+				,
+					cwd: './test/'
+					src: 'scripts/**/*.ls'
+					dest: './dist_test/'
+					expand: true
+					ext: '.js'
+				]
+				options:
+					# Don't include a surrounding Immediately-Invoked Function Expression (IIFE) in the compiled output.
+					# For more information on IIFEs, please visit http://benalman.com/news/2010/11/immediately-invoked-function-expression/
+					bare: true
+
 		# Compile CoffeeScript (.coffee) files to JavaScript (.js).
 		coffee:
 			scripts:
@@ -356,6 +377,9 @@ module.exports = (grunt) ->
 	# coffeelint
 	grunt.loadNpmTasks('grunt-coffeelint');
 
+	# livescript compiler
+	grunt.loadNpmTasks('grunt-livescript')
+
 	# Express server + LiveReload
 	grunt.loadNpmTasks 'grunt-express'
 
@@ -405,6 +429,7 @@ module.exports = (grunt) ->
 		'clean:working'
 		'coffeelint:scripts'
 		'coffee:scripts'
+		'livescript:scripts'
 		'copy:js'
 		'less'
 		'template:views'
