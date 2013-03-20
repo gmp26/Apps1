@@ -60,7 +60,7 @@ require
 				'services/semver'
 			]
 		'services/semver': deps: ['libs/angular', 'app']
-		'bootstrap': deps: ['apps']
+		'bootstrap': deps: ['app']
 		'libs/bootstrap': deps: ['libs/jquery']
 		'libs/angular-resource': deps: ['libs/angular']
 		'libs/ui-bootstrap-tpls': deps: ['libs/angular']

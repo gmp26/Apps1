@@ -29,6 +29,28 @@ module.exports = (grunt) ->
 					'!**/node_modules/**'
 				]
 
+		#
+		coffeelint:
+			scripts: 
+				files:
+					src: './src/scripts/**/*.coffee'
+			tests:
+				files:
+					src: ['/src/test/**/*.coffee']
+			options:
+				no_trailing_whitespace:
+					level: 'error'
+				#Use one tab for indentation.
+				indentation:
+					value: 1
+					level: 'error'
+				# No maximum line length.
+				max_line_length:
+					level: 'ignore'
+				# Using tabs should not result in an error.
+				no_tabs:
+					level: 'ignore'
+
 		# Compile CoffeeScript (.coffee) files to JavaScript (.js).
 		coffee:
 			scripts:
@@ -304,6 +326,7 @@ module.exports = (grunt) ->
 			scripts:
 				files: './src/scripts/**'
 				tasks: [
+					'coffeelint:scripts'
 					'coffee:scripts'
 					'copy:js'
 					'copy:scripts'
@@ -332,6 +355,9 @@ module.exports = (grunt) ->
 	grunt.loadNpmTasks 'grunt-contrib-livereload'
 	grunt.loadNpmTasks 'grunt-contrib-requirejs'
 	grunt.loadNpmTasks 'grunt-contrib-watch'
+
+	# coffeelint
+	grunt.loadNpmTasks('grunt-coffeelint');
 
 	# Express server + LiveReload
 	grunt.loadNpmTasks 'grunt-express'

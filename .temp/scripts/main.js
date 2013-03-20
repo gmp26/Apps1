@@ -43,7 +43,7 @@ require({
       deps: ['libs/angular', 'app']
     },
     'bootstrap': {
-      deps: ['apps']
+      deps: ['app']
     },
     'libs/bootstrap': {
       deps: ['libs/jquery']
