@@ -26,12 +26,11 @@ angular.module('app').controller 'frogController', [
     #   and the current red and blue counts.
     ###
     class MoveList
-      constructor: (@list, @tag, @red, @blue) ->
+      (@list, @tag, @red, @blue) ->
       clone: ->
         new MoveList @list.concat(), @tag, @red, @blue
 
     reset = ->
-
 
       # this will be constant
       initialState = spawn($scope._red, $scope._blue)
@@ -45,7 +44,7 @@ angular.module('app').controller 'frogController', [
       # create a move list for current frog counts
       $scope.moves = new MoveList(
         [],
-        undefined,
+        void,
         $scope._red,
         $scope._blue
       )
@@ -74,9 +73,7 @@ angular.module('app').controller 'frogController', [
       #console.log frog.x, space.x
 
       # save the move
-      $scope.moves.list.push
-      	frogx: frog.x
-      	spacex: space.x
+      $scope.moves.list.push {frogx: frog.x, spacex: space.x}
 
       # and swap places
       [frog.x, space.x] = [space.x, frog.x]
@@ -105,8 +102,8 @@ angular.module('app').controller 'frogController', [
           # schedule each move for playback, saving
           # the promised timeouts in case we have to cancel them
           promises.push $timeout ->
-            frog = (f for f in $scope.frogs when f.x == d.frogx)[0]
-            space = (f for f in $scope.frogs when f.x == d.spacex)[0]
+            frog = [f for f in $scope.frogs when f.x == d.frogx][0]
+            space = [f for f in $scope.frogs when f.x == d.spacex][0]
             $scope.hop(frog, space)
             frog.move(space)
           , 800*(i+0.2)
@@ -119,7 +116,7 @@ angular.module('app').controller 'frogController', [
     $scope.save = ->
       saved = $scope.moves.clone()
       saved.tag = if $scope.moves.tag then $scope.moves.tag else newTag()
-      $scope.moves.tag = undefined
+      $scope.moves.tag = void
       $scope.savedMoves.push(saved)
 
     $scope.forget = (index) ->

@@ -29,11 +29,13 @@ module.exports = (grunt) ->
 					'!**/node_modules/**'
 				]
 
+		###
+		# no longer needed
 		#
 		coffeelint:
 			scripts: 
 				files:
-					src: ['./src/**/*.coffee', './test/**/*.coffee']
+					src: ['./src/ss/s.coffee', './test/ss/s.coffee']
 			options:
 				no_trailing_whitespace:
 					level: 'error'
@@ -47,6 +49,7 @@ module.exports = (grunt) ->
 				# Using tabs should not result in an error.
 				no_tabs:
 					level: 'ignore'
+		###
 
 		#compile livescript (.ls) files to javascript (.js)
 		livescript:
@@ -344,7 +347,7 @@ module.exports = (grunt) ->
 			scripts:
 				files: './src/scripts/**'
 				tasks: [
-					'coffeelint:scripts'
+					#'coffeelint:scripts'
 					'coffee:scripts'
 					'livescript:scripts'
 					'copy:js'
@@ -376,7 +379,7 @@ module.exports = (grunt) ->
 	grunt.loadNpmTasks 'grunt-contrib-watch'
 
 	# coffeelint
-	grunt.loadNpmTasks('grunt-coffeelint');
+	#grunt.loadNpmTasks('grunt-coffeelint');
 
 	# livescript compiler
 	grunt.loadNpmTasks('grunt-livescript')
@@ -428,7 +431,7 @@ module.exports = (grunt) ->
 	# grunt
 	grunt.registerTask 'default', [
 		'clean:working'
-		'coffeelint:scripts'
+		#'coffeelint:scripts'
 		'coffee:scripts'
 		'livescript:scripts'
 		'copy:js'

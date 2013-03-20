@@ -45,7 +45,7 @@ angular.module('app').directive 'frog', [
 				| 0 => "frog red"
 				| 1 => "frog"
 				| 2 => "frog blue"
-				else throw new Error("invalid frog colour")
+				default throw new Error("invalid frog colour")
 
 			element.addClass(classBy(scope.frog.colour))
 
