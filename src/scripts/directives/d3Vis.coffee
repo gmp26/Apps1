@@ -72,7 +72,7 @@
 
 		link: (scope, element, attrs) ->
 
-			console.log('d3Vis')
+			#console.log('d3Vis')
 
 			# define handler for different window widths
 			# use timer to avoid too many redraws

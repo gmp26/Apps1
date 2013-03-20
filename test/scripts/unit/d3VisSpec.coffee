@@ -8,7 +8,7 @@ describe 'd3Vis directive', () ->
 
 	beforeEach module 'app'
 
-	beforeEach inject ($rootScope, $compile, $timeout) ->
+	beforeEach inject ($rootScope, $compile, $timeout, $window) ->
 
 		spyOn(d3, 'select').andCallThrough()
 
@@ -18,6 +18,7 @@ describe 'd3Vis directive', () ->
 		compile(el)(scope)
 		scope.$digest()
 		$timeout.flush()
+		window = $window
 
 
 	afterEach ->
@@ -37,7 +38,7 @@ describe 'd3Vis directive', () ->
 
 		it "should be window width - woff + 1", ->
 			w = ~~el.find('svg').eq(0).attr('width')
-			ww = angular.element(window).innerWidth()
+			ww = window.innerWidth
 			woff = 41
 			expected = if(w <= ww - woff) then 601 else (ww-woff+1)
 			expect(w).toBe expected

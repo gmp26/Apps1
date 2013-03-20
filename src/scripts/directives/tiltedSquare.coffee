@@ -17,7 +17,7 @@ angular.module('app').directive 'tiltedSquare', ['$timeout', ($timeout) ->
 			by: '@'
 
 		restrict: 'A'
-		templateUrl: 'src/views/directives/tiltedSquare.html'
+		templateUrl: '/views/directives/tiltedSquare.html'
 		replace: true
 
 		link: (scope, element, attrs) ->

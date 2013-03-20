@@ -12,11 +12,11 @@ describe 'App', () ->
 		$controller 'frogController',
 			$scope: scope
 
+
+	###
 	describe 'frog colours', () ->
 		it 'should return a red frog on pad 0', ()->
 			expect(scope.getFrog(0)).toBe "pad redfrog"
-
-	###
 	describe 'add', () ->
 
 		it 'should add new todo', () ->

@@ -1,5 +1,12 @@
 path = require 'path'
 
+# stuff to port from grunt 0.3
+#
+# data-uri
+# angular-templates (but that may be ok!)
+# .template to .html
+#
+
 # Build configurations.
 module.exports = (grunt) ->
 	grunt.initConfig
@@ -42,6 +49,7 @@ module.exports = (grunt) ->
 					# Don't include a surrounding Immediately-Invoked Function Expression (IIFE) in the compiled output.
 					# For more information on IIFEs, please visit http://benalman.com/news/2010/11/immediately-invoked-function-expression/
 					bare: true
+
 			# Used for those that desire plain old JavaScript.
 			jslove:
 				files: [
@@ -245,9 +253,10 @@ module.exports = (grunt) ->
 					optimizeCss: 'standard'
 					out: './.temp/styles/styles.min.css'
 
-		# Compile template files (.template) to HTML (.html).
+		# Compile template files (.html) -> (.html).
 		#
-		# .template files are essentially html; however, you can take advantage of features provided by grunt such as underscore templating.
+		# You can take advantage of features provided by grunt such as underscore templating in the
+		# source html. These templates are interpolated during the copy from ./src to ./temp
 		#
 		# The example below demonstrates the use of the environment configuration setting.
 		# In 'prod' the concatenated and minified scripts are used along with a QueryString parameter of the hash of the file contents to address browser caching.
@@ -261,10 +270,10 @@ module.exports = (grunt) ->
 		template:
 			views:
 				files:
-					'./.temp/views/': './src/views/**/*.template'
+					'./.temp/views/': './src/views/**/*.html'
 			dev:
 				files:
-					'./.temp/index.html': './src/index.template'
+					'./.temp/index.html': './src/index.html'
 				environment: 'dev'
 			prod:
 				files: '<%= template.dev.files %>'
@@ -287,7 +296,7 @@ module.exports = (grunt) ->
 		# Sets up file watchers and runs tasks when watched files are changed.
 		watch:
 			index:
-				files: './src/index.template'
+				files: './src/index.html'
 				tasks: [
 					'template:dev'
 					'copy:index'
@@ -306,7 +315,7 @@ module.exports = (grunt) ->
 					'copy:styles'
 				]
 			views:
-				files: './src/views/**/*.template'
+				files: './src/views/**/*.html'
 				tasks: [
 					'template:views'
 					'copy:views'
