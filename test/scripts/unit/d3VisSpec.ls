@@ -1,10 +1,15 @@
-
-describe 'd3Vis directive', () ->
+#
+# 'it' is a reserved word in livescript - it means the value of a dummy argument.
+# So we need to insert a real argument '_' to decsribe to avoid 'it' being inserted there.
+# Mildly yukky.
+#
+describe 'd3Vis directive', (_) ->
 
 	scope={}
 	compile={}
 	el = {}
 	flag = false
+	window = {}
 
 	beforeEach module 'app'
 
@@ -12,13 +17,13 @@ describe 'd3Vis directive', () ->
 
 		spyOn(d3, 'select').andCallThrough()
 
-		scope = $rootScope
-		compile = $compile
-		el = angular.element('<div d3-vis fullwidth="600" responsive></div>')
+		scope := $rootScope
+		compile := $compile
+		el := angular.element('<div d3-vis fullwidth="600" responsive></div>')
 		compile(el)(scope)
 		scope.$digest()
 		$timeout.flush()
-		window = $window
+		window := $window
 
 
 	afterEach ->
@@ -31,7 +36,7 @@ describe 'd3Vis directive', () ->
 	it "should have appended an svg", ->
 		expect(el.find('svg').length).toBe 1
 
-	describe "svg width", ->
+	describe "svg width", (_) ->
 
 		it "should be defined", ->
 			expect(el.find('svg').eq(0).attr('width')).toBeDefined()
@@ -43,11 +48,11 @@ describe 'd3Vis directive', () ->
 			expected = if(w <= ww - woff) then 601 else (ww-woff+1)
 			expect(w).toBe expected
 
-	describe "border defaults", ->
+	describe "border defaults", (_) ->
 		s = {}
 
 		beforeEach ->
-			s = el.scope()
+			s := el.scope()
 
 		it "for margins should be zero", ->
 			expect(s._margin.top == s._margin.bottom).toBe true
@@ -57,16 +62,16 @@ describe 'd3Vis directive', () ->
 			expect(s._padding.top == s._padding.bottom).toBe true
 			expect(s._padding.left == s._padding.right).toBe true
 
-	describe "borders", ->
+	describe "borders", (_) ->
 
 		s = {}
 
 		beforeEach inject ($timeout) ->
 			el.remove()
-			el = angular.element('<div d3-vis fullwidth="600" margin="1 2 3 4" padding="5,6"></div>')
+			el := angular.element('<div d3-vis fullwidth="600" margin="1 2 3 4" padding="5,6"></div>')
 			compile(el)(scope)
 			scope.$digest()
-			s = el.scope()
+			s := el.scope()
 			$timeout.flush()
 
 		it "can be set from attribute list", ->
@@ -79,15 +84,15 @@ describe 'd3Vis directive', () ->
 			expect(s._padding.bottom).toBe 5
 			expect(s._padding.left).toBe 6
 
-	describe "margins and padding", ->
+	describe "margins and padding", (_) ->
 		s = {}
 
 		beforeEach inject ($timeout) ->
 			el.remove()
-			el = angular.element('<div d3-vis fullwidth="600" margin="10 20 30 40" padding="5 5 5 5"></div>')
+			el := angular.element('<div d3-vis fullwidth="600" margin="10 20 30 40" padding="5 5 5 5"></div>')
 			compile(el)(scope)
 			scope.$digest()
-			s = el.scope()
+			s := el.scope()
 			$timeout.flush()
 
 		it "affect the width and innerWidth", ->
@@ -102,15 +107,15 @@ describe 'd3Vis directive', () ->
 			expect(s.innerWidth + s._margin.left + s._margin.right == s.outerWidth).toBe true
 			expect(s.width + s._padding.left + s._padding.right == s.innerWidth).toBe true
 
-	describe "visibility", ->
+	describe "visibility", (_) ->
 		s = {}
 
 		beforeEach inject ($timeout) ->
 			el.remove()
-			el = angular.element('<div d3-vis fullwidth="600" visible="false"></div>')
+			el := angular.element('<div d3-vis fullwidth="600" visible="false"></div>')
 			compile(el)(scope)
 			scope.$digest()
-			s = el.scope()
+			s := el.scope()
 			$timeout.flush()
 
 		it "is hidden if visible is false", ->

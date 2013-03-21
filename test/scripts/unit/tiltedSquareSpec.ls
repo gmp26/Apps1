@@ -1,20 +1,20 @@
 beforeEach module 'app'
 
-describe 'App', () ->
+describe 'App', ->
 
 	# we want to make the scope available generally
 	scope = {}
 
 	beforeEach inject ($controller, $rootScope) ->
 
-		scope = $rootScope.$new()
+		scope := $rootScope.$new()
 
 		$controller 'd3TiltedController',
 			$scope: scope
 
-	describe 'd3 tiltedSquare Controller', () ->
+	describe 'd3 tiltedSquare Controller', ->
 
-		xit 'should set default values on scope', ()->
+		xit 'should set default values on scope', ->
 			expect(scope.radius).toBeUndefined()
 			scope.setDefaults()
 			expect(scope.outerWidth).toBeDefined()
@@ -24,7 +24,7 @@ describe 'App', () ->
 			expect(scope.radius).toBeDefined()
 			expect(scope.spotRadius).toBeDefined()
 
-		xit 'should calculate along and down', ()->
+		xit 'should calculate along and down', ->
 			scope.setDimensions()
 			expect(scope.along).toBeDefined()
 			expect(scope.down).toBeDefined()

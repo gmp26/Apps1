@@ -12,7 +12,7 @@
     done: false
   ]
 
-  $scope.addTodo = () ->
+  $scope.addTodo = ->
     $scope.todos.push {
       text: $scope.todoText
       done: false

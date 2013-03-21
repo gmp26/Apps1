@@ -29,28 +29,6 @@ module.exports = (grunt) ->
 					'!**/node_modules/**'
 				]
 
-		###
-		# no longer needed
-		#
-		coffeelint:
-			scripts: 
-				files:
-					src: ['./src/ss/s.coffee', './test/ss/s.coffee']
-			options:
-				no_trailing_whitespace:
-					level: 'error'
-				#Use one tab for indentation.
-				indentation:
-					value: 1
-					level: 'error'
-				# No maximum line length.
-				max_line_length:
-					level: 'ignore'
-				# Using tabs should not result in an error.
-				no_tabs:
-					level: 'ignore'
-		###
-
 		#compile livescript (.ls) files to javascript (.js)
 		livescript:
 			scripts:
@@ -345,9 +323,8 @@ module.exports = (grunt) ->
 					'copy:index'
 				]
 			scripts:
-				files: './src/scripts/**'
+				files: ['./src/scripts/**', './test/scripts/**']
 				tasks: [
-					#'coffeelint:scripts'
 					'coffee:scripts'
 					'livescript:scripts'
 					'copy:js'
@@ -431,7 +408,6 @@ module.exports = (grunt) ->
 	# grunt
 	grunt.registerTask 'default', [
 		'clean:working'
-		#'coffeelint:scripts'
 		'coffee:scripts'
 		'livescript:scripts'
 		'copy:js'
@@ -456,6 +432,7 @@ module.exports = (grunt) ->
 	grunt.registerTask 'prod', [
 		'clean:working'
 		'coffee:scripts'
+		'livescript:scripts'
 		'copy:js'
 		'less'
 		'template:views'

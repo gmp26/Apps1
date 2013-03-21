@@ -1,19 +1,25 @@
 beforeEach module 'app'
 
-describe 'App', () ->
+describe 'App', ->
 
 	# we want to make the scope available generally
 	scope = {}
 
 	beforeEach inject ($controller, $rootScope) ->
 
-		scope = $rootScope.$new()
-		$controller 'todoController',
+		scope := $rootScope.$new()
+
+		$controller 'frogController',
 			$scope: scope
 
-	describe 'add', () ->
 
-		it 'should add new todo', () ->
+	/*
+	describe 'frog colours', ->
+		it 'should return a red frog on pad 0', ->
+			expect(scope.getFrog(0)).toBe "pad redfrog"
+	describe 'add', ->
+
+		it 'should add new todo', ->
 			scope.todos = []
 			scope.todoText = 'FAKE TODO'
 
@@ -23,7 +29,7 @@ describe 'App', () ->
 			expect(scope.todos[0].text).toBe 'FAKE TODO'
 
 
-		it 'should reset newText', () ->
+		it 'should reset newText', ->
 			scope.todos = []
 			scope.todoText = 'SOME TEXT'
 			scope.addTodo()
@@ -31,9 +37,9 @@ describe 'App', () ->
 			expect(scope.todoText).toBe ''
 
 
-	describe 'remaining', () ->
+	describe 'remaining', ->
 
-		it 'should return number of todos that are not done', () ->
+		it 'should return number of todos that are not done', ->
 			scope.todos = [
 				{done: false}
 				{done: false}
@@ -45,9 +51,9 @@ describe 'App', () ->
 			scope.todos[0].done = true
 			expect(scope.remaining()).toBe 3
 
-	describe 'archive', () ->
+	describe 'archive', ->
 
-		it 'should remove todos that are done', () ->
+		it 'should remove todos that are done', ->
 			scope.todos = [
 				{done: false}
 				{done: true}
@@ -58,3 +64,4 @@ describe 'App', () ->
 
 			scope.archive()
 			expect(scope.todos.length).toBe 2
+	*/

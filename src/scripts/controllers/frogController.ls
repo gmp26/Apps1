@@ -12,12 +12,11 @@ angular.module('app').controller 'frogController', [
 
     # spawn an array of frog objects containing colour and pad index
     spawn = (red,blue) ->
-      [-red..blue].map (d,i) ->
+      [-red to blue].map (d,i) ->
         colour: if d < 0 then 0 else if d == 0 then 1 else 2
         x: i
 
     initialState = null
-    doneState = []
     promises = []
 
     ###
@@ -33,7 +32,7 @@ angular.module('app').controller 'frogController', [
     reset = ->
 
       # this will be constant
-      initialState = spawn($scope._red, $scope._blue)
+      initialState := spawn($scope._red, $scope._blue)
 
       # this will change
       $scope.frogs = spawn($scope._red, $scope._blue)
