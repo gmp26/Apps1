@@ -9,10 +9,10 @@ angular.module('app').directive 'frog', [
 			# we forgot the "px"; and browsers simply ignore unitless properties!!!
 			X = (x) -> 100*x + "px"
 
-			scope.frog.move = (space) ->
-				element.css("left", X(this.x))
+			scope.$watch 'frog.x', (newX, oldX) ->
+				# console.log "moving #oldX to #newX"
+				element.css("left", X(newX))
 				element.css("z-index", 1)
-				space.element.css("left", X(space.x))
 
 			# respond to a click on a frog
 			jump = (me) ->
@@ -36,7 +36,7 @@ angular.module('app').directive 'frog', [
 						scope.hop(me, emptyPad)
 
 						# & update the screen
-						me.move(emptyPad)
+						#me.move(emptyPad)
 
 
 			# map colour to css class
@@ -55,7 +55,6 @@ angular.module('app').directive 'frog', [
 			# set up a click handler on the frog
 			element.bind "click", (event) -> jump(scope.frog)
 
-			scope.frog = scope.frog
 			scope.frog.element = element
 
 ]

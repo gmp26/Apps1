@@ -312,7 +312,7 @@ module.exports = (grunt) ->
 					port: 8081
 					reporters: ['progress']
 					runnerPort: 9100
-					singleRun: true
+					singleRun: false
 
 		# Sets up file watchers and runs tasks when watched files are changed.
 		watch:

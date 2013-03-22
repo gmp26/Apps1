@@ -17,7 +17,7 @@ angular.module('app').controller 'frogController', [
         x: i
 
     initialState = null
-    promises = []
+    #promises = []
 
     ###
     # class MoveList
@@ -54,7 +54,8 @@ angular.module('app').controller 'frogController', [
       $scope.showReplay = $scope.savedMoves.length > 0
 
       # cancel any moves that are outstanding
-      promises.forEach (p) -> $timeout.cancel p
+      # promises.forEach (p) -> $timeout.cancel p
+      $scope.moves.list.forEach (d) -> $timeout.cancel d.promisedHop
 
     reset()
 
@@ -64,8 +65,10 @@ angular.module('app').controller 'frogController', [
         mirrorx = a.length - d.x - 1
         d.colour == b[mirrorx].colour
 
-    $scope.$watch "_red", reset
-    $scope.$watch "_blue", reset
+    resetIfChanged = (newVal, oldVal) -> reset() if(newVal != oldVal)
+    $scope.$watch "_red", resetIfChanged
+    $scope.$watch "_blue", resetIfChanged
+
     $scope.reset = reset
 
     $scope.hop = (frog, space) ->
@@ -96,23 +99,14 @@ angular.module('app').controller 'frogController', [
       $scope._blue = moves.blue
       reset()
 
-      $timeout ->
-        console.log("timeout wrap")
-        moves.list.forEach (d, i) ->
-          # schedule each move for playback, saving
-          # the promised timeouts in case we have to cancel them
-          console.log "phew"
-          promises.push $timeout ->
-            frog = [f for f in $scope.frogs when f.x == d.frogx][0]
-            space = [f for f in $scope.frogs when f.x == d.spacex][0]
-            $scope.hop(frog, space)
-            #frog.move(space)
-            console.log "hopping"
-          , 800*(i+0.2)
-        console.log "promises.length = #{promises.length}"
-      ,0
-
-
+      moves.list.forEach (d, i) ->
+        # schedule each hop for playback, saving
+        # the promises in case we have to cancel them
+        d.promisedHop = $timeout ->
+          frog = [f for f in $scope.frogs when f.x == d.frogx][0]
+          space = [f for f in $scope.frogs when f.x == d.spacex][0]
+          $scope.hop(frog, space)
+        , 800*(i+0.2)
 
     newTag = ->
       "try " + ($scope.savedMoves.length + 1)

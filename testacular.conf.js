@@ -6,7 +6,8 @@ files = [
 	'./dist/scripts/libs/angular-resource.js',
 	'./dist/scripts/libs/ui-bootstrap-tpls.js',
 	'./dist/scripts/libs/d3.v3.js',
-	'./test/scripts/libs/angular-mocks.js',	
+	'./test/scripts/libs/angular-mocks.js',
+	'./test/scripts/libs/prelude-browser-min.js',
 	'./dist/scripts/app.js',
 	'./dist/scripts/controllers/*.js',
 	'./dist/scripts/directives/*.js',
@@ -16,7 +17,6 @@ files = [
 
 	'./dist_test/scripts/controllers/*.js',
 	'./dist_test/scripts/directives/*.js',
-	'./dist_test/scripts/unit/*.js',
 	'./dist_test/scripts/filters/*.js',
 	'./dist_test/scripts/services/*.js'
 ];
