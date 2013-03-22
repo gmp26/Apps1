@@ -8,24 +8,20 @@ angular.module('app').controller('spinController', [
     /*
      * array of spin amounts
      */
-    $scope.spinVar = [
-      {
-        spinning: false
+    $scope.spinVar = 
+      * spinning: false
         duration: 0
         turns: 0
         snapAngle: Math.PI/1000
         value: 0      # spin in radians
         random: 0      # value normalised to [0..1]
-      },
-      {
-        spinning: false
+      * spinning: false
         duration: 0
         turns: 0
         snapAngle: Math.PI/1000
         value: 0      # spin in radians
         random: 0      # value normalised to [0..1]
-      }
-    ]
+
     $scope.getSpinVar = (x) -> $scope.spinVar[x]
 
     /*
