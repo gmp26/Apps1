@@ -17,13 +17,12 @@ angular.module('app').controller 'frogController', [
         x: i
 
     initialState = null
-    #promises = []
 
-    ###
-    # class MoveList
-    #   an easy to clone list of moves annotated with a tag string
-    #   and the current red and blue counts.
-    ###
+    /*
+     * class MoveList
+     *  an easy to clone list of moves annotated with a tag string
+     *   and the current red and blue counts.
+     */
     class MoveList
       (@list, @tag, @red, @blue) ->
       clone: ->
