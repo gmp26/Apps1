@@ -97,16 +97,21 @@ angular.module('app').controller 'frogController', [
       reset()
 
       $timeout ->
+        console.log("timeout wrap")
         moves.list.forEach (d, i) ->
           # schedule each move for playback, saving
           # the promised timeouts in case we have to cancel them
+          console.log "phew"
           promises.push $timeout ->
             frog = [f for f in $scope.frogs when f.x == d.frogx][0]
             space = [f for f in $scope.frogs when f.x == d.spacex][0]
             $scope.hop(frog, space)
-            frog.move(space)
+            #frog.move(space)
+            console.log "hopping"
           , 800*(i+0.2)
+        console.log "promises.length = #{promises.length}"
       ,0
+
 
 
     newTag = ->

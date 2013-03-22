@@ -14,6 +14,7 @@ files = [
 	'./dist/scripts/responseInterceptors/*.js',
 	'./dist/scripts/services/*.js',
 
+	'./dist_test/scripts/controllers/*.js',
 	'./dist_test/scripts/directives/*.js',
 	'./dist_test/scripts/unit/*.js',
 	'./dist_test/scripts/filters/*.js',
