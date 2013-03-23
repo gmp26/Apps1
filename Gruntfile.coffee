@@ -1,12 +1,5 @@
 path = require 'path'
 
-# stuff to port from grunt 0.3
-#
-# data-uri
-# angular-templates (but that may be ok!)
-# .template to .html
-#
-
 # Build configurations.
 module.exports = (grunt) ->
   grunt.initConfig
@@ -117,6 +110,7 @@ module.exports = (grunt) ->
           dest: './dist_test/'
           expand: true
         ]
+
       # Copies select files from the temp directory to the dist directory.
       # In 'prod' minified files are used along with img and libs.
       # The dist artifacts contain only the files necessary to run the application.
@@ -244,6 +238,28 @@ module.exports = (grunt) ->
     # RequireJS is still used for the 'dev' build.
     # The main file is used only to establish the proper loading sequence.
     requirejs:
+      frogs:
+        options:
+          baseUrl: './.temp/scripts/'
+          findNestedDependencies: true
+          logLevel: 0
+          mainConfigFile: './.temp/scripts/frogs/main.js'
+          name: 'main'
+          # Exclude main from the final output to avoid the dependency on RequireJS at runtime.
+          onBuildWrite: (moduleName, path, contents) ->
+            modulesToExclude = ['main']
+            shouldExcludeModule = modulesToExclude.indexOf(moduleName) >= 0
+
+            return '' if shouldExcludeModule
+
+            contents
+          optimize: 'uglify'
+          out: './.temp/scripts/scripts.min.js'
+          preserveLicenseComments: false
+          skipModuleInsertion: true
+          uglify:
+            # Let uglifier replace variables to further reduce file size.
+            no_mangle: false
       scripts:
         options:
           baseUrl: './.temp/scripts/'
@@ -376,6 +392,13 @@ module.exports = (grunt) ->
   # Referenced in package.json.
   # https://github.com/Dignifiedquire/grunt-testacular
   grunt.loadNpmTasks 'grunt-testacular'
+
+  ###
+  grunt.registerMultiTask 'publish', 'extract and publish an app', ->
+    grunt.log.writeln @target + ": " + @data
+    console.log grunt.config.get()
+    grunt.log.writeln @data.files[0].cwd
+	###
 
   # Compiles the app with non-optimized build settings, places the build artifacts in the dist directory, and runs unit tests.
   # Enter the following command at the command line to execute this build task:

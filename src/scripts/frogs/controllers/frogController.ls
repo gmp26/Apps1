@@ -1,10 +1,18 @@
 angular.module('app').controller 'frogController', [
   '$scope'
   '$timeout'
-  ($scope, $timeout) ->
+  '$routeParams'
+  ($scope, $timeout, $routeParams) ->
 
     $scope._red = 2
     $scope._blue = 2
+    if $routeParams
+      $scope.resourceId = $routeParams.id ? 1246
+      $scope.single = $routeParams.users != "class" 
+      if $routeParams.reds?
+        $scope._red = Math.min(Math.max(1, ~~$routeParams.reds), 9)
+      if $routeParams.blues?
+        $scope._blue = Math.min(Math.max(1, ~~$routeParams.blues), 9)
     $scope.container.width = 650 if $scope.container?
     $scope.minMove = 8
     $scope.savedMoves = []
