@@ -32,6 +32,10 @@ Follow the patterns and you'll get a complete development workflow, including:
 * a server to run the application
 
 ## Prerequisites
+* Text editor - preferably TextMate or Sublime Text, set to translate tabs
+  to 2 spaces. We use 2 spaces per indent for livescript. If using these
+  editors, install the [livescript.tmbundle](https://github.com/paulmillr/livescript.tmbundle) for syntax checking.
+
 * Must have [Git](http://git-scm.com/) installed
 * Must have [node.js (at least v0.8.1)](http://nodejs.org/) installed with npm (Node Package Manager)
 * Must have [CoffeeScript](https://npmjs.org/package/coffee-script) node package installed globally.  `npm install -g coffee-script`

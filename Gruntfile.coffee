@@ -10,6 +10,14 @@ path = require 'path'
 # Build configurations.
 module.exports = (grunt) ->
 	grunt.initConfig
+
+		currentProject: 
+			id: 'frogs'
+
+		frogs:
+			title: 'Frogs'
+
+
 		# Deletes dist and temp directories.
 		# The temp directory is used during the build process.
 		# The dist directory contains the artifacts of the build.
