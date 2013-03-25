@@ -339,6 +339,7 @@ module.exports = (grunt) ->
           './apps/*/styles.less'
         ]
         tasks: [
+          'appstyles'
           'less'
           'copy:styles'
         ]
@@ -438,15 +439,34 @@ module.exports = (grunt) ->
     'clean:jslove'
   ]
 
-  # By default allow all apps to be built
-  grunt.registerTask 'restrict', "Read and apply the application mask",  ->
+  # if appmask is set limit the css styles needed
+  grunt.registerTask 'appstyles', "Include only styles for app mask", ->
     mask = ''
     if grunt.file.exists '.appmask'
       mask = grunt.file.read '.appmask'
-    if mask.length > 0 then grunt.task.run [ mask ]
+    if mask.length == 0
+      # include all apps styles
+      styleFiles = grunt.file.expand({cwd:'./apps/'}, '*/*.less')
+    else
+      styleFiles = grunt.file.expand({cwd:'./apps/'}, mask+'/*.less')
+    styleFileContent = ''
+    styleFiles.forEach (f) ->
+      imp = '@' +'import "'
+      imp += f
+      imp += '";'
+      grunt.log.writeln imp
+      styleFileContent += grunt.util.normalizelf(imp + '\n')
+    grunt.file.write('./apps/styles.less', styleFileContent)
+
+  # By default allow all apps to be built
+  grunt.registerTask 'restrict', "Read and apply the application mask", ->
+    mask = ''
+    if grunt.file.exists '.appmask'
+      mask = grunt.file.read '.appmask'
+    if mask.length > 0 then grunt.task.run [ "copy:"+mask ]
  
   grunt.registerTask 'mask', "Set mask to restrict apps in page", (mask) ->
-    grunt.file.write '.appmask', "copy:"+mask
+    grunt.file.write '.appmask', mask
     grunt.log.writeln 'grunt dev and grunt prod will display ', mask, ' mask apps.'
  
   grunt.registerTask 'unmask', "Unset mask to display all apps", () ->
@@ -461,6 +481,7 @@ module.exports = (grunt) ->
     'coffee:scripts'
     'livescript:scripts'
     'copy:js'
+    'appstyles'
     'less'
     'template:views'
     'copy:img'
@@ -485,6 +506,7 @@ module.exports = (grunt) ->
     'coffee:scripts'
     'livescript:scripts'
     'copy:js'
+    'appstyles'
     'less'
     'template:views'
     'template:prod'
