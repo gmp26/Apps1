@@ -8,7 +8,7 @@ shim =
       deps:
         * 'app'
         ...
-    'controllers/frogController':
+    'frog-controller':
       deps:
         * 'app'
         ...
@@ -21,11 +21,11 @@ shim =
         * 'app'
           'libs/d3.v3'
           'directives/svgCheck'
-    'directives/frogs':
+    'frogs-directive':
       deps:
         * 'app'
         ...
-    'directives/frog':
+    'frog-directive':
       deps:
         * 'app'
         ...
@@ -66,7 +66,7 @@ shim =
     'bootstrap':
       deps:
         * 'app'
-          'libs/angular'
+        ...
     'libs/bootstrap':
       deps:
         * 'libs/jquery'
@@ -96,28 +96,19 @@ shim =
 configure = [
   'require'
   'controllers/appController'
-  'controllers/todoController'
-  'controllers/frogController'
-  'directives/frogs'
-  'directives/frog'
-  'controllers/boomerangController'
-  'controllers/spinController'
+  'frog-controller'
+  'frogs-directive'
+  'frog-directive'
   'directives/appVersion'
-  'directives/d3Vis'
-  'directives/d3DotGrid'
-  'directives/d3TiltedSquare'
-  'directives/tiltedSquare'
-  'directives/svgCheck'
-  'directives/d3Spinner'
   'routes'
   'views'
 ]
 
 config =
   paths: 
-    'controllers/frogController': '../../apps/frogs/controllers/frogController'
-    'directives/frogs': '../../apps/frogs/directives/frogs'
-    'directives/frog': '../../apps/frogs/directives/frog'
+    'frog-controller': '../../apps/frogs/controllers/frogController'
+    'frogs-directive': '../../apps/frogs/directives/frogs'
+    'frog-directive': '../../apps/frogs/directives/frog'
 
 require.config config
 

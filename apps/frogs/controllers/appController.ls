@@ -12,7 +12,7 @@ angular.module('app').controller('appController', [
 
   $scope.$watch '$location.path()', (path) ->
   
-    #console.log 'path=', path
+    console.log 'path=', path
     $scope.activeNavId = path || '/'
   
 

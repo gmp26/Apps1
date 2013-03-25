@@ -15,17 +15,17 @@ module.exports = (grunt) ->
           './dist_test/'
           './.temp/'
         ]
-      # Used for those that desire plain old JavaScript.
-      jslove:
-        src: [
-          '**/*.coffee'
-          '!**/node_modules/**'
-        ]
 
     #compile livescript (.ls) files to javascript (.js)
     livescript:
       scripts:
         files: [
+          cwd: './'
+          src: ['apps/**/*.ls', '!apps/*/test/**/*.ls']
+          dest: './.temp/'
+          expand: true
+          ext: '.js'
+        ,
           cwd: './src/'
           src: 'scripts/**/*.ls'
           dest: './.temp/'
@@ -33,7 +33,13 @@ module.exports = (grunt) ->
           ext: '.js'
         ,
           cwd: './test/'
-          src: 'scripts/**/*.ls'
+          src: ['scripts/**/*.ls']
+          dest: './dist_test/'
+          expand: true
+          ext: '.js'
+        ,
+          cwd: './apps/'
+          src: ['*/test/**/*.ls']
           dest: './dist_test/'
           expand: true
           ext: '.js'
@@ -47,6 +53,12 @@ module.exports = (grunt) ->
     coffee:
       scripts:
         files: [
+          cwd: './'
+          src: 'apps/**/*.coffee'
+          dest: './.temp/'
+          expand: true
+          ext: '.js'
+        ,
           cwd: './src/'
           src: 'scripts/**/*.coffee'
           dest: './.temp/'
@@ -80,7 +92,7 @@ module.exports = (grunt) ->
 
     # Copies directories and files from one location to another.
     copy:
-      # Copies the contents of the temp directory, except views, to the dist directory.
+      # Copies the contents of the temp directory, to the dist directory.
       # In 'dev' individual files are used.
       dev:
         files: [
@@ -89,9 +101,46 @@ module.exports = (grunt) ->
           dest: './dist/'
           expand: true
         ]
+      # frogdev version
+      ###
+      frogdev:
+        files: [
+          cwd: './.temp/'
+          src: '**'
+          dest: './dist/'
+          expand: true
+        ,
+          cwd: './.temp/apps/frogs'
+          src: ['main.js', 'routes.js', 'services/semver.js']
+          dest: './dist/scripts/'
+          expand: true
+        ,
+          cwd: './.temp/apps/frogs'
+          src: ['index.html','views/nav.html']
+          dest: './dist/'
+          expand: true
+        ]
+      ###
+      frog:
+        files: [
+          cwd: './.temp/apps/frogs'
+          src: ['main.js', 'routes.js', 'services/semver.js']
+          dest: './.temp/scripts/'
+          expand: true
+        ,
+          cwd: './.temp/apps/frogs'
+          src: ['index.html','views/nav.html']
+          dest: './.temp/'
+          expand: true
+        ]
       # Copies img directory to temp.
       img:
         files: [
+          cwd: './'
+          src: 'apps/**/*.png'
+          dest: './.temp/'
+          expand: true
+        ,
           cwd: './src/'
           src: 'img/**/*.png'
           dest: './.temp/'
@@ -100,6 +149,11 @@ module.exports = (grunt) ->
       # Copies js files to the temp directory
       js:
         files: [
+          cwd: './'
+          src: 'apps/**/*.js'
+          dest: './.temp/'
+          expand: true
+        ,
           cwd: './src/'
           src: 'scripts/**/*.js'
           dest: './.temp/'
@@ -157,7 +211,7 @@ module.exports = (grunt) ->
       views:
         files: [
           cwd: './.temp/'
-          src: 'views/**'
+          src: '**/*.html'
           dest: './dist/'
           expand: true
         ]
@@ -238,28 +292,6 @@ module.exports = (grunt) ->
     # RequireJS is still used for the 'dev' build.
     # The main file is used only to establish the proper loading sequence.
     requirejs:
-      frogs:
-        options:
-          baseUrl: './.temp/scripts/'
-          findNestedDependencies: true
-          logLevel: 0
-          mainConfigFile: './.temp/scripts/frogs/main.js'
-          name: 'main'
-          # Exclude main from the final output to avoid the dependency on RequireJS at runtime.
-          onBuildWrite: (moduleName, path, contents) ->
-            modulesToExclude = ['main']
-            shouldExcludeModule = modulesToExclude.indexOf(moduleName) >= 0
-
-            return '' if shouldExcludeModule
-
-            contents
-          optimize: 'uglify'
-          out: './.temp/scripts/scripts.min.js'
-          preserveLicenseComments: false
-          skipModuleInsertion: true
-          uglify:
-            # Let uglifier replace variables to further reduce file size.
-            no_mangle: false
       scripts:
         options:
           baseUrl: './.temp/scripts/'
@@ -308,6 +340,7 @@ module.exports = (grunt) ->
       views:
         files:
           './.temp/views/': './src/views/**/*.html'
+          './.temp/apps/': './apps/**/*.html'
       dev:
         files:
           './.temp/index.html': './src/index.html'
@@ -347,13 +380,17 @@ module.exports = (grunt) ->
           'copy:scripts'
         ]
       styles:
-        files: './src/styles/**/*.less'
+        files: [
+          './src/styles/**/*.less'
+          './apps/styles.less'
+          './apps/*/styles.less'
+        ]
         tasks: [
           'less'
           'copy:styles'
         ]
       views:
-        files: './src/views/**/*.html'
+        files: ['./src/views/**/*.html', './apps/**/*.html']
         tasks: [
           'template:views'
           'copy:views'
@@ -370,9 +407,6 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks 'grunt-contrib-livereload'
   grunt.loadNpmTasks 'grunt-contrib-requirejs'
   grunt.loadNpmTasks 'grunt-contrib-watch'
-
-  # coffeelint
-  #grunt.loadNpmTasks('grunt-coffeelint');
 
   # livescript compiler
   grunt.loadNpmTasks('grunt-livescript')
@@ -426,6 +460,12 @@ module.exports = (grunt) ->
     'clean:jslove'
   ]
 
+  # Set up the task that restricts build to one app
+  grunt.registerTask 'restrict', ['copy:frog']
+
+  # By default allow all apps to be built
+  grunt.registerTask 'restrict', []
+
   # Compiles the app with non-optimized build settings and places the build artifacts in the dist directory.
   # Enter the following command at the command line to execute this build task:
   # grunt
@@ -438,6 +478,7 @@ module.exports = (grunt) ->
     'template:views'
     'copy:img'
     'template:dev'
+    'restrict'
     'copy:dev'
   ]
 
@@ -464,5 +505,15 @@ module.exports = (grunt) ->
     'requirejs'
     'template:prod'
     'minifyHtml'
+    'restrict'
     'copy:prod'
   ]
+
+  ###
+  # Overide the default complete collection of apps by overwriting 
+  # dist files with those needed to create subset collections.
+  #
+  # Comment these out to revert to the complete collection
+  ###
+  # Only Frogs
+  grunt.registerTask 'copydev', ['copy:frogdev']
