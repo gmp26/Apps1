@@ -8,3 +8,4 @@ publish
 apps/Frogs/publish/
 apps/Frogs/test
 *~
+.appmask

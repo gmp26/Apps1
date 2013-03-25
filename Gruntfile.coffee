@@ -90,7 +90,36 @@ module.exports = (grunt) ->
         ]
         options: '<%= coffee.scripts.options %>'
 
+    # Compile template files (.html) -> (.html).
+    #
+    # You can take advantage of features provided by grunt such as underscore templating in the
+    # source html. These templates are interpolated during the copy from ./src to ./temp
+    #
+    # The example below demonstrates the use of the environment configuration setting.
+    # In 'prod' the concatenated and minified scripts are used along with a QueryString parameter of the hash of the file contents to address browser caching.
+    # In environments other than 'prod' the individual files are used and loaded with RequireJS.
+    #
+    # <% if (config.environment === 'prod') { %>
+    #   <script src="/scripts/scripts.min.js?v=<%= config.hash('./.temp/scripts/scripts.min.js') %>"></script>
+    # <% } else { %>
+    #   <script data-main="/scripts/main.js" src="/scripts/libs/require.js"></script>
+    # <% } %>
+    template:
+      views:
+        files:
+          './.temp/views/': './src/views/**/*.html'
+          './.temp/apps/': './apps/**/*.html'
+      dev:
+        files:
+          './.temp/index.html': './src/index.html'
+          './.temp/apps/': './apps/**/index.html'
+        environment: 'dev'
+      prod:
+        files: '<%= template.dev.files %>'
+        environment: 'prod'
+
     # Copies directories and files from one location to another.
+
     copy:
       # Copies the contents of the temp directory, to the dist directory.
       # In 'dev' individual files are used.
@@ -101,27 +130,8 @@ module.exports = (grunt) ->
           dest: './dist/'
           expand: true
         ]
-      # frogdev version
-      ###
-      frogdev:
-        files: [
-          cwd: './.temp/'
-          src: '**'
-          dest: './dist/'
-          expand: true
-        ,
-          cwd: './.temp/apps/frogs'
-          src: ['main.js', 'routes.js', 'services/semver.js']
-          dest: './dist/scripts/'
-          expand: true
-        ,
-          cwd: './.temp/apps/frogs'
-          src: ['index.html','views/nav.html']
-          dest: './dist/'
-          expand: true
-        ]
-      ###
-      frog:
+      # restriction to frogs only
+      frogs:
         files: [
           cwd: './.temp/apps/frogs'
           src: ['main.js', 'routes.js', 'services/semver.js']
@@ -129,18 +139,13 @@ module.exports = (grunt) ->
           expand: true
         ,
           cwd: './.temp/apps/frogs'
-          src: ['index.html','views/nav.html']
+          src: ['index.html','views/*.html']
           dest: './.temp/'
           expand: true
         ]
       # Copies img directory to temp.
-      img:
+      img: 
         files: [
-          cwd: './'
-          src: 'apps/**/*.png'
-          dest: './.temp/'
-          expand: true
-        ,
           cwd: './src/'
           src: 'img/**/*.png'
           dest: './.temp/'
@@ -269,21 +274,10 @@ module.exports = (grunt) ->
     ngTemplateCache:
       views:
         files:
-          './.temp/scripts/views.js': './.temp/views/**/*.html'
+          './.temp/scripts/views.js': ['./.temp/views/**/*.html']
         options:
           trim: './.temp'
 
-    # Restart server when server sources have changed, notify all browsers on change.
-    regarde:
-      dist:
-        files: './dist/**'
-        tasks: 'livereload'
-      server:
-        files: [
-          'server.coffee'
-          'routes.coffee'
-        ]
-        tasks: 'express-restart:livereload'
 
     # RequireJS optimizer configuration for both scripts and styles.
     # This configuration is only used in the 'prod' build.
@@ -322,47 +316,6 @@ module.exports = (grunt) ->
           optimizeCss: 'standard'
           out: './.temp/styles/styles.min.css'
 
-    # Compile template files (.html) -> (.html).
-    #
-    # You can take advantage of features provided by grunt such as underscore templating in the
-    # source html. These templates are interpolated during the copy from ./src to ./temp
-    #
-    # The example below demonstrates the use of the environment configuration setting.
-    # In 'prod' the concatenated and minified scripts are used along with a QueryString parameter of the hash of the file contents to address browser caching.
-    # In environments other than 'prod' the individual files are used and loaded with RequireJS.
-    #
-    # <% if (config.environment === 'prod') { %>
-    #   <script src="/scripts/scripts.min.js?v=<%= config.hash('./.temp/scripts/scripts.min.js') %>"></script>
-    # <% } else { %>
-    #   <script data-main="/scripts/main.js" src="/scripts/libs/require.js"></script>
-    # <% } %>
-    template:
-      views:
-        files:
-          './.temp/views/': './src/views/**/*.html'
-          './.temp/apps/': './apps/**/*.html'
-      dev:
-        files:
-          './.temp/index.html': './src/index.html'
-        environment: 'dev'
-      prod:
-        files: '<%= template.dev.files %>'
-        environment: 'prod'
-
-    # Runs unit tests using testacular
-    testacular:
-      unit:
-        options:
-          autoWatch: true
-          browsers: ['Chrome']
-          colors: true
-          configFile: './testacular.conf.js'
-          keepalive: true
-          port: 8081
-          reporters: ['progress']
-          runnerPort: 9100
-          singleRun: false
-
     # Sets up file watchers and runs tasks when watched files are changed.
     watch:
       index:
@@ -390,12 +343,37 @@ module.exports = (grunt) ->
           'copy:styles'
         ]
       views:
-        files: ['./src/views/**/*.html', './apps/**/*.html']
+        files: ['./src/views/**/*.html']
         tasks: [
           'template:views'
           'copy:views'
         ]
 
+    # Restart server when server sources have changed, notify all browsers on change.
+    regarde:
+      dist:
+        files: './dist/**'
+        tasks: 'livereload'
+      server:
+        files: [
+          'server.coffee'
+          'routes.coffee'
+        ]
+        tasks: 'express-restart:livereload'
+
+    # Runs unit tests using testacular
+    testacular:
+      unit:
+        options:
+          autoWatch: true
+          browsers: ['Chrome']
+          colors: true
+          configFile: './testacular.conf.js'
+          keepalive: true
+          port: 8081
+          reporters: ['progress']
+          runnerPort: 9100
+          singleRun: false
   # Register grunt tasks supplied by grunt-contrib-*.
   # Referenced in package.json.
   # https://github.com/gruntjs/grunt-contrib
@@ -460,11 +438,20 @@ module.exports = (grunt) ->
     'clean:jslove'
   ]
 
-  # Set up the task that restricts build to one app
-  grunt.registerTask 'restrict', ['copy:frog']
-
   # By default allow all apps to be built
-  grunt.registerTask 'restrict', []
+  grunt.registerTask 'restrict', "Read and apply the application mask",  ->
+    mask = ''
+    if grunt.file.exists '.appmask'
+      mask = grunt.file.read '.appmask'
+    if mask.length > 0 then grunt.task.run [ mask ]
+ 
+  grunt.registerTask 'mask', "Set mask to restrict apps in page", (mask) ->
+    grunt.file.write '.appmask', "copy:"+mask
+    grunt.log.writeln 'grunt dev and grunt prod will display ', mask, ' mask apps.'
+ 
+  grunt.registerTask 'unmask', "Unset mask to display all apps", () ->
+    grunt.file.write '.appmask', ""
+    grunt.log.writeln 'grunt dev and grunt prod will display all apps'
 
   # Compiles the app with non-optimized build settings and places the build artifacts in the dist directory.
   # Enter the following command at the command line to execute this build task:
@@ -500,20 +487,12 @@ module.exports = (grunt) ->
     'copy:js'
     'less'
     'template:views'
+    'template:prod'
+    'restrict'
     'imagemin'
     'ngTemplateCache'
     'requirejs'
-    'template:prod'
     'minifyHtml'
-    'restrict'
     'copy:prod'
   ]
 
-  ###
-  # Overide the default complete collection of apps by overwriting 
-  # dist files with those needed to create subset collections.
-  #
-  # Comment these out to revert to the complete collection
-  ###
-  # Only Frogs
-  grunt.registerTask 'copydev', ['copy:frogdev']

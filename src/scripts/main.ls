@@ -1,4 +1,4 @@
-shim = 
+require {
   shim:
     'controllers/appController':
       deps:
@@ -92,33 +92,22 @@ shim =
       deps:
         * 'app'
         ...
-
-configure = [
-  'require'
-  'controllers/appController'
-  'controllers/todoController'
-  'controllers/frogController'
-  'directives/frogs'
-  'directives/frog'
-  'controllers/boomerangController'
-  'controllers/spinController'
-  'directives/appVersion'
-  'directives/d3Vis'
-  'directives/d3DotGrid'
-  'directives/d3TiltedSquare'
-  'directives/tiltedSquare'
-  'directives/svgCheck'
-  'directives/d3Spinner'
-  'routes'
-  'views'
-]
-
-config =
-  paths: 
-    'controllers/frogController': '../../apps/frogs/controllers/frogController'
-    'directives/frogs': '../../apps/frogs/directives/frogs'
-    'directives/frog': '../../apps/frogs/directives/frog'
-
-require.config config
-
-require shim, configure, (require) -> require ['bootstrap']
+},
+  * 'require'
+    'controllers/appController'
+    'controllers/todoController'
+    'controllers/frogController'
+    'directives/frogs'
+    'directives/frog'
+    'controllers/boomerangController'
+    'controllers/spinController'
+    'directives/appVersion'
+    'directives/d3Vis'
+    'directives/d3DotGrid'
+    'directives/d3TiltedSquare'
+    'directives/tiltedSquare'
+    'directives/svgCheck'
+    'directives/d3Spinner'
+    'routes'
+    'views'
+, (require) -> require ['bootstrap']

@@ -1,4 +1,4 @@
-shim = 
+require {
   shim:
     'controllers/appController':
       deps:
@@ -8,7 +8,7 @@ shim =
       deps:
         * 'app'
         ...
-    'frog-controller':
+    'controllers/frogController':
       deps:
         * 'app'
         ...
@@ -21,11 +21,11 @@ shim =
         * 'app'
           'libs/d3.v3'
           'directives/svgCheck'
-    'frogs-directive':
+    'directives/frogs':
       deps:
         * 'app'
         ...
-    'frog-directive':
+    'directives/frog':
       deps:
         * 'app'
         ...
@@ -66,7 +66,7 @@ shim =
     'bootstrap':
       deps:
         * 'app'
-        ...
+          'libs/angular'
     'libs/bootstrap':
       deps:
         * 'libs/jquery'
@@ -92,24 +92,13 @@ shim =
       deps:
         * 'app'
         ...
-
-configure = [
-  'require'
-  'controllers/appController'
-  'frog-controller'
-  'frogs-directive'
-  'frog-directive'
-  'directives/appVersion'
-  'routes'
-  'views'
-]
-
-config =
-  paths: 
-    'frog-controller': '../../apps/frogs/controllers/frogController'
-    'frogs-directive': '../../apps/frogs/directives/frogs'
-    'frog-directive': '../../apps/frogs/directives/frog'
-
-require.config config
-
-require shim, configure, (require) -> require ['bootstrap']
+},
+  * 'require'
+    'controllers/appController'
+    'controllers/frogController'
+    'directives/frogs'
+    'directives/frog'
+    'directives/appVersion'
+    'routes'
+    'views'
+, (require) -> require ['bootstrap']
