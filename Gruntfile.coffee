@@ -301,7 +301,7 @@ module.exports = (grunt) ->
             return '' if shouldExcludeModule
 
             contents
-          optimize: 'uglify'
+          optimize: 'none' #'uglify'
           out: './.temp/scripts/scripts.min.js'
           preserveLicenseComments: false
           skipModuleInsertion: true
@@ -456,7 +456,7 @@ module.exports = (grunt) ->
   # Compiles the app with non-optimized build settings and places the build artifacts in the dist directory.
   # Enter the following command at the command line to execute this build task:
   # grunt
-  grunt.registerTask 'default', [
+  grunt.registerTask 'default', "Default dev build", [
     'clean:working'
     'coffee:scripts'
     'livescript:scripts'
@@ -472,7 +472,7 @@ module.exports = (grunt) ->
   # Compiles the app with non-optimized build settings, places the build artifacts in the dist directory, and watches for file changes.
   # Enter the following command at the command line to execute this build task:
   # grunt dev
-  grunt.registerTask 'dev', [
+  grunt.registerTask 'dev', "Dev build and watch for file changes", [
     'default'
     'watch'
   ]
