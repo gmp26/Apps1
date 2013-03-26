@@ -130,7 +130,60 @@ module.exports = (grunt) ->
           dest: './dist/'
           expand: true
         ]
+      # restriction to mask only
+      mask:
+        files: [
+          cwd: './.temp/apps/mask'
+          src: ['main.js', 'routes.js', 'services/semver.js']
+          dest: './.temp/scripts/'
+          expand: true
+        ,
+          cwd: './.temp/apps/mask'
+          src: ['index.html','views/*.html']
+          dest: './.temp/'
+          expand: true
+        ]
+      # restriction to tilted only
+      tilted:
+        files: [
+          cwd: './.temp/apps/tilted'
+          src: ['main.js', 'routes.js', 'services/semver.js']
+          dest: './.temp/scripts/'
+          expand: true
+        ,
+          cwd: './.temp/apps/tilted'
+          src: ['index.html','views/*.html']
+          dest: './.temp/'
+          expand: true
+        ]
+      # restriction to probability only
+      probability:
+        files: [
+          cwd: './.temp/apps/probability'
+          src: ['main.js', 'routes.js', 'services/semver.js']
+          dest: './.temp/scripts/'
+          expand: true
+        ,
+          cwd: './.temp/apps/probability'
+          src: ['index.html','views/*.html']
+          dest: './.temp/'
+          expand: true
+        ]
+      # restriction to boomerangs only
+      boomerangs:
+        files: [
+          cwd: './.temp/apps/boomerangs'
+          src: ['main.js', 'routes.js', 'services/semver.js']
+          dest: './.temp/scripts/'
+          expand: true
+        ,
+          cwd: './.temp/apps/boomerangs'
+          src: ['index.html','views/*.html']
+          dest: './.temp/'
+          expand: true
+        ]
       # restriction to frogs only
+      ###
       frogs:
         files: [
           cwd: './.temp/apps/frogs'
@@ -143,6 +196,7 @@ module.exports = (grunt) ->
           dest: './.temp/'
           expand: true
         ]
+      ###
       # Copies img directory to temp.
       img: 
         files: [
@@ -458,14 +512,58 @@ module.exports = (grunt) ->
       styleFileContent += grunt.util.normalizelf(imp + '\n')
     grunt.file.write('./apps/styles.less', styleFileContent)
 
-  # By default allow all apps to be built
+  ###
+  # Read and apply the application mask
   grunt.registerTask 'restrict', "Read and apply the application mask", ->
     mask = ''
     if grunt.file.exists '.appmask'
       mask = grunt.file.read '.appmask'
     if mask.length > 0 then grunt.task.run [ "copy:"+mask ]
+  ###
+
+  # Read and apply the application mask
+  grunt.registerTask 'restrict', "Read and apply the application mask", ->
+    mask = ''
+    if grunt.file.exists '.appmask'
+      mask = grunt.file.read '.appmask'
+
+    # if mask is non trivial
+    if mask.length > 0
+      # discover whether custom a copy:<mask> exists
+      customConfig = grunt.config 'copy.'+mask
+      if customConfig?
+        grunt.log.writeln "Running copy:"+mask
+        grunt.task.run [ "copy:"+mask ]
+      else
+        grunt.log.writeln "Running generic copy:mask"
+
+        files = grunt.config 'copy.mask.files'
+        files.forEach (f) ->
+          cwd = f.cwd.replace /mask/, mask
+          #grunt.log.writeln "cwd = " + cwd
+          f.src.forEach (p) ->
+            #grunt.log.writeln "p = " + p
+            maps = grunt.file.expandMapping p, f.dest, {cwd:cwd} 
+            maps.forEach (m) ->
+              grunt.log.writeln("copy: " + m.src + " -> " + m.dest)
+              grunt.file.copy('./'+m.src, './'+m.dst)
  
-  grunt.registerTask 'mask', "Set mask to restrict apps in page", (mask) ->
+      ###
+      grunt.log.writeln "dest =" + files[0].dest
+      grunt.log.writeln "src =" + files[1].src
+      grunt.log.writeln "dest =" + files[1].dest
+      #grunt.file.copy grunt.config 'mask.files[0].src'
+      mask:
+        files: [
+          cwd: './.temp/apps/mask'
+          src: ['main.js', 'routes.js', 'services/semver.js']
+          dest: './.temp/scripts/'
+          expand: true
+      ###
+
+
+
+  grunt.registerTask 'mask', "Set mask to restrict apps in page. e.g. grunt mask:frogs", (mask) ->
     grunt.file.write '.appmask', mask
     grunt.log.writeln 'grunt dev and grunt prod will display ', mask, ' mask apps.'
  
@@ -501,7 +599,7 @@ module.exports = (grunt) ->
   # Compiles the app with optimized build settings and places the build artifacts in the dist directory.
   # Enter the following command at the command line to execute this build task:
   # grunt prod
-  grunt.registerTask 'prod', [
+  grunt.registerTask 'prod', "Production build for currently masked apps", [
     'clean:working'
     'coffee:scripts'
     'livescript:scripts'

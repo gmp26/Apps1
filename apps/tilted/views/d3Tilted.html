@@ -1,0 +1,26 @@
+<div class="header">
+  <h2>Tilted Squares <a href="http://nrich.maths.org/2293">NRICH 2293</a></h2>
+  <p>Find a quick way to work out the area of the square even if it is tilted.</p>
+  <p><i>This version uses SVG rather than canvas</i></p>
+</div>
+
+<div d3-vis 
+  fullWidth="600" fullHeight="600" woff="41"
+  margin="20 20 20 20" padding="5 5 5 5" 
+  responsive="true" visible="true">
+
+  <div d3-dot-grid 
+    along="16" down="16" radius="4" 
+    hspace="auto" vspace="auto" minspace="25"
+    square="true">
+
+    <div d3-tilted-square ax="2" ay="6" bx="5" by="5"></div>
+<!--
+    You can add as many squares as you like
+    <div d3-tilted-square ax="5" ay="12" bx="7" by="10"></div>
+-->
+  </div>
+
+</div>
+
+</div>
