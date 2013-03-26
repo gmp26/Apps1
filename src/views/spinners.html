@@ -1,0 +1,75 @@
+<div class="header">
+  <h2>Spinners <a href="http://nrich.maths.org/2293">NRICH 8130</a></h2>
+  <p>Spinner support for probability experiments.</p>
+  <p>Spinners provide a good screen-friendly way to simulate throwing dice, 
+    spinning a coin, or choosing things from a bag.
+  <div ng-controller="spinController">
+    <div svg-check id="spinset1">
+      <input type="number" ng-model="spinVar[0].value"></input>
+      <input type="number" ng-model="spinVar[1].value"></input>
+      <div d3-vis 
+        fullWidth="100" fullHeight="100" woff="41"
+        margin="0" padding="5 5 5 5" 
+        responsive="false" visible="true">
+        <div d3-spinner spinner="0" ng-model="$parent.spinVar[0].value"></div>
+      </div>
+      <!--
+      <div d3-vis 
+        fullWidth="100" fullHeight="100" woff="41"
+        margin="0" padding="5 5 5 5" 
+        responsive="false" visible="true">
+        <div d3-spinner spinner="1" ng-model="$parent.spinVar[1].value"></div>
+      </div>
+      <div d3-vis 
+        fullWidth="100" fullHeight="100" woff="41"
+        margin="0" padding="5 5 5 5" 
+        responsive="false" visible="true">
+        <div d3-spinner></div>
+      </div>
+      -->
+      <button type="button" class="btn btn-primary" ng-click="go()">Go</button>
+    </div>
+  </div>
+  <h3>To do:</h3>
+  <ul>
+    <li>n colour spinner with configurable probabilities.
+      <ul>
+        <li>Denomimator delineated by numbered sectors.</li>
+        <li>result bound to model.</li>
+        <li>Adjustable radius</li>
+        <li>Fast forward</li>
+      </ul>
+    </li>
+    <li>n colour bag with configurable probabilities.
+      <ul>
+        <li>Result is removed from bag</li>
+        <li>Optional animated replacement</li>
+      </ul>
+    </li>
+    <li>One-arm-bandit</li>
+    <li>Stackable horizontally, vertical spin</li>
+    <li>Buttons
+    <ul>
+      <li>Go</li>
+      <li>Replace and Go butt</li>
+      <li>Hold</li>
+    </ul></li>
+    <li>Results
+      <ul>
+        <li>Individual Result Display</li>
+        <li>Tabular Result Displays</li>
+      </ul>
+    </li>
+    <li>Pack of cards
+      <ul>
+        <li>shuffle - zoom out, distribute, reassemble</li>
+        <li>turn over</li>
+        <li>deal card to hand</li>
+        <li>deal card from hand</li>
+        <li>stack</li>
+        <li>sort</li>
+      </ul>
+    </li>
+    <li>Tree diagram.</li>
+  </ul>
+</div>

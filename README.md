@@ -5,10 +5,15 @@ A collection of Apps for [NRICH](http://nrich.maths.org)
 Derived from AngularFun
 *By [@CaryLandholt](https://twitter.com/carylandholt)*
 
-The aim is to make this app host a few related apps and for the basis for similar collections.
+The aim is to make this app host a few related apps and form the basis of similar collections. 
 
-Templates are handled via the templateCache and the grunt-angular-templates task.
-This simplfies directive testing when templateURL is used.
+Creating an individual app extractor. This repo should contain the whole codebase,
+which can create individual apps using a grunt extract task.
+
+Converted codebase to [livescript](http://livescript.net).
+
+Updated to grunt-0.4 in all but the playlist branch which is
+still at grunt-0.3.
 
 ## About
 Apps1 is an [AngularJS](http://angularjs.org/) app collection.
@@ -27,6 +32,10 @@ Follow the patterns and you'll get a complete development workflow, including:
 * a server to run the application
 
 ## Prerequisites
+* Text editor - preferably TextMate or Sublime Text, set to translate tabs
+  to 2 spaces. We use 2 spaces per indent for livescript. If using these
+  editors, install the [livescript.tmbundle](https://github.com/paulmillr/livescript.tmbundle) for syntax checking.
+
 * Must have [Git](http://git-scm.com/) installed
 * Must have [node.js (at least v0.8.1)](http://nodejs.org/) installed with npm (Node Package Manager)
 * Must have [CoffeeScript](https://npmjs.org/package/coffee-script) node package installed globally.  `npm install -g coffee-script`

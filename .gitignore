@@ -4,4 +4,7 @@ node_modules/
 .temp/
 dist_test/
 incoming
+publish
+apps/styles.less
 *~
+.appmask
