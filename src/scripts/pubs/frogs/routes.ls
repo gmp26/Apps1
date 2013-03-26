@@ -8,6 +8,6 @@ angular.module('app').config [
 
     $routeProvider
     .when '/frogs/:users/:id/:reds/:blues' templateUrl: '/views/frogs.html'
-    .otherwise redirectTo: '/frogs/1/1246/2/2'
+    .otherwise redirectTo: '/frogs/single/1246/2/2'
 
 ]

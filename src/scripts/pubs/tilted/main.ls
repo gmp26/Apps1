@@ -8,36 +8,32 @@ require {
       deps:
         * 'app'
         ...
-    'controllers/frogController':
+    'pubs/frogs/controllers/frogController':
       deps:
         * 'app'
         ...
-    'controllers/boomerangController':
+    'pubs/boomerangs/controllers/boomerangController':
       deps:
         * 'app'
         ...
-    'controllers/spinController':
+    'pubs/probability/controllers/spinController':
       deps:
         * 'app'
           'libs/d3.v3'
           'directives/svgCheck'
-    'directives/frogs':
+    'pubs/frogs/directives/frogs':
       deps:
         * 'app'
         ...
-    'directives/frog':
+    'pubs/frogs/directives/frog':
       deps:
         * 'app'
         ...
-    'directives/d3Spinner':
+    'pubs/probability/directives/d3Spinner':
       deps:
         * 'app'
           'directives/d3Vis'
           'libs/d3.v3'
-    'directives/tiltedSquare':
-      deps:
-        * 'app'
-          'libs/fabric'
     'directives/d3Vis':
       deps:
         * 'app'
@@ -47,7 +43,7 @@ require {
       deps:
         * 'app'
           'directives/d3Vis'
-    'directives/d3TiltedSquare':
+    'pubs/tilted/directives/d3TiltedSquare':
       deps:
         * 'app'
           'directives/d3DotGrid'
@@ -95,11 +91,8 @@ require {
 },
   * 'require'
     'controllers/appController'
+    'pubs/tilted/directives/d3TiltedSquare'
     'directives/appVersion'
-    'directives/d3Vis'
-    'directives/d3DotGrid'
-    'directives/d3TiltedSquare'
-    'directives/svgCheck'
     'routes'
     'views'
 , (require) -> require ['bootstrap']

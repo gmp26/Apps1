@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>Todo App example</title>
+    <meta name="description" content="Sample only" />
+    <meta name="viewport" content="width=device-width" initial-scale="1.0"/>
+    <meta name="author" content="angular team"/>
+    <% if (config.environment === 'prod') { %>
+      <link rel="stylesheet" href="styles/styles.min.css?_=v<%= config.uniqueVersion() %>" />
+
+    <% } else { %>
+      <link rel="stylesheet" href="/styles/styles.css" />
+    <% } %>
+
+    <!--[if lte IE 7]>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/json2/20110223/json2.js"></script><![endif]--><!--[if lte IE 8]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  </head>
+
+  <body ng-cloak class="ng-cloak">
+
+    <div class="wrapper">
+      <div class="navbar navbar-static-top">
+        <div class="navbar-inner">
+          <div class="container">
+            <button ng-click="dropHeaderMenu = !dropHeaderMenu" class="btn btn-navbar"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a href="/" class="brand">Todo v<span app-version></span></a>
+            <div collapse="!dropHeaderMenu" class="nav-collapse">
+              <div ng-include="'/views/nav.html'"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="container main-content">
+        <div ng-view></div>
+      </div>
+    </div>
+    <footer class="footer">
+      <div class="container">
+        <p><small><a href="https://github.com/gmp26/Apps1.git">source</a></small></p>
+      </div>
+    </footer>
+    <% if (config.environment === 'prod') { %>
+      <script src="scripts/scripts.min.js?_=v<%= config.uniqueVersion() %>"></script>
+    <% } else { %>
+      <script data-main="/scripts/main.js" src="/scripts/libs/require.js"></script>
+    <% } %>
+  </body>
+</html>

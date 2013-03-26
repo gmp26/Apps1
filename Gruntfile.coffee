@@ -20,12 +20,6 @@ module.exports = (grunt) ->
     livescript:
       scripts:
         files: [
-          cwd: './'
-          src: ['apps/**/*.ls', '!apps/*/test/**/*.ls']
-          dest: './.temp/'
-          expand: true
-          ext: '.js'
-        ,
           cwd: './src/'
           src: 'scripts/**/*.ls'
           dest: './.temp/'
@@ -33,7 +27,7 @@ module.exports = (grunt) ->
           ext: '.js'
         ,
           cwd: './test/'
-          src: ['scripts/**/*.ls','apps/**/*.ls']
+          src: ['scripts/**/*.ls','pubs/**/*.ls']
           dest: './dist_test/'
           expand: true
           ext: '.js'
@@ -47,12 +41,6 @@ module.exports = (grunt) ->
     coffee:
       scripts:
         files: [
-          cwd: './'
-          src: 'apps/**/*.coffee'
-          dest: './.temp/'
-          expand: true
-          ext: '.js'
-        ,
           cwd: './src/'
           src: 'scripts/**/*.coffee'
           dest: './.temp/'
@@ -60,7 +48,7 @@ module.exports = (grunt) ->
           ext: '.js'
         ,
           cwd: './test/'
-          src: 'scripts/**/*.coffee'
+          src: ['scripts/**/*.coffee','pubs/**/*.coffee']
           dest: './dist_test/'
           expand: true
           ext: '.js'
@@ -102,11 +90,11 @@ module.exports = (grunt) ->
       views:
         files:
           './.temp/views/': './src/views/**/*.html'
-          './.temp/apps/': './apps/**/*.html'
+          './.temp/views/pubs': './src/scripts/pubs/**/*.html'
       dev:
         files:
           './.temp/index.html': './src/index.html'
-          './.temp/apps/': './apps/**/index.html'
+          './.temp/views/pubs': './src/scripts/pubs/**/index.html'
         environment: 'dev'
       prod:
         files: '<%= template.dev.files %>'
@@ -115,81 +103,19 @@ module.exports = (grunt) ->
     # Copies directories and files from one location to another.
 
     copy:
-      # Copies the contents of the temp directory, to the dist directory.
-      # In 'dev' individual files are used.
-      dev:
-        files: [
-          cwd: './.temp/'
-          src: '**'
-          dest: './dist/'
-          expand: true
-        ]
       # restriction to mask only
       mask:
         files: [
-          cwd: './.temp/apps/mask'
+          cwd: './.temp/scripts/pubs/mask'
           src: ['main.js', 'routes.js', 'services/semver.js']
           dest: './.temp/scripts/'
           expand: true
         ,
-          cwd: './.temp/apps/mask'
-          src: ['index.html','views/*.html']
+          cwd: './.temp/views/pubs/mask'
+          src: ['index.html', 'views/*.html']
           dest: './.temp/'
           expand: true
         ]
-      ### restriction to tilted only
-      tilted:
-        files: [
-          cwd: './.temp/apps/tilted'
-          src: ['main.js', 'routes.js', 'services/semver.js']
-          dest: './.temp/scripts/'
-          expand: true
-        ,
-          cwd: './.temp/apps/tilted'
-          src: ['index.html','views/*.html']
-          dest: './.temp/'
-          expand: true
-        ]
-      # restriction to probability only
-      probability:
-        files: [
-          cwd: './.temp/apps/probability'
-          src: ['main.js', 'routes.js', 'services/semver.js']
-          dest: './.temp/scripts/'
-          expand: true
-        ,
-          cwd: './.temp/apps/probability'
-          src: ['index.html','views/*.html']
-          dest: './.temp/'
-          expand: true
-        ]
-      # restriction to boomerangs only
-      boomerangs:
-        files: [
-          cwd: './.temp/apps/boomerangs'
-          src: ['main.js', 'routes.js', 'services/semver.js']
-          dest: './.temp/scripts/'
-          expand: true
-        ,
-          cwd: './.temp/apps/boomerangs'
-          src: ['index.html','views/*.html']
-          dest: './.temp/'
-          expand: true
-        ]
-      # restriction to frogs only
-      frogs:
-        files: [
-          cwd: './.temp/apps/frogs'
-          src: ['main.js', 'routes.js', 'services/semver.js']
-          dest: './.temp/scripts/'
-          expand: true
-        ,
-          cwd: './.temp/apps/frogs'
-          src: ['index.html','views/*.html']
-          dest: './.temp/'
-          expand: true
-        ]
-      ###
       
       # Copies img directory to temp.
       img: 
@@ -202,11 +128,6 @@ module.exports = (grunt) ->
       # Copies js files to the temp directory
       js:
         files: [
-          cwd: './'
-          src: 'apps/**/*.js'
-          dest: './.temp/'
-          expand: true
-        ,
           cwd: './src/'
           src: 'scripts/**/*.js'
           dest: './.temp/'
@@ -215,6 +136,16 @@ module.exports = (grunt) ->
           cwd: './src/'
           src: 'scripts/**/*.js'
           dest: './dist_test/'
+          expand: true
+        ]
+
+      # Copies the contents of the temp directory, to the dist directory.
+      # In 'dev' individual files are used.
+      dev:
+        files: [
+          cwd: './.temp/'
+          src: '**'
+          dest: './dist/'
           expand: true
         ]
 
@@ -236,6 +167,7 @@ module.exports = (grunt) ->
         ,
           './dist/index.html': './.temp/index.min.html'
         ]
+
       # Task is run when the watched index.template file is modified.
       index:
         files: [
@@ -322,7 +254,7 @@ module.exports = (grunt) ->
     ngTemplateCache:
       views:
         files:
-          './.temp/scripts/views.js': ['./.temp/views/**/*.html']
+          './.temp/scripts/views.js': ['./.temp/views/**/*.html', '!./.temp/views/pubs/**/*.html']
         options:
           trim: './.temp'
 
@@ -366,6 +298,18 @@ module.exports = (grunt) ->
 
     # Sets up file watchers and runs tasks when watched files are changed.
     watch:
+      mask:
+        files: [
+          '.appmask'
+          '/src/scripts/pubs/**/*.html'
+        ]
+        tasks: [
+          'appstyles'
+          'less'
+          'template:dev'
+          'restrict'
+          'copy:dev'
+        ]
       index:
         files: './src/index.html'
         tasks: [
@@ -373,7 +317,10 @@ module.exports = (grunt) ->
           'copy:index'
         ]
       scripts:
-        files: ['./src/scripts/**', './test/scripts/**']
+        files: [
+          './src/scripts/**'
+          './test/scripts/**'
+        ]
         tasks: [
           'coffee:scripts'
           'livescript:scripts'
@@ -383,8 +330,8 @@ module.exports = (grunt) ->
       styles:
         files: [
           './src/styles/**/*.less'
-          './apps/styles.less'
-          './apps/*/styles.less'
+          './src/scripts/pubs/styles.less'
+          './src/scripts/pubs/*/styles.less'
         ]
         tasks: [
           'appstyles'
@@ -454,12 +401,6 @@ module.exports = (grunt) ->
   # https://github.com/Dignifiedquire/grunt-testacular
   grunt.loadNpmTasks 'grunt-testacular'
 
-  ###
-  grunt.registerMultiTask 'publish', 'extract and publish an app', ->
-    grunt.log.writeln @target + ": " + @data
-    console.log grunt.config.get()
-    grunt.log.writeln @data.files[0].cwd
-	###
 
   # Compiles the app with non-optimized build settings, places the build artifacts in the dist directory, and runs unit tests.
   # Enter the following command at the command line to execute this build task:
@@ -494,9 +435,9 @@ module.exports = (grunt) ->
       mask = grunt.file.read '.appmask'
     if mask.length == 0
       # include all apps styles
-      styleFiles = grunt.file.expand({cwd:'./apps/'}, '*/*.less')
+      styleFiles = grunt.file.expand({cwd:'./src/scripts/pubs/'}, '*/*.less')
     else
-      styleFiles = grunt.file.expand({cwd:'./apps/'}, mask+'/*.less')
+      styleFiles = grunt.file.expand({cwd:'./src/scripts/pubs/'}, mask+'/*.less')
     styleFileContent = ''
     styleFiles.forEach (f) ->
       imp = '@' +'import "'
@@ -504,7 +445,7 @@ module.exports = (grunt) ->
       imp += '";'
       grunt.log.writeln imp
       styleFileContent += grunt.util.normalizelf(imp + '\n')
-    grunt.file.write('./apps/styles.less', styleFileContent)
+    grunt.file.write('./src/scripts/pubs/styles.less', styleFileContent)
 
   ###
   # Read and apply the application mask
@@ -541,20 +482,6 @@ module.exports = (grunt) ->
             maps.forEach (m) ->
               grunt.log.writeln("copy: " + m.src + " -> " + m.dest)
               grunt.file.copy('./'+m.src, './'+m.dest)
- 
-      ###
-      grunt.log.writeln "dest =" + files[0].dest
-      grunt.log.writeln "src =" + files[1].src
-      grunt.log.writeln "dest =" + files[1].dest
-      #grunt.file.copy grunt.config 'mask.files[0].src'
-      mask:
-        files: [
-          cwd: './.temp/apps/mask'
-          src: ['main.js', 'routes.js', 'services/semver.js']
-          dest: './.temp/scripts/'
-          expand: true
-      ###
-
 
 
   grunt.registerTask 'mask', "Set mask to restrict apps in page. e.g. grunt mask:frogs", (mask) ->

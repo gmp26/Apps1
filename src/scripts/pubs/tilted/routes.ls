@@ -7,7 +7,7 @@ angular.module('app').config [
     #$locationProvider.html5Mode true
 
     $routeProvider
-    .when '/d3Tilted', templateUrl: '/views/d3Tilted.html'
-    .otherwise redirectTo: '/d3Tilted'
+    .when '/tilted', templateUrl: '/views/tilted.html'
+    .otherwise redirectTo: '/tilted'
 
 ]
