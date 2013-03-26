@@ -5,7 +5,6 @@ node_modules/
 dist_test/
 incoming
 publish
-apps/Frogs/publish/
-apps/Frogs/test
+apps/styles.less
 *~
 .appmask
