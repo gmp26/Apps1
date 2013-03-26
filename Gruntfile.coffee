@@ -33,13 +33,7 @@ module.exports = (grunt) ->
           ext: '.js'
         ,
           cwd: './test/'
-          src: ['scripts/**/*.ls']
-          dest: './dist_test/'
-          expand: true
-          ext: '.js'
-        ,
-          cwd: './apps/'
-          src: ['*/test/**/*.ls']
+          src: ['scripts/**/*.ls','apps/**/*.ls']
           dest: './dist_test/'
           expand: true
           ext: '.js'

@@ -18,7 +18,9 @@ files = [
 	'./dist_test/scripts/controllers/*.js',
 	'./dist_test/scripts/directives/*.js',
 	'./dist_test/scripts/filters/*.js',
-	'./dist_test/scripts/services/*.js'
+	'./dist_test/scripts/services/*.js',
+
+	'./dist_test/apps/**/*.js'
 ];
 
 // level of logging
