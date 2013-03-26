@@ -143,7 +143,7 @@ module.exports = (grunt) ->
           dest: './.temp/'
           expand: true
         ]
-      # restriction to tilted only
+      ### restriction to tilted only
       tilted:
         files: [
           cwd: './.temp/apps/tilted'
@@ -183,7 +183,6 @@ module.exports = (grunt) ->
           expand: true
         ]
       # restriction to frogs only
-      ###
       frogs:
         files: [
           cwd: './.temp/apps/frogs'
@@ -197,6 +196,7 @@ module.exports = (grunt) ->
           expand: true
         ]
       ###
+      
       # Copies img directory to temp.
       img: 
         files: [
@@ -546,7 +546,7 @@ module.exports = (grunt) ->
             maps = grunt.file.expandMapping p, f.dest, {cwd:cwd} 
             maps.forEach (m) ->
               grunt.log.writeln("copy: " + m.src + " -> " + m.dest)
-              grunt.file.copy('./'+m.src, './'+m.dst)
+              grunt.file.copy('./'+m.src, './'+m.dest)
  
       ###
       grunt.log.writeln "dest =" + files[0].dest
