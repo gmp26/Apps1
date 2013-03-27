@@ -16,13 +16,6 @@ files = [
 	'./dist/scripts/**/filters/*.js',
 	'./dist/scripts/**/responseInterceptors/*.js',
 	'./dist/scripts/**/services/*.js',
-	/*
-	'./dist/scripts/pubs/controllers/*.js',
-	'./dist/scripts/pubs/directives/*.js',
-	'./dist/scripts/pubs/filters/*.js',
-	'./dist/scripts/pubs/responseInterceptors/*.js',
-	'./dist/scripts/pubs/services/*.js',
-	*/
 
 	/* test scripts */
 	'./dist_test/scripts/controllers/*.js',
