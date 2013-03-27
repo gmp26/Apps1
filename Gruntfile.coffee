@@ -306,7 +306,10 @@ module.exports = (grunt) ->
         tasks: [
           'appstyles'
           'less'
+          'template:views'
+          'copy:views'
           'template:dev'
+          'copy:index'
           'restrict'
           'copy:dev'
         ]

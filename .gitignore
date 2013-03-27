@@ -5,6 +5,7 @@ node_modules/
 dist_test/
 incoming
 publish
-apps/styles.less
+src/scripts/pubs/styles.less
 *~
 .appmask
+apps

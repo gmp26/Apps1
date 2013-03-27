@@ -8,19 +8,29 @@ files = [
 	'./dist/scripts/libs/d3.v3.js',
 	'./test/scripts/libs/angular-mocks.js',
 	'./test/scripts/libs/prelude-browser-min.js',
-	'./dist/scripts/app.js',
-	'./dist/scripts/controllers/*.js',
-	'./dist/scripts/directives/*.js',
-	'./dist/scripts/filters/*.js',
-	'./dist/scripts/responseInterceptors/*.js',
-	'./dist/scripts/services/*.js',
 
+	/* things under test */
+	'./dist/scripts/app.js',
+	'./dist/scripts/**/controllers/*.js',
+	'./dist/scripts/**/directives/*.js',
+	'./dist/scripts/**/filters/*.js',
+	'./dist/scripts/**/responseInterceptors/*.js',
+	'./dist/scripts/**/services/*.js',
+	/*
+	'./dist/scripts/pubs/controllers/*.js',
+	'./dist/scripts/pubs/directives/*.js',
+	'./dist/scripts/pubs/filters/*.js',
+	'./dist/scripts/pubs/responseInterceptors/*.js',
+	'./dist/scripts/pubs/services/*.js',
+	*/
+
+	/* test scripts */
 	'./dist_test/scripts/controllers/*.js',
 	'./dist_test/scripts/directives/*.js',
 	'./dist_test/scripts/filters/*.js',
 	'./dist_test/scripts/services/*.js',
 
-	'./dist_test/apps/**/*.js'
+	'./dist_test/pubs/**/*.js'
 ];
 
 // level of logging
