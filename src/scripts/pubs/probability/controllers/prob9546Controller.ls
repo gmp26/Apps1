@@ -2,13 +2,14 @@ angular.module('app').controller('prob9546Controller', [
   '$scope'
   '$timeout'
   'spinnerConfigs'
-  ($scope, $timeout) ->
+  ($scope, $timeout, spinnerConfigs) ->
 
     t = 0
 
     #
     # Put into a spin configuration service!
     #
+    spins = spinnerConfigs
 
     /*
      * array of spin amounts

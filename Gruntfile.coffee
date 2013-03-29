@@ -316,8 +316,12 @@ module.exports = (grunt) ->
       index:
         files: './src/index.html'
         tasks: [
+          'template:views'
+          'copy:views'
           'template:dev'
           'copy:index'
+          'restrict'
+          'copy:dev'
         ]
       scripts:
         files: [
@@ -345,10 +349,14 @@ module.exports = (grunt) ->
           'livereload'
         ]
       views:
-        files: ['./src/views/**/*.html']
+        files: ['./src/**/*.html']
         tasks: [
           'template:views'
           'copy:views'
+          'template:dev'
+          'copy:index'
+          'restrict'
+          'copy:dev'
         ]
 
     # Restart server when server sources have changed, notify all browsers on change.
