@@ -329,6 +329,8 @@ module.exports = (grunt) ->
           'livescript:scripts'
           'copy:js'
           'copy:scripts'
+          'restrict'
+          'copy:dev'
         ]
       styles:
         files: [

@@ -26,6 +26,7 @@ require {
         * 'app'
           'libs/d3.v3'
           'directives/svgCheck'
+          'pubs/probability/services/spinnerConfigs'
     'pubs/frogs/directives/frogs':
       deps:
         * 'app'
@@ -64,10 +65,14 @@ require {
       deps:
         * 'app'
         ...
+    'pubs/probability/services/spinnerConfigs':
+      deps:
+        * 'app'
+        ...
     'bootstrap':
       deps:
         * 'app'
-          'libs/angular'
+        ...
     'libs/bootstrap':
       deps:
         * 'libs/jquery'
