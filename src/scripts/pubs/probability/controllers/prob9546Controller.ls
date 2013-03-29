@@ -2,7 +2,8 @@ angular.module('app').controller('prob9546Controller', [
   '$scope'
   '$timeout'
   'spinnerConfigs'
-  ($scope, $timeout, spinnerConfigs) ->
+  '$window'
+  ($scope, $timeout, spinnerConfigs, window) ->
 
     t = 0
 
@@ -19,7 +20,7 @@ angular.module('app').controller('prob9546Controller', [
         duration: 0
         turns: 0
         snapAngle: Math.PI/1000
-        value: 0      # spin in radians
+        value: 0     # spin in radians
         random: 0      # value normalised to [0..1]
       * spinning: false
         duration: 0
