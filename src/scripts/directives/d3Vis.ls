@@ -5,8 +5,7 @@
 .controller 'd3VisController',
 [
   '$scope'
-  '$transclude'
-  ($scope, $transclude) ->
+  ($scope) ->
     $scope.defaultWidth  = 550
     $scope.defaultHeight = 400
 
@@ -72,7 +71,7 @@
 
     link: (scope, element, attrs) ->
 
-      #console.log('d3Vis')
+      console.log 'd3Vis scope = ', scope.$id
 
       # define handler for different window widths
       # use timer to avoid too many redraws
@@ -122,6 +121,10 @@
 
         @svg.attr 'width', @outerWidth + 1
         @svg.attr 'height', @outerHeight + 1
+
+        # Give the html element an appropriate width and height
+        element.css("width", +@outerWidth + 1)
+        element.css("height", +@outerHeight + 1)
 
         g = @svg.select("g")
         .attr("transform", "translate(" + @_margin.left + "," + @_margin.top + ")")

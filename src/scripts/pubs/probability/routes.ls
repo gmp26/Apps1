@@ -7,7 +7,8 @@ angular.module('app').config [
     #$locationProvider.html5Mode true
 
     $routeProvider
-    .when '/probability', templateUrl: '/views/probability.html'
-    .otherwise redirectTo: '/probability'
+    .when '/spinners', templateUrl: '/views/spinners.html'
+    .when '/prob9546', templateUrl: '/views/prob9546.html'
+    .otherwise redirectTo: '/spinners'
 
 ]

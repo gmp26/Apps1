@@ -88,7 +88,14 @@ angular.module('app').directive 'd3Spinner', ->
       .attr("stroke-linecap", "round")
       .attr("fill", \#000)
       .attr("d", line)
-      .attr("opacity", "0.5")
+      .attr("opacity", "0.3")
+
+      hub = arrow.append("circle")
+      .attr("fill", \#fff)
+      .attr("opacity", 0.7)
+      .attr("r", r/2)
+
+      hub.on "click", (d, i)->scope.$parent.go(d3.event)
 
       ngModel.$render = ->
         x = ngModel.$viewValue

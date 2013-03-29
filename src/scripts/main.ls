@@ -21,6 +21,11 @@ require {
         * 'app'
           'libs/d3.v3'
           'directives/svgCheck'
+    'pubs/probability/controllers/prob9546Controller':
+      deps:
+        * 'app'
+          'libs/d3.v3'
+          'directives/svgCheck'
     'pubs/frogs/directives/frogs':
       deps:
         * 'app'
@@ -97,6 +102,7 @@ require {
     'pubs/frogs/directives/frog'
     'pubs/boomerangs/controllers/boomerangController'
     'pubs/probability/controllers/spinController'
+    'pubs/probability/controllers/prob9546Controller'
     'pubs/probability/directives/d3Spinner'
     'pubs/tilted/directives/d3TiltedSquare'
     'directives/appVersion'

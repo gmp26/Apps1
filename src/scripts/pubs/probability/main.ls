@@ -21,6 +21,11 @@ require {
         * 'app'
           'libs/d3.v3'
           'directives/svgCheck'
+    'pubs/probability/controllers/prob9546Controller':
+      deps:
+        * 'app'
+          'libs/d3.v3'
+          'directives/svgCheck'
     'pubs/frogs/directives/frogs':
       deps:
         * 'app'
@@ -92,6 +97,7 @@ require {
   * 'require'
     'controllers/appController'
     'pubs/probability/controllers/spinController'
+    'pubs/probability/controllers/prob9546Controller'
     'pubs/probability/directives/d3Spinner'
     'directives/appVersion'
     'routes'
