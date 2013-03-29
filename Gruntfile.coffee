@@ -340,6 +340,7 @@ module.exports = (grunt) ->
           'appstyles'
           'less'
           'copy:styles'
+          'livereload'
         ]
       views:
         files: ['./src/views/**/*.html']

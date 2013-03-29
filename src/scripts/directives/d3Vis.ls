@@ -123,8 +123,9 @@
         @svg.attr 'height', @outerHeight + 1
 
         # Give the html element an appropriate width and height
-        element.css("width", +@outerWidth + 1)
-        element.css("height", +@outerHeight + 1)
+        console.log "setting el width to ", (+@outerWidth + 1)
+        element.css "width", (+@outerWidth + 1)+"px"
+        element.css "height", (+@outerHeight + 1)+"px"
 
         g = @svg.select("g")
         .attr("transform", "translate(" + @_margin.left + "," + @_margin.top + ")")
