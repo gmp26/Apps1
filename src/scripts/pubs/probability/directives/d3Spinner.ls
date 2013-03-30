@@ -8,15 +8,20 @@ angular.module('app').directive 'd3Spinner', ->
     rad2deg = 180/Math.PI
 
     # will point to this spinners data
-    spinner = {}
+    spinner = scope.$parent.addSpinner attrs.spinner, attrs.ngModel
 
     draw = (event, container, width, height) ->
 
       console.log "spinner scope = ", scope.$id
-      console.log "spinner index = ", attrs.spinner
+      console.log "spinner = ", attrs.spinner
 
       return unless attrs.spinner
-      spinner = scope.$parent.spinner[~~attrs.spinner]
+
+      console.log "ngModel.$viewValue = ", ngModel.$viewValue
+      console.log "ngModel.$modelValue = ", ngModel.$modelValue
+
+      # create spinner
+      #spinner = scope.$parent.spinner[attrs.spinner]
 
       # Calculate radius of spinner and new origin
       r = Math.min(width, height)/2
@@ -40,7 +45,7 @@ angular.module('app').directive 'd3Spinner', ->
       .value((d) -> d.weight)
 
       arcs = spinGroup.selectAll("g.slice")
-      .data(pie(spinner.data))
+      .data(pie(spinner))
 
       arcs.enter().append("g")
       .attr("class", "slice")
@@ -96,9 +101,13 @@ angular.module('app').directive 'd3Spinner', ->
       .attr("r", r/2)
 
       hub.on "click", (d, i)->scope.$parent.go(d3.event)
-
+      /*
       ngModel.$render = ->
         x = ngModel.$viewValue
+        arrow.attr("transform", "rotate(" + (x*rad2deg) + ")")
+      */
+      scope.$parent.$watch attrs.ngModel, (newVal, oldVal) ->
+        x = newVal
         arrow.attr("transform", "rotate(" + (x*rad2deg) + ")")
 
     # listen for redraw events

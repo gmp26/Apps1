@@ -1,84 +1,45 @@
 angular.module('app').controller('prob9546Controller', [
   '$scope'
   '$timeout'
+  '$parse'
   'spinnerConfigs'
-  '$window'
-  ($scope, $timeout, spinnerConfigs, window) ->
+  ($scope, $timeout, $parse, spinnerConfigs) ->
 
     t = 0
 
     #
     # Put into a spin configuration service!
     #
-    spins = spinnerConfigs
+    $scope.spinnerConfigs = spinnerConfigs
 
-    /*
-     * array of spin amounts
-     */
-    $scope.spinVar = 
-      * spinning: false
+
+    $scope.model =
+      goal1: 30
+      goal2: 50
+
+    $scope.addSpinner = (name, model) ->
+      return unless spinnerConfigs[name]? && model?
+
+      expr = $parse(model)
+      spinState = 
+        expr: expr
+        spinning: false
         duration: 0
         turns: 0
         snapAngle: Math.PI/1000
-        value: 0     # spin in radians
         random: 0      # value normalised to [0..1]
-      * spinning: false
-        duration: 0
-        turns: 0
-        snapAngle: Math.PI/1000
-        value: 0      # spin in radians
-        random: 0      # value normalised to [0..1]
+      ($scope.spinState ?= []).push spinState
 
-    $scope.getSpinVar = (x) -> $scope.spinVar[x]
-
-    /*
-     * array of spinners
-     */
-    $scope.spinner =
-      * spinVarIndex: 0
+      config = spinnerConfigs[name]
+      spinner =
+        spinState: spinState
         resultx: 0
         results: []
-        data:
-          * "label": \yeti
-            "weight": 10
-            "fill" : \#fe2
-          * "label": \yeti
-            "weight": 10
-            "fill" : \#fe2
-          * "label": \yeti
-            "weight": 10
-            "fill" : \#fe2
-          * "label": \yeti
-            "weight": 10
-            "fill" : \#fe2
-          * "label": \beaver
-            "weight": 10
-            "fill" : \#6af
-          * "label": \beaver
-            "weight": 10
-            "fill" : \#4af
-      * spinVarIndex: 1
-        resultx: 1
-        results: []
-        data:
-          * "label": \yeti
-            "weight": 10
-            "fill" : \#fe2
-          * "label": \yeti
-            "weight": 10
-            "fill" : \#fe2
-          * "label": \yeti
-            "weight": 10
-            "fill" : \#fe2
-          * "label": \yeti
-            "weight": 10
-            "fill" : \#fe2
-          * "label": \beaver
-            "weight": 10
-            "fill" : \#6af
-          * "label": \beaver
-            "weight": 10
-            "fill" : \#4af
+        data: config.concat()
+      normalise(spinner.data) 
+      ($scope.spinner ?= []).push spinner
+      return spinner.data
+
     totalWeight = (weights) ->
       weights.reduce (prev, d) ->
         prev + d.weight
@@ -89,28 +50,24 @@ angular.module('app').controller('prob9546Controller', [
       weights.forEach (d, i) ->
         d.probability = d.weight/total
 
-    $scope.spinner.forEach (d, i) -> normalise(d.data)
-
     getResultAt = (weights, d, i) ->
       return i if d < 0 or i == weights.length or d <= (p = weights[i].probability)
       getResultAt(weights, d - p, i+1)
 
-    saveResult = (spinVarIndex) ->
-      #console.log "saveResult ", spinVarIndex
+    saveResult = (spinState) ->
+      #console.log "saveResult ", spinStateIndex
       $scope.spinner.forEach (d,i) ->
-        if d.spinVarIndex == spinVarIndex
-          spin = $scope.getSpinVar(spinVarIndex)
-          d.result = spin.random
-          randx = getResultAt d.data, spin.random, 0
+        if d.spinState == spinState
+          d.result = spinState.random
+          randx = getResultAt d.data, spinState.random, 0
           d.results.push(randx)
           console.log "result[",i,"]= ", d.data[randx].label
 
     $scope.getLabel = (value, spinner) ->
       spinner.result.label
 
-
     randomise = ->
-      $scope.spinVar.forEach (d, i) ->
+      $scope.spinState.forEach (d, i) ->
         d.duration = 1000*(1+Math.random())
         d.turns = Math.PI*(d.duration/50 + 2*Math.random())
         d.spinning = true
@@ -128,15 +85,17 @@ angular.module('app').controller('prob9546Controller', [
       spinning = false
       t := t + $scope.msPerFrame
 
-      $scope.spinVar.forEach (d, i) ->
+      $scope.spinState.forEach (d, i) ->
         if d.spinning
-          theta = (d.value = tween(d, t)) / (2*Math.PI)
+          value = tween d, t
+          d.expr.assign($scope, value)
+          theta = value / (2*Math.PI)
           d.random = theta - Math.floor(theta)
           if (t < d.duration)
             spinning := true
           else
             d.spinning = false
-            saveResult(i)
+            saveResult(d)
 
       # if someone is spinning, schedule another timeout
       if spinning
