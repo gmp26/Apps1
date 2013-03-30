@@ -5,32 +5,35 @@
   </div>
 
   <div class="row-fluid">
-    <div class="span9">
+    <div class="span10">
       <p>
         Every weekend, Team Beaver and Team Yeti play each other at 2-Goal Football - they play until two goals have been scored.  Sometimes games last only a minute or two, sometimes they seem to go on for ever.
       </p>
       <p>
         Over a 36-week season, which team is likely to win more games?  
       </p>
-      <div svg-check class="row-fluid">
-        <input type="number" ng-model="model.goal1"></input>
-        <input type="number" ng-model="model.goal2"></input>
-        <div class="span6">
-          <h4>Goal 1</h4>
-          <div d3-vis ng-click="go()"
-            fullWidth="220" fullHeight="220" woff="41"
-            margin="0" padding="15 15 15 15" 
-            responsive="false" visible="true">
-            <div d3-spinner spinner="goal1" ng-model="model.goal1"></div>
+      <div svg-check>
+        <button ng-click="go()" class="btn btn-primary">Play a match</button>
+        <button ng-click="go()" class="btn btn-primary">Play 36 matches</button>
+
+        <div class="row-fluid">
+          <div class="span6">
+            <h4 style="margin-left:80px">Goal 1</h4>
+            <div d3-vis ng-click="go()"
+              fullWidth="220" fullHeight="220" woff="41"
+              margin="0" 
+              responsive="true" visible="false">
+              <div d3-spinner spinner="goal1" ng-model="model.goal1"></div>
+            </div>
           </div>
-        </div>
-        <div class="span6">
-          <h4>Goal 2</h4>
-          <div d3-vis ng-click="$parent.go()"
-            fullWidth="220" fullHeight="220" woff="41"
-            margin="0" padding="15 15 15 15" 
-            responsive="false" visible="true">
-            <div d3-spinner spinner="goal2" ng-model="model.goal2"></div>
+          <div class="span6">
+            <h4 style="margin-left:80px">Goal 2</h4>
+            <div d3-vis ng-click="$parent.go()"
+              fullWidth="220" fullHeight="220" woff="41"
+              margin="0"  
+              responsive="true" visible="false">
+              <div d3-spinner spinner="goal2" ng-model="model.goal2"></div>
+            </div>
           </div>
         </div>
       </div>

@@ -12,7 +12,6 @@ angular.module('app').controller('prob9546Controller', [
     #
     $scope.spinnerConfigs = spinnerConfigs
 
-
     $scope.model =
       goal1: 30
       goal2: 50
@@ -28,7 +27,7 @@ angular.module('app').controller('prob9546Controller', [
         turns: 0
         snapAngle: Math.PI/1000
         random: 0      # value normalised to [0..1]
-      ($scope.spinState ?= []).push spinState
+      ($scope.spinStates ?= []).push spinState
 
       config = spinnerConfigs[name]
       spinner =
@@ -38,7 +37,7 @@ angular.module('app').controller('prob9546Controller', [
         data: config.concat()
       normalise(spinner.data) 
       ($scope.spinner ?= []).push spinner
-      return spinner.data
+      return spinner
 
     totalWeight = (weights) ->
       weights.reduce (prev, d) ->
@@ -66,8 +65,9 @@ angular.module('app').controller('prob9546Controller', [
     $scope.getLabel = (value, spinner) ->
       spinner.result.label
 
-    randomise = ->
-      $scope.spinState.forEach (d, i) ->
+    startSpin = (spinState) ->
+      spinStates = if spinState? then [spinState] else $scope.spinStates
+      spinStates.forEach (d) ->
         d.duration = 1000*(1+Math.random())
         d.turns = Math.PI*(d.duration/50 + 2*Math.random())
         d.spinning = true
@@ -85,7 +85,7 @@ angular.module('app').controller('prob9546Controller', [
       spinning = false
       t := t + $scope.msPerFrame
 
-      $scope.spinState.forEach (d, i) ->
+      $scope.spinStates.forEach (d) ->
         if d.spinning
           value = tween d, t
           d.expr.assign($scope, value)
@@ -104,10 +104,12 @@ angular.module('app').controller('prob9546Controller', [
         $timeout.cancel(timing)
         timing := null
 
-    $scope.go = ->
+
+    # start one or more spinStates spinning. If none given, start all
+    $scope.go = (spinState) ->
       return unless timing == null
       t := 0
-      randomise()
+      startSpin(spinState)
       setSpinVars()
 
 ])
