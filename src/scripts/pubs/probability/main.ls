@@ -16,12 +16,12 @@ require {
       deps:
         * 'app'
         ...
-    'pubs/probability/controllers/spinController':
+    'pubs/probability/controllers/sampleSpinController':
       deps:
         * 'app'
           'libs/d3.v3'
           'directives/svgCheck'
-    'pubs/probability/controllers/spinnerController':
+    'pubs/probability/controllers/spinGroupController':
       deps:
         * 'app'
           'libs/d3.v3'
@@ -102,8 +102,8 @@ require {
   * 'require'
     'libs/prelude-browser-min'
     'controllers/appController'
-    'pubs/probability/controllers/spinController'
-    'pubs/probability/controllers/spinnerController'
+    'pubs/probability/controllers/sampleSpinController'
+    'pubs/probability/controllers/spinGroupController'
     'pubs/probability/controllers/prob9546ResultsController'
     'pubs/probability/directives/d3Spinner'
     'directives/appVersion'

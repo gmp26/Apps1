@@ -1,6 +1,6 @@
 <div ng-controller="prob9546ResultsController">
 
-  <div class="row-fluid" ng-controller="spinnerController">
+  <div class="row-fluid" ng-controller="spinGroupController">
     <div class="span11">
 
       <div class="row-fluid">
@@ -92,7 +92,7 @@
       <tbody>
         <tr ng-repeat="match in matches">
           <td>
-            {{$index}}
+            {{match.number}}
           </td>
           <td>
             {{match.goal1}}

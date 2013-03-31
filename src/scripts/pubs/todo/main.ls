@@ -16,7 +16,7 @@ require {
       deps:
         * 'app'
         ...
-    'pubs/probability/controllers/spinController':
+    'pubs/probability/controllers/sampleSpinController':
       deps:
         * 'app'
           'libs/d3.v3'

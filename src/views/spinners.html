@@ -3,16 +3,15 @@
   <p>Spinner support for probability experiments.</p>
   <p>Spinners provide a good screen-friendly way to simulate throwing dice, 
     spinning a coin, or choosing things from a bag.
-  <div ng-controller="spinController">
-    <div svg-check id="spinset1">
-      <input type="number" ng-model="spinVar[0].value"></input>
-      <input type="number" ng-model="spinVar[1].value"></input>
+  <div ng-controller="sampleSpinController">
+    <div svg-check id="spinset1" ng-controller="spinGroupController">
+      <input type="number" ng-model="model.spin1"></input>
       <br />
       <div d3-vis 
         fullWidth="100" fullHeight="100" woff="41"
         margin="0" padding="5 5 5 5" 
         responsive="false" visible="true">
-        <div d3-spinner spinner="0" ng-model="$parent.spinVar[0].value"></div>
+        <div d3-spinner spinner="spin1" ng-model="model.spin1"></div>
       <br />
       </div>
       <!--

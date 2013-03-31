@@ -75,11 +75,11 @@ angular.module('app').controller 'prob9546ResultsController', [
       goalScorers.goal2 = []
 
     logMatch = (goal1Scorer, goal2Scorer) ->
-      console.log "goal1=#goal1Scorer, goal2=#goal2Scorer"
       yGoals = +(goal1Scorer == \Y) + +(goal2Scorer == \Y)
       bGoals = 2 - yGoals
       s = $scope.summary
-      $scope.matches.push {
+      $scope.matches.unshift {
+        number: @length
         goal1: goal1Scorer
         goal2: goal2Scorer
         score: "Y: #yGoals, B: #bGoals"

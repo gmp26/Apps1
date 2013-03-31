@@ -16,12 +16,12 @@ require {
       deps:
         * 'app'
         ...
-    'pubs/probability/controllers/spinController':
+    'pubs/probability/controllers/sampleSpinController':
       deps:
         * 'app'
           'libs/d3.v3'
           'directives/svgCheck'
-    'pubs/probability/controllers/spinnerController':
+    'pubs/probability/controllers/spinGroupController':
       deps:
         * 'app'
           'libs/d3.v3'
@@ -101,8 +101,8 @@ require {
     'pubs/frogs/directives/frogs'
     'pubs/frogs/directives/frog'
     'pubs/boomerangs/controllers/boomerangController'
-    'pubs/probability/controllers/spinController'
-    'pubs/probability/controllers/spinnerController'
+    'pubs/probability/controllers/sampleSpinController'
+    'pubs/probability/controllers/spinGroupController'
     'pubs/probability/directives/d3Spinner'
     'pubs/tilted/directives/d3TiltedSquare'
     'directives/appVersion'
