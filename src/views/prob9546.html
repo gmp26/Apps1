@@ -1,65 +1,75 @@
 <div ng-controller="prob9546Controller">
 
-  <div class="header">
-    <h3>Which team will win? <a href="http://nrich.maths.org/9546">NRICH 9546</a></h3>
-  </div>
-
   <div class="row-fluid">
-    <div class="span10">
-      <p>
-        Every weekend, Team Beaver and Team Yeti play each other at 2-Goal Football - they play until two goals have been scored.  Sometimes games last only a minute or two, sometimes they seem to go on for ever.
-      </p>
-      <p>
-        Over a 36-week season, which team is likely to win more games?  
-      </p>
-      <div svg-check>
-        <div class="row-fluid">
-          <div class="span4">
-            <h4 style="margin-left:80px">Goal 1</h4>
-            <div d3-vis ng-click="go()"
-              fullWidth="200" fullHeight="200" woff="41"
-              margin="5" 
-              responsive="true" visible="false">
-              <div d3-spinner spinner="goal1" ng-model="model.goal1" style="position:relative">
-                <button ng-click="$parent.go()" style='position:absolute;left:26px; top:26px;zoom:2;-webkit-border-radius: 30px;width:48px;height:48px;opacity:0.4' class="btn btn-primary"><i class="icon-play icon-white"></i></button>
+    <div class="span11 offset1">
+
+      <div class="row-fluid">
+        <div class="header" class="span12">
+          <h3>Which team will win? <a href="http://nrich.maths.org/9546">NRICH 9546</a></h3>
+        </div>
+
+        <p class="span12">
+          Every weekend, Team B and Team Y play each other at 2-Goal Football - they play until two goals have been scored.  Sometimes games last only a minute or two, sometimes they seem to go on for ever.
+        </p>
+        <p class="span12">
+          If Team Y is twice as likely to score as Team B, then over a 36-week season, what would you expect to happen?  
+        </p>
+        <div class="span12 well">
+
+          <div class="row-fluid">
+            <div class="span1 offset3">
+              <button ng-click="go()" class="btn btn-success">Play a match</button>
+            </div>
+          </div>
+
+          <div svg-check class="row-fluid">
+            <div class="span4">
+              <h4 style="margin-left:80px">Goal 1</h4>
+              <div d3-vis ng-click="go()"
+                fullWidth="200" fullHeight="200" woff="41"
+                margin="5" 
+                responsive="true" visible="false">
+                <div d3-spinner spinner="goal1" ng-model="model.goal1" style="position:relative">
+                </div>
               </div>
             </div>
 
-          </div>
-          <div class="span4">
-            <h4 style="margin-left:80px">Goal 2</h4>
-            <div d3-vis ng-click="$parent.go()"
-              fullWidth="200" fullHeight="200" woff="41"
-              margin="5"  
-              responsive="true" visible="false">
-              <div d3-spinner spinner="goal2" ng-model="model.goal2" style="position:relative">
-                <button ng-click="$parent.go()" style='position:absolute;left:26px; top:26px;zoom:2;-webkit-border-radius: 30px;width:48px;height:48px;opacity:0.4' class="btn btn-primary"><i class="icon-play icon-white"></i></button>
+            <div class="span4">
+              <h4 style="margin-left:80px">Goal 2</h4>
+              <div d3-vis ng-click="$parent.go()"
+                fullWidth="200" fullHeight="200" woff="41"
+                margin="5"  
+                responsive="true" visible="false">
+                <div d3-spinner spinner="goal2" ng-model="model.goal2" style="position:relative">
+                </div>
               </div>
             </div>
-          </div>
-          <div class="span4">
-            <div class="btn-group btn-group-vertical" style="opacity:0.7;margin-left:20px">
-              <button ng-click="go()" style="width:150px;height:44px" class="btn btn-danger">Reset</button>
-              <button ng-click="go()" style="width:150px;height:44px" class="btn btn-success">Play a match</button>
-              <button ng-click="go()" style="width:150px;height:44px" class="btn btn-primary">Play 36 matches</button>
+
+            <div class="span4">
+              <div class="btn-group " style="opacity:0.7">
+                <button ng-click="go()"  class="btn btn-primary">Play 36</button>
+
+                <button ng-click="go()"  class="btn btn-primary">Play 100</button>
+              </div>
+              <h4 style="margin-left:20px">Result Summary</h4>
+              <table class="table table-condensed">
+                <tbody>
+                  <tr>
+                    <td>Team B wins</td>
+                    <td>{{winners("B")}}</td>
+                  </tr>
+                  <tr>
+                    <td>Team Y wins</td>
+                    <td>{{winners("Y")}}</td>
+                  </tr>
+                  <tr>
+                    <td>Matches played</td>
+                    <td>{{matches.length}}</td>
+                  </tr>
+                </tbody>
+              </table>
+              <button ng-click="go()"  class="btn btn-danger">Reset</button>
             </div>
-            <h4>Result Summary</h4>
-            <table class="table table-condensed">
-              <tbody>
-                <tr>
-                  <td>Team B wins</td>
-                  <td>{{winners("B")}}</td>
-                </tr>
-                <tr>
-                  <td>Team Y wins</td>
-                  <td>{{winners("Y")}}</td>
-                </tr>
-                <tr>
-                  <td>Matches played</td>
-                  <td>{{matches.length}}</td>
-                </tr>
-              </tbody>
-            </table>
           </div>
         </div>
       </div>

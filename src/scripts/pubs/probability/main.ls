@@ -100,6 +100,7 @@ require {
         ...
 },
   * 'require'
+    'libs/prelude-browser-min'
     'controllers/appController'
     'pubs/probability/controllers/spinController'
     'pubs/probability/controllers/prob9546Controller'
