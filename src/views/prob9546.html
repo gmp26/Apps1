@@ -1,7 +1,7 @@
-<div ng-controller="prob9546Controller">
+<div ng-controller="prob9546ResultsController">
 
-  <div class="row-fluid">
-    <div class="span11 offset1">
+  <div class="row-fluid" ng-controller="spinnerController">
+    <div class="span11">
 
       <div class="row-fluid">
         <div class="header" class="span12">
@@ -9,7 +9,7 @@
         </div>
 
         <p class="span12">
-          Every weekend, Team B and Team Y play each other at 2-Goal Football - they play until two goals have been scored.  Sometimes games last only a minute or two, sometimes they seem to go on for ever.
+          Every weekend, Team B and Team Y play each other at 2 goal football. They play until two goals have been scored.
         </p>
         <p class="span12">
           If Team Y is twice as likely to score as Team B, then over a 36-week season, what would you expect to happen?  
@@ -56,11 +56,15 @@
                 <tbody>
                   <tr>
                     <td>Team B wins</td>
-                    <td>{{winners("B")}}</td>
+                    <td>{{summary.wonByB}}</td>
                   </tr>
                   <tr>
                     <td>Team Y wins</td>
-                    <td>{{winners("Y")}}</td>
+                    <td>{{summary.wonByY}}</td>
+                  </tr>
+                  <tr>
+                    <td>Draws</td>
+                    <td>{{summary.drawn}}</td>
                   </tr>
                   <tr>
                     <td>Matches played</td>
@@ -100,7 +104,7 @@
             {{match.score}}
           </td>
           <td>
-            {{match.winner}}
+            {{match.result}}
           </td>
         </tr>
       </tbody>

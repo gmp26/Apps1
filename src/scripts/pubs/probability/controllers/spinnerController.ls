@@ -1,24 +1,12 @@
 import prelude
 
-angular.module('app').controller('prob9546Controller', [
+angular.module('app').controller 'spinnerController', [
   '$scope'
   '$timeout'
   '$parse'
-  'spinnerConfigs'
-  ($scope, $timeout, $parse, spinnerConfigs) ->
-
-    console.log take 2, [1,2,3,4]
+  ($scope, $timeout, $parse) ->
 
     t = 0
-
-    #
-    # Put into a spin configuration service!
-    #
-    $scope.spinnerConfigs = spinnerConfigs
-
-    $scope.model =
-      goal1: 30
-      goal2: 50
 
     #
     # Spinners have a spinstate which binds arrow angle to a 
@@ -28,7 +16,8 @@ angular.module('app').controller('prob9546Controller', [
     # apinnerConfigs service.
     #
     $scope.addSpinner = (name, model) ->
-      return unless spinnerConfigs[name]? && model?
+      config = $scope.spinnerConfigs[name]
+      return unless config? && model?
 
       spinState = 
         expr: $parse(model)
@@ -39,11 +28,9 @@ angular.module('app').controller('prob9546Controller', [
         random: 0      # model value normalised to [0..1]
       ($scope.spinStates ?= []).push spinState
 
-      config = spinnerConfigs[name]
       spinner =
         spinState: spinState
-        resultx: 0
-        results: []
+        name: name
         data: config.concat()
       normalise(spinner.data) 
       ($scope.spinner ?= []).push spinner
@@ -69,13 +56,16 @@ angular.module('app').controller('prob9546Controller', [
         if d.spinState == spinState
           d.result = spinState.random
           randx = getResultAt d.data, spinState.random, 0
-          d.results.push(randx)
-          console.log "result[",i,"]= ", d.data[randx].label
+          #d.results.push(randx)
+          $scope.spinLog(d.name, randx, d.data[randx].label)
+          console.log "result[",d.name,"]= ", randx, " -> ", d.data[randx].label
 
-    $scope.getLabel = (value, spinner) ->
-      spinner.result.label
+    #$scope.getLabel = (value, spinner) ->
+    #  spinner.result.label
 
     class SpinManager
+
+      # constructor
       (spinState, options) ->
         @spinStates = if spinState then [].concat(spinState) else [].concat($scope.spinStates)
 
@@ -88,10 +78,11 @@ angular.module('app').controller('prob9546Controller', [
         if options?
           import options
           
-
       # Start spinning specifying a location to store results in scope 
       start: (resultExpr) ->
         @results = $parse($scope, resultExpr)
+
+        startSpin(@spinStates)
 
 
     startSpin = (spinState, options) ->
@@ -148,4 +139,4 @@ angular.module('app').controller('prob9546Controller', [
       startSpin(spinState, options)
       setSpinVars()
 
-])
+]

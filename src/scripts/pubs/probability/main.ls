@@ -21,12 +21,16 @@ require {
         * 'app'
           'libs/d3.v3'
           'directives/svgCheck'
-    'pubs/probability/controllers/prob9546Controller':
+    'pubs/probability/controllers/spinnerController':
       deps:
         * 'app'
           'libs/d3.v3'
           'directives/svgCheck'
-          'pubs/probability/services/spinnerConfigs'
+    'pubs/probability/controllers/prob9546ResultsController':
+      deps:
+        * 'app'
+          'libs/d3.v3'
+          'directives/svgCheck'
     'pubs/frogs/directives/frogs':
       deps:
         * 'app'
@@ -65,10 +69,6 @@ require {
       deps:
         * 'app'
         ...
-    'pubs/probability/services/spinnerConfigs':
-      deps:
-        * 'app'
-        ...
     'bootstrap':
       deps:
         * 'app'
@@ -103,7 +103,8 @@ require {
     'libs/prelude-browser-min'
     'controllers/appController'
     'pubs/probability/controllers/spinController'
-    'pubs/probability/controllers/prob9546Controller'
+    'pubs/probability/controllers/spinnerController'
+    'pubs/probability/controllers/prob9546ResultsController'
     'pubs/probability/directives/d3Spinner'
     'directives/appVersion'
     'routes'
