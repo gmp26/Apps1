@@ -9,6 +9,7 @@ angular.module('app').config [
     $routeProvider
     .when '/spinners', templateUrl: '/views/spinners.html'
     .when '/prob9546', templateUrl: '/views/prob9546.html'
+    .when '/prob9525', templateUrl: '/views/prob9525.html'
     .otherwise redirectTo: '/spinners'
 
 ]

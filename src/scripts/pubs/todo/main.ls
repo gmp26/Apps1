@@ -4,7 +4,7 @@ require {
       deps:
         * 'app'
         ...
-    'pubs/todo/controllers/todoController':
+    'controllers/todoController':
       deps:
         * 'app'
         ...
@@ -17,6 +17,16 @@ require {
         * 'app'
         ...
     'pubs/probability/controllers/sampleSpinController':
+      deps:
+        * 'app'
+          'libs/d3.v3'
+          'directives/svgCheck'
+    'pubs/probability/controllers/spinGroupController':
+      deps:
+        * 'app'
+          'libs/d3.v3'
+          'directives/svgCheck'
+    'pubs/probability/controllers/prob9546ResultsController':
       deps:
         * 'app'
           'libs/d3.v3'
@@ -62,7 +72,7 @@ require {
     'bootstrap':
       deps:
         * 'app'
-          'libs/angular'
+        ...
     'libs/bootstrap':
       deps:
         * 'libs/jquery'
