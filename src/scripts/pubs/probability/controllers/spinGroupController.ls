@@ -111,11 +111,11 @@ angular.module('app').controller 'spinGroupController', [
     $scope.go = (spinState, options) ->
       return unless timing == null
       t := 0
-      startSpinners(spinState, )
+      startSpinners()
       setSpinVars()
 
     $scope.sequence = (repeatCount) ->
-
+      console.log "sequence #repeatCount"
 
 
 ]
