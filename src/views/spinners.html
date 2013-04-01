@@ -1,18 +1,27 @@
-<div class="header">
+<div ng-controller="sampleSpinController">
   <h2>Spinners <a href="http://nrich.maths.org/2293">NRICH 8130</a></h2>
   <p>Spinner support for probability experiments.</p>
   <p>Spinners provide a good screen-friendly way to simulate throwing dice, 
     spinning a coin, or choosing things from a bag.
-  <div ng-controller="sampleSpinController">
-    <div svg-check id="spinset1" ng-controller="spinGroupController">
+  <div ng-controller="spinGroupController">
+
+    <!-- 
+      NB adding an ng-controller to a div which has other directives breaks in Firefox
+      (angular-1.0.4). OK in Chrome.
+
+      Might be this, but d3-vis does not do ng-transclude and we so it may be different.
+        https://github.com/angular/angular.js/issues/1307
+    -->
+
+    <div svg-check id="spinset1" >
       <input type="number" ng-model="model.spin1"></input>
       <br />
-      <div d3-vis 
+      <div d3-vis
         fullWidth="100" fullHeight="100" woff="41"
         margin="0" padding="5 5 5 5" 
         responsive="false" visible="true">
         <div d3-spinner spinner="spin1" ng-model="model.spin1"></div>
-      <br />
+        <br />
       </div>
       <!--
       <div d3-vis 
