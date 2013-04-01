@@ -130,6 +130,10 @@ angular.module('app').controller 'spinGroupController', [
 
     $scope.reset = ->
       event.stopPropagation()
+      repeats := 1
+      if timing
+        $timeout.cancel timing
+        timing := null
       $scope.$emit "resetSpinners"
 
     /*
@@ -167,7 +171,9 @@ angular.module('app').controller 'spinGroupController', [
       sps = $scope.spinner.filter (.name == name)
       if sps.length > 0 then sps[0] else void
 
+    # Remove a sector from the spinner
     $scope.delArc = (name, label)->
+      return if timing or repeats > 1
       spinner = getSpinnerByName(name)
       if spinner
         arcIndex = -1
@@ -185,12 +191,14 @@ angular.module('app').controller 'spinGroupController', [
             console.log d.label, " ", d.probability
           $scope.$broadcast "resize"
 
+    # Add a sector to the spinner
     $scope.addArc = (name, label)->
+      return if timing or repeats > 1
       spinner = getSpinnerByName(name)
       if spinner
         arcIndex = -1
         addItem = null
-        return if spinner.data.length > 10
+        return if spinner.data.length > 19
         spinner.data.forEach (d,i) ->
           if arcIndex < 0 && d.label==label
             arcIndex := i

@@ -69,6 +69,9 @@ angular.module('app').controller 'prob9546ResultsController', [
       goalScorers :=
         goal1: []
         goal2: []
+      $scope.model =
+        goal1: 0
+        goal2: 0
 
     $scope.$on "resetSpinners", reset
 
