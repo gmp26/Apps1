@@ -1,122 +1,177 @@
-angular.module('app').directive 'd3Spinner', ->
-  restrict: 'A'
-  require: '?ngModel'
-  link: (scope, element, attrs, ngModel) ->
+angular.module('app').directive 'd3Spinner', [
+  '$timeout'
+  ($timeout) ->
+    restrict: 'A'
+    require: '?ngModel'
+    link: (scope, element, attrs, ngModel) ->
 
-    return unless ngModel?
+      return unless ngModel?
 
-    rad2deg = 180/Math.PI
+      rad2deg = 180/Math.PI
 
-    # will point to this spinners data
-    spinner = scope.$parent.addSpinner attrs.spinner, attrs.ngModel
+      # will point to this spinners data
+      spinner = scope.$parent.addSpinner attrs.spinner, attrs.ngModel
 
-    # listen for redraw events
-    scope.$on 'draw', draw
-    scope.$on 'resize', resize
+      # remember last draw space
+      savedContainer = null
+      savedWidth = 100
+      savedHeight = 100
 
-    spinGroup = null;
+      # listen for redraw events
+      scope.$on 'draw', draw
+      scope.$on 'resize', resize
 
-    arrowPath = (r) ->
-      u = r/6
-      u3 = 3*u
-      u_2 = u/2
-      u_2r2= u_2/Math.sqrt(2)
-      return [
-        [0,u_2]
-        [-u_2r2,u_2r2]
-        [-u_2,0]
-        [-u_2,-u3]
-        [-2*u,-u3]
-        [0,-u3*2]
-        [2*u,-u3]
-        [u_2,-u3]
-        [u/2,0]
-        [u_2r2,u_2r2]
-        [0,u_2]
-      ]
+      spinGroup = null;
+      arc = null
+      pie = null
+      arcs = null
 
-    r0 = 0
+      arrowPath = (r) ->
+        u = r/6
+        u3 = 3*u
+        u_2 = u/2
+        u_2r2= u_2/Math.sqrt(2)
+        return [
+          [0,u_2]
+          [-u_2r2,u_2r2]
+          [-u_2,0]
+          [-u_2,-u3]
+          [-2*u,-u3]
+          [0,-u3*2]
+          [2*u,-u3]
+          [u_2,-u3]
+          [u/2,0]
+          [u_2r2,u_2r2]
+          [0,u_2]
+        ]
 
-    # named function syntax allows forward reference to 'draw'
-    function draw(event, container, width, height)
+      r0 = 0
 
-      console.log "spinner scope = ", scope.$id
-      console.log "spinner = ", attrs.spinner
+      # named function syntax allows forward reference to 'draw'
+      function draw(event, container, width, height)
 
-      return unless attrs.spinner
+        console.log "spinner scope = ", scope.$id
+        console.log "spinner = ", attrs.spinner
 
-      # Calculate radius of spinner and new origin
-      r = Math.min(width, height)/2
-      r0 := r if r0 == 0
-      origin = {x:r, y:r}
+        return unless attrs.spinner
 
-      # Establish a group with origin at the spinner centre
-      spinGroup := container.selectAll ".spin-group"
-      .data [scope.$id]
-      .enter().append("g")
-      .attr "class", "spin-group"
-      .attr "transform", "translate(#r , #r)"
+        savedContainer := container
+        savedWidth := width
+        savedHeight := height
 
-      arc = d3.svg.arc()
-      .innerRadius r/2
-      .outerRadius r
+        # Calculate radius of spinner and new origin
+        r = Math.min(width, height)/2
+        r0 := r if r0 == 0
+        origin = {x:r, y:r}
 
-      pie = d3.layout.pie()
-      .sort null
-      .value (d) -> d.weight
+        # Establish a group with origin at the spinner centre
+        spinGroup := container.selectAll ".spin-group"
+        .data [scope.$id]
+        .enter().append("g")
+        .attr "class", "spin-group"
+        .attr "transform", "translate(#r , #r)"
 
-      arcs = spinGroup.selectAll "g.slice"
-      .data pie spinner.data
-      .enter().append "g"
-      .attr "class", "slice"
+        arc := d3.svg.arc()
+        .innerRadius r/2
+        .outerRadius r
 
-      arcs.append "path"
-      .style "fill", (d) -> d.data.fill
-      .style "stroke-width", "1px"
-      .style "stroke", \#888
-      .attr "d", arc
+        pie := d3.layout.pie()
+        .sort null
+        .value (d) -> d.weight
 
-      arcs.append "text"
-      .attr "transform", (d) -> 'translate(' + arc.centroid(d) + ')'
-      .attr "text-anchor", "middle"
-      .attr "dy", "0.35em"
-      .text (d, i) -> d.data.label
+        arcs := spinGroup.selectAll "g.slice"
+        .data pie spinner.data
+        
+        arcs.enter().append "g"
+        .attr "class", "slice"
 
-      line = d3.svg.line()
+        arcs.append "path"
+        .style "fill", (d) -> d.data.fill
+        .style "stroke-width", "1px"
+        .style "stroke", \#888
+        .attr "d", arc
 
-      arrow = spinGroup
-      .append "g"
+        arcs.append "text"
+        .attr "transform", (d) -> 'translate(' + arc.centroid(d) + ')'
+        .attr "text-anchor", "middle"
+        .attr "dy", "0.35em"
+        .text (d, i) -> d.data.label
 
-      arrow.attr "class", "arrow"
+        line = d3.svg.line()
 
-      # define arrow path
+        arrowGroup = container.selectAll ".arrow-group"
+        .data ["arrow"]
+        .enter().append "g"
+        .attr "class", "arrow-group"
+        .attr "transform", "translate(#r , #r)"
 
-      arrow.append "path"
-      .datum arrowPath(r)
-      .attr "stroke", \#fff
-      .attr "stroke-width", 1
-      .attr "stroke-linejoin", "round"
-      .attr "stroke-linecap", "round"
-      .attr "fill", \#000
-      .attr "d", line
-      .attr "opacity", "0.3"
+        arrow = arrowGroup.append "g"
 
-      hub = arrow.append "circle"
-      .attr "fill", \#fff
-      .attr "opacity", 0.7
-      .attr "r", r/2
+        arrow.attr "class", "arrow"
 
-      hub.on "click", (d, i)->scope.$parent.go spinner.spinState
+        # define arrow path
 
-      scope.$parent.$watch attrs.ngModel, (newVal) ->
-        arrow.attr "transform", "rotate(#{newVal*rad2deg})"
+        arrow.append "path"
+        .datum arrowPath(r)
+        .attr "stroke", \#fff
+        .attr "stroke-width", 1
+        .attr "stroke-linejoin", "round"
+        .attr "stroke-linecap", "round"
+        .attr "fill", \#000
+        .attr "d", line
+        .attr "opacity", "0.3"
 
-    # named function syntax allows forward reference to 'draw'
-    function resize(event, container, width, height)
+        hub = arrow.append "circle"
+        .attr "fill", \#fff
+        .attr "opacity", 0.7
+        .attr "r", r/2
 
-      # Calculate radius of spinner and new origin
-      r = Math.min(width, height)/2
-      scale = r/r0
+        hub.on "click", (d, i)->scope.$parent.go spinner.spinState
 
-      container.selectAll ".spin-group"
-      .attr "transform", "scale(#{scale}) translate(#r0 , #r0)"
+        scope.$parent.$watch attrs.ngModel, (newVal) ->
+          arrow.attr "transform", "rotate(#{newVal*rad2deg})"
+
+      # named function syntax allows forward reference to 'draw'
+      function resize(event, container=savedContainer, width=savedWidth, height=savedHeight)
+
+        savedContainer := container
+        savedWidth := width
+        savedHeight := height
+
+        # Calculate radius of spinner and new origin
+        r = Math.min(width, height)/2
+        scale = r/r0
+
+        spinGroup = container.selectAll ".spin-group"
+        .attr "transform", "scale(#{scale}) translate(#r0 , #r0)"
+
+        arcs.selectAll("path").remove()
+        arcs.selectAll("text").remove()
+
+        arcs := arcs
+        .data pie spinner.data
+
+        arcs.attr "d", arc
+
+        arcs.enter().append "g"
+        .attr "class", "slice"
+
+        arcs.append "path"
+        .style "fill", (d) -> d.data.fill
+        .style "stroke-width", "1px"
+        .style "stroke", \#888
+        .attr "d", arc
+
+        arcs.append "text"
+        .attr "transform", (d) -> 'translate(' + arc.centroid(d) + ')'
+        .attr "text-anchor", "middle"
+        .attr "dy", "0.35em"
+        .text (d, i) -> d.data.label
+
+        leaving = arcs.exit()
+        leaving.selectAll("path").remove()
+        leaving.selectAll("text").remove()
+        leaving.remove()
+
+
+]

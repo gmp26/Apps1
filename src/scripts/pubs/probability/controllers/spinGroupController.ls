@@ -1,5 +1,3 @@
-import prelude
-
 angular.module('app').controller 'spinGroupController', [
   '$scope'
   '$timeout'
@@ -55,6 +53,20 @@ angular.module('app').controller 'spinGroupController', [
       return i if d < 0 or i == weights.length or d <= (p = weights[i].probability)
       getResultAt(weights, d - p, i+1)
 
+
+    repeats = 1
+    sequential = false
+
+    speedFactor = 1000
+
+    startOneSpin = (spinState) ->
+      spinState.duration = speedFactor*(1+Math.random())
+      spinState.turns = Math.PI*(spinState.duration/50 + 2*Math.random())
+      spinState.spinning = true
+
+    startSpinners = ->
+      $scope.spinStates.forEach (d) -> startOneSpin(d)
+
     saveResult = (spinState) ->
       #console.log "saveResult ", spinStateIndex
       $scope.spinner.forEach (d,i) ->
@@ -65,15 +77,21 @@ angular.module('app').controller 'spinGroupController', [
           $scope.$emit "spinDone", d.name, randx, d.data[randx].label
           console.log "result[",d.name,"]= ", randx, " -> ", d.data[randx].label
 
-    startOneSpin = (spinState) ->
-      spinState.duration = 1000*(1+Math.random())
-      spinState.turns = Math.PI*(spinState.duration/50 + 2*Math.random())
-      spinState.spinning = true
+          # check whether we should start the next spinner
+          if sequential && i+1 < $scope.spinStates.length
+            t := 0
+            startOneSpin $scope.spinStates[i+1]
 
-    startSpinners = ->
-      $scope.spinStates.forEach (d) -> startOneSpin(d)
+    $scope.speedCheck = 
+      value: false
 
-    $scope.msPerFrame = 20
+    $scope.msPerFrame = 30
+
+    $scope.change = ->
+      speedFactor := if $scope.speedCheck.value then 100 else 1000
+      $scope.spinStates.forEach (d) ->
+        d.duration = speedFactor*(1+Math.random())
+      console.log "$scope.speedCheck: #{$scope.speedCheck.value}" 
 
     tween = (spin, t) ->
       spin.turns*(1-Math.exp(t*Math.log(spin.snapAngle)/spin.duration))
@@ -98,24 +116,89 @@ angular.module('app').controller 'spinGroupController', [
             d.spinning = false
             saveResult(d)
 
-      # if someone is spinning, schedule another timeout
+      # if someone is still spinning, schedule another timeout
       if spinning
         timing := $timeout setSpinVars, $scope.msPerFrame, true
       else
-        $timeout.cancel(timing)
+        $timeout.cancel timing
         timing := null
         $scope.$emit "spinGroupDone"
+        if --repeats == 0
+          $scope.$emit "spinRepeatsDone"
+        else
+          $scope.go repeats, sequential
 
+    $scope.reset = ->
+      event.stopPropagation()
+      $scope.$emit "resetSpinners"
 
+    /*
     # Start spinners. 
-    $scope.go = (spinState, options) ->
+    $scope.go = ->
       return unless timing == null
       t := 0
+      repeats := 1
       startSpinners()
       setSpinVars()
+    */
 
-    $scope.sequence = (repeatCount) ->
+    $scope.go = (repeatCount = 1, sequence = true) ->
       console.log "sequence #repeatCount"
+      return unless timing == null
+      t := 0
+      repeats := repeatCount
+      sequential := sequence
+      if sequential
+        startOneSpin $scope.spinStates[0]
+      else
+        startSpinners()
+      setSpinVars()
 
+    # Start a run where each spinner in the group
+    # starts after the previous has settled
+    $scope.goSeq = (repeatCount = 1) ->
+      $scope.go repeatCount, true
 
+    # Start a run where all spinners start at same time
+    $scope.goPar = (repeatCount = 1) ->
+      $scope.go repeatCount, false
+
+    getSpinnerByName = (name) ->
+      sps = $scope.spinner.filter (.name == name)
+      if sps.length > 0 then sps[0] else void
+
+    $scope.delArc = (name, label)->
+      spinner = getSpinnerByName(name)
+      if spinner
+        arcIndex = -1
+        return if spinner.data.length < 2
+        foundLabels = 0
+        spinner.data.forEach (d,i) ->
+          if d.label==label
+            foundLabels++
+            if arcIndex < 0
+              arcIndex := i
+        if arcIndex >= 0 && foundLabels > 1
+          spinner.data.splice arcIndex, 1
+          normalise(spinner.data)
+          spinner.data.forEach (d)->
+            console.log d.label, " ", d.probability
+          $scope.$broadcast "resize"
+
+    $scope.addArc = (name, label)->
+      spinner = getSpinnerByName(name)
+      if spinner
+        arcIndex = -1
+        addItem = null
+        return if spinner.data.length > 10
+        spinner.data.forEach (d,i) ->
+          if arcIndex < 0 && d.label==label
+            arcIndex := i
+            addItem := angular.copy d
+        if arcIndex >= 0
+          spinner.data.splice arcIndex, 0, addItem
+          normalise(spinner.data) 
+          spinner.data.forEach (d)->
+            console.log d.label, " ", d.probability
+          $scope.$broadcast "resize"
 ]

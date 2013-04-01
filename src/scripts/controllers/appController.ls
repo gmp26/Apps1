@@ -1,3 +1,10 @@
+#
+# do this once only!
+#
+# TODO: duplicate in pubs and remove prelude from any that don't need it.
+#
+# import prelude
+
 angular.module('app').controller('appController', [
   '$scope'
   '$location'

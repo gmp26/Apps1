@@ -32,6 +32,12 @@
                 <div d3-spinner spinner="goal1" ng-model="model.goal1" style="position:relative">
                 </div>
               </div>
+              <div class="btn-group">
+                <button class="btn" ng-click="delArc('goal1','Y')"><i class="icon-arrow-down"></i>Y</button>
+                <button class="btn" ng-click="addArc('goal1','Y')"><i class="icon-arrow-up"></i>Y</button>
+                <button class="btn" ng-click="delArc('goal1','B')"><i class="icon-arrow-down"></i>B</button>
+                <button class="btn" ng-click="addArc('goal1','B')"><i class="icon-arrow-up"></i>B</button>
+              </div>
             </div>
 
             <div class="span4">
@@ -43,14 +49,25 @@
                 <div d3-spinner spinner="goal2" ng-model="model.goal2" style="position:relative">
                 </div>
               </div>
+              <div class="btn-group">
+                <button class="btn" ng-click="delArc('goal2','Y')"><i class="icon-arrow-down"></i>Y</button>
+                <button class="btn" ng-click="addArc('goal2','Y')"><i class="icon-arrow-up"></i>Y</button>
+                <button class="btn" ng-click="delArc('goal2','B')"><i class="icon-arrow-down"></i>B</button>
+                <button class="btn" ng-click="addArc('goal2','B')"><i class="icon-arrow-up"></i>B</button>
+              </div>
             </div>
 
             <div class="span4">
               <div class="btn-group " style="opacity:0.7">
-                <button ng-click="sequence(36)"  class="btn btn-primary">Play 36</button>
+                <button ng-click="goSeq(36)"  class="btn btn-primary">Play 36</button>
 
-                <button ng-click="sequence(100)"  class="btn btn-primary">Play 100</button>
+                <button ng-click="goSeq(100)"  class="btn btn-primary">Play 100</button>
               </div>
+              <div>
+              <label class="checkbox">
+                <input type="checkbox" ng-change="change()" ng-model="speedCheck.value"/>
+                <span>Speed up? {{speedCheck.value}}</span>
+              </label>
               <h4 style="margin-left:20px">Result Summary</h4>
               <table class="table table-condensed">
                 <tbody>

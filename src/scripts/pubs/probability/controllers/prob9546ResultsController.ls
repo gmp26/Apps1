@@ -1,5 +1,3 @@
-import prelude
-
 angular.module('app').controller 'prob9546ResultsController', [
   '$scope'
   ($scope) ->
@@ -62,7 +60,7 @@ angular.module('app').controller 'prob9546ResultsController', [
     $scope.matches = []
     goalScorers = {}
 
-    $scope.reset = ->
+    reset = ->
       $scope.summary :=
         wonByB:0
         wonByY:0
@@ -72,8 +70,10 @@ angular.module('app').controller 'prob9546ResultsController', [
         goal1: []
         goal2: []
 
+    $scope.$on "resetSpinners", reset
+
     # initial view setup
-    $scope.reset()
+    reset()
 
     # view update
     logMatch = (goal1Scorer, goal2Scorer) ->
