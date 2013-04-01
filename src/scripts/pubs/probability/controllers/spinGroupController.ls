@@ -128,12 +128,15 @@ angular.module('app').controller 'spinGroupController', [
         else
           $scope.go repeats, sequential
 
-    $scope.reset = ->
+    $scope.stop = ->
       event.stopPropagation()
       repeats := 1
       if timing
         $timeout.cancel timing
         timing := null
+
+    $scope.reset = ->
+      $scope.stop()
       $scope.$emit "resetSpinners"
 
     /*

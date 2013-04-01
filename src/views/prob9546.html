@@ -59,7 +59,7 @@
 
             <div class="span4">
               <br />
-              <div class="btn-group" style="opacity:0.7">
+              <div class="btn-group">
                 <button ng-click="goSeq(36)"  class="btn btn-primary">Play 36</button>
 
                 <button ng-click="goSeq(100)"  class="btn btn-primary">Play 100</button>
@@ -90,7 +90,10 @@
                   </tr>
                 </tbody>
               </table>
-              <button ng-click="reset()"  class="btn btn-danger">Reset</button>
+              <div class="btn-group">
+                <button ng-click="reset()"  class="btn btn-danger">Reset</button>
+                <button ng-click="stop()"  class="btn btn-warning">Stop</button>
+              </div>
             </div>
           </div>
         </div>
