@@ -44,6 +44,12 @@ angular.module('app').controller 'prob9525ResultsController', [
           "weight": 10
           "fill" : \#4f6
 
+      alwaysA:
+        * "label": \A
+          "weight": 10
+          "fill" : \#fe2
+
+
     $scope.model =
       excuse: 0
       accuse: 0
