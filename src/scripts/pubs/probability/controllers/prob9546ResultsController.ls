@@ -64,7 +64,8 @@ angular.module('app').controller 'prob9546ResultsController', [
       $scope.summary :=
         wonByB:0
         wonByY:0
-        drawn:0
+        drawYB:0
+        drawBY:0
       $scope.matches := []
       goalScorers :=
         goal1: []
@@ -77,6 +78,15 @@ angular.module('app').controller 'prob9546ResultsController', [
 
     # initial view setup
     reset()
+
+    drawDiscriminator = (goal1Scorer) ->
+      s = $scope.summary
+      if goal1Scorer == \Y
+        s.drawYB++
+        return "draw YB"
+      else
+        s.drawBY++
+        return "draw BY"
 
     # view update
     logMatch = (goal1Scorer, goal2Scorer) ->
@@ -91,7 +101,7 @@ angular.module('app').controller 'prob9546ResultsController', [
         score: "Y: #yGoals, B: #bGoals"
         result: switch yGoals
         | 0 => s.wonByB++; "B"
-        | 1 => s.drawn++; "draw"
+        | 1 => drawDiscriminator(goal1Scorer)
         | 2 => s.wonByY++; "Y"
       }
 
