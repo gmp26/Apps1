@@ -282,7 +282,7 @@ module.exports = (grunt) ->
             return '' if shouldExcludeModule
 
             contents
-          optimize: 'none' #'uglify'
+          optimize: 'uglify'
           out: './.temp/scripts/scripts.min.js'
           preserveLicenseComments: false
           skipModuleInsertion: true
@@ -385,6 +385,7 @@ module.exports = (grunt) ->
           reporters: ['progress']
           runnerPort: 9100
           singleRun: false
+
   # Register grunt tasks supplied by grunt-contrib-*.
   # Referenced in package.json.
   # https://github.com/gruntjs/grunt-contrib
