@@ -11,11 +11,18 @@
     #
     $scope.groups = config.groups
 
-    $scope.topicTitleById = (topicId) ->
-      config.topics[topicId][0]
+    $scope.questions = []
 
-    $scope.topicMakerById = (topicId) ->
-      config.topics[topicId][1]
+    #topicById = (id) -> config.topics[id]
+    #topicMakerById = (id) -> topicById(id)[1]
+
+    $scope.topicTitleById = (id) -> config.topicById(id)[0]
+
+    $scope.getQA = (id) ->
+      maker = config.topicMakerById id
+      qid = Math.random()
+      $scope.questions.push maker.call this
+
 
     #
     # Local storage test

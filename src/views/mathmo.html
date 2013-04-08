@@ -16,7 +16,7 @@
       <accordion close-others="false">
         <accordion-group heading="{{group.title}}" ng-repeat="group in groups">
           <div class="btn-group btn-group-vertical row-fluid">
-            <button class="btn span12" ng-repeat="id in group.topicIds">{{topicTitleById(id)}}</button>
+            <button class="btn span12" ng-repeat="id in group.topicIds" ng-click="getQA(id)">{{topicTitleById(id)}}</button>
           </div>
         </accordion-group>
       </accordion>
@@ -24,6 +24,16 @@
     <div class="modal-footer">
         <button class="btn btn-warning cancel" ng-click="closeAddQ()">Close</button>
     </div>
+  </div>
+
+  <div ng-repeat="qa in questions">
+
+    <h5>Question</h5>
+    <div>{{qa[0]}}</div>
+
+    <h5>Answer</h5>
+    <div>{{qa[1]}}</div>
+
   </div>
 
   <!-- Works, but not mobile friendly.
