@@ -64,7 +64,7 @@ angular.module('app').controller 'spinGroupController', [
       spinState.turns = Math.PI*(spinState.duration/50 + 2*Math.random())
       spinState.spinning = true
 
-    startSpinners = ->
+    startSpinners =  ->
       $scope.spinStates.forEach (d) -> startOneSpin(d)
 
     saveResult = (spinState) ->
