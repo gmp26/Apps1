@@ -1,1 +1,2 @@
 1.0.5
+ui-bootstrap-tpls.js  0.2.0

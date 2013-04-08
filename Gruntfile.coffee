@@ -121,10 +121,11 @@ module.exports = (grunt) ->
       img: 
         files: [
           cwd: './src/'
-          src: 'img/**/*.png'
+          src: '**/*.png'
           dest: './.temp/'
-          expand: true
+          expand: true       
         ]
+
       # Copies js files to the temp directory
       js:
         files: [
@@ -489,9 +490,16 @@ module.exports = (grunt) ->
         files = grunt.config 'copy.mask.files'
         files.forEach (f) ->
           cwd = f.cwd.replace /mask/, mask
-          #grunt.log.writeln "cwd = " + cwd
           f.src.forEach (p) ->
-            #grunt.log.writeln "p = " + p
+            maps = grunt.file.expandMapping p, f.dest, {cwd:cwd} 
+            maps.forEach (m) ->
+              grunt.log.writeln("copy: " + m.src + " -> " + m.dest)
+              grunt.file.copy('./'+m.src, './'+m.dest)
+
+        files = grunt.config 'copy.mask.files'
+        files.forEach (f) ->
+          cwd = f.cwd.replace /mask/, mask
+          f.src.forEach (p) ->
             maps = grunt.file.expandMapping p, f.dest, {cwd:cwd} 
             maps.forEach (m) ->
               grunt.log.writeln("copy: " + m.src + " -> " + m.dest)
@@ -505,6 +513,53 @@ module.exports = (grunt) ->
   grunt.registerTask 'unmask', "Unset mask to display all apps", () ->
     grunt.file.write '.appmask', ""
     grunt.log.writeln 'grunt dev and grunt prod will display all apps'
+
+
+  #
+  # Create a new app
+  #
+  grunt.registerTask 'create', "Create boilerplate for a new app", (mask) ->
+    grunt.file.write '.appmask', mask
+    grunt.log.writeln 'create', mask
+
+    data =
+      mask: mask
+      apptitle: (mask.substr(0,1).toUpperCase() + mask.substr(1))
+      delimiters: 'curlies'
+
+    #grunt.log.writeln "data.mask = ", data.mask
+    #grunt.log.writeln "data.apptitle = ", data.apptitle
+
+    # create the pubs application folder
+    appDir = './src/scripts/pubs/'+mask
+    if grunt.file.exists appDir
+      grunt.warn (appDir + ' already exists.'), 6
+    else
+      grunt.template.addDelimiters('curlies', '{%', '%}')
+      grunt.file.mkdir('./src/scripts/pubs/'+mask)
+
+      # copy appTemplate files to it, rewriting the app name in the process
+      cwd = './boilerplate'
+      templateFiles = grunt.file.expand {cwd: cwd}, '**/*'
+      templateFiles.forEach (tf) ->
+        src = cwd + '/' + tf
+        if grunt.file.isFile src
+          dest = appDir + '/' + tf.replace('mask', mask)
+          grunt.log.writeln "copy boilerplate file ", src, " to ", dest
+
+          # couldn't get the standard lodash templates to behave,
+          # so this is a kludgy search and replace
+          if(tf == 'index.html')
+            content = grunt.file.read(src).replace(/\<%= mask %\>/g, data.apptitle)
+          else
+            content = grunt.file.read(src).replace(/\<%= mask %\>/g, data.mask)
+            #content = grunt.template.process(grunt.file.read(src), {data: data})
+          grunt.file.write dest, content
+
+      grunt.log.writeln ""
+      grunt.log.oklns "Now you need to create a main view and nav html in src/views, and edit the generic main.ls and routes."
+
+
 
   # Compiles the app with non-optimized build settings and places the build artifacts in the dist directory.
   # Enter the following command at the command line to execute this build task:

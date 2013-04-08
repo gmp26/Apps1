@@ -1,0 +1,110 @@
+<div ng-controller="mathmoController" class="row-fluid">
+
+  <div class="btn-group btn-group-vertical">
+    <button class="btn" ng-click="openAbout()">About Mathmo</button>
+
+    <button class="btn" ng-click="openAddQ()">Add a question</button>
+  </div>
+
+  <div modal="addQOpen" close="closeAddQ()" options="addQOpts">
+
+    <div class="modal-header">
+      <h3>Add a question</h3>
+      <h4>on topic</h4>
+    </div>
+    <div class="modal-body">
+      <accordion close-others="false">
+        <accordion-group heading="{{group.title}}" ng-repeat="group in groups">
+          <div class="btn-group btn-group-vertical row-fluid">
+            <button class="btn span12" ng-repeat="id in group.topicIds">{{topicTitleById(id)}}</button>
+          </div>
+        </accordion-group>
+      </accordion>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-warning cancel" ng-click="closeAddQ()">Close</button>
+    </div>
+  </div>
+
+  <!-- Works, but not mobile friendly.
+      Could be a good desktop soloution however. 
+  <div class="dropdown span12">
+    <button class="btn dropdown-toggle btn-info">
+      Add a question  <i class="caret"></i>
+    </button>
+    <ul class="dropdown-menu">
+      <li ng-repeat="group in groups" class="dropdown-submenu">
+        <a tabindex="-1" href="#">{{group.title}}</a>
+        <ul class="dropdown-menu">
+          <li ng-repeat="id in group.topicIds">
+            <a href="#">{{topicTitleById(id)}}</a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+  -->
+
+  <div modal="aboutOpen" close="closeAbout()" options="aboutOpts">
+
+    <div class="modal-header">
+        <h4><img src="scripts/pubs/mathmo/img/icon.png"> About Mathmo</h4>
+    </div>
+    <div class="modal-body">
+       Mathmo is designed to give you extra practice.
+      <br>
+      <br>
+      On the <b>My Qs</b> tab you'll find your current set of questions under a list of topics. 
+      These stay with you till you clear them or delete them individually. They'll be the same questions even if you close Mathmo and return to it later.
+      Tap one of the question topics to see the question itself.
+      <br><br>
+      When you have completed a question, touch <b>Check Answer</b> to check your work and
+      reply to <b>Did you agree?</b>. You may need to do a little more work to see whether your answer really is the same or not.
+      The questions will change colour according to your answer. Red means 'I didn't agree'. Green means 'I agreed'. Black means 'Answer not checked'. 
+      <br><br>
+      On the <b>Add</b> tab you can generate 5 more random core, further or stats questions, or generate them singly on selected topics.
+
+      <h3>Updates</h3>
+      Mathmo is a web application, and should update itself when you reload the app after it has been updated on the server. 
+      <a href="http://nrich.maths.org/7088" target="_blank">Further info here</a>.
+
+      <h3>Credits</h3>
+      <p>
+      Syllabus hugging ideas: Stephen Hewson
+      </p>
+      <p>
+      Question and Answer generators:
+       Tom White, Edward Cree
+      </p>
+      <p>
+      <a href="http://github.com/gmp26/mathmo">Mobile Implementation:</a> Mike Pearson with contributions from
+      <a href="http://github.com/naush/mathmo">Li Hsuan</a>.</p>
+
+      <p>
+      The following have also been important in developing mathmo
+      </p><ul>
+      <li>
+      <a href="http://www.mobl-lang.org">Mobl-lang</a> by Zef Hemel, University of Delft.
+      </li>
+      <li>
+      The <a href="http://code.google.com/p/flot/">flot plotting library</a>
+      </li>
+
+      </ul>
+      <a href="http://www.mathjax.org/">
+        <img title="Powered by MathJax" src="http://www.mathjax.org/badge.gif" border="0" alt="Powered by MathJax">
+      </a>
+
+      <h3>License</h3>
+      <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-sa/3.0/88x31.png"></a><br><span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/InteractiveResource" property="dct:title" rel="dct:type">Mathmo</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://nrich.maths.org" property="cc:attributionName" rel="cc:attributionURL">NRICH Project, University of Cambridge</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.<br>Based on a work at <a xmlns:dct="http://purl.org/dc/terms/" href="http://github.com/gmp26/mathmo" rel="dct:source">github.com</a>.
+
+    </div>
+
+    <div class="modal-footer">
+        <button class="btn btn-warning cancel" ng-click="closeAbout()">Close</button>
+    </div>
+  </div>
+
+
+
+</div>

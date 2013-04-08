@@ -1,0 +1,11 @@
+Make a grunt task to create a new App.
+
+grunt init mathmo 
+
+it should:
+  create pubs/mathmo
+  create pubs/mathmo/controllers, services, directives,views
+  from generic code, copy
+    main.ls, routes.ls
+  create a main view in generics
+    mathmo.html

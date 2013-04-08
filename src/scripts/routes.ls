@@ -14,6 +14,7 @@ angular.module('app').config [
     .when '/prob9525', templateUrl: '/views/prob9525.html'
     .when '/boomerangs', templateUrl: '/views/boomerangs.html'
     .when '/frogs/:users/:id/:reds/:blues' templateUrl: '/views/frogs.html'
+    .when '/mathmo', templateUrl: '/views/mathmo.html'
     .otherwise redirectTo: '/tilted'
 
 ]

@@ -14,7 +14,7 @@ angular.module('app').controller 'spinGroupController', [
     # random model variable and determines whether it's spinning.
     #
     # They are configured by a named object provided by the 
-    # apinnerConfigs service.
+    # spinner.
     #
     $scope.addSpinner = (name, model) ->
 
