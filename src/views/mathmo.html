@@ -1,10 +1,55 @@
 <div ng-controller="mathmoController" class="row-fluid">
 
+  <div class="hero-unit">
+    <h1>Mathmo</h1>
+    <p>An exercise generator for A-level mathematics</p>
+    <form name="addQSetForm">
+
+      <div class="input-append">
+
+        <input type="text" name="name" placeholder="name" required ng-model="newName" ng-minlength="4"></input>
+
+        <button class="btn" ng-disabled="!addQSetForm.name.$valid"  ng-click="addQSet()"><i class="icon-plus"></i> Add</button>
+
+      </div>
+      <p><small>Enter an exercise name of 4 characters or more and press <code>Add</code> to start.</small></p>
+
+    </form>
+  </div>
+
+
+  <tabs>
+    <pane ng-repeat="pane in panes" heading="{{pane.name}}" active="pane.active">
+
+      <div class="btn-group">
+        <button class="btn btn-danger" ng-click="delQSet(pane.name)"><i class="icon-remove icon-white"></i> Delete {{pane.name}}</button>
+        <button class="btn" ng-click="openAddQ(pane)">Add a question</button>
+      </div>
+
+      <div ng-repeat="qa in pane.questions">
+        <h5>Q{{$index+1}}:{{qa.topic}}</h5>
+        <p ng-bind-html-unsafe="qa.q"></p>
+
+        <button class="btn btn-warning" ng-click="qa.toggle()"><i class="icon-chevron-down icon-white"></i> answer</button>
+        <div collapse="qa.isCollapsed">
+          <div class="well well-large" ng-bind-html-unsafe="qa.a"></div>
+        </div>
+      </div>
+
+    </pane>
+  </tabs>
+
+
+  <hr />
+
   <div class="btn-group btn-group-vertical">
     <button class="btn" ng-click="openAbout()">About Mathmo</button>
 
     <button class="btn" ng-click="openAddQ()">Add a question</button>
+
+    <button class="btn" ng-click="qStore.clear()">Clear all</button>
   </div>
+
 
   <div modal="addQOpen" close="closeAddQ()" options="addQOpts">
 
@@ -16,7 +61,7 @@
       <accordion close-others="false">
         <accordion-group heading="{{group.title}}" ng-repeat="group in groups">
           <div class="btn-group btn-group-vertical row-fluid">
-            <button class="btn span12" ng-repeat="id in group.topicIds" ng-click="getQA(id)">{{topicTitleById(id)}}</button>
+            <button class="btn span12" ng-repeat="id in group.topicIds" ng-click="appendQ(id)">{{topicTitleById(id)}}</button>
           </div>
         </accordion-group>
       </accordion>
@@ -25,35 +70,6 @@
         <button class="btn btn-warning cancel" ng-click="closeAddQ()">Close</button>
     </div>
   </div>
-
-  <div ng-repeat="qa in questions">
-
-    <h5>Question</h5>
-    <div>{{qa[0]}}</div>
-
-    <h5>Answer</h5>
-    <div>{{qa[1]}}</div>
-
-  </div>
-
-  <!-- Works, but not mobile friendly.
-      Could be a good desktop soloution however. 
-  <div class="dropdown span12">
-    <button class="btn dropdown-toggle btn-info">
-      Add a question  <i class="caret"></i>
-    </button>
-    <ul class="dropdown-menu">
-      <li ng-repeat="group in groups" class="dropdown-submenu">
-        <a tabindex="-1" href="#">{{group.title}}</a>
-        <ul class="dropdown-menu">
-          <li ng-repeat="id in group.topicIds">
-            <a href="#">{{topicTitleById(id)}}</a>
-          </li>
-        </ul>
-      </li>
-    </ul>
-  </div>
-  -->
 
   <div modal="aboutOpen" close="closeAbout()" options="aboutOpts">
 
