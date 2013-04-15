@@ -60,6 +60,15 @@ A certain teacher, Mr L I Detector, claims he can tell when students are lying a
                   <button class="btn" ng-click="delArc('accuse','A')"><i class="icon-arrow-down"></i>A</button>
                 </div>
               </div>
+
+              <!-- Always accuse spinner -->
+              <div d3-vis ng-click="$parent.go()"
+                fullWidth="170" fullHeight="170" woff="41"
+                margin="5"  
+                responsive="true" visible="false">
+                <div d3-spinner spinner="alwaysA" ng-model="model.alwaysA" style="position:relative">
+                </div>
+              </div>
             </div>
 
             <div class="span6">

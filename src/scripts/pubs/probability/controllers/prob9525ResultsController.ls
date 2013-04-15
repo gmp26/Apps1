@@ -3,23 +3,33 @@ angular.module('app').controller 'prob9525ResultsController', [
   ($scope) ->
     console.log "results controller scope = #{$scope.$id}"
 
-    $scope.spinnerConfigs = 
+    $scope.spinnerConfigs =
+      triggers:
+        excuse:
+          "T": \accuse
+          "L": \alwaysA
+
       excuse: # an array of spinner configurations
         * "label": \T
           "weight": 10
           "fill" : \#6af
+          
         * "label": \T
           "weight": 10
           "fill" : \#6af
+
         * "label": \T
           "weight": 10
           "fill" : \#6af
+
         * "label": \T
           "weight": 10
           "fill" : \#6af
+
         * "label": \T
           "weight": 10
           "fill" : \#6af
+ 
         * "label": \L
           "weight": 10
           "fill" : \#f88
@@ -48,11 +58,13 @@ angular.module('app').controller 'prob9525ResultsController', [
         * "label": \A
           "weight": 10
           "fill" : \#fe2
+        ...
 
 
     $scope.model =
       excuse: 0
       accuse: 0
+      alwaysA: 0
 
     $scope.summary = {}
     $scope.lessons = []
@@ -113,7 +125,7 @@ angular.module('app').controller 'prob9525ResultsController', [
     # watch for single spinner settle events
     $scope.$on "spinDone", (event, name, sectorIndex, label) ->
       event.stopPropagation()
-      decisions[name].push label
+      decisions[name].push label unless name = \alwaysA
 
     # and all spinners finished
     $scope.$on "spinGroupDone", (event) ->

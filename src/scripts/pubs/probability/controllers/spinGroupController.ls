@@ -29,12 +29,15 @@ angular.module('app').controller 'spinGroupController', [
         turns: 0
         snapAngle: Math.PI/1000
         random: 0      # model value normalised to [0..1]
+
       ($scope.spinStates ?= []).push spinState
 
       spinner =
         spinState: spinState
         name: name
         data: config.concat()
+        triggers: $scope.spinnerConfigs.triggers[name]
+
       normalise(spinner.data) 
       ($scope.spinner ?= []).push spinner
       return spinner
@@ -75,12 +78,22 @@ angular.module('app').controller 'spinGroupController', [
           randx = getResultAt d.data, spinState.random, 0
           #d.results.push(randx)
           $scope.$emit "spinDone", d.name, randx, d.data[randx].label
-          console.log "result[",d.name,"]= ", randx, " -> ", d.data[randx].label
 
+          nextSpinner = if d.triggers? then d.triggers[d.data[randx].label] else void
+          console.log "spin: ", nextSpinner + " next"
+
+          if nextSpinner?
+            nextSpinState = ($scope.spinner.filter (.name == nextSpinner))[0].spinState
+            t := 0
+            startOneSpin nextSpinState
+
+
+          /*
           # check whether we should start the next spinner
           if sequential && i+1 < $scope.spinStates.length
             t := 0
             startOneSpin $scope.spinStates[i+1]
+          */
 
     $scope.speedCheck = 
       value: false
