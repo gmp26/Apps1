@@ -6,6 +6,9 @@ angular.module('app').factory 'questionStore', [
     localStore = $window.localStorage
 
     # Clear the question store
+    #
+    # All data is stored in localStore.qSets - keyed by exercise name.
+    #
     # NB we store question topicIds and seeds, trusting that
     # given the same seed we can regenerate the same question.
     #

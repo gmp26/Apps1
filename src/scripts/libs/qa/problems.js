@@ -1100,9 +1100,8 @@ function makeModulus()
 		var aa=Math.abs(a);
 		var l=rand(-aa-6, -aa-2);
 		var r=rand(aa+2, aa+6);
-		var qString="Sketch the graph of \\(|"+a+"-|x||\\) for \\("+l+"\\leq{x}\\leq"+r+"\\).";
-		var aString='%GRAPH%';
-		fn=function drawIt(parms)
+		var qString = "Sketch the graph of \\(|"+a+"-|x||\\) for \\("+l+"\\leq{x}\\leq"+r+"\\).";
+		makeModulus.fn=function drawIt(parms)
 		{
 			var d1 = [];
 			var n=0;
@@ -1116,8 +1115,7 @@ function makeModulus()
 			//$.plot($("#graph"), [d1]);
 			return [d1];
 		};
-		parms=[a, l, r];
-		data = JSON.stringify(fn(parms));
+		aString = '%GRAPH%' + JSON.stringify([a, l, r]);
 	}
 	else
 	{
@@ -1127,8 +1125,7 @@ function makeModulus()
 		l=rand(-xa-6, -xa-2);
 		r=rand(xa+2, xa+6);
 		qString="Sketch the graph of \\(("+a[0]+(s[0]?'+':'-')+"|x|)("+a[1]+(s[1]?'+':'-')+"|x|)\\) for \\("+l+"\\leq{x}\\leq"+r+"\\).";
-		aString='%GRAPH%';
-		fn=function drawIt(parms)
+		makeModulus.fn=function drawIt(parms)
 		{
 			var a=parms[0];
 			var s=parms[1];
@@ -1146,10 +1143,9 @@ function makeModulus()
 			//$.plot($("#graph"), [d1]);
 			return [d1];
 		};
-		parms=[a,s,l,r];
-		data = JSON.stringify(fn(parms));
+		aString = '%GRAPH%' + JSON.stringify([a, s, l, r]);
 	}
-	var qa=[qString,aString,data];
+	var qa=[qString,aString];
 	return qa;
 }
 
@@ -1172,8 +1168,7 @@ function makeTransformation()
 	var r=l+rand(4, 8);
 	var qString="Let \\(f(x)="+fnn[which].replace(/z/g, 'x')+"\\). Sketch the graphs of \\(y=f(x)\\) and \\(y="+p.write("f("+q.write()+")")+"\\) for \\("+l+((which==0&&l==0)?" < ":"\\leq ")+"x \\leq "+r+"\\).";
 	//console.log(qString);
-	var aString='%GRAPH%';
-	fn=function drawIt(parms)
+	makeTransformation.fn=function drawIt(parms)
 	{
 		var p=parms[0];
 		var q=parms[1];
@@ -1200,9 +1195,8 @@ function makeTransformation()
 		//$.plot($("#graph"), [d1, d2]);
 		return [d1, d2];
 	};
-	parms=[p,q,fnf[which],l,r];
-	data = JSON.stringify(fn(parms));
-	var qa=[qString,aString,data];
+	var aString='%GRAPH%' + JSON.stringify([p,q,fnf[which],l,r]);
+	var qa=[qString,aString];
 	return qa;
 }
 
@@ -1219,8 +1213,7 @@ function makeComposition()
 	var l=rand(-4, 0);
 	var r=rand(Math.max(l+5, 2), 8);
 	var qString="Let \\(f(x)="+fnn[which[0]].replace(/z/g, 'x')+", g(x)="+fnn[which[1]].replace(/z/g, 'x')+".\\) Sketch the graph of \\(y=f(g(x))\\) (where it exists) for \\("+l+"\\leq{x}\\leq"+r+"\\) and \\(-12\\leq{y}\\leq12.\\)";
-	var aString='%GRAPH%';
-	fn=function drawIt(parms)
+	makeComposition.fn=function drawIt(parms)
 	{
 		var f=parms[0];
 		var g=parms[1];
@@ -1243,9 +1236,9 @@ function makeComposition()
 		//$.plot($("#graph"), [d1]);
 		return [d1];
 	};
-	parms=[fnf[which[0]], fnf[which[1]], p, l, r];
-	data = JSON.stringify(fn(parms));
-	var qa=[qString,aString,data];
+
+	var aString='%GRAPH%'+JSON.stringify([fnf[which[0]], fnf[which[1]], p, l, r]);
+	var qa=[qString,aString];
 	return qa;
 }
 
@@ -1260,8 +1253,7 @@ function makeParametric()
 	var fn=0;
 	var data="";
 	var qString="Sketch the curve in the \\(xy\\) plane given by \\(x="+fnn[which[0]].replace(/z/g, 't')+", y="+fnn[which[1]].replace(/z/g, 't')+". t\\) is a real parameter which ranges from \\("+(which[0]&&which[1]?"-10":"0")+" \\mbox{ to } 10.\\)";
-	var aString='%GRAPH%';
-	fn=function drawIt(parms)
+	makeParametric.fn=function drawIt(parms)
 	{
 		var f=parms[0];
 		var g=parms[1];
@@ -1284,9 +1276,8 @@ function makeParametric()
 		//$.plot($("#graph"), [d1]);
 		return [d1];
 	};
-	parms=[fnf[which[0]], fnf[which[1]], p, (which[0]&&which[1]?-10:0)];
-	data = JSON.stringify(fn(parms));
-	var qa=[qString,aString,data];
+	aString = '%GRAPH%' + JSON.stringify([fnf[which[0]], fnf[which[1]], p, (which[0]&&which[1]?-10:0)]);
+	var qa=[qString,aString];
 	return qa;
 }
 
@@ -1299,8 +1290,7 @@ function makeImplicitFunction()
 		var f=new frac(a[0], a[1]);
 		var data="";
 		var qString="Sketch the curve in the \\(xy\\) plane given by \\(y="+ascoeff(n)+"x^{"+f.write()+"}\\)";
-		var aString='%GRAPH%';
-		var fn=function drawIt(parms)
+		mIF1.fn=function drawIt(parms)
 		{
 			var f=parms[0];
 			var n=parms[1];
@@ -1321,9 +1311,8 @@ function makeImplicitFunction()
 			//$.plot($("#graph"), [d1]);
 			return [d1];
 		};
-		var parms=[f, n];
-		data = JSON.stringify(fn(parms));
-		var qa=[qString,aString,data];
+		aString = '%GRAPH%' + JSON.stringify([f,n]);
+		var qa=[qString,aString];
 		return qa;
 	}
 	function mIF2()
@@ -1333,8 +1322,7 @@ function makeImplicitFunction()
 		var f=new frac(a[0], a[1]);
 		var data="";
 		var qString="Sketch the curve in the \\(xy\\) plane given by \\("+ascoeff(a[0])+"y"+(a[1]>0?"+":"")+ascoeff(a[1])+"x"+(n>0?"+":"")+n+"=0\\)";
-		var aString='%GRAPH%';
-		var fn=function drawIt(parms)
+		mIF2.fn=function drawIt(parms)
 		{
 			var f=parms[0];
 			var n=parms[1];
@@ -1348,8 +1336,8 @@ function makeImplicitFunction()
 			return [d1];
 		};
 		var parms=[f, n];
-		data = JSON.stringify(fn(parms));
-		var qa=[qString,aString,data];
+		var aString = '%GRAPH%' + JSON.stringify([f, n]);
+		var qa=[qString,aString];
 		return qa;
 	}
 	function mIF3()
@@ -1357,8 +1345,8 @@ function makeImplicitFunction()
 		var data="";
 		var a=distrandnz(2, 2, 5);
 		var qString="Sketch the curve in the \\(xy\\) plane given by \\(\\frac{x^2}{"+(a[0]*a[0])+"} + \\frac{y^2}{"+(a[1]*a[1])+"}=1\\)";
-		var aString='%GRAPH%';
-		var fn=function drawIt(parms)
+
+		mIF3.fn=function drawIt(parms)
 		{
 			var d1 = [];
 			for(var i=-1;i<=1; i+=0.005)
@@ -1370,8 +1358,7 @@ function makeImplicitFunction()
 			//$.plot($("#graph"), [d1]);
 			return [d1];
 		};
-		var parms=a;
-		data = JSON.stringify(fn(parms));
+		var aString = '%GRAPH%' + JSON.stringify(a);
 		var qa=[qString,aString,data];
 		return qa;
 	}
@@ -1742,8 +1729,7 @@ function makePolarSketch()
 	var a=rand(0, 3);
 	var b=rand(1, (which===3?1:5));
 	var qString="Sketch the curve given in polar co-ordinates by \\(r="+(a?a+"+":"")+fnn[which].replace(/z/g, ascoeff(b)+'\\theta')+"\\) (where \\(\\theta\\) runs from \\(-\\pi\\) to \\(\\pi\\)).";
-	var aString='%GRAPH%';
-	fn=function drawIt(parms)
+	makePolarSketch.fn=function drawIt(parms)
 	{
 		var f=parms[0];
 		var d1 = [];
@@ -1766,10 +1752,8 @@ function makePolarSketch()
 		return [d1];
 		//$.plot($("#graph"), [d1]);
 	};
-	parms=[fnf[which], a, b];
-
-	data = JSON.stringify(fn(parms));
-	var qa=[qString,aString,data];
+	var aString='%GRAPH%' + JSON.stringify([fnf[which], a, b])
+	var qa=[qString,aString];
 	return qa;
 }
 
