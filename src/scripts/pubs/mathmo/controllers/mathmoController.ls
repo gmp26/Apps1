@@ -32,17 +32,18 @@
       Math.seedrandom(name+topicId+pane.questions.length)
       maker = config.topicMakerById topicId
       qa = maker()
+      #if qa[1] == '%GRAPH%'
+
       console.log "q=", qa[0]
       console.log "a=", qa[1]
+
       pane.questions.push {
         topic: config.topicById(topicId)[0]
         q:qa[0]
         a:qa[1]
         isCollapsed: true
-        toggleText: "Show answer"
         toggle: ->
           @isCollapsed = !@isCollapsed
-          @toggleText = (if @isCollapsed then "Show" else "Hide") + " answer"
       }
       $scope.renderMath()
      
