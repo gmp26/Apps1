@@ -4,6 +4,11 @@ angular.module('app').controller 'prob9546ResultsController', [
     console.log "results controller scope = #{$scope.$id}"
 
     $scope.spinnerConfigs = 
+      triggers:
+        goal1:
+          "Y": \goal2
+          "B": \goal2
+
       goal1: # an array of spinner configurations
         * "label": \Y
           "weight": 10

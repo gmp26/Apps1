@@ -25,6 +25,8 @@ angular.module('app').factory 'questionStore', [
       # clear it unless it's already initialised for mathmo
       clear() unless qSets?.mathmo
 
+    init()
+
     # append a question
     appendQ = (name, topicId) ->
       qSets = JSON.parse localStore.qSets

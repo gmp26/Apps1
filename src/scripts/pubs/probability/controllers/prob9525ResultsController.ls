@@ -125,7 +125,7 @@ angular.module('app').controller 'prob9525ResultsController', [
     # watch for single spinner settle events
     $scope.$on "spinDone", (event, name, sectorIndex, label) ->
       event.stopPropagation()
-      decisions[name].push label unless name = \alwaysA
+      decisions[name].push label unless name == \alwaysA
 
     # and all spinners finished
     $scope.$on "spinGroupDone", (event) ->
