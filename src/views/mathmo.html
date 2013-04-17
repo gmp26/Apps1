@@ -31,9 +31,20 @@
         <p ng-bind-html-unsafe="qa.q"></p>
 
         <button class="btn btn-warning" ng-click="qa.toggle()"><i class="icon-chevron-down icon-white"></i> answer</button>
+ 
         <div collapse="qa.isCollapsed">
-          <div class="well well-large" ng-bind-html-unsafe="qa.a"></div>
+           <div ng-switch on="qa.isGraph()" >
+            <div ng-switch-when="html">
+              <div class="well well-large" ng-bind-html-unsafe="qa.a"></div>
+            </div>
+            <div ng-switch-when="graph">
+              Apply {{qa.graph}} </br>
+              To {{qa.a}}
+            </div>
+            <span ng-switch-default>default</span>
+          </div>
         </div>
+
       </div>
 
     </pane>

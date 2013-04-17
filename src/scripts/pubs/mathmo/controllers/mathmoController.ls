@@ -39,11 +39,14 @@
 
       pane.questions.push {
         topic: config.topicById(topicId)[0]
+        graph: if maker.fn? then maker.fn.toString() else 'no fn'
         q:qa[0]
         a:qa[1]
         isCollapsed: true
         toggle: ->
           @isCollapsed = !@isCollapsed
+        isGraph: ->
+          if @a.indexOf('%GRAPH%') == 0 then 'graph' else 'html'
       }
       $scope.renderMath()
      

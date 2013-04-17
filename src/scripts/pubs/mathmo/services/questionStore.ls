@@ -21,12 +21,13 @@ angular.module('app').factory 'questionStore', [
     # constructor
     init = ->
       try
-        qSets = JSON.parse @localStore.qSets
+        qSets = JSON.parse localStore.qSets
       catch e
         qSets = {}
 
       # clear it unless it's already initialised for mathmo
-      clear() unless qSets?.mathmo
+      if not qSets? or not qSets.mathmo
+        clear()
 
     init()
 
