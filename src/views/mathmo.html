@@ -38,8 +38,7 @@
               <div class="well well-large" ng-bind-html-unsafe="qa.a"></div>
             </div>
             <div ng-switch-when="graph">
-              Apply {{qa.graph}} </br>
-              To {{qa.a}}
+              {{qa.graphData()}}
             </div>
             <span ng-switch-default>default</span>
           </div>

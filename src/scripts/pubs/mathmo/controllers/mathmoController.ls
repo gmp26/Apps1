@@ -26,13 +26,13 @@
 
     $scope.qStore = qStore
 
+    gPrefix = '%GRAPH%'
 
     retrieveQ = (topicId, pane) ->
       name = pane.name
       Math.seedrandom(name+topicId+pane.questions.length)
       maker = config.topicMakerById topicId
       qa = maker()
-      #if qa[1] == '%GRAPH%'
 
       console.log "q=", qa[0]
       console.log "a=", qa[1]
@@ -42,14 +42,18 @@
         graph: if maker.fn? then maker.fn.toString() else 'no fn'
         q:qa[0]
         a:qa[1]
+        f:qa[2]
+        g:qa[3]
         isCollapsed: true
         toggle: ->
           @isCollapsed = !@isCollapsed
         isGraph: ->
-          if @a.indexOf('%GRAPH%') == 0 then 'graph' else 'html'
+          if @a.indexOf(gPrefix) == 0 then 'graph' else 'html'
+        graphData: ->
+          @f(@g)
       }
       $scope.renderMath()
-     
+    
     $scope.appendQ = (topicId, pane = null) ->
       if pane == null
         pane = $scope.activePane
