@@ -372,14 +372,14 @@ module.exports = (grunt) ->
         ]
         tasks: 'express-restart:livereload'
 
-    # Runs unit tests using testacular
-    testacular:
+    # Runs unit tests using karma
+    karma:
       unit:
         options:
           autoWatch: true
           browsers: ['Chrome']
           colors: true
-          configFile: './testacular.conf.js'
+          configFile: './karma.conf.js'
           keepalive: true
           port: 8081
           reporters: ['progress']
@@ -412,10 +412,10 @@ module.exports = (grunt) ->
   # Recommended watcher for LiveReload + Express.
   grunt.loadNpmTasks 'grunt-regarde'
 
-  # Register grunt tasks supplied by grunt-testacular.
+  # Register grunt tasks supplied by grunt-karma.
   # Referenced in package.json.
-  # https://github.com/Dignifiedquire/grunt-testacular
-  grunt.loadNpmTasks 'grunt-testacular'
+  # https://github.com/Dignifiedquire/grunt-karma
+  grunt.loadNpmTasks 'grunt-karma'
 
 
   # Compiles the app with non-optimized build settings, places the build artifacts in the dist directory, and runs unit tests.
@@ -423,7 +423,7 @@ module.exports = (grunt) ->
   # grunt test
   grunt.registerTask 'test', [
     'default'
-    'testacular'
+    'karma'
   ]
 
   # Starts a web server
