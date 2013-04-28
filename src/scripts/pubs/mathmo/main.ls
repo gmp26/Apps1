@@ -55,7 +55,7 @@ require {
     'pubs/mathmo/services/config':
       deps:
         * 'app'
-        'libs/qa/problems'
+          'libs/qa/problems'
 
     'pubs/mathmo/services/questionStore':
       deps:

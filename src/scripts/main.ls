@@ -54,13 +54,19 @@ require {
 
     'pubs/mathmo/services/config':
       deps:
-        * 'libs/qa/problems'
-        ...
+        * 'app'
+          'libs/qa/problems'
+
+    'pubs/mathmo/services/questionStore':
+      deps:
+        * 'app'
+          'libs/seedrandom'
 
     'pubs/mathmo/controllers/mathmoController':
       deps:
         * 'app'
           'pubs/mathmo/services/config'
+          'pubs/mathmo/services/questionStore'
 
     'controllers/appController':
       deps:
