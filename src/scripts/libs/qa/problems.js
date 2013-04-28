@@ -1288,7 +1288,7 @@ function makeParametric()
 		return [d1];
 	};
 	aString = '%GRAPH%';
-	var qa=[qString,aString, fn ,[fnf[which[0]], fnf[which[1]], p, (which[0]&&which[1]?-10:0)]];
+	var qa=[qString,aString, drawIt ,[fnf[which[0]], fnf[which[1]], p, (which[0]&&which[1]?-10:0)]];
 	return qa;
 }
 
