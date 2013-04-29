@@ -68,6 +68,14 @@ require {
           'pubs/mathmo/services/config'
           'pubs/mathmo/services/questionStore'
 
+    'pubs/mathmo/directives/mathmoPlot':
+      deps:
+        * 'app'
+          'pubs/mathmo/controllers/mathmoController'
+          'directives/d3Vis'
+          'services/d3LineChart'
+          'libs/d3.v3'
+
     'controllers/appController':
       deps:
         * 'app'
@@ -146,6 +154,11 @@ require {
       deps:
         * 'app'
         ...
+    'services/d3LineChart':
+      deps:
+        * 'app'
+        'libs/d3.v3'
+        ...
     'bootstrap':
       deps:
         * 'app'
@@ -190,6 +203,7 @@ require {
     'pubs/probability/directives/d3Spinner'
     'pubs/tilted/directives/d3TiltedSquare'
     'pubs/mathmo/controllers/mathmoController'
+    'pubs/mathmo/directives/mathmoPlot'
     'directives/appVersion'
     'routes'
     'views'

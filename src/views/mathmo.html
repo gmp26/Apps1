@@ -18,6 +18,7 @@
   </div>
 
 
+
   <tabs>
     <pane ng-repeat="pane in panes" heading="{{pane.name}}" active="pane.active">
 
@@ -38,7 +39,17 @@
               <div class="well well-large" ng-bind-html-unsafe="qa.a"></div>
             </div>
             <div ng-switch-when="graph">
+
               {{qa.graphData()}}
+
+              <div d3-vis
+                fullWidth="400" fullHeight="400" woff="41"
+                margin="20"  
+                responsive="false" visible="false">
+                <div mathmo-plot data="qa.graphData()" style="position:relative">Plot</div>
+              </div>
+
+
             </div>
             <span ng-switch-default>default</span>
           </div>
