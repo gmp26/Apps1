@@ -104,6 +104,8 @@
             when 4 then [obj.top, obj.right, obj.bottom, obj.left] = list
         return obj
 
+      scope.woff = scope.defaultWoff
+
       scope.svgResize = (ww) ->
         w = ww - @woff
         @outerWidth = ~~@fullWidth
@@ -148,11 +150,11 @@
         scope.fullWidth = if val? then ~~val else scope.defaultWidth
 
       scope.$watch 'fullheight', (val) ->
-        scope.fullHeight = if val? then ~~val else scope.defaultHeight
+        scope.fullHeight = if val? then +val else scope.defaultHeight
 
       scope.$watch 'woff', (val) ->
-        scope.woff = if val? then ~~val else scope.defaultWoff
-
+        scope.woff = if val? then +val else scope.defaultWoff
+        
       scope.$watch 'responsive', (val) ->
         win = angular.element($window)
         if(val? && val != "false" && win?)
@@ -165,8 +167,6 @@
       scope.$watch 'padding', (val) ->
         if val?
           scope._padding = parseBorderList(val)
-
-
 
 
       #
@@ -186,7 +186,7 @@
         scope.container.append("rect")
           .attr("class", "inner")
 
-        scope.svgResize $window.innerWidth
+        scope.svgResize.call scope, $window.innerWidth
 
         scope.$broadcast "draw", scope.container, scope.width, scope.height
 

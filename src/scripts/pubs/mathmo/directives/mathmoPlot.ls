@@ -12,6 +12,8 @@ angular.module('app').directive 'mathmoPlot' [
       savedWidth = 400
       savedHeight = 300
 
+      chart = {}
+
       draw = (event, container, width, height) ->
         console.log 'draw'
 
@@ -24,7 +26,7 @@ angular.module('app').directive 'mathmoPlot' [
         data = getData(scope.$parent)
         console.log data
 
-        chart = d3LineChart().width(width).height(height)
+        chart := d3LineChart().width(width).height(height)
           .x((d) -> d[0])
           .y((d) -> d[1])
 
@@ -36,6 +38,8 @@ angular.module('app').directive 'mathmoPlot' [
         savedContainer := container
         savedWidth := width
         savedHeight := height
+
+        chart.width(width).height(height)
 
 
       # listen for redraw events

@@ -20,10 +20,13 @@ angular.module('app').factory 'd3LineChart', ->
         )]).range [height - margin.top - margin.bottom, 0]
         
         # Select the svg element, if it exists.
-        svg = d3.select(this).selectAll("svg").data([data])
-        
+        svg = d3.select(this).selectAll("g.plot")
+        .data([data])
+
+        gPlotEnter = svg.enter().append("g").attr "class", "plot"
+
         # Otherwise, create the skeletal chart.
-        gEnter = svg.enter().append("svg").append("g")
+        gEnter = gPlotEnter.append("g")
         gEnter.append("path").attr "class", "line"
         gEnter.append("g").attr "class", "x axis"
         
@@ -46,14 +49,15 @@ angular.module('app').factory 'd3LineChart', ->
     # The x-accessor for the path generator; yScale ∘ yValue.
     Y = (d) ->
       yScale d[1]
+
     margin =
       top: 20
       right: 20
       bottom: 20
       left: 20
 
-    width = 400
-    height = 300
+    width = 300
+    height = 250
     xValue = (d) ->
       d[0]
 
@@ -72,6 +76,7 @@ angular.module('app').factory 'd3LineChart', ->
     chart.width = (_) ->
       return width  unless arguments.length
       width = _
+
       chart
 
     chart.height = (_) ->
