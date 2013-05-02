@@ -12,7 +12,8 @@ angular.module('app').directive 'mathmoPlot' [
       savedWidth = 400
       savedHeight = 300
 
-      chart = {}
+      chart = null
+      data = null
 
       draw = (event, container, width, height) ->
         console.log 'draw'
@@ -23,7 +24,7 @@ angular.module('app').directive 'mathmoPlot' [
 
         # since we're nested in d3Vis scope, must evaluate attributes on parent scope
         getData = $parse(attrs.data)
-        data = getData(scope.$parent)
+        data := getData(scope.$parent)
         console.log data
 
         chart := d3LineChart().width(width).height(height)
@@ -40,6 +41,7 @@ angular.module('app').directive 'mathmoPlot' [
         savedHeight := height
 
         chart.width(width).height(height)
+        container.datum(data[0]).call(chart)
 
 
       # listen for redraw events
