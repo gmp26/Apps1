@@ -2,50 +2,51 @@ angular.module('app').directive 'mathmoPlot' [
   '$parse'
   'd3LineChart'
   ($parse, d3LineChart) ->
-    restrict: 'A'
-    link: (scope, element, attrs) ->
 
-      console.log 'mathmoPlot'
+    return
+      restrict: 'A'
+      link: (scope, element, attrs) ->
 
-      # remember last draw space
-      savedContainer = null
-      savedWidth = 400
-      savedHeight = 300
+        console.log 'mathmoPlot'
 
-      chart = null
-      data = null
+        # remember last draw space
+        savedContainer = null
+        savedWidth = 400
+        savedHeight = 300
 
-      draw = (event, container, width, height) ->
-        console.log 'draw'
+        chart = null
+        data = null
 
-        savedContainer := container
-        savedWidth := width
-        savedHeight := height
+        draw = (event, container, width, height) ->
+          console.log 'draw'
 
-        # since we're nested in d3Vis scope, must evaluate attributes on parent scope
-        getData = $parse(attrs.data)
-        data := getData(scope.$parent)
-        console.log data
+          savedContainer := container
+          savedWidth := width
+          savedHeight := height
 
-        chart := d3LineChart().width(width).height(height)
-          .x((d) -> d[0])
-          .y((d) -> d[1])
+          # since we're nested in d3Vis scope, must evaluate attributes on parent scope
+          getData = $parse(attrs.data)
+          data := getData(scope.$parent)
+          console.log data
 
-        container.datum(data[0]).call(chart)
+          chart := d3LineChart().width(width).height(height)
+            .x((d) -> d[0])
+            .y((d) -> d[1])
 
-      resize = (event, container = savedContainer, width = savedWidth, height = savedHeight) ->
-        console.log 'resize'
+          container.datum(data[0]).call(chart)
 
-        savedContainer := container
-        savedWidth := width
-        savedHeight := height
+        resize = (event, container = savedContainer, width = savedWidth, height = savedHeight) ->
+          console.log 'resize'
 
-        chart.width(width).height(height)
-        container.datum(data[0]).call(chart)
+          savedContainer := container
+          savedWidth := width
+          savedHeight := height
 
+          chart.width(width).height(height)
+          container.datum(data[0]).call(chart)
 
-      # listen for redraw events
-      scope.$on 'draw', draw
-      scope.$on 'resize', resize
+        # listen for redraw events
+        scope.$on 'draw', draw
+        scope.$on 'resize', resize
 
 ]
