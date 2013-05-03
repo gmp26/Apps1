@@ -40,13 +40,15 @@
             </div>
             <div ng-switch-when="graph">
 
-
+              <div ng-repeat="alert in alerts">
+                <alert type="alert.type" close="closeAlert($index)">{{alert.msg}}</alert>
+              </div>
               <div d3-vis
                 fullWidth="350" fullHeight="300"
                 margin="0 0 20 0"
                 padding="10 10 25 35"
                 responsive="true" visible="false">
-                <div mathmo-plot alerts="{{alerts}}" data="qa.graphData()" style="position:relative"></div>
+                <div mathmo-plot data="qa.graphData()" style="position:relative"></div>
               </div>
 
               <!--{{qa.graphData()}}-->

@@ -114,9 +114,8 @@
     # Warning dialogs
     $scope.alerts =
       * type: "warning"
-        msg: "Mathmo plots rather than sketches."
-      * type: "warning"
-        msg: "Significant features are not labelled."
+        msg: "Your own sketch should label significant features of the graph."
+      ...
 
     $scope.closeAlert = (index) ->
       $scope.alerts.splice index, 1
