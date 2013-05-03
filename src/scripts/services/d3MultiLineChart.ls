@@ -34,6 +34,8 @@ angular.module('app').factory 'd3MultiLineChart', ->
         # Select the plot element, if it exists, and join it with the data series
         gplot = d3.select(this).selectAll("g.plot")
         .data(series)
+        .attr "width", width
+        .attr "height", height
         #.data([data])
 
         gPlotEnter = gplot.enter().append("g").attr "class", "plot"
@@ -44,11 +46,6 @@ angular.module('app').factory 'd3MultiLineChart', ->
         gSeries = gplot.selectAll ".line"
         .data (d,i) -> d
         .enter().append("g").attr "class", "line"
-
-        # Update the plot space. 
-        gplot
-        .attr "width", width
-        .attr "height", height
                 
         # Update the line path. Note that isNaN(null) is weirdly false in javascript.
         line.defined (d) -> !(d[0]==null or d[1]==null or isNaN(d[0]) or isNaN(d[1]))

@@ -44,12 +44,12 @@
               <div d3-vis
                 fullWidth="350" fullHeight="300"
                 margin="0 0 20 0"
-                padding="10 10 25 30"
-                responsive="true" visible="true">
-                <div mathmo-plot data="qa.graphData()" style="position:relative">Plot</div>
+                padding="10 10 25 35"
+                responsive="true" visible="false">
+                <div mathmo-plot alerts="{{alerts}}" data="qa.graphData()" style="position:relative"></div>
               </div>
 
-              {{qa.graphData()}}
+              <!--{{qa.graphData()}}-->
 
             </div>
             <span ng-switch-default>default</span>

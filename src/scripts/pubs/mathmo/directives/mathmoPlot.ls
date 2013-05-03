@@ -2,9 +2,19 @@ angular.module('app').directive 'mathmoPlot' [
   '$parse'
   'd3LineChart'
   ($parse, d3LineChart) ->
-
     return
       restrict: 'A'
+      /*
+      controller: [
+        '$scope'
+        '$element'
+        (scope, element) ->
+          html = "<div style='width:100%;height:40px'>"
+          scope.$parent.alerts.forEach (alert, i) ->
+            html += "<div alert type='#{alert.type}' close='closeAlert(#i)'>#{alert.msg}</div>"
+          element.html html+'</div>'
+      ]
+      */
       link: (scope, element, attrs) ->
 
         console.log 'mathmoPlot'

@@ -111,5 +111,15 @@
       backdropFade: true
       dialogFade:true
 
+    # Warning dialogs
+    $scope.alerts =
+      * type: "warning"
+        msg: "Mathmo plots rather than sketches."
+      * type: "warning"
+        msg: "Significant features are not labelled."
+
+    $scope.closeAlert = (index) ->
+      $scope.alerts.splice index, 1
+
 ]
 

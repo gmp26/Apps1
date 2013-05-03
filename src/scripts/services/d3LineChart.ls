@@ -16,6 +16,8 @@ angular.module('app').factory 'd3LineChart', ->
         # Select the svg element, if it exists.
         gplot = d3.select(this).selectAll("g.plot")
         .data([data])
+        .attr "width", width
+        .attr "height", height
 
         gPlotEnter = gplot.enter().append("g").attr "class", "plot"
 
@@ -25,11 +27,6 @@ angular.module('app').factory 'd3LineChart', ->
         gPlotEnter.append("g").attr "class", "x axis"
         gPlotEnter.append("g").attr "class", "y axis"
         
-        # Update the plot space. 
-        gplot
-        .attr "width", width
-        .attr "height", height
-                
         # Update the line path. 
         gplot.select(".line").attr "d", line
         
