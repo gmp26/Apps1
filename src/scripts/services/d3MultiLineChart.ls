@@ -22,6 +22,10 @@ angular.module('app').factory 'd3MultiLineChart', ->
       return extent
 
     chart = (selection) ->
+
+
+
+
       selection.each (series) ->
         
         # Convert data to standard representation greedily;
@@ -37,14 +41,12 @@ angular.module('app').factory 'd3MultiLineChart', ->
         yScale.domain(yExtent).range [height, 0]
         
         # Select the plot element, if it exists, and join it with the data series
-        container = d3.select()
         gplot = d3.select(this).selectAll("g.plot")
         .data(series)
         .attr "width", width
         .attr "height", height
-        #.data([data])
 
-        selection.append("g").attr "class", "x axis"
+        gplot.append("g").attr "class", "x axis"
         gplot.append("g").attr "class", "y axis"
 
         gPlotEnter = gplot.enter().append("g").attr "class", "plot"

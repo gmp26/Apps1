@@ -326,8 +326,12 @@ module.exports = (grunt) ->
         ]
       scripts:
         files: [
-          './src/scripts/**'
-          './test/scripts/**'
+          './src/scripts/**/*.coffee'
+          './src/scripts/**/*.ls'
+          './src/scripts/**/*.js'
+          './test/scripts/**/*.coffee'
+          './test/scripts/**/*.ls'
+          './test/scripts/**/*.js'
         ]
         tasks: [
           'coffee:scripts'
