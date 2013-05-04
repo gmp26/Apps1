@@ -158,7 +158,6 @@ require {
       deps:
         * 'app'
         'libs/d3.v3'
-        ...
     'bootstrap':
       deps:
         * 'app'
