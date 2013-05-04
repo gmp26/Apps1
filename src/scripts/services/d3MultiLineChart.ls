@@ -13,6 +13,7 @@ angular.module('app').factory 'd3MultiLineChart', ->
 
     # Return the total extent of data in all the series for a given accessor function
     # Used to define the axis ranges
+    yMax = 10
     seriesExtent = (series, accessor) ->
       extent = [1e12,-1e12]
       series.forEach (data) ->
@@ -22,9 +23,6 @@ angular.module('app').factory 'd3MultiLineChart', ->
       return extent
 
     chart = (selection) ->
-
-
-
 
       selection.each (series) ->
         
@@ -38,6 +36,8 @@ angular.module('app').factory 'd3MultiLineChart', ->
         
         # Update the y-scale.
         yExtent = seriesExtent series, (d) -> d[1]
+        yExtent[0] = -yMax if yExtent[0] < -yMax
+        yExtent[1] = yMax if yExtent[1] > yMax
         yScale.domain(yExtent).range [height, 0]
         
         # Select the plot element, if it exists, and join it with the data series
@@ -46,19 +46,36 @@ angular.module('app').factory 'd3MultiLineChart', ->
         .attr "width", width
         .attr "height", height
 
-        gplot.append("g").attr "class", "x axis"
-        gplot.append("g").attr "class", "y axis"
-
         gPlotEnter = gplot.enter().append("g").attr "class", "plot"
-        gPlotEnter.append("path").attr "class", "line"
-        
-        # Update the line path. 
-        gplot.select(".line").attr "d", line
-                
+
+        firstPlot = gPlotEnter.filter (d, i) -> i == 0
+        firstPlot.append('clipPath')
+        .attr "id" "clip"
+        .append("rect")
+        .attr "width" width
+        .attr "height" height
+
+        gPlotEnter.append("path")
+        .attr "class", "line"
+        .style "stroke", (d, i)->color(i)
+        .attr "clip-path", 'url(#clip)'
+
+        # We are plotting all series on the same axes
+        firstPlot.append("g").attr "class", "x axis"
+        firstPlot.append("g").attr "class", "y axis"
+
         # Update the axes.
         gplot.select(".x.axis").attr("transform", "translate(0," + yScale.range()[0] + ")").call xAxis
         gplot.select(".y.axis").attr("transform", "translate(" + xScale.range()[0] + ", 0)").call yAxis
+        
+        # Update the clip path
+        gplot.select('#clip rect')
+        .attr "width" width
+        .attr "height" height
 
+        # Update the line path. 
+        gplot.select(".line").attr "d", line
+                
     
     # The x-accessor for the path generator; xScale ∘ xValue.
     X = (d) -> xScale d[0]
@@ -74,13 +91,13 @@ angular.module('app').factory 'd3MultiLineChart', ->
     xScale = d3.scale.linear()
     yScale = d3.scale.linear()
     xAxis = d3.svg.axis().scale(xScale).orient("bottom").tickSize(6, 0)
-    yAxis = d3.svg.axis().scale(yScale).orient("left").tickSize(6,0)
-
+    yAxis = d3.svg.axis().scale(yScale).orient("left").tickSize(6, 0)
+    color = d3.scale.category10()
     line = d3.svg.line().x(X).y(Y)
 
     # Chop the line path into defined sub paths
     # Note that isNaN(null) is weirdly false in javascript.
-    line.defined (d) -> !(d[0]==null or d[1]==null or isNaN(d[0]) or isNaN(d[1]))
+    line.defined (d) -> not (d[0] is null or d[1] is null or isNaN d[0] or isNaN d[1])
 
     chart.width = (_) ->
       return width  unless arguments.length

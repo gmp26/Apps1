@@ -1193,11 +1193,11 @@ function makeTransformation()
 		{
 			n++;
 			var y1=f(i);
-			if(Math.abs(y1)>12)
+			if(Math.abs(y1)>20)
 				y1=null;
 			d1.push([i, y1]);
 			var y2=p.compute(f(q.compute(i)));
-			if(Math.abs(y2)>12)
+			if(Math.abs(y2)>20)
 				y2=null;
 			d2.push([i, y2]);
 			if(n>2500)
