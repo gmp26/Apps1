@@ -12,8 +12,7 @@ angular.module('app').factory 'd3MultiLineChart', ->
   multiLineChart = ->
 
     # Return the total extent of data in all the series for a given accessor function
-    # Used to define the axis ranges
-    yMax = 10
+    # Used to define the axis ranges as these are common to all series.
     seriesExtent = (series, accessor) ->
       extent = [1e12,-1e12]
       series.forEach (data) ->
@@ -45,10 +44,19 @@ angular.module('app').factory 'd3MultiLineChart', ->
         .data(series)
         .attr "width", width
         .attr "height", height
+        .attr "fill", '#ffffff'
 
         gPlotEnter = gplot.enter().append("g").attr "class", "plot"
 
         firstPlot = gPlotEnter.filter (d, i) -> i == 0
+        firstPlot.append('rect')
+        .attr 'width', width
+        .attr 'height', height
+        .style 'fill', '#ffffff'
+        .style 'stroke', '#000000'
+        .style 'stroke-width', 0.5
+        .style 'stroke-opacity', 0.3
+
         firstPlot.append('clipPath')
         .attr "id" "clip"
         .append("rect")
@@ -85,6 +93,7 @@ angular.module('app').factory 'd3MultiLineChart', ->
 
     width = 300
     height = 250
+    yMax = 10 # default extent becomes -yMax to yMax. 
     xValue = (d) -> d[0]
     yValue = (d) -> d[1]
 
@@ -102,21 +111,28 @@ angular.module('app').factory 'd3MultiLineChart', ->
     chart.width = (_) ->
       return width  unless arguments.length
       width := _
-      chart
+      return chart
 
     chart.height = (_) ->
       return height  unless arguments.length
       height := _
-      chart
+      return chart
 
     chart.x = (_) ->
       return xValue  unless arguments.length
       xValue := _
-      chart
+      return chart
 
     chart.y = (_) ->
       return yValue  unless arguments.length
       yValue := _
-      chart
+      return chart
 
-    chart
+    # TODO: refactor x and y extents so we can drag the chart around and
+    # regenerate the plot area appropriately.
+    chart.yMax = (_) ->
+      return yMax  unless arguments.length
+      yMax := _
+      return chart
+
+    return chart

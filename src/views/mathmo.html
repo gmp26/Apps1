@@ -20,23 +20,33 @@
 
 
   <tabs>
-    <pane ng-repeat="pane in panes" heading="{{pane.name}}" active="pane.active">
+    <pane ng-repeat="pane in panes" heading="{{pane.name}}" active="pane.active" >
 
       <div class="btn-group">
         <button class="btn btn-danger" ng-click="delQSet(pane.name)"><i class="icon-remove icon-white"></i> Delete {{pane.name}}</button>
         <button class="btn" ng-click="openAddQ(pane)">Add a question</button>
       </div>
 
-      <div ng-repeat="qa in pane.questions">
+      <div ng-repeat="qa in pane.questions" class="well well-large">
         <h5>Q{{$index+1}}:{{qa.topic}}</h5>
         <p ng-bind-html-unsafe="qa.q"></p>
 
+        <!-- yellow answer button
         <button class="btn btn-warning" ng-click="qa.toggle()"><i class="icon-chevron-down icon-white"></i> answer</button>
+        -->
+        <a ng-click="qa.toggle()" href="">
+          <span ng-show="qa.isCollapsed">
+            <i class="icon-chevron-down"></i> show answer
+          </span>
+          <span ng-hide="qa.isCollapsed">
+            <i class="icon-chevron-up"></i> hide answer
+          </span>
+        </a>
  
         <div collapse="qa.isCollapsed">
            <div ng-switch on="qa.isGraph()" >
             <div ng-switch-when="html">
-              <div class="well well-large" ng-bind-html-unsafe="qa.a"></div>
+              <div ng-bind-html-unsafe="qa.a"></div>
             </div>
             <div ng-switch-when="graph">
 
