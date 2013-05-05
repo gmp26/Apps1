@@ -5,8 +5,22 @@
   'config'
   'questionStore'
   '$timeout'
+  '$routeParams'
+  ($scope, $window, config, qStore, $timeout, $routeParams) ->
 
-  ($scope, $window, config, qStore, $timeout) ->
+    $scope._exName = null
+    $scope._topic = null
+    $scope._qNo = 0
+
+    if $routeParams
+      $scope.resourceId = $routeParams.id ? 7088
+      $scope.single = $routeParams.users != "class" 
+      if $routeParams.ex?
+        $scope._exName = $routeParams.x
+      if $routeParams.topic?
+        $scope._topic = $routeParams.t
+      if $routeParams.qNo?
+        $scope._qNo = $routeParams.q
 
 
     $scope.renderMath = ->
@@ -22,7 +36,7 @@
     #
     # Exercise tab panes
     #
-    $scope.panes = {}
+    $scope.panes = []
 
     $scope.qStore = qStore
 
@@ -61,28 +75,36 @@
       retrieveQ(topicId, pane)
      
     qStore.list().forEach (name) ->
-      p = $scope.panes[name] = 
+      p = {
         name: name
         qStore: qStore.getQSet(name)
-
-      p.questions = []
+        questions: []
+        active: false
+      }
+      $scope.panes.push p
 
       p.qStore.forEach (topicId) ->
         retrieveQ topicId, p    
 
-    $scope.newName = ""
+    $scope.newData = {name:""}
 
     $scope.addQSet = ->
-      $scope.panes[$scope.newName] =
-        name: $scope.newName
-        qStore: qStore.newQSet($scope.newName)
+      $scope.panes.push {
+        name: $scope.newData.name
+        qStore: qStore.newQSet($scope.newData.name)
         questions: []
         active: true
-      $scope.newName = ""
+      }
+      $scope.newData.name = ""
 
-    $scope.delQSet = (name) ->
-      qStore.remove(name)
-      delete $scope.panes[name]
+    $scope.delQSet = (paneIndex) ->
+      pane = $scope.panes[paneIndex]
+      qStore.remove(pane.name)
+      $scope.panes.splice paneIndex, 1
+
+    $scope.clearAll = ->
+      qStore.clear()
+      $scope.panes = []
 
     $scope.topicTitleById = (id) -> config.topicById(id)[0]
 
@@ -111,14 +133,10 @@
       backdropFade: true
       dialogFade:true
 
-    # Warning dialogs
-    $scope.alerts =
-      * type: "warning"
-        msg: "Your own sketch should label significant features of the graph."
-      ...
+    swarnings = true
+    $scope.closeSketchWarning = ->
+      swarnings := false
 
-    $scope.closeAlert = (index) ->
-      $scope.alerts.splice index, 1
-
+    $scope.showSketchWarning = -> swarnings
 ]
 

@@ -1,13 +1,13 @@
-<div ng-controller="mathmoController" class="row-fluid">
+<div ng-controller="mathmoController" class="mathmo">
 
-  <div class="hero-unit">
+  <div class="well well-large">
     <h1>Mathmo</h1>
     <p>An exercise generator for A-level mathematics</p>
     <form name="addQSetForm">
 
       <div class="input-append">
 
-        <input type="text" name="name" placeholder="name" required ng-model="newName" ng-minlength="4"></input>
+        <input type="text" name="name" placeholder="name" required ng-model="newData.name" ng-minlength="4"></input>
 
         <button class="btn" ng-disabled="!addQSetForm.name.$valid"  ng-click="addQSet()"><i class="icon-plus"></i> Add</button>
 
@@ -17,16 +17,38 @@
     </form>
   </div>
 
-
-
   <tabs>
-    <pane ng-repeat="pane in panes" heading="{{pane.name}}" active="pane.active" >
+    <pane heading="Help">
+      <h5>Getting Started</h5>
+      <p>
+      Use the input box in the <a ng-click="openAbout()" href="">Mathmo</a> header to add a new named exercise. Each exercise appears in a new tab. Click on the tab to add questions on any of a large choice of topics. These same questions stay with you until you choose to delete them.
+      </p>
 
-      <div class="btn-group">
-        <button class="btn btn-danger" ng-click="delQSet(pane.name)"><i class="icon-remove icon-white"></i> Delete {{pane.name}}</button>
-        <button class="btn" ng-click="openAddQ(pane)">Add a question</button>
+      <h5>Mathmo remembers</h5>
+      <p>
+      When you close down mathmo, your exercises will be remembered in local storage. When you return to mathmo, the same exercises and questions will be restored. Even if you start mathmo on a different computer, you can generate the same questions by creating an exercise with the same name.
+      </p>
+
+      <p>This works because the random number generator used to generate questions is seeded from:
+        <ul>
+          <li>The exercise name</li>
+          <li>The question topic</li>
+          <li>The question number within a topic.</li>
+        </ul>
+      When all of these are the same mathmo generates the same question.
+      </p>
+
+      <h5>Sharing</h5>
+      <p>You can share questions with your friends. Press the share button to see available methods.</p>
+
+    </pane>
+    <pane ng-repeat="pane in panes" heading="{{pane.name}}" active="pane.active">
+      <!--
+      <div style="margin-bottom:20px;">
+        <button class="btn btn-primary" style="float:left" ng-click="openAddQ(pane)">Add a question</button>
+        <button class="btn btn-danger" tooltip="Delete exercise {{pane.name}}" tooltip-placement="left" style="float:right" ng-click="delQSet($index)"><i class="icon-remove icon-white"></i></button>
       </div>
-
+      -->
       <div ng-repeat="qa in pane.questions" class="well well-large">
         <h5>Q{{$index+1}}:{{qa.topic}}</h5>
         <p ng-bind-html-unsafe="qa.q"></p>
@@ -49,9 +71,8 @@
               <div ng-bind-html-unsafe="qa.a"></div>
             </div>
             <div ng-switch-when="graph">
-
-              <div ng-repeat="alert in alerts">
-                <alert type="alert.type" close="closeAlert($index)">{{alert.msg}}</alert>
+              <div ng-show="showSketchWarning()">
+                <alert type="warning" close="closeSketchWarning()">Your own sketch should label significant features of the graph.</alert>
               </div>
               <div d3-vis
                 fullWidth="350" fullHeight="300"
@@ -70,18 +91,22 @@
 
       </div>
 
+      <div>
+        <button class="btn btn-primary" style="float:left" ng-click="openAddQ(pane)">Add a question</button>
+        <button class="btn btn-danger" tooltip="Delete exercise {{pane.name}}" tooltip-placement="left" style="float:right" ng-click="delQSet($index)"><i class="icon-remove icon-white"></i></button>
+      </div>
+
     </pane>
   </tabs>
 
 
-  <hr />
+  <hr/>
 
-  <div class="btn-group btn-group-vertical">
-    <button class="btn" ng-click="openAbout()">About Mathmo</button>
-
-    <button class="btn" ng-click="openAddQ()">Add a question</button>
-
-    <button class="btn" ng-click="qStore.clear()">Clear all</button>
+  <div class="well" style="padding-bottom:28px">
+    Crown Copyright
+    <button class="btn btn-danger" style="float:right" tooltip="delete all exercises" tooltip-placement="top" ng-click="clearAll()">Clear all</button>
+    <span style="float:right">&nbsp;</span>
+    <button class="btn btn-info" style="float:right" tooltip="Credits etc." tooltip-placement="top"  ng-click="openAbout()">About</button>
   </div>
 
 
@@ -111,18 +136,8 @@
         <h4><img src="scripts/pubs/mathmo/img/icon.png"> About Mathmo</h4>
     </div>
     <div class="modal-body">
-       Mathmo is designed to give you extra practice.
+       Mathmo is designed to give you extra fluency practice in A-level mathematics.
       <br>
-      <br>
-      On the <b>My Qs</b> tab you'll find your current set of questions under a list of topics. 
-      These stay with you till you clear them or delete them individually. They'll be the same questions even if you close Mathmo and return to it later.
-      Tap one of the question topics to see the question itself.
-      <br><br>
-      When you have completed a question, touch <b>Check Answer</b> to check your work and
-      reply to <b>Did you agree?</b>. You may need to do a little more work to see whether your answer really is the same or not.
-      The questions will change colour according to your answer. Red means 'I didn't agree'. Green means 'I agreed'. Black means 'Answer not checked'. 
-      <br><br>
-      On the <b>Add</b> tab you can generate 5 more random core, further or stats questions, or generate them singly on selected topics.
 
       <h3>Updates</h3>
       Mathmo is a web application, and should update itself when you reload the app after it has been updated on the server. 
@@ -134,29 +149,21 @@
       </p>
       <p>
       Question and Answer generators:
-       Tom White, Edward Cree
+       Tom White, Edward Cree, with unit tests by Ben Millwood.
       </p>
       <p>
-      <a href="http://github.com/gmp26/mathmo">Mobile Implementation:</a> Mike Pearson with contributions from
-      <a href="http://github.com/naush/mathmo">Li Hsuan</a>.</p>
+      <a href="http://github.com/gmp26/mathmo">HTML5/Angular Implementation:</a> Mike Pearson.
+      </p>
 
       <p>
-      The following have also been important in developing mathmo
-      </p><ul>
-      <li>
-      <a href="http://www.mobl-lang.org">Mobl-lang</a> by Zef Hemel, University of Delft.
-      </li>
-      <li>
-      The <a href="http://code.google.com/p/flot/">flot plotting library</a>
-      </li>
-
-      </ul>
-      <a href="http://www.mathjax.org/">
-        <img title="Powered by MathJax" src="http://www.mathjax.org/badge.gif" border="0" alt="Powered by MathJax">
-      </a>
+      Mathmo is now based on <a href="http://angularjs.org">Angular</a>, 
+      <a href="http://angular-ui.github.io/bootstrap">Angular UI Bootstrap</a>,
+      the <a href="d3js.org">d3 SVG toolkit</a> from Mike Bostock, and the
+      <a href="http://www.mathjax.org/">MathJAX library</a> for TeX rendering.
+      </p>
 
       <h3>License</h3>
-      <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-sa/3.0/88x31.png"></a><br><span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/InteractiveResource" property="dct:title" rel="dct:type">Mathmo</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://nrich.maths.org" property="cc:attributionName" rel="cc:attributionURL">NRICH Project, University of Cambridge</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.<br>Based on a work at <a xmlns:dct="http://purl.org/dc/terms/" href="http://github.com/gmp26/mathmo" rel="dct:source">github.com</a>.
+      <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-sa/3.0/88x31.png"></a><br><span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/InteractiveResource" property="dct:title" rel="dct:type">Mathmo</span> by the <a xmlns:cc="http://creativecommons.org/ns#" href="http://nrich.maths.org" property="cc:attributionName" rel="cc:attributionURL">NRICH Project, University of Cambridge</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.<br>Based on a work at <a xmlns:dct="http://purl.org/dc/terms/" href="http://github.com/gmp26/Apps1" rel="dct:source">github.com</a>.
 
     </div>
 
