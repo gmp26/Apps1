@@ -23,6 +23,19 @@ angular.module('app').directive 'mathmoPlot' [
           savedContainer := container
           savedWidth := width
           savedHeight := height
+          /*
+          attrs.$observe 'data', (val) ->
+            console.log 'attr changed'
+            console.log val
+            scope.$parent.$watch val, (data) ->
+              console.log 'data changed'
+              console.log val
+              scope.$broadcast 'resize', container, width, height
+          */
+          scope.$parent.$watch attrs.data, (data) ->
+            console.log 'data changed'
+            console.log data
+            scope.$broadcast 'resize', container, width, height
 
           # since we're nested in d3Vis scope, must evaluate attributes on parent scope
           getData = $parse(attrs.data)
@@ -42,6 +55,10 @@ angular.module('app').directive 'mathmoPlot' [
           savedContainer := container
           savedWidth := width
           savedHeight := height
+
+         # since we're nested in d3Vis scope, must evaluate attributes on parent scope
+          getData = $parse(attrs.data)
+          data := getData(scope.$parent)
 
           chart.width(width).height(height)
           container.datum(data).call(chart)

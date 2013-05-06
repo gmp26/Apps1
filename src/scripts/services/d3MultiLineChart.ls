@@ -44,12 +44,13 @@ angular.module('app').factory 'd3MultiLineChart', ->
         .data(series)
         .attr "width", width
         .attr "height", height
-        .attr "fill", '#ffffff'
 
         gPlotEnter = gplot.enter().append("g").attr "class", "plot"
 
         firstPlot = gPlotEnter.filter (d, i) -> i == 0
+
         firstPlot.append('rect')
+        .attr 'class', 'ground'
         .attr 'width', width
         .attr 'height', height
         .style 'fill', '#ffffff'
@@ -76,6 +77,11 @@ angular.module('app').factory 'd3MultiLineChart', ->
         gplot.select(".x.axis").attr("transform", "translate(0," + yScale.range()[0] + ")").call xAxis
         gplot.select(".y.axis").attr("transform", "translate(" + xScale.range()[0] + ", 0)").call yAxis
         
+        # Update the ground
+        gplot.select('rect.ground')
+        .attr "width" width
+        .attr "height" height
+
         # Update the clip path
         gplot.select('#clip rect')
         .attr "width" width

@@ -4,7 +4,8 @@
 angular.module('app').factory 'config', ->
 
   topicById: (id) -> @topics[id]
-  topicMakerById: (id) -> @topicById(id)[1]
+  topicTitleById: (id) -> @topics[id][0]
+  topicMakerById: (id) -> @topics[id][1]
 
   groups:
     * title: "Algebraic"

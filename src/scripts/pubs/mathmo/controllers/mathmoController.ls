@@ -42,17 +42,30 @@
 
     gPrefix = '%GRAPH%'
 
+    topicCounts = {}
+
     retrieveQ = (topicId, pane) ->
       name = pane.name
-      Math.seedrandom(name+topicId+pane.questions.length)
+
+      topicCounts[name] ||= {}
+      topicCounts[name][topicId] ||= 1
+
+      seed = name+'/'+topicId+'/'+topicCounts[name][topicId]
+
+      console.log "seed = #seed"
+
+      Math.seedrandom seed
+
       maker = config.topicMakerById topicId
       qa = maker()
 
       console.log "q=", qa[0]
       console.log "a=", qa[1]
 
-      pane.questions.push {
-        topic: config.topicById(topicId)[0]
+      question = {
+        exName: name
+        topicId: topicId
+        topic: config.topicTitleById topicId
         graph: if maker.fn? then maker.fn.toString() else 'no fn'
         q:qa[0]
         a:qa[1]
@@ -63,17 +76,52 @@
           @isCollapsed = !@isCollapsed
         isGraph: ->
           if @a.indexOf(gPrefix) == 0 then 'graph' else 'html'
-        graphData: ->
-          @f(@g)
       }
+      question.graphData = qa[2](qa[3]) if question.isGraph()=='graph'
+      pane.questions.push question
       $scope.renderMath()
+    
+    similarQ = (question, index, inc) ->
+      name = question.exName
+      topicId = question.topicId
+
+      topicCounts[name] ||= {}
+      topicCounts[name][topicId] ||= 1
+      j = (topicCounts[name][topicId] += inc)
+
+      seed = name+'/'+topicId+'/'+j
+
+      console.log "similar seed = #seed"
+
+      Math.seedrandom seed
+
+      maker = config.topicMakerById topicId
+      qa = maker()
+
+      console.log "q=", qa[0]
+      console.log "a=", qa[1]
+
+      question.graph = if maker.fn? then maker.fn.toString() else 'no fn'
+      question.q = qa[0]
+      question.a = qa[1]
+      question.f = qa[2]
+      question.g = qa[3]
+      question.graphData = qa[2](qa[3]) if question.isGraph()=='graph'
+
+      $scope.renderMath()
+
+    $scope.prevOnTopic = (qa, index) ->
+      similarQ(qa, index, -1)
+    
+    $scope.nextOnTopic = (qa, index) ->
+      similarQ(qa, index, +1)
     
     $scope.appendQ = (topicId, pane = null) ->
       if pane == null
         pane = $scope.activePane
       qStore.appendQ pane.name, topicId
       retrieveQ(topicId, pane)
-     
+    
     qStore.list().forEach (name) ->
       p = {
         name: name
@@ -101,10 +149,12 @@
       pane = $scope.panes[paneIndex]
       qStore.remove(pane.name)
       $scope.panes.splice paneIndex, 1
+      delete topicCounts[name]
 
     $scope.clearAll = ->
       qStore.clear()
       $scope.panes = []
+      topicCounts := {}
 
     $scope.topicTitleById = (id) -> config.topicById(id)[0]
 
@@ -133,6 +183,8 @@
       backdropFade: true
       dialogFade:true
 
+    # Control visibility of sketch warnings
+    # Close box is a 'do not show me again'
     swarnings = true
     $scope.closeSketchWarning = ->
       swarnings := false
