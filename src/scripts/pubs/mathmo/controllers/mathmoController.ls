@@ -116,6 +116,10 @@
     $scope.nextOnTopic = (qa, index) ->
       similarQ(qa, index, +1)
     
+    $scope.topicAvailable = (topicId) ->
+      pane = $scope.activePane
+      return not topicCounts[pane.name]?[topicId]?
+
     $scope.appendQ = (topicId, pane = null) ->
       if pane == null
         pane = $scope.activePane

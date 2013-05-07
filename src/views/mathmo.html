@@ -87,7 +87,7 @@
                 <div mathmo-plot data="qa.graphData" style="position:relative"></div>
               </div>
 
-              {{qa.graphData}}
+              <!-- {{qa.graphData}} -->
 
             </div>
             <span ng-switch-default>default</span>
@@ -116,7 +116,6 @@
 
 
   <div modal="addQOpen" close="closeAddQ()" options="addQOpts">
-
     <div class="modal-header">
       <h3>Add a question</h3>
       <h4>on topic</h4>
@@ -125,7 +124,7 @@
       <accordion close-others="false">
         <accordion-group heading="{{group.title}}" ng-repeat="group in groups">
           <div class="btn-group btn-group-vertical row-fluid">
-            <button class="btn span12" ng-repeat="id in group.topicIds" ng-click="appendQ(id)">{{topicTitleById(id)}}</button>
+            <button class="btn span12" ng-repeat="id in group.topicIds" ng-show="topicAvailable(id)" ng-click="appendQ(id)">{{topicTitleById(id)}}</button>
           </div>
         </accordion-group>
       </accordion>
