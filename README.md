@@ -7,8 +7,10 @@ Derived from AngularFun
 
 The aim is to make this app host a few related apps and form the basis of similar collections. 
 
-Creating an individual app extractor. This repo should contain the whole codebase,
-which can create individual apps using a grunt extract task.
+Added some grunt tasks:
+
+* grunt mask:<appname> causes only the named add to be generated in the final dist.
+* grunt unmask causes all apps to be present. Useful for test purposes.
 
 Converted codebase to [livescript](http://livescript.net).
 
