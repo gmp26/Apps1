@@ -97,7 +97,14 @@
       </div>
 
       <div>
-        <button class="btn btn-primary" style="float:left" ng-click="openAddQ(pane)">Add a question</button>
+        <div class="btn-grp" style="float:left" >
+          <button class="btn btn-primary" ng-click="openAddQ(pane)">Add a question</button>
+          <!--
+          <button class="btn" ng-show="moreCore(pane)" ng-click="addCore(pane)">Add core questions</button>
+          <button class="btn" ng-show="moreFurther(pane)" ng-click="addFurther(pane)">Add further questions</button>
+          <button class="btn" ng-show="moreStats(pane)" ng-click="addStats(pane)">Add statistics questions</button>
+          -->
+        </div>
         <button class="btn btn-danger" tooltip="Delete exercise {{pane.name}}" tooltip-placement="left" style="float:right" ng-click="delQSet($index)"><i class="icon-remove icon-white"></i></button>
       </div>
 

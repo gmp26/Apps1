@@ -1,1 +1,1 @@
-angular.module('app').factory 'semver', ->"0.5.0"
+angular.module('app').factory 'semver', ->"0.9.1"
