@@ -80,7 +80,7 @@
       question.graphData = qa[2](qa[3]) if question.isGraph()=='graph'
       pane.questions.push question
       $scope.renderMath()
-    
+
     similarQ = (question, index, inc) ->
       name = question.exName
       topicId = question.topicId
@@ -182,28 +182,6 @@
 
     $scope.closeAddQ = ->
       $scope.addQOpen = false
-
-    /*
-    #
-    # Add random Qs
-    #
-    # Keep track of available questions
-    available = function(typeChar)
-      availableQs[$scope.activePane]?[typeChar] = for topicId of config.topics when topicId.indexOf typeChar == 0 and $scope.topicAvailable(topicId)
-
-    $scope.availableCore = (pane) ->
-      coreQs = for topicId of config.topics when topicId.indexOf 'C' == 0 and $scope.topicAvailable(topicId)
-      $scope.addCore = (pane) ->
-
-
-      Object.keys(config.topics)
-      .filter (topicId) -> topicId.indexOf 'C' == 0
-      .
-
-              <button class="btn" ng-show="moreCore(pane)" ng-click="addCore(pane)">Add core questions</button>
-          <button class="btn" ng-show="moreFurther(pane)" ng-click="addFurther(pane)">Add further questions</button>
-          <button class="btn" ng-show="moreStats(pane)" ng-click="addStats(pane)">Add statistics questions</button>
-    */
 
     $scope.addQOpts =
       backdropFade: true

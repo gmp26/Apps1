@@ -1,18 +1,18 @@
 <div ng-controller="mathmoController" class="mathmo">
 
   <div class="well well-large">
-    <h1>Mathmo</h1>
+    <h1><img src="scripts/pubs/mathmo/img/icon.png" style="width:60px;height:60px"> Mathmo</h1>
     <p>An exercise generator for A-level mathematics</p>
     <form name="addQSetForm">
 
       <div class="input-append">
 
-        <input type="text" name="name" placeholder="name" required ng-model="newData.name" ng-minlength="4"></input>
+        <input type="text" name="name" placeholder="name" required ng-model="newData.name" ng-minlength="4" ng-maxlength="10" size="10" tooltip="Enter a 4 to 10 character name" tooltip-placement='top'></input>
 
-        <button class="btn" ng-disabled="!addQSetForm.name.$valid"  ng-click="addQSet()"><i class="icon-plus"></i> Add</button>
+        <button class="btn" ng-disabled="!addQSetForm.name.$valid"  ng-click="addQSet()"><i class="icon-plus"></i> Exercise</button>
 
       </div>
-      <p><small>Enter an exercise name of 4 characters or more and press <code>Add</code> to start.</small></p>
+      <p><small>Enter an exercise name and press <code>+ Exercise</code> to start.</small></p>
 
     </form>
   </div>
@@ -97,13 +97,8 @@
       </div>
 
       <div>
-        <div class="btn-grp" style="float:left" >
-          <button class="btn btn-primary" ng-click="openAddQ(pane)">Add a question</button>
-          <!--
-          <button class="btn" ng-show="moreCore(pane)" ng-click="addCore(pane)">Add core questions</button>
-          <button class="btn" ng-show="moreFurther(pane)" ng-click="addFurther(pane)">Add further questions</button>
-          <button class="btn" ng-show="moreStats(pane)" ng-click="addStats(pane)">Add statistics questions</button>
-          -->
+        <div class="btn-group" style="float:left" >
+          <button class="btn btn-primary" ng-click="openAddQ(pane)"><i class="icon-plus icon-white"></i> Questions</button>
         </div>
         <button class="btn btn-danger" tooltip="Delete exercise {{pane.name}}" tooltip-placement="left" style="float:right" ng-click="delQSet($index)"><i class="icon-remove icon-white"></i></button>
       </div>
@@ -144,7 +139,7 @@
   <div modal="aboutOpen" close="closeAbout()" options="aboutOpts">
 
     <div class="modal-header">
-        <h4><img src="scripts/pubs/mathmo/img/icon.png"> About Mathmo</h4>
+        <h4><img src="scripts/pubs/mathmo/img/icon.png" style="width:60px;height:60px"> About Mathmo</h4>
     </div>
     <div class="modal-body">
        Mathmo is designed to give you extra fluency practice in A-level mathematics.
