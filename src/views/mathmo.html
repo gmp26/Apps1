@@ -75,9 +75,7 @@
               <div ng-bind-html-unsafe="qa.a"></div>
             </div>
             <div ng-switch-when="graph">
-              <div ng-show="showSketchWarning()">
-                <alert type="warning" close="closeSketchWarning()">Your own sketch should label significant features of the graph.</alert>
-              </div>
+
               <div d3-vis
                 fullWidth="350" fullHeight="300"
                 margin="0 0 20 0"
@@ -87,6 +85,9 @@
                 <div mathmo-plot data="qa.graphData" style="position:relative"></div>
               </div>
 
+              <div ng-show="showSketchWarning()">
+                <alert type="warning" close="closeSketchWarning()">Your own sketch should label significant features of the graph.</alert>
+              </div>
               <!-- {{qa.graphData}} -->
 
             </div>
