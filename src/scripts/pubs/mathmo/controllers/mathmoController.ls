@@ -44,11 +44,14 @@
 
     topicCounts = {}
 
+    startQNumber = 1000
+
     retrieveQ = (topicId, pane) ->
       name = pane.name
 
       topicCounts[name] ||= {}
-      topicCounts[name][topicId] ||= 1
+      topicCounts[name][topicId] ||= startQNumber
+
 
       seed = name+'/'+topicId+'/'+topicCounts[name][topicId]
 
@@ -86,7 +89,8 @@
       topicId = question.topicId
 
       topicCounts[name] ||= {}
-      topicCounts[name][topicId] ||= 1
+      topicCounts[name][topicId] ||= startQNumber
+
       j = (topicCounts[name][topicId] += inc)
 
       seed = name+'/'+topicId+'/'+j
