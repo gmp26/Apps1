@@ -35,10 +35,15 @@
     startQNumber = 1000
 
     #
-    # set up sharing tab if needed
+    # shared topics are ExerciseName:TopicId:QNo
+    # other topics consist solely of the TopicId
     #
-    addSharingTab($routeParams)
-    
+    topicParts = (topic) -> topic.split \:
+    isShared = (parts) -> parts.length == 3
+    sharedTopicId = (parts) -> parts[0]
+    sharedQNo = (parts) -> parts[1]
+    sharedExercise = (parts) -> parts[2]
+
 
     $scope.renderMath = ->
       $timeout ->
@@ -46,10 +51,17 @@
       , 10
 
     retrieveQ = (topicId, pane) ->
+
       name = pane.name
+      qNo = startQNumber
+
+      # some questions may have 3 part ids
+      parts = topicId.split \:
+      if parts.length == 3
+        [name, qNo, topicId] = parts
 
       topicCounts[name] ||= {}
-      topicCounts[name][topicId] ||= startQNumber
+      topicCounts[name][topicId] ||= qNo
 
 
       seed = name+'/'+topicId+'/'+topicCounts[name][topicId]
@@ -138,19 +150,23 @@
       }
       $scope.panes.push p
 
+
       p.qStore.forEach (topicId) ->
-        retrieveQ topicId, p    
+        retrieveQ topicId, p unless (topicId.split \:).length == 3
 
     $scope.exercise = {name:""}
 
-    $scope.addQSet = ->
+    $scope.addQSet = (name = $scope.exercise.name) ->
+      if qStore.getQSet name
+        return ($scope.panes.filter (.name == name))[0]
       $scope.panes.push {
-        name: $scope.exercise.name
+        name: name
         qStore: qStore.newQSet($scope.exercise.name)
         questions: []
         active: true
       }
-      $scope.exercise.name = ""
+      $scope.exercise.name = "" if name == $scope.exercise.name
+      return $scope.panes[*-1]
 
     $scope.delQSet = (paneIndex) ->
       pane = $scope.panes[paneIndex]
@@ -168,28 +184,45 @@
     #
     # Set up share tab to view shared Qs
     #
-    function addSharingTab($routeParams)
-      $scope._cmd = null
-      $scope._exName = null
-      $scope._topic = null
-      $scope._qNo = 0
+    addSharingTab = ($routeParams) ->
+
+      # Parse the url route parameters
+      cmd = null
+      ex = null
+      topic = null
+      qNo = 0
       if $routeParams
         $scope.resourceId = $routeParams.id ? 7088
         $scope.single = $routeParams.users != "class" 
         if $routeParams.cmd?
-          $scope._cmd = $routeParams.cmd
-        if $routeParams.ex?
-          $scope._exName = $routeParams.x
-        if $routeParams.topic?
-          $scope._topic = $routeParams.t
-        if $routeParams.qNo?
-          $scope._qNo = $routeParams.q
+          cmd = $routeParams.cmd
+        if $routeParams.x?
+          ex = $routeParams.x
+        if $routeParams.t?
+          topic = $routeParams.t
+        if $routeParams.q?
+          qNo = +$routeParams.q
 
-        if $scope._cmd=='share'
-          pane = {}
-          $scope.panes.push('shared')
+        # if we have a shared question in the url
+        if cmd=='share' && ex && topic && !isNaN(qNo)
+
+          # create a shared pane unless it already exists
+          pane = $scope.addQSet('shared')
+
+          # append the shared question to it
+          # note that the full form of a topic is TopicId[:qNo:ExerciseName]
+          $scope.appendQ "#{topic}:#{qNo}:#{ex}", pane
+
+          # now retrieve any previously shared questions
+          pane.qStore.forEach (topic) ->
+            retrieveQ topic, p    
 
 
+    #
+    # set up sharing tab if needed
+    #
+    addSharingTab($routeParams)
+    
 
     #
     # About dialog
