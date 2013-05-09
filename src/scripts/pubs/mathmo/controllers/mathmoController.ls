@@ -141,16 +141,16 @@
       p.qStore.forEach (topicId) ->
         retrieveQ topicId, p    
 
-    $scope.newData = {name:""}
+    $scope.exercise = {name:""}
 
     $scope.addQSet = ->
       $scope.panes.push {
-        name: $scope.newData.name
-        qStore: qStore.newQSet($scope.newData.name)
+        name: $scope.exercise.name
+        qStore: qStore.newQSet($scope.exercise.name)
         questions: []
         active: true
       }
-      $scope.newData.name = ""
+      $scope.exercise.name = ""
 
     $scope.delQSet = (paneIndex) ->
       pane = $scope.panes[paneIndex]
