@@ -71,7 +71,8 @@
           </span>
         </a>
  
-        <div collapse="qa.isCollapsed">
+        <!--<div collapse="qa.isCollapsed">-->
+        <div ng-hide="qa.isCollapsed">
            <div ng-switch on="qa.isGraph()" >
             <div ng-switch-when="html">
               <div ng-bind-html-unsafe="qa.a"></div>
@@ -90,6 +91,7 @@
               <div ng-show="showSketchWarning()">
                 <alert type="warning" close="closeSketchWarning()">Your own sketch should label significant features of the graph.</alert>
               </div>
+
               <!-- {{qa.graphData}} -->
 
             </div>

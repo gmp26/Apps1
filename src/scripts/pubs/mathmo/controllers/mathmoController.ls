@@ -8,25 +8,10 @@
   '$routeParams'
   ($scope, $window, config, qStore, $timeout, $routeParams) ->
 
-    $scope._exName = null
-    $scope._topic = null
-    $scope._qNo = 0
-
-    if $routeParams
-      $scope.resourceId = $routeParams.id ? 7088
-      $scope.single = $routeParams.users != "class" 
-      if $routeParams.ex?
-        $scope._exName = $routeParams.x
-      if $routeParams.topic?
-        $scope._topic = $routeParams.t
-      if $routeParams.qNo?
-        $scope._qNo = $routeParams.q
-
-
-    $scope.renderMath = ->
-      $timeout ->
-        MathJax.Hub.Queue ["Typeset", MathJax.Hub]
-      , 10
+    #
+    # Exercise tab panes
+    #
+    $scope.panes = []
 
     #
     # topic group selection
@@ -34,17 +19,31 @@
     $scope.groups = config.groups
 
     #
-    # Exercise tab panes
+    # question store
     #
-    $scope.panes = []
-
     $scope.qStore = qStore
 
+    #
+    # maker functions return this when the answer is a graph sketch
+    #
     gPrefix = '%GRAPH%'
 
+    #
+    # question seeding
+    # 
     topicCounts = {}
-
     startQNumber = 1000
+
+    #
+    # set up sharing tab if needed
+    #
+    addSharingTab($routeParams)
+    
+
+    $scope.renderMath = ->
+      $timeout ->
+        MathJax.Hub.Queue ["Typeset", MathJax.Hub]
+      , 10
 
     retrieveQ = (topicId, pane) ->
       name = pane.name
@@ -165,6 +164,31 @@
       topicCounts := {}
 
     $scope.topicTitleById = (id) -> config.topicById(id)[0]
+
+    #
+    # Set up share tab to view shared Qs
+    #
+    function addSharingTab($routeParams)
+      $scope._cmd = null
+      $scope._exName = null
+      $scope._topic = null
+      $scope._qNo = 0
+      if $routeParams
+        $scope.resourceId = $routeParams.id ? 7088
+        $scope.single = $routeParams.users != "class" 
+        if $routeParams.cmd?
+          $scope._cmd = $routeParams.cmd
+        if $routeParams.ex?
+          $scope._exName = $routeParams.x
+        if $routeParams.topic?
+          $scope._topic = $routeParams.t
+        if $routeParams.qNo?
+          $scope._qNo = $routeParams.q
+
+        if $scope._cmd=='share'
+          pane = {}
+          $scope.panes.push('shared')
+
 
 
     #
