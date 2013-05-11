@@ -58,10 +58,11 @@
       # some questions may have 3 part ids
       parts = topicId.split \:
       if parts.length == 3
-        [name, qNo, topicId] = parts
+        [topicId, qNo, name] = parts
+        qNo = +qNo
 
       topicCounts[name] ||= {}
-      topicCounts[name][topicId] ||= qNo
+      topicCounts[name][topicId] = qNo
 
 
       seed = name+'/'+topicId+'/'+topicCounts[name][topicId]
@@ -144,14 +145,13 @@
     qStore.list().forEach (name) ->
       p = {
         name: name
-        qStore: qStore.getQSet(name)
+        qSet: qStore.getQSet(name)
         questions: []
         active: false
       }
       $scope.panes.push p
 
-
-      p.qStore.forEach (topicId) ->
+      p.qSet.forEach (topicId) ->
         retrieveQ topicId, p unless (topicId.split \:).length == 3
 
     $scope.exercise = {name:""}
@@ -159,14 +159,15 @@
     $scope.addQSet = (name = $scope.exercise.name) ->
       if qStore.getQSet name
         return ($scope.panes.filter (.name == name))[0]
-      $scope.panes.push {
+      pane = {
         name: name
-        qStore: qStore.newQSet($scope.exercise.name)
+        qSet: qStore.newQSet(name)
         questions: []
         active: true
       }
+      $scope.panes.push pane
       $scope.exercise.name = "" if name == $scope.exercise.name
-      return $scope.panes[*-1]
+      return pane
 
     $scope.delQSet = (paneIndex) ->
       pane = $scope.panes[paneIndex]
@@ -209,13 +210,15 @@
           # create a shared pane unless it already exists
           pane = $scope.addQSet('shared')
 
-          # append the shared question to it
+          # append the shared question to it unless it already exists
           # note that the full form of a topic is TopicId[:qNo:ExerciseName]
-          $scope.appendQ "#{topic}:#{qNo}:#{ex}", pane
+          topicId = "#{topic}:#{qNo}:#{ex}"
+          if (pane.qSet.indexOf(topicId) < 0)
+            $scope.appendQ topicId, pane
 
-          # now retrieve any previously shared questions
-          pane.qStore.forEach (topic) ->
-            retrieveQ topic, p    
+          # now retrieve any previously shared questions, suppressing any
+          pane.qSet.forEach (topic) ->
+            retrieveQ topic, pane    
 
 
     #
@@ -223,6 +226,15 @@
     #
     addSharingTab($routeParams)
     
+    #
+    # Sharing dialog
+    #
+    $scope.openShare = -> $scope.shareOpen = true
+    $scope.closeShare = -> $scope.shareOpen = false;
+
+    $scope.shareOpts =
+      backdropFade: true
+      dialogFade:true
 
     #
     # About dialog

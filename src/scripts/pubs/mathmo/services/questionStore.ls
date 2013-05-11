@@ -47,9 +47,10 @@ angular.module('app').factory 'questionStore', [
       qSets["mathmo"] = semver
       qSets[name] = topicIds
       localStore.qSets = JSON.stringify qSets
+      return topicIds
 
     newQSet = (name) ->
-      saveAs(name, [])
+      return saveAs(name, [])
 
     getQSet = (name) ->
       qSets = JSON.parse localStore.qSets

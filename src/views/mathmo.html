@@ -53,12 +53,17 @@
       -->
       <div ng-repeat="qa in pane.questions" class="well well-large">
         <h5 style="float:left">Q{{$index+1}}: {{qa.topic}}</h5>
-        <div class="btn-group" style="float:right" tooltip="Similar questions" tooltip-placement="top">
+        <div class="btn-group pull-right" tooltip="Similar questions" tooltip-placement="top">
           <button class="btn" ng-click="prevOnTopic(qa, $index)">Prev</button>
           <button class="btn" ng-click="nextOnTopic(qa, $index)">Next</button>
         </div>
         <p ng-bind-html-unsafe="qa.q" style="clear:both"></p>
+  
+        <button class="btn pull-right" ng-click="openShare()"><i class="icon-share"></i> Share</button>
 
+<!--
+        <a href="https://twitter.com/share?hashtags=mathmo&url=http://nrich.maths.org/%23/mathmo/share/C24/1001/good"&text="test: please ignore" class="twitter-share-button" data-lang="en" style="float:right">Tweet</a>
+-->
         <!-- yellow answer button
         <button class="btn btn-warning" ng-click="qa.toggle()"><i class="icon-chevron-down icon-white"></i> answer</button>
         -->
@@ -89,7 +94,7 @@
               </div>
 
               <div ng-show="showSketchWarning()">
-                <alert type="warning" close="closeSketchWarning()">Your own sketch should label significant features of the graph.</alert>
+                <alert type="warning" close="closeSketchWarning()">Do not rely on this plot being correctly framed. <a href="https://github.com/gmp26/Apps1/issues/1">[#1]</a>. Your own sketch should label significant features of the graph. </alert>
               </div>
 
               <!-- {{qa.graphData}} -->
@@ -102,7 +107,7 @@
       </div>
 
       <div>
-        <div class="btn-group" style="float:left" >
+        <div class="btn-group pull-left">
           <button class="btn btn-primary" ng-click="openAddQ(pane)"><i class="icon-plus icon-white"></i> Questions</button>
         </div>
         <button class="btn btn-danger" tooltip="Delete exercise {{pane.name}}" tooltip-placement="left" style="float:right" ng-click="delQSet($index)"><i class="icon-remove icon-white"></i></button>
@@ -121,6 +126,29 @@
     <button class="btn btn-info" style="float:right" tooltip="Credits etc." tooltip-placement="top"  ng-click="openAbout()">About</button>
   </div>
 
+  <div modal="shareOpen" close="closeShare()" options="shareOpts">
+    <div class="modal-header">
+      <h3>Share Question</h3>
+    </div>
+    <div class="modal-body">
+      <ul class="unstyled">
+        <li class="inline"><a href="http://del.icio.us/post?url={{qa.exName}}" target="_blank" style="margin:0px; padding:0px;"><img src="https://sharenice.org/images/delicious_com.png" style="border: 0" alt="delicious.com_icon" title="delicious.com"></a></li>
+
+        <li class="inline"><a href="http://digg.com/submit?phase=2&amp;url=https%3A%2F%2Fsharenice.org%2Fdemo" target="_blank" style="margin:0px; padding:0px;"><img src="https://sharenice.org/images/digg_com.png" style="border: 0" alt="digg.com_icon" title="digg.com"></a></li>
+
+        <li class="inline"><a href="mailto:?subject=Demo%20shareNice&amp;body=https%3A%2F%2Fsharenice.org%2Fdemo" target="_blank" style="margin:0px; padding:0px;"><img src="https://sharenice.org/images/icon-email.png" style="border: 0" alt="email_icon" title="email"></a></li>
+
+        <li><a href="http://www.facebook.com/sharer.php?u=https%3A%2F%2Fsharenice.org%2Fdemo&amp;t=Demo%20shareNice" target="_blank" style="margin:0px; padding:0px;"><img src="https://sharenice.org/images/facebook_com.png" style="border: 0" alt="facebook.com_icon" title="facebook.com"></a></li>
+
+        <li><a href="http://twitter.com/?status=https%3A%2F%2Fsharenice.org%2Fdemo" target="_blank" style="margin:0px; padding:0px;"><img src="https://sharenice.org/images/twitter_com.png" style="border: 0" alt="twitter.com_icon" title="twitter.com"></a></li>
+
+        <li><a href="https://plus.google.com/_/+1/confirm?url=https%3A%2F%2Fsharenice.org%2Fdemo" target="_blank" style="margin:0px; padding:0px;"><img src="https://sharenice.org/images/plus_google_com.png" style="border: 0" alt="plus.google.com_icon" title="plus.google.com"></a></li>
+      </ul>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-warning cancel" ng-click="closeShare()">Close</button>
+    </div>
+  </div>
 
   <div modal="addQOpen" close="closeAddQ()" options="addQOpts">
     <div class="modal-header">
@@ -137,14 +165,14 @@
       </accordion>
     </div>
     <div class="modal-footer">
-        <button class="btn btn-warning cancel" ng-click="closeAddQ()">Close</button>
+      <button class="btn btn-warning cancel" ng-click="closeAddQ()">Close</button>
     </div>
   </div>
 
   <div modal="aboutOpen" close="closeAbout()" options="aboutOpts">
 
     <div class="modal-header">
-        <h4><img src="scripts/pubs/mathmo/img/icon.png" style="width:60px;height:60px"> About Mathmo</h4>
+      <h4><img src="scripts/pubs/mathmo/img/icon.png" style="width:60px;height:60px"> About Mathmo</h4>
     </div>
     <div class="modal-body">
        Mathmo is designed to give you extra fluency practice in A-level mathematics.
@@ -182,7 +210,4 @@
         <button class="btn btn-warning cancel" ng-click="closeAbout()">Close</button>
     </div>
   </div>
-
-
-
 </div>
