@@ -1,26 +1,25 @@
 <div ng-controller="mathmoController" class="mathmo">
 
-  <div class="well well-large">
+  <div class="well well-large" style="margin-top:15px;background-image:url('/scripts/pubs/mathmo/img/well.png')">
     <h1><img src="scripts/pubs/mathmo/img/icon.png" style="width:60px;height:60px"> Mathmo</h1>
     <p>An exercise generator for A-level mathematics</p>
     <form name="addQSetForm">
 
       <div class="input-prepend">
 
-
-        <button class="btn" ng-disabled="!addQSetForm.name.$valid"  ng-click="addQSet()"><i class="icon-plus"></i> Exercise</button>
+        <button class="btn btn-primary" ng-disabled="!addQSetForm.name.$valid"  ng-click="addQSet()"><i class="icon-plus icon-white"></i> Exercise</button>
 
         <input type="text" name="name" placeholder="name" required ng-model="exercise.name" ng-minlength="4" ng-maxlength="10" size="12" tooltip="Enter a 4 to 10 character name" tooltip-placement='top'></input>
 
 
       </div>
-      <p><small>Enter an exercise name and press <code>+ Exercise</code> to start.</small></p>
+      <p><small>Enter an exercise name and press <span class="label label-info">+ Exercise</span> to start.</small></p>
 
     </form>
   </div>
 
   <tabs>
-    <pane heading="Help">
+    <pane id="helpTab" heading="Help">
       <h5>Getting Started</h5>
       <p>
       Use the input box in the <a ng-click="openAbout()" href="">Mathmo</a> header to add a new named exercise. Each exercise appears in a new tab. Click on the tab to add questions on any of a large choice of topics. These same questions stay with you until you choose to delete them.
@@ -59,14 +58,14 @@
         </div>
         <p ng-bind-html-unsafe="qa.q" style="clear:both"></p>
   
-        <button class="btn pull-right" ng-click="openShare()"><i class="icon-share"></i> Share</button>
+        <button class="btn pull-right" 
+          ng-click="openShare(qa)"
+          tooltip="Share {{qa.seed}}"
+          tooltip-placement="top"
+        >
+          <i class="icon-share"></i> Share
+        </button>
 
-<!--
-        <a href="https://twitter.com/share?hashtags=mathmo&url=http://nrich.maths.org/%23/mathmo/share/C24/1001/good"&text="test: please ignore" class="twitter-share-button" data-lang="en" style="float:right">Tweet</a>
--->
-        <!-- yellow answer button
-        <button class="btn btn-warning" ng-click="qa.toggle()"><i class="icon-chevron-down icon-white"></i> answer</button>
-        -->
         <a ng-click="qa.toggle()" href="">
           <span ng-show="qa.isCollapsed">
             <i class="icon-chevron-down"></i> show answer
@@ -89,7 +88,7 @@
                 margin="0 0 20 0"
                 padding="10 10 20 30"
                 woff = "100"
-                responsive="true" visible="true">
+                responsive="true" visible="false">
                 <div mathmo-plot data="qa.graphData" style="position:relative"></div>
               </div>
 
@@ -130,19 +129,24 @@
     <div class="modal-header">
       <h3>Share Question</h3>
     </div>
-    <div class="modal-body">
-      <ul class="unstyled">
-        <li class="inline"><a href="http://del.icio.us/post?url={{qa.exName}}" target="_blank" style="margin:0px; padding:0px;"><img src="https://sharenice.org/images/delicious_com.png" style="border: 0" alt="delicious.com_icon" title="delicious.com"></a></li>
+    <div class="modal-body share">
+      <textarea rows="3">{{shareText}}</textarea>
+      <p>to one of these services:</p>
 
-        <li class="inline"><a href="http://digg.com/submit?phase=2&amp;url=https%3A%2F%2Fsharenice.org%2Fdemo" target="_blank" style="margin:0px; padding:0px;"><img src="https://sharenice.org/images/digg_com.png" style="border: 0" alt="digg.com_icon" title="digg.com"></a></li>
+      <ul class="btn-group unstyled">
+        <li class="btn"tooltip="Email" tooltip-placement="bottom"><a ng-href="mailto:?subject={{encodeURI(currentQuestion.url)}}&amp;body={{encodeURI(shareText)}}" target="_blank"><img src="https://sharenice.org/images/icon-email.png"  alt="email_icon" title="email" ></a></li>
 
-        <li class="inline"><a href="mailto:?subject=Demo%20shareNice&amp;body=https%3A%2F%2Fsharenice.org%2Fdemo" target="_blank" style="margin:0px; padding:0px;"><img src="https://sharenice.org/images/icon-email.png" style="border: 0" alt="email_icon" title="email"></a></li>
+        <li class="btn" tooltip="Facebook" tooltip-placement="bottom"><a ng-href="http://www.facebook.com/sharer.php?u={{encodeURI(currentQuestion.url)}}&amp;t=Demo%20shareNice" target="_blank"><img src="https://sharenice.org/images/facebook_com.png" alt="facebook.com_icon" title="facebook.com"></a></li>
 
-        <li><a href="http://www.facebook.com/sharer.php?u=https%3A%2F%2Fsharenice.org%2Fdemo&amp;t=Demo%20shareNice" target="_blank" style="margin:0px; padding:0px;"><img src="https://sharenice.org/images/facebook_com.png" style="border: 0" alt="facebook.com_icon" title="facebook.com"></a></li>
+        <li class="btn" tooltip="Twitter" tooltip-placement="bottom"><a ng-href="http://twitter.com/?status={{encodeURI(shareText)}}" target="_blank"><img src="https://sharenice.org/images/twitter_com.png" alt="twitter.com_icon" title="twitter.com"></a></li>
 
-        <li><a href="http://twitter.com/?status=https%3A%2F%2Fsharenice.org%2Fdemo" target="_blank" style="margin:0px; padding:0px;"><img src="https://sharenice.org/images/twitter_com.png" style="border: 0" alt="twitter.com_icon" title="twitter.com"></a></li>
+        <li class="btn" tooltip="Google Plus" tooltip-placement="bottom"><a ng-href="https://plus.google.com/_/+1/confirm?url={{encodeURI(currentQuestion.url)}}" target="_blank" ><img src="https://sharenice.org/images/plus_google_com.png" alt="plus.google.com_icon" title="plus.google.com"></a></li>
 
-        <li><a href="https://plus.google.com/_/+1/confirm?url=https%3A%2F%2Fsharenice.org%2Fdemo" target="_blank" style="margin:0px; padding:0px;"><img src="https://sharenice.org/images/plus_google_com.png" style="border: 0" alt="plus.google.com_icon" title="plus.google.com"></a></li>
+        <li class="btn" tooltip="Delicious" tooltip-placement="bottom"><a ng-href="http://del.icio.us/post?url={{encodeURI(currentQuestion.url)}}" target="_blank" style="margin:0px; padding:0px;"><img src="https://sharenice.org/images/delicious_com.png" alt="delicious.com_icon" title="delicious.com"></a></button>
+
+        <!--
+        <li class="btn" tooltip="Digg" tooltip-placement="bottom"><a ng-href="http://digg.com/submit?phase=2&amp;url={{encodeURI(currentQuestion.url)}}" target="_blank"><img src="https://sharenice.org/images/digg_com.png" alt="digg.com_icon" title="digg.com"></a></li>
+        -->
       </ul>
     </div>
     <div class="modal-footer">

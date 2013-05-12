@@ -6,7 +6,8 @@
   'questionStore'
   '$timeout'
   '$routeParams'
-  ($scope, $window, config, qStore, $timeout, $routeParams) ->
+  '$location'
+  ($scope, $window, config, qStore, $timeout, $routeParams, $location) ->
 
     #
     # Exercise tab panes
@@ -81,6 +82,8 @@
         exName: name
         topicId: topicId
         topic: config.topicTitleById topicId
+        seed: seed
+        url: $location.host()+':'+$location.port() + '/#mathmo/' + seed
         graph: if maker.fn? then maker.fn.toString() else 'no fn'
         q:qa[0]
         a:qa[1]
@@ -118,6 +121,7 @@
       console.log "a=", qa[1]
 
       question.graph = if maker.fn? then maker.fn.toString() else 'no fn'
+      question.url = $location.absUrl() + '/' + seed
       question.q = qa[0]
       question.a = qa[1]
       question.f = qa[2]
@@ -205,20 +209,28 @@
           qNo = +$routeParams.q
 
         # if we have a shared question in the url
-        if cmd=='share' && ex && topic && !isNaN(qNo)
+        switch cmd
+        case 'help'
+          help = angular.element 'helpTab'
+          help.active = true
 
-          # create a shared pane unless it already exists
-          pane = $scope.addQSet('shared')
+        case 'share'
+          if ex && topic && !isNaN(qNo)
 
-          # append the shared question to it unless it already exists
-          # note that the full form of a topic is TopicId[:qNo:ExerciseName]
-          topicId = "#{topic}:#{qNo}:#{ex}"
-          if (pane.qSet.indexOf(topicId) < 0)
-            $scope.appendQ topicId, pane
+            # create a shared pane unless it already exists
+            pane = $scope.addQSet('shared')
 
-          # now retrieve any previously shared questions, suppressing any
-          pane.qSet.forEach (topic) ->
-            retrieveQ topic, pane    
+            pane.active = true
+
+            # append the shared question to it unless it already exists
+            # note that the full form of a topic is TopicId[:qNo:ExerciseName]
+            topicId = "#{topic}:#{qNo}:#{ex}"
+            if (pane.qSet.indexOf(topicId) < 0)
+              $scope.appendQ topicId, pane
+
+            # now retrieve any previously shared questions, suppressing any
+            pane.qSet.forEach (topic) ->
+              retrieveQ topic, pane    
 
 
     #
@@ -229,12 +241,18 @@
     #
     # Sharing dialog
     #
-    $scope.openShare = -> $scope.shareOpen = true
+    $scope.openShare = (qa) ->
+      $scope.currentQuestion = qa
+      $scope.shareOpen = true
+      $scope.shareText = '#mathmo #nrichmaths Working on '+qa.url
+
     $scope.closeShare = -> $scope.shareOpen = false;
 
     $scope.shareOpts =
       backdropFade: true
       dialogFade:true
+
+    $scope.encodeURI = $window.encodeURIComponent
 
     #
     # About dialog
