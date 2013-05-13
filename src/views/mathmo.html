@@ -1,7 +1,7 @@
 <div ng-controller="mathmoController" class="mathmo">
 
-  <div class="well well-large" style="margin-top:15px;background-image:url('/scripts/pubs/mathmo/img/well.png')">
-    <h1><img src="scripts/pubs/mathmo/img/icon.png" style="width:60px;height:60px"> Mathmo</h1>
+  <div class="well well-large" style="margin-top:15px;background-image:url('scripts/pubs/mathmo/img/well.png')">
+    <h1><img src="scripts/pubs/mathmo/img/icon.png" style="width:60px;height:60px"> Mathmo <span style="font-size:18px" app-version></span></h1>
     <p>An exercise generator for A-level mathematics</p>
     <form name="addQSetForm">
 
@@ -10,7 +10,6 @@
         <button class="btn btn-primary" ng-disabled="!addQSetForm.name.$valid"  ng-click="addQSet()"><i class="icon-plus icon-white"></i> Exercise</button>
 
         <input type="text" name="name" placeholder="name" required ng-model="exercise.name" ng-minlength="4" ng-maxlength="10" size="12" tooltip="Enter a 4 to 10 character name" tooltip-placement='top'></input>
-
 
       </div>
       <p><small>Enter an exercise name and press <span class="label label-info">+ Exercise</span> to start.</small></p>
@@ -50,7 +49,7 @@
         <button class="btn btn-danger" tooltip="Delete exercise {{pane.name}}" tooltip-placement="left" style="float:right" ng-click="delQSet($index)"><i class="icon-remove icon-white"></i></button>
       </div>
       -->
-      <div ng-repeat="qa in pane.questions" class="well well-large">
+      <div ng-repeat="qa in pane.questions" class="well well-large" style="background-color:#F4F9F8">
         <h5 style="float:left">Q{{$index+1}}: {{qa.topic}}</h5>
         <div class="btn-group pull-right" tooltip="Similar questions" tooltip-placement="top">
           <button class="btn" ng-click="prevOnTopic(qa, $index)">Prev</button>

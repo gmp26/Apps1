@@ -78,12 +78,14 @@
       console.log "q=", qa[0]
       console.log "a=", qa[1]
 
+      path = if ('' + $location.port() == '80') then '/mathmoApp' else ''
+
       question = {
         exName: name
         topicId: topicId
         topic: config.topicTitleById topicId
         seed: seed
-        url: $location.host()+':'+$location.port() + '/#mathmo/' + seed
+        url: 'http://' + $location.host() + ':' + $location.port() + path + '/#/mathmo/share/' + seed
         graph: if maker.fn? then maker.fn.toString() else 'no fn'
         q:qa[0]
         a:qa[1]
