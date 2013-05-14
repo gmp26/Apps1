@@ -4,9 +4,12 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <title> Mathmo </title>
-    <meta name="description" content="Sample only" />
+    <meta name="description" content="mathematics A-level question generator fluency syllabus curriculum answer" />
     <meta name="viewport" content="width=device-width" initial-scale="1.0"/>
-    <meta name="author" content="angular team"/>
+    <meta name="author" content="NRICH team"/>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta names="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <link rel="apple-touch-icon-precomposed" href="/mathmoApp/scripts/pubs/mathmo/img/icon.png"/>
     <% if (config.environment === 'prod') { %>
       <link rel="stylesheet" href="styles/styles.min.css?_=v<%= config.uniqueVersion() %>" />
 
@@ -23,7 +26,12 @@
   </head>
 
   <body ng-cloak class="ng-cloak">
-
+    <div ng-show="false">
+      <section>
+        <h1>Mathmo interactive A-level workbook</h1>
+        <p>Mathmo generates an endless number of A-level mathematics questions for the UK A-level mathematics syllabus which you can use to improve your fluency.</p>
+      </section>
+    </div>
     <div class="wrapper">
       <!--
       <div class="navbar navbar-static-top">
