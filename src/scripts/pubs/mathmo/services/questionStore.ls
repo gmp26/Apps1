@@ -43,21 +43,13 @@ angular.module('app').factory 'questionStore', [
       qSets = JSON.parse localStore.qSets
       set = qSets[name]
       if set
+        # copy the exercise, while editing qNo for question at topicId
         qSets[name] = set.map (q) ->
           if q.indexOf(topicId) == 0
             parts = q.split \:
             parts[1] = qNo
             q = parts.join \:
           return q
-
-        /*
-        [question] = for q, i in set when q.indexOf(topicId) == 0
-          [q,i]
-        parts = question[0].split '/'
-        parts[1] = qNo
-        question[0] = parts.join '/'
-        set[question[1]] = question[0]
-        */
         localStore.qSets = JSON.stringify qSets
 
     # Save this question set in local storage by name
