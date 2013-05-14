@@ -56,11 +56,15 @@
       name = pane.name
       qNo = startQNumber
 
-      # some questions may have 3 part ids
+      # some questions may have 2 or 3 part ids
       parts = topicId.split \:
-      if parts.length == 3
-        [topicId, qNo, name] = parts
+      if parts.length == 2
+        [topicId, qNo] = parts
         qNo = +qNo
+      else
+        if parts.length == 3
+          [topicId, qNo, name] = parts
+          qNo = +qNo
 
       topicCounts[name] ||= {}
       topicCounts[name][topicId] = qNo
@@ -101,7 +105,7 @@
       pane.questions.push question
       $scope.renderMath()
 
-    similarQ = (question, index, inc) ->
+    similarQ = (question, inc) ->
       name = question.exName
       topicId = question.topicId
 
@@ -110,6 +114,7 @@
 
       j = (topicCounts[name][topicId] += inc)
 
+      qStore.updateQ(name, topicId, j)
       seed = name+'/'+topicId+'/'+j
 
       console.log "similar seed = #seed"
@@ -124,6 +129,7 @@
 
       question.graph = if maker.fn? then maker.fn.toString() else 'no fn'
       question.url = $location.absUrl() + '/' + seed
+      question.seed = seed
       question.q = qa[0]
       question.a = qa[1]
       question.f = qa[2]
@@ -132,11 +138,11 @@
 
       $scope.renderMath()
 
-    $scope.prevOnTopic = (qa, index) ->
-      similarQ(qa, index, -1)
+    $scope.prevOnTopic = (qa) ->
+      similarQ(qa, -1)
     
-    $scope.nextOnTopic = (qa, index) ->
-      similarQ(qa, index, +1)
+    $scope.nextOnTopic = (qa) ->
+      similarQ(qa, +1)
     
     $scope.topicAvailable = (topicId) ->
       pane = $scope.activePane

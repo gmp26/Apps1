@@ -52,14 +52,14 @@
       <div ng-repeat="qa in pane.questions" class="well well-large" style="background-color:#F4F9F8">
         <h5 style="float:left">Q{{$index+1}}: {{qa.topic}}</h5>
         <div class="btn-group pull-right" tooltip="Similar questions" tooltip-placement="top">
-          <button class="btn" ng-click="prevOnTopic(qa, $index)">Prev</button>
-          <button class="btn" ng-click="nextOnTopic(qa, $index)">Next</button>
+          <button class="btn" ng-click="prevOnTopic(qa)">Prev</button>
+          <button class="btn" ng-click="nextOnTopic(qa)">Next</button>
         </div>
         <p ng-bind-html-unsafe="qa.q" style="clear:both"></p>
   
         <button class="btn pull-right" 
           ng-click="openShare(qa)"
-          tooltip="Share {{qa.seed}}"
+          tooltip="Seed {{qa.seed}}"
           tooltip-placement="top"
         >
           <i class="icon-share"></i> Share
