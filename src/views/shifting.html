@@ -1,0 +1,97 @@
+<div ng-controller="shiftingController">
+
+  <div class="header">
+    <h2>shifting <a href="http://nrich.maths.org/{{resourceId}}">NRICH {{resourceId}}</a></h2>
+  </div>
+
+	<form class="form-inline">
+		<label class="control-label" for="reds">Find a way to swap the </label>
+    <input id="reds" type="number" min="1" max="9" ng-model="_red" class="shiftinginput">
+    <label class="control-label" for="blues">red and </label>
+    <input id="blues" type="number" min="1" max="9" ng-model="_blue" class="shiftinginput">
+    <label class="control-label">blue shifting.</label>
+	</form>
+
+
+<!--
+    <div resize-from="(_red + _blue + 1)*105" woff="100" class="shifting-space well">
+      <div shifting ng-repeat="shifting in shifting"></div>
+    </div>
+-->
+
+  <div shifting woff="20"
+    class="shifting-space well" 
+    style="width: {{(_red + _blue + 1)*100}}px"
+  ></div>
+
+  <p>You have made {{ moves.list.length }} moves.</p>
+  <div ng-show="done && single">
+    <p ng-hide="minimum">You could have swapped the shifting in fewer moves. Have another go.</p>
+    <p ng-show="minimum">Well done, you have swapped all the shifting in the minimum number of moves!</p>
+  </div>
+
+  <div>
+    <button  type="button" class="btn" ng-click = "reset()" tooltip="Start again" tooltip-placement="bottom">
+      <i class="icon-fast-backward" ></i> Reset
+    </button>
+    <button type="button" class="btn" ng-click = "replay()" tooltip="Replay moves to this point" tooltip-placement="bottom">
+      <i class="icon-repeat" ></i> Replay
+    </button>
+  </div>
+
+  <hr />
+  <div ng-show="showReplay">
+
+    <h5>Replay list</h5>
+
+    <div class="input-append">
+      <input ng-model="moves.tag" placeholder="enter name" type="text">
+      <button type="button" class="btn" 
+        ng-click = "save()"
+        ng-disabled = "!done"
+        tooltip="Add moves to replay list" tooltip-placement="bottom">
+        <i class="icon-plus"></i>
+      </button>
+    </div>
+
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <td>Name</td>
+          <td>shifting</td>
+          <td>Moves</td>
+          <td></td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="saved in savedMoves">
+          <td>
+            {{saved.tag}}
+          </td>
+          <td>
+            {{saved.red}},{{saved.blue}}
+          </td>
+          <td>
+            {{saved.list.length}}
+          </td>
+          <td>
+            <button type="btn" ng-click="replay($index)" tooltip="Replay" tooltip-placement="bottom"/>
+              <i class="icon-repeat"></i>
+            </button>
+            <button type="btn" ng-click="forget($index)" tooltip="Remove" tooltip-placement="bottom"/>
+              <i class="icon-remove"></i>
+            </button>
+          </td>
+        </tr>
+        <tr ng-show="savedMoves.length">
+          <td></td>
+          <td></td>
+          <td></td>
+          <td>
+            <button type="button" class="btn btn-danger" tooltip="clear playlist" tooltip-placement="left" ng-click="clear()"><i class="icon-remove icon-white"></i></button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
