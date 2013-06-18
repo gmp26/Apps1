@@ -48,7 +48,6 @@ Enter the following commands in the terminal.
 
 1. `git clone git://github.com/gmp26/Apps1.git`
 1. `cd Apps1`
-1. `git checkout d3`
 1. `npm install`
 
 ## Compile Apps1
