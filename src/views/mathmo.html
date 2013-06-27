@@ -56,8 +56,8 @@
           <button class="btn" ng-click="nextOnTopic(qa)">Next</button>
         </div>
         <p ng-bind-html-unsafe="qa.q" style="clear:both"></p>
-  
-        <button class="btn pull-right" 
+
+        <button class="btn pull-right"
           ng-click="openShare(qa)"
           tooltip="Seed {{qa.seed}}"
           tooltip-placement="top"
@@ -73,7 +73,7 @@
             <i class="icon-chevron-up"></i> hide answer
           </span>
         </a>
- 
+
         <!--<div collapse="qa.isCollapsed">-->
         <div ng-hide="qa.isCollapsed">
            <div ng-switch on="qa.isGraph()" >
@@ -118,7 +118,7 @@
   <hr/>
 
   <div class="well" style="padding-bottom:28px">
-    Copyright University of Cambridge
+    Copyright &copy; University of Cambridge
     <button class="btn btn-danger" style="float:right" tooltip="delete all exercises" tooltip-placement="top" ng-click="clearAll()">Clear all</button>
     <span style="float:right">&nbsp;</span>
     <button class="btn btn-info" style="float:right" tooltip="Credits etc." tooltip-placement="top"  ng-click="openAbout()">About</button>
@@ -182,7 +182,7 @@
       <br>
 
       <h3>Updates</h3>
-      Mathmo is a web application, and should update itself when you reload the app after it has been updated on the server. 
+      Mathmo is a web application, and should update itself when you reload the app after it has been updated on the server.
       <a href="http://nrich.maths.org/7088" target="_blank">Further info here</a>.
 
       <h3>Credits</h3>
@@ -198,10 +198,10 @@
       </p>
 
       <p>
-      Mathmo is now based on <a href="http://angularjs.org">Angular</a>, 
+      Mathmo is now based on <a href="http://angularjs.org">Angular</a>,
       <a href="http://angular-ui.github.io/bootstrap">Angular UI Bootstrap</a>,
-      the <a href="d3js.org">d3 SVG toolkit</a> from Mike Bostock, and the
-      <a href="http://www.mathjax.org/">MathJAX library</a> for TeX rendering.
+      the <a href="http://d3js.org">d3 SVG toolkit</a> from Mike Bostock, and the
+      <a href="http://www.mathjax.org/">MathJax library</a> for TeX rendering.
       </p>
 
       <h3>License</h3>
