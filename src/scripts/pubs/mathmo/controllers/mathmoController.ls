@@ -31,7 +31,7 @@
 
     #
     # question seeding
-    # 
+    #
     topicCounts = {}
     startQNumber = 1000
 
@@ -51,7 +51,7 @@
         MathJax.Hub.Queue ["Typeset", MathJax.Hub]
       , 10
 
-    retrieveQ = (topicId, pane) ->
+    $scope.retrieveQ = (topicId, pane) ->
 
       name = pane.name
       qNo = startQNumber
@@ -105,6 +105,61 @@
       pane.questions.push question
       $scope.renderMath()
 
+    $scope.testQ = (topicId, pane) ->
+
+      name = pane.name
+      qNo = startQNumber
+
+      # some questions may have 2 or 3 part ids
+      parts = topicId.split \:
+      if parts.length == 2
+        [topicId, qNo] = parts
+        qNo = +qNo
+      else
+        if parts.length == 3
+          [topicId, qNo, name] = parts
+          qNo = +qNo
+
+      topicCounts[name] ||= {}
+      topicCounts[name][topicId] = qNo
+
+      seed = name+'/'+topicId+'/'+topicCounts[name][topicId]
+
+      # console.log "seed = #seed"
+
+      Math.seedrandom seed
+
+      maker = config.topicMakerById topicId
+      qa = maker()
+
+      # console.log "q=", qa[0]
+      # console.log "a=", qa[1]
+
+      path = if ('' + $location.port() == '80') then '/mathmoApp' else ''
+
+      question = {
+        exName: name
+        topicId: topicId
+        topic: config.topicTitleById topicId
+        seed: seed
+        url: 'http://' + $location.host() + ':' + $location.port() + path + '/#/mathmo/share/' + seed
+        graph: if maker.fn? then maker.fn.toString() else 'no fn'
+        q:qa[0]
+        a:qa[1]
+        f:qa[2]
+        g:qa[3]
+        isCollapsed: true
+        toggle: ->
+          @isCollapsed = !@isCollapsed
+        isGraph: ->
+          if @a.indexOf(gPrefix) == 0 then 'graph' else 'html'
+      }
+      question.graphData = qa[2](qa[3]) if question.isGraph()=='graph'
+
+      [qa[0], qa[1]]
+      # pane.questions.push question
+      # $scope.renderMath()
+
     similarQ = (question, inc) ->
       name = question.exName
       topicId = question.topicId
@@ -140,10 +195,10 @@
 
     $scope.prevOnTopic = (qa) ->
       similarQ(qa, -1)
-    
+
     $scope.nextOnTopic = (qa) ->
       similarQ(qa, +1)
-    
+
     $scope.topicAvailable = (topicId) ->
       pane = $scope.activePane
       return not topicCounts[pane.name]?[topicId]?
@@ -153,7 +208,7 @@
         pane = $scope.activePane
       qStore.appendQ pane.name, topicId
       retrieveQ(topicId, pane)
-    
+
     qStore.list().forEach (name) ->
       p = {
         name: name
@@ -206,7 +261,7 @@
       qNo = 0
       if $routeParams
         $scope.resourceId = $routeParams.id ? 7088
-        $scope.single = $routeParams.users != "class" 
+        $scope.single = $routeParams.users != "class"
         if $routeParams.cmd?
           cmd = $routeParams.cmd
         if $routeParams.x?
@@ -238,14 +293,14 @@
 
             # now retrieve any previously shared questions, suppressing any
             pane.qSet.forEach (topic) ->
-              retrieveQ topic, pane    
+              retrieveQ topic, pane
 
 
     #
     # set up sharing tab if needed
     #
     addSharingTab($routeParams)
-    
+
     #
     # Sharing dialog
     #
