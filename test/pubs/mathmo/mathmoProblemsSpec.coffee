@@ -57,8 +57,8 @@ describe "mathmoController", ->
     [
       "makeVector"
       "C5"
-      "Consider the four vectors$$\\mathbf{A}=\\left(\\begin{array}{c}-9\\\\0\\\\2\\end{array}\\right), \\mathbf{B}=\\left(\\begin{array}{c}-8\\\\-8\\\\4\\end{array}\\right)$$$$\\mathbf{C}=\\left(\\begin{array}{c}9\\\\0\\\\-2\\end{array}\\right), \\mathbf{D}=\\left(\\begin{array}{c}1\\\\-2\\\\5\\end{array}\\right)$$<ol style=\"list-style-type:lower-roman\"><li>Order the vectors by magnitude.</li><li>Use the scalar product<br>to find the angles between<ol style=\"list-style-type:lower-alpha\"><li>\\(\\mathbf{D}\\) and \\(\\mathbf{C}\\),</li><li>\\(\\mathbf{C}\\) and \\(\\mathbf{B}\\)</li></ol></ol>"
-      "<ol style=\"list-style-type:lower-roman\"><li>\\(|\\mathbf{B}|=\\sqrt{144}, |\\mathbf{A}|=\\sqrt{85},\\)<br>\\( |\\mathbf{C}|=\\sqrt{85}, |\\mathbf{D}|=\\sqrt{30}\\).</li><li><ol style=\"list-style-type:lower-alpha\"><li>\\(\\arccos\\left(\\frac{-1}{5\\sqrt{102}}\\right)\\)</li><li>\\(\\arccos\\left(\\frac{-20}{3\\sqrt{85}}\\right)\\)</li></ol></li></ol>"
+      "Consider the four vectors$$\\mathbf{A}=\\left(\\begin{array}{c}-9\\\\0\\\\2\\end{array}\\right), \\mathbf{B}=\\left(\\begin{array}{c}-8\\\\-8\\\\4\\end{array}\\right)$$$$\\mathbf{C}=\\left(\\begin{array}{c}9\\\\0\\\\-2\\end{array}\\right), \\mathbf{D}=\\left(\\begin{array}{c}1\\\\-2\\\\5\\end{array}\\right)$$<ol class=\"exercise\"><li>Order the vectors by magnitude.</li><li>Use the scalar product<br>to find the angles between<ol class=\"exercise\"><li>\\(\\mathbf{D}\\) and \\(\\mathbf{C}\\),</li><li>\\(\\mathbf{C}\\) and \\(\\mathbf{B}\\)</li></ol></ol>"
+      "<ol class=\"exercise\"><li>\\(|\\mathbf{B}|=\\sqrt{144}, |\\mathbf{A}|=\\sqrt{85},\\)<br>\\( |\\mathbf{C}|=\\sqrt{85}, |\\mathbf{D}|=\\sqrt{30}\\).</li><li><ol style=\"list-style-type:lower-alpha\"><li>\\(\\arccos\\left(\\frac{-1}{5\\sqrt{102}}\\right)\\)</li><li>\\(\\arccos\\left(\\frac{-20}{3\\sqrt{85}}\\right)\\)</li></ol></li></ol>"
     ]
     [
       "makeLines"
@@ -262,8 +262,8 @@ describe "mathmoController", ->
     [
       "makeCArithmetic"
       "F1"
-      "Given \\(z=i\\) and \\(w=2\\sqrt{3} -2i\\), compute:<ul style=\"list-style-type: lower-roman;\"><li>\\(z+w\\)</li><li>\\(z\\times w\\)</li><li>\\(\\frac{z}{w}\\)</li><li>\\(\\frac{w}{z}\\)</li></ul>"
-      "<ul style=\"list-style-type: lower-roman;\"><li>\\(2\\sqrt{3} -i\\)</li><li>\\(2 + 2\\sqrt{3}i\\)</li><li>\\(-\\frac{1}{8} + \\frac{\\sqrt{3}}{8}i\\)</li><li>\\(-2 -2\\sqrt{3}i\\)</li></ul>"
+      "Given \\(z=i\\) and \\(w=2\\sqrt{3} -2i\\), compute:<ul class=\"exercise\"><li>\\(z+w\\)</li><li>\\(z\\times w\\)</li><li>\\(\\frac{z}{w}\\)</li><li>\\(\\frac{w}{z}\\)</li></ul>"
+      "<ul class=\"exercise\"><li>\\(2\\sqrt{3} -i\\)</li><li>\\(2 + 2\\sqrt{3}i\\)</li><li>\\(-\\frac{1}{8} + \\frac{\\sqrt{3}}{8}i\\)</li><li>\\(-2 -2\\sqrt{3}i\\)</li></ul>"
     ]
     [
       "makeCPolar"
@@ -280,8 +280,8 @@ describe "mathmoController", ->
     [
       "makeMatrix2"
       "F4"
-      "Let $$A=\\left(\\begin{array}{cc}5&-4\\\\-5&1\\end{array}\\right)$$ $$B=\\left(\\begin{array}{cc}-4&2\\\\5&3\\end{array}\\right)$$.Compute: <ul style=\"list-style-type: lower-roman;\"><li>\\(A+B\\)</li><li>\\(A \\times B\\)</li><li>\\(B^{-1}\\)</li></ul>"
-      "<ul style=\"list-style-type: lower-roman;\"><li>\\(\\left(\\begin{array}{cc}1&-2\\\\0&4\\end{array}\\right)\\)</li><li>\\(\\left(\\begin{array}{cc}-40&-2\\\\25&-7\\end{array}\\right)\\)</li><li>\\(\\left(\\begin{array}{cc}-\\frac{3}{22}&\\frac{1}{11}\\\\\\frac{5}{22}&\\frac{2}{11}\\end{array}\\right)\\)</li></ul>"
+      "Let $$A=\\left(\\begin{array}{cc}5&-4\\\\-5&1\\end{array}\\right)$$ $$B=\\left(\\begin{array}{cc}-4&2\\\\5&3\\end{array}\\right)$$.Compute: <ul class=\"exercise\"><li>\\(A+B\\)</li><li>\\(A \\times B\\)</li><li>\\(B^{-1}\\)</li></ul>"
+      "ul class=\"exercise\"><li>\\(\\left(\\begin{array}{cc}1&-2\\\\0&4\\end{array}\\right)\\)</li><li>\\(\\left(\\begin{array}{cc}-40&-2\\\\25&-7\\end{array}\\right)\\)</li><li>\\(\\left(\\begin{array}{cc}-\\frac{3}{22}&\\frac{1}{11}\\\\\\frac{5}{22}&\\frac{2}{11}\\end{array}\\right)\\)</li></ul>"
     ]
     [
       "makeTaylor"
@@ -298,20 +298,20 @@ describe "mathmoController", ->
     [
       "makeMatrix3"
       "F7"
-      "Let $$A=\\left(\\begin{array}{ccc}3&1&2\\\\3&-3&1\\\\3&-4&-2\\end{array}\\right)$$ $$B=\\left(\\begin{array}{ccc}-4&-2&2\\\\-2&-2&3\\\\-3&3&2\\end{array}\\right)$$.Compute: <ul style=\"list-style-type: lower-roman;\"><li>\\(A+B\\)</li><li>\\(A \\times B\\)</li><li>\\(B^{-1}\\)</li></ul>"
-      "<ul style=\"list-style-type: lower-roman;\"><li>\\(\\left(\\begin{array}{ccc}-1&-1&4\\\\1&-5&4\\\\0&-1&0\\end{array}\\right)\\)</li><li>\\(\\left(\\begin{array}{ccc}-20&-2&13\\\\-9&3&-1\\\\2&-4&-10\\end{array}\\right)\\)</li><li>\\(\\left(\\begin{array}{ccc}-\\frac{13}{38}&\\frac{5}{19}&-\\frac{1}{19}\\\\-\\frac{5}{38}&-\\frac{1}{19}&\\frac{4}{19}\\\\-\\frac{6}{19}&\\frac{9}{19}&\\frac{2}{19}\\end{array}\\right)\\)</li></ul>"
+      "Let $$A=\\left(\\begin{array}{ccc}3&1&2\\\\3&-3&1\\\\3&-4&-2\\end{array}\\right)$$ $$B=\\left(\\begin{array}{ccc}-4&-2&2\\\\-2&-2&3\\\\-3&3&2\\end{array}\\right)$$.Compute: <ul class=\"exercise\"><li>\\(A+B\\)</li><li>\\(A \\times B\\)</li><li>\\(B^{-1}\\)</li></ul>"
+      "<ul class=\"exercise\"><li>\\(\\left(\\begin{array}{ccc}-1&-1&4\\\\1&-5&4\\\\0&-1&0\\end{array}\\right)\\)</li><li>\\(\\left(\\begin{array}{ccc}-20&-2&13\\\\-9&3&-1\\\\2&-4&-10\\end{array}\\right)\\)</li><li>\\(\\left(\\begin{array}{ccc}-\\frac{13}{38}&\\frac{5}{19}&-\\frac{1}{19}\\\\-\\frac{5}{38}&-\\frac{1}{19}&\\frac{4}{19}\\\\-\\frac{6}{19}&\\frac{9}{19}&\\frac{2}{19}\\end{array}\\right)\\)</li></ul>"
     ]
     [
       "makeFurtherVector"
       "F8"
-      "Let \\(a=\\left(\\begin{array}{c}2\\\\2\\\\-5\\end{array}\\right)\\), \\(b=\\left(\\begin{array}{c}-2\\\\-3\\\\1\\end{array}\\right)\\), \\(c=\\left(\\begin{array}{c}3\\\\3\\\\-3\\end{array}\\right)\\). Calculate: <ul style=\"list-style-type: lower-roman;\"><li>the vector product, \\(a\\wedge b\\),</li><li>the scalar triple product, \\([a, b, c]\\).</li></ul>"
-      "<ul style=\"list-style-type: lower-roman;\"><li>\\(\\left(\\begin{array}{c}-13\\\\8\\\\-2\\end{array}\\right)\\)</li><li>\\(-9\\)</li></ul>"
+      "Let \\(a=\\left(\\begin{array}{c}2\\\\2\\\\-5\\end{array}\\right)\\), \\(b=\\left(\\begin{array}{c}-2\\\\-3\\\\1\\end{array}\\right)\\), \\(c=\\left(\\begin{array}{c}3\\\\3\\\\-3\\end{array}\\right)\\). Calculate: <ul class=\"exercise\"><li>the vector product, \\(a\\wedge b\\),</li><li>the scalar triple product, \\([a, b, c]\\).</li></ul>"
+      "<ul class=\"exercise\"><li>\\(\\left(\\begin{array}{c}-13\\\\8\\\\-2\\end{array}\\right)\\)</li><li>\\(-9\\)</li></ul>"
     ]
     [
       "makeNewtonRaphson"
       "F9"
       "Use the Newton-Raphson method to find the first \\(4m\\) iterates in solving \\(x^2 - 2x - 1 = \\cos(x)\\) with \\(x_0 = 3\\)."
-      "Iteration: $$x_{n+1}=x_{n}-\\frac{\\cos(x_n)- x^2 + 2x + 1}{-\\sin(x_n)- 2x + 2}$$$$x_{1} = 2.277974922054657$$$$x_{2} = 2.1926616449298555$$$$x_{3} = 2.1911000725687817$$$$x_{4} = 2.1910995316432778$$"
+      "Iteration: \\begin{align*} x_{n+1}&=x_{n}-\\frac{\\cos(x_n)- x^2 + 2x + 1}{-\\sin(x_n)- 2x + 2} \\\\[10pt]x_{1} &= 2.277974922054657\\\\x_{2} &= 2.1926616449298555\\\\x_{3} &= 2.1911000725687817\\\\x_{4} &= 2.1910995316432778\\\\\\end{align*}"
     ]
     [
       "makeFurtherIneq"
@@ -359,7 +359,7 @@ describe "mathmoController", ->
     [
       "makeHypTest"
       "S3"
-      "In a hypothesis test, the null hypothesis \\({\\rm H}_0\\) is that \\(X\\) is normally distributed, with \\(\\mu = 5\\). The alternative hypothesis \\({\\rm H}_1\\) is that \\(\\mu<5\\). The significance level is \\(1\\%\\). A sample of size \\(13\\) is drawn from \\(X\\), and its sum \\(\\sum{x} = 40.351\\). The sum of squares, \\(\\sum{x^2} = 267.698\\). Compute: <ul style=\"list-style-type: lower-roman;\"><li>\\(\\overline{x}\\)</li><li>Compute an estimate, \\(S^2\\), of the variance of \\(X\\)</li><li>Is \\({\\rm H}_0\\) accepted?</li></ul>"
+      "In a hypothesis test, the null hypothesis \\({\\rm H}_0\\) is that \\(X\\) is normally distributed, with \\(\\mu = 5\\). The alternative hypothesis \\({\\rm H}_1\\) is that \\(\\mu<5\\). The significance level is \\(1\\%\\). A sample of size \\(13\\) is drawn from \\(X\\), and its sum \\(\\sum{x} = 40.351\\). The sum of squares, \\(\\sum{x^2} = 267.698\\). Compute: <ul class=\"exercise\"><li>\\(\\overline{x}\\)</li><li>Compute an estimate, \\(S^2\\), of the variance of \\(X\\)</li><li>Is \\({\\rm H}_0\\) accepted?</li></ul>"
       "<li>\\(\\overline{x} = 3.104\\)</li><li>\\(S^2 = 11.871\\). Under \\({\\rm H}_0\\), \\({\\frac{\\overline{X}-5}{0.956}}\\sim t_{12}\\)</li><li>The critical region is \\(\\overline{x}<2.438\\); </br />\\({\\rm H}_0\\) is accepted.</li></ul>"
     ]
     [
@@ -371,18 +371,16 @@ describe "mathmoController", ->
     [
       "makeChiSquare"
       "S5"
-      "The random variable \\(X\\) is modelled by a <i>normal</i> distribution. A sample of size \\(55\\) is drawn from \\(X\\) with the following grouped frequency data. <div style=\"font-size: 80%;\">$$\\begin{array}{c|r}x&\\mbox{Frequency}\\\\x < -1&4\\\\-1\\le x <1&5\\\\1\\le x <3&3\\\\3\\le x <5&10\\\\5\\le x <7&12\\\\7\\le x <9&8\\\\9\\le x <11&6\\\\11\\le x <13&6\\\\13\\le x <15&0\\\\15\\le x <17&0\\\\17\\le x <19&0\\\\19\\le x&1\\\\\\end{array}$$</div><ul style=\"list-style-type: lower-roman;\"><li>Estimate the parameters of the distribution.</li><li>Use a \\(\\chi^2\\) test, with a significance level of \\(99\\)%, to test this hypothesis.</li></ul>"
-      "<ol style=\"list-style-type: lower-roman;\"><li>$$\\mu=5.927, \\sigma=4.438.$$</li><li></li></ol><div style=\"font-size: 80%;\">$$\\begin{array}{c||r|r|r}x&O_i&E_i&\\frac{(O_i-E_i)^2}{E_i}\\\\x < 1&9&7.342&0.374\\\\1\\le x <3&3&6.680&2.027\\\\3\\le x <5&10&8.947&0.124\\\\5\\le x <7&12&9.768&0.510\\\\7\\le x <9&8&8.817&0.076\\\\9\\le x <11&6&6.476&0.035\\\\11\\le x&7&6.970&0.000\\\\\\end{array}$$</div>$$\\chi^2 = 3.146$$$$\\nu = 4$$Critical region: \\(\\chi^2 >13.28\\)<br />The hypothesis is accepted."
+      "The random variable \\(X\\) is modelled by a <i>normal</i> distribution. A sample of size \\(55\\) is drawn from \\(X\\) with the following grouped frequency data. <div style=\"font-size: 80%;\">$$\\begin{array}{c|r}x&\\mbox{Frequency}\\\\x < -1&4\\\\-1\\le x <1&5\\\\1\\le x <3&3\\\\3\\le x <5&10\\\\5\\le x <7&12\\\\7\\le x <9&8\\\\9\\le x <11&6\\\\11\\le x <13&6\\\\13\\le x <15&0\\\\15\\le x <17&0\\\\17\\le x <19&0\\\\19\\le x&1\\\\\\end{array}$$</div><ul class=\"exercise\"><li>Estimate the parameters of the distribution.</li><li>Use a \\(\\chi^2\\) test, with a significance level of \\(99\\)%, to test this hypothesis.</li></ul>"
+      "<ol class=\"exercise\"><li>$$\\mu=5.927, \\sigma=4.438.$$</li><li></li></ol><div style=\"font-size: 80%;\">$$\\begin{array}{c||r|r|r}x&O_i&E_i&\\frac{(O_i-E_i)^2}{E_i}\\\\x < 1&9&7.342&0.374\\\\1\\le x <3&3&6.680&2.027\\\\3\\le x <5&10&8.947&0.124\\\\5\\le x <7&12&9.768&0.510\\\\7\\le x <9&8&8.817&0.076\\\\9\\le x <11&6&6.476&0.035\\\\11\\le x&7&6.970&0.000\\\\\\end{array}$$</div>$$\\chi^2 = 3.146$$$$\\nu = 4$$Critical region: \\(\\chi^2 >13.28\\)<br />The hypothesis is accepted."
     ]
     [
       "makeProductMomen"
       "S6"
-      "For the following data,<ul style=\"list-style-type: lower-roman;\"><li>compute the product moment correlation coefficient, \\({\\bf r}\\)</li><li>find the regression line of \\(y\\) on \\(x\\)$$\\begin{array}{c|c}x&y\\\\-0.005&-4.976\\\\-2.079&-4.368\\\\-1.276&-2.957\\\\2.534&-2.072\\\\-1.725&-4.288\\\\-2.534&-3.341\\\\0.347&-5.927\\\\-0.439&-2.561\\\\-2.235&-2.679\\\\1.095&-5.589\\\\-3.161&-3.771\\\\-4.049&-2.893\\\\\\end{array}$$</li></ul>"
-      "<ul style=\"list-style-type: lower-roman;\"><li>\\({\\bf r}=-0.198\\)</li><li>\\(y=-0.131x-3.932\\)."
+      "For the following data,<ul class=\"exercise\"><li>compute the product moment correlation coefficient, \\({\\bf r}\\)</li><li>find the regression line of \\(y\\) on \\(x\\)$$\\begin{array}{c|c}x&y\\\\-0.005&-4.976\\\\-2.079&-4.368\\\\-1.276&-2.957\\\\2.534&-2.072\\\\-1.725&-4.288\\\\-2.534&-3.341\\\\0.347&-5.927\\\\-0.439&-2.561\\\\-2.235&-2.679\\\\1.095&-5.589\\\\-3.161&-3.771\\\\-4.049&-2.893\\\\\\end{array}$$</li></ul>"
+      "<ul class=\"exercise\"><li>\\({\\bf r}=-0.198\\)</li><li>\\(y=-0.131x-3.932\\)."
     ]
   ]
-
-  # TODO CHeck which ones to remove because they provide graphical solutions
 
   console.log ""
   console.log "Starting mathmo unit tests"

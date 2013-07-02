@@ -7,7 +7,7 @@ var egparms=0;
 // Partial Fractions
 function makePartial()
 {
-	function makePartial1()
+	function makePartial1() // Two terms in the denominator
 	{
 		var a=randnz(8);
 		var b=new poly(1);b.setrand(8);
@@ -36,20 +36,20 @@ function makePartial()
 			c/=f;
 		}
 		if(b[1]==d[1]&&b[0]==d[0]) d[0]=-d[0];
-		
+
 		var aString=(a>0?"$$":"$$-")+"\\frac{"+Math.abs(a)+"}{"+b.write()+"}"+(c>0?"+":"-")+"\\frac{"+Math.abs(c)+"}{"+d.write()+"}$$";
-		
+
 		var bot=polyexpand(b, d);
 		b.xthru(c);
 		d.xthru(a);
 		b.addp(d);
-		
+
 		var qString="Express$$\\frac{"+b.write()+"}{"+bot.write()+"}$$in partial fractions.";
-		
+
 		var qa=[qString,aString];
 		return qa;
 	}
-	function makePartial2()
+	function makePartial2() // Three terms in the denominator
 	{
 		var m=distrandnz(3, 3);
 		var d=randnz(4),e=randnz(3),f=randnz(3);
@@ -81,7 +81,7 @@ function makeBinomial2()
 	p[0]=rand(1,5);
 	p[1]=randnz(6-p[0]);
 	var n=Math.round(3+Math.random()*(3-Math.max(0,Math.max(p[0]-3,p[1]-3))));
-	
+
 	var q=new poly(3);
 	q[0]=Math.pow(p[0],n);
 	q[1]=n*Math.pow(p[0],n-1)*p[1];
@@ -100,14 +100,14 @@ function makePolyInt()
 {
 	var A=rand(-3,2);
 	var B=rand(A+1,3);
-	
+
 	var a=new poly(3);
 	a.setrand(6);
 	var b=new fpoly(3);
 	b.setpoly(a);
 	var c=new fpoly(4);
 	b.integ(c);
-	
+
 	var qString="Evaluate$$\\int_\{"+A+"\}^\{"+B+"\}"+a.write()+"\\,\\mathrm{d}x$$";
 	var hi=c.compute(B);
 	var lo=c.compute(A);
@@ -115,7 +115,7 @@ function makePolyInt()
 	var ans=new frac(hi.top, hi.bot);
 	ans.add(lo.top, lo.bot);
 	var aString="$$"+ans.write()+"$$";
-	
+
 	var qa = [qString, aString];
 	return qa;
 }
@@ -179,7 +179,7 @@ function makeTrigInt()
 			soln[i]/=c;
 			soln[i+1]/=c;
 		}
-	} 
+	}
 	var aString="$$";
 	if(soln[0]&&soln[1]==1) aString+=soln[0];
 	else if(soln[0]>0) aString+="\\frac\{"+soln[0]+"\}\{"+soln[1]+"\}";
@@ -191,7 +191,7 @@ function makeTrigInt()
 	else if(soln[4]>0) aString+=(aString.length?"+":"")+"\\frac\{"+soln[4]+"\}\{"+soln[5]+"\}\\sqrt\{3\}";
 	else if(soln[4]<0) aString+="-\\frac\{"+(-soln[4])+"\}\{"+soln[5]+"\}\\sqrt\{3\}";
 
-	if(aString=="$$") 
+	if(aString=="$$")
 		aString += "0$$";
 	else
 		aString += "$$";
@@ -211,7 +211,7 @@ function makeVector()
 	{
 		A[i]=new vector(3);
 		A[i].setrand(10);
-	}	
+	}
 	var B=new Array(0,1,2,3);
 	for(i=0;i<3;i++)
 	{
@@ -224,17 +224,17 @@ function makeVector()
 		}
 	}
 	var v=distrand(3, 0, 3);
-	
+
 	//qString="Consider the four vectors$$\\begin\{array\}\{l\} \\mathbf\{A\}="+A[0].write()+", \\mathbf\{B\}="+A[1].write()+", \\mathbf\{C\}="+A[2].write()+", \\mathbf\{D\}="+A[3].write()+".\\\\ \\\\ \\mbox\{	(i) Order the vectors by magnitude.\}\\\\ \\\\ \\mbox\{	(ii) Use the scalar product to find the angles between (a) \}\\mathbf\{"+ntol(v[0])+"\} \\mbox\{ and \}\\mathbf\{"+ntol(v[1])+"\}, \\mbox\{(b) \}\\mathbf\{"+ntol(v[1])+"\} \\mbox\{ and \} \\mathbf\{"+ntol(v[2])+"\}.\\end\{array\}";
 	var qString = "Consider the four vectors";
 	qString += "$$\\mathbf{A}=" + A[0].write() + ", \\mathbf{B}=" + A[1].write() + "$$";
 	qString += "$$\\mathbf{C}=" + A[2].write() + ", \\mathbf{D}=" + A[3].write() + "$$";
-	qString += "<ol style=\"list-style-type:lower-roman\"><li>Order the vectors by magnitude.</li>";
+	qString += "<ol class=\"exercise\"><li>Order the vectors by magnitude.</li>";
 	qString += "<li>Use the scalar product<br>to find the angles between";
-	qString += "<ol style=\"list-style-type:lower-alpha\"><li>\\(\\mathbf{" + ntol(v[0]) + "}\\) and \\(\\mathbf{" + ntol(v[1]) + "}\\),</li>";
+	qString += "<ol class=\"exercise\"><li>\\(\\mathbf{" + ntol(v[0]) + "}\\) and \\(\\mathbf{" + ntol(v[1]) + "}\\),</li>";
 	qString += "<li>\\(\\mathbf{" + ntol(v[1]) + "}\\) and \\(\\mathbf{" + ntol(v[2]) + "}\\)</li></ol></ol>";
-	
-	var aString = "<ol style=\"list-style-type:lower-roman\"><li>";
+
+	var aString = "<ol class=\"exercise\"><li>";
 	aString += "\\(|\\mathbf{" + ntol(B[0]) + "}|=\\sqrt{" + A[B[0]].mag();
 	aString += "}, |\\mathbf{" + ntol(B[1]) + "}|=\\sqrt{" + A[B[1]].mag();
 	aString += "},\\)<br>\\( |\\mathbf{" + ntol(B[2]) + "}|=\\sqrt{" + A[B[2]].mag();
@@ -268,14 +268,14 @@ function makeVector()
 	else if(top2==1&&bot2.n==1&&bot2.a==1) aString+="0";
 	else if(top2==-1&&bot2.n==1&&bot2.a==1) aString+="\\pi";
 	else
-	{ 
+	{
 		aString += "\\arccos\\left(";
 		if(bot2.a==1&&bot2.n==1) aString+=top2;
 		else aString += "\\frac\{"+top2+"\}\{"+bot2.write()+"\}";
 		aString += "\\right)";
 	}
 	aString += "\\)</li></ol></li></ol>";
- 
+
 	var qa=[qString,aString];
 	return qa;
 }
@@ -290,7 +290,7 @@ function makeLines()
 	var e1=rand(3);
 	var f1=rand(3);
 	var a2,b2,c2,d2,e2,f2;
-	var ch=rand(1,10); 
+	var ch=rand(1,10);
 	if(ch<6)
 	{
 		a2=randnz(3);
@@ -365,7 +365,7 @@ function makeLines()
 
 	var qString="Consider the lines$$"+eqn1+"$$and$$"+eqn2+"$$Find the angle between them<br>and determine whether they<br>intersect.";
 	var aString = "";
-	
+
 	if(a1*b2==b1*a2&&b1*c2==c1*b2)
 	{
 		if(a2*b2*d1-b2*a1*d2==a2*b2*e1-a2*b1*e2&&b2*c2*e1-c2*b1*e2==b2*c2*f1-b2*c1*f2) {
@@ -475,9 +475,9 @@ function makeIneq()
 		var m=[a,b,c];
 		var r=ranking(m);
 		var aString="$$y < "+m[r[0]];
-		if(m[r[1]]!=m[r[2]]) 
+		if(m[r[1]]!=m[r[2]])
 			aString+="$$and$$"+m[r[1]]+" < y < "+m[r[2]] + "$$";
-		else 
+		else
 			aString+= "$$";
 		var qa=[qString,aString];
 		return qa;
@@ -495,8 +495,8 @@ function makeAP()
 	var a2=new frac();
 	var qString="An arithmetic progression has "+ordt(m)+" term \\(\\alpha\\) and "+ordt(n)+" term \\(\\beta\\). Find the ";
 	if(rand()==0)
-	{ 
-		qString+="sum to \\("+k+"\\) terms.";	
+	{
+		qString+="sum to \\("+k+"\\) terms.";
 		a1.set(k*(2*n-1-k),2*(n-m));
 		a2.set(k*(1+k-2*m),2*(n-m));
 	}
@@ -609,7 +609,7 @@ function makeQuadratic()
 	}
 	qString+="=0$$";
 	var qa=[qString,aString];
-	return qa;		
+	return qa;
 }
 
 function makeComplete()
@@ -693,7 +693,7 @@ function makeLog()
 	var qa;
 	switch(rand(1,3))
 	{
-		case 1:	
+		case 1:
 			qa=makeLog1();
 			break;
 		case 2:
@@ -702,13 +702,13 @@ function makeLog()
 		case 3:
 			qa=makeLog3();
 			break;
-	}		
-	return qa;				
+	}
+	return qa;
 }
 
 function makeStationary()
 {
-	function makeStationary2()
+	function makeStationary2() // Quadratics
 	{
 		var p=new poly(2);
 		p.set(randnz(4), randnz(8), randnz(4));
@@ -720,7 +720,7 @@ function makeStationary()
 		var qa=[qString,aString];
 		return qa;
 	}
-	function makeStationary3()
+	function makeStationary3() // Cubics
 	{
 		var p=new poly(3);
 		var d=randnz(4), c=randnz(3), b=randnz(3), a=randnz(5);
@@ -733,7 +733,7 @@ function makeStationary()
 		else aString="\\(x="+Math.min(a,b)+"\\), minimum, <br />and \\(x="+Math.max(a,b)+"\\), maximum";
 		var qa=[qString,aString];
 		return qa;
-	}	
+	}
 	var qa;
 	switch(rand(2,3))
 	{
@@ -742,9 +742,9 @@ function makeStationary()
 			break;
 		case 3:
 			qa=makeStationary3();
-			break;	 
+			break;
 	}
-	return qa;			
+	return qa;
 }
 
 function makeTriangle()
@@ -803,7 +803,7 @@ function makeTriangle()
 		aString+="\\right)$$";
 		var qa=[qString,aString];
 		return qa;
-	}	
+	}
 	var qa;
 	switch(rand(1,3))
 	{
@@ -815,10 +815,10 @@ function makeTriangle()
 			break;
 		case 3:
 			qa=makeTriangle3();
-			break;	 
-	}					 
+			break;
+	}
 	return qa;
-} 
+}
 
 function makeCircle()
 {
@@ -827,7 +827,7 @@ function makeCircle()
 	var top=rand(1,2*bot-1);
 	var prop=new frac(top,bot);
 	var qString="Find, for a sector of angle \\(";
-	qString += ((prop.bot===1) ? 
+	qString += ((prop.bot===1) ?
 		(ascoeff(prop.top)+"\\pi") :
 		("\\frac{" + ascoeff(prop.top) + "\\pi}{" + prop.bot + "}"));
 	qString += "\\) of a disc of radius \\(" + r + ":\\)<br>i. the length of the perimeter; and<br>ii. the area.";
@@ -836,14 +836,14 @@ function makeCircle()
 	var aString="i. \\("+(r*2)+"+"+length.write()+"\\pi\\)<br>ii. \\("+area.write()+"\\pi\\)";
 	var qa=[qString,aString];
 	return qa;
-}	
+}
 
 function makeSolvingTrig()
 {
 	var A=pickrand(1,3,4,5);
 	var alpha=pickrand(3,4,6);
 	var c=new frac(A,2);
-	
+
 	var qString="Write $$"+c.write();
 	if(alpha==6) qString+="\\sqrt{3}";
 	else if(alpha==4) qString+="\\sqrt{2}";
@@ -1158,11 +1158,11 @@ function makeTransformation()
 	var fnn=new Array("\\ln(z)", "\\csc(z)", "\\sec(z)", "\\sin(z)", "\\tan(z)", "\\cos(z)", "{z}^{2}");
 	var which=rand(0, 6);
 	var fnf=[
-		Math.log, function(x) { return 1/Math.sin(x);}, 
-		function(x) {return 1/Math.cos(x);}, 
-		Math.sin, 
-		function(x) {return Math.tan(x);}, 
-		Math.cos, 
+		Math.log, function(x) { return 1/Math.sin(x);},
+		function(x) {return 1/Math.cos(x);},
+		Math.sin,
+		function(x) {return Math.tan(x);},
+		Math.cos,
 		function(x) {return Math.pow(x, 2);}
 	][which];
 	var parms=0;
@@ -1582,14 +1582,14 @@ function makeCArithmetic()
 	var w=Complex.randnz(4, 6);
 	var qString="Given \\(z="+z.write()+"\\) and \\(w="+w.write()+"\\), compute:";
 
-	qString += "<ul style=\"list-style-type: lower-roman;\">";
+	qString += "<ul class=\"exercise\">";
 	qString += "<li>\\(z+w\\)</li>";
 	qString += "<li>\\(z\\times w\\)</li>";
 	qString += "<li>\\(\\frac{z}{w}\\)</li>";
 	qString += "<li>\\(\\frac{w}{z}\\)</li>";
 	qString += "</ul>";
-	
-	var aString = "<ul style=\"list-style-type: lower-roman;\">";
+
+	var aString = "<ul class=\"exercise\">";
 	aString += "<li>\\(" + z.add(w.Re, w.Im).write() +"\\)</li>";
 	aString += "<li>\\(" + z.times(w.Re, w.Im).write() +"\\)</li>";
 	aString += "<li>\\(" + z.divide(w.Re, w.Im).write() +"\\)</li>";
@@ -1683,7 +1683,7 @@ function makeMatrixQ(dim,max)
 	}
 
 	var qString="Let $$A="+A.write()+"$$ $$B="+B.write()+"$$.";
-	qString += "Compute: <ul style=\"list-style-type: lower-roman;\">";
+	qString += "Compute: <ul class=\"exercise\">";
 	qString += "<li>\\(A+B\\)</li>";
 	qString += "<li>\\(A \\times B\\)</li>";
 	qString += "<li>\\(B^{-1}\\)</li>";
@@ -1691,7 +1691,7 @@ function makeMatrixQ(dim,max)
 	var S=A.add(B);
 	var P=A.times(B);
 	var Y=B.inv();
-	var aString = "<ul style=\"list-style-type: lower-roman;\">";
+	var aString = "<ul class=\"exercise\">";
 	aString += "<li>\\(" + S.write() +"\\)</li>";
 	aString += "<li>\\(" + P.write() +"\\)</li>";
 	aString += "<li>\\(" + Y.write() +"\\)</li>";
@@ -1773,13 +1773,13 @@ function makeFurtherVector()
 	var b=new vector(3);b.setrand(5);
 	var c=new vector(3);c.setrand(5);
 	var qString="Let \\(a="+a.write()+"\\), \\(b="+b.write()+"\\), \\(c="+c.write()+"\\). ";
-	qString += "Calculate: <ul style=\"list-style-type: lower-roman;\">";
+	qString += "Calculate: <ul class=\"exercise\">";
 	qString += "<li>the vector product, \\(a\\wedge b\\),</li>";
 	qString += "<li>the scalar triple product, \\([a, b, c]\\).</li>";
 	qString += "</ul>";
 	var axb=a.cross(b);
 	var abc=axb.dot(c);
-	var aString = "<ul style=\"list-style-type: lower-roman;\">";
+	var aString = "<ul class=\"exercise\">";
 	aString += "<li>\\(" + axb.write() +"\\)</li>";
 	aString += "<li>\\(" + abc +"\\)</li>";
 	aString += "</ul>";
@@ -1807,15 +1807,16 @@ function makeNewtonRaphson()
 	var n=rand(4, 6);
 	var x=new Array(n+1);x[0]=rand((which?0:2), 4);
 	var qString="Use the Newton-Raphson method to find the first \\("+n+"m\\) iterates in solving \\("+p.write()+" = "+fns[which].replace(/z/g, 'x')+"\\) with \\(x_0 = "+x[0]+"\\).";
-	var aString="Iteration: $$x_{n+1}=x_{n}-\\frac{"+fns[which].replace(/z/g, 'x_n')+np.write()+"}{"+difs[which].replace(/z/g, 'x_n')+nq.write()+"}$$";
+	var aString="Iteration: \\begin{align*} x_{n+1}&=x_{n}-\\frac{"+fns[which].replace(/z/g, 'x_n')+np.write()+"}{"+difs[which].replace(/z/g, 'x_n')+nq.write()+"} \\\\[10pt]";
 	for(i=0;i<n;i++)
 	{
 		var eff=fnf[which](x[i])-p.compute(x[i]);
 		var effdash=diff[which](x[i])-q.compute(x[i]);
 		x[i+1]=x[i]-(eff/effdash);
 		if(Math.abs(x[i+1])<1e-7) {x[i+1]=0;}
-		aString+="$$x_{"+(i+1)+"} = "+x[i+1]+"$$"; /*+"&"+p.write('x_{'+(i+1)+'}')+'='+p.compute(x[i+1])+"&"+fns[which].replace(/z/g, 'x_{'+(i+1)+'}')+"="+fnf[which](x[i+1])*/
+		aString+="x_{"+(i+1)+"} &= "+x[i+1]+"\\\\"; /*+"&"+p.write('x_{'+(i+1)+'}')+'='+p.compute(x[i+1])+"&"+fns[which].replace(/z/g, 'x_{'+(i+1)+'}')+"="+fnf[which](x[i+1])*/
 	}
+  aString+="\\end{align*}"
 	if(isNaN(x[n]))
 	{
 		return(makeNewtonRaphson()); //TODO: find a better way; this is worst-case infinite
@@ -1988,9 +1989,9 @@ function makeRevolution()
 		b.setpoly(a);
 		var c=new fpoly(4);
 		b.integ(c);
-		
+
 		var x=rand(1, 4);
-		
+
 		var qString="Find the area of the surface formed when the curve";
 		qString+="$$y = "+a.write('x')+"$$";
 		qString+="from \\(x = 0\\mbox{ to }x = "+x+"\\) is rotated through \\(2\\pi\\) around the x-axis.";
@@ -2125,13 +2126,13 @@ function makeHypTest()
 		qString+="The significance level is \\("+sl+"\\%\\). ";
 		qString+="A sample of size \\("+n+"\\) is drawn from \\(X\\), and its sum \\(\\sum{x} = "+Sx.toFixed(3)+"\\).<br />";
 
-		qString+="<br />Compute: <ul style=\"list-style-type: lower-roman;\">";
+		qString+="<br />Compute: <ul class=\"exercise\">";
 		qString += "<li>\\(\\overline{x}\\)</li>";
 		qString += "<li> Is \\({\\rm H}_0\\) accepted?}</li>";
 		qString += "</ul>";
 
 		xbar=Sx/n;
-		aString = "<ul style=\"list-style-type: lower-roman;\">";
+		aString = "<ul class=\"exercise\">";
 		aString += "<li>\\(\\overline{x} = "+xbar.toFixed(3) +"\\)</li>";
 		p=0;
 		if(which) // one tail
@@ -2222,14 +2223,14 @@ function makeHypTest()
 		qString += "The significance level is \\("+sl+"\\%\\). ";
 		qString += "A sample of size \\("+n+"\\) is drawn from \\(X\\), and its sum \\(\\sum{x} = "+Sx.toFixed(3)+"\\). ";
 		qString += "The sum of squares, \\(\\sum{x^2} = "+Sxx.toFixed(3)+"\\). ";
-		
-		qString += "Compute: <ul style=\"list-style-type: lower-roman;\">";
+
+		qString += "Compute: <ul class=\"exercise\">";
 		qString += "<li>\\(\\overline{x}\\)</li>";
 		qString += "<li>Compute an estimate, \\(S^2\\), of the variance of \\(X\\)</li>";
 		qString += "<li>Is \\({\\rm H}_0\\) accepted?</li>";
 		qString += "</ul>";
 		xbar=Sx/n;
-		aString = "<ul style=\"list-style-type: lower-roman;\">";
+		aString = "<ul class=\"exercise\">";
 		aString="<li>\\(\\overline{x} = "+xbar.toFixed(3)+"\\)</li>";
 		var SS=(Sxx-Sx*Sx/n)/(n-1);
 		aString+="<li>\\(S^2 = "+SS.toFixed(3)+"\\). ";
@@ -2390,7 +2391,7 @@ function makeChiSquare()
 		qString+="&"+freq[i]+"\\\\";
 	}
 	qString += "\\end{array}$$</div>";
-	qString += "<ul style=\"list-style-type: lower-roman;\">";
+	qString += "<ul class=\"exercise\">";
 	qString += "<li>Estimate the parameters of the distribution.</li>";
 	qString += "<li>Use a \\(\\chi^2\\) test, with a significance level of \\("+sl+"\\)%, to test this hypothesis.</li>";
 	qString += "</ul>";
@@ -2410,7 +2411,7 @@ function makeChiSquare()
 	var xbar=Sx/n;
 	var SS=(Sxx-Sx*Sx/n)/(n-1);
 	var hypparms=[0,0];
-	var aString = "<ol style=\"list-style-type: lower-roman;\">";
+	var aString = "<ol class=\"exercise\">";
 
 	// calculate parameters
 	switch(which)
@@ -2536,7 +2537,7 @@ function makeChiSquare()
 	var nu=row2.length-1-nparms[which];
 	aString+="$$\\nu = "+nu+"$$";
 	if(nu<1)
-		throw new Error("makeChiSquare: nu < 1!" + 
+		throw new Error("makeChiSquare: nu < 1!" +
 			"\n\twhich:" + which +
 			"\n\trow2.length:" + row2.length);
 	var critval=tableChi.values[nu-1][p];
@@ -2568,7 +2569,7 @@ function makeProductMoment()
 	}
 	var Ex=0,Exx=0,Exy=0,Eyy=0,Ey=0; // Here E represents sigma
 	var qString="For the following data,";
-	qString += "<ul style=\"list-style-type: lower-roman;\">";
+	qString += "<ul class=\"exercise\">";
 	qString += "<li>compute the product moment correlation coefficient, \\({\\bf r}\\)</li>";
 	qString+="<li>find the regression line of \\(y\\) on \\(x\\)$$\\begin{array}{c|c}x&y\\\\";
 	for(i=0;i<n;i++)
@@ -2587,7 +2588,7 @@ function makeProductMoment()
 	var r=Sxy/Math.sqrt(Sxx*Syy);
 	var b=Sxy/Sxx;
 	var a=ybar-(b*xbar);
-	var aString = "<ul style=\"list-style-type: lower-roman;\">";
+	var aString = "<ul class=\"exercise\">";
 	aString += "<li>\\({\\bf r}="+r.toFixed(3)+"\\)</li><li>\\(y="+b.toFixed(3)+"x"+(a>0?"+":"")+a.toFixed(3)+"\\).";
 	var qa=[qString,aString];
 	return(qa);
