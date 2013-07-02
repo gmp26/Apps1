@@ -23,19 +23,15 @@ files = [
 	'./dist_test/scripts/filters/*.js',
 	'./dist_test/scripts/services/*.js',
 
-	'./dist_test/pubs/**/*.js',
-
-  /* This line needs to be specific or bootstrap.js throws an error */
-  /* http://stackoverflow.com/questions/9227406/ */
+  /* This line needs to be specific or bootstrap.js throws an error :( */
+  /* See http://stackoverflow.com/questions/9227406/ */
   './dist_test/scripts/libs/qa/*.js',
 
-  /* Added by Alex */
-  // './dist/scripts/*.js',
-  // './dist/scripts/pubs/mathmo/**/*.js',
+  /* Unit tests for mathmo */
   './dist/scripts/pubs/mathmo/services/*.js',
-  // './dist/scripts/pubs/mathmo/services/*.js',
   './dist/scripts/libs/seedrandom.js',
-  './test/unit/**/*.js'
+  './dist_test/pubs/**/*.js'
+  // './test/unit/**/*.js'
 ];
 
 // level of logging

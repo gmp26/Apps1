@@ -51,7 +51,7 @@
         MathJax.Hub.Queue ["Typeset", MathJax.Hub]
       , 10
 
-    $scope.retrieveQ = (topicId, pane) ->
+    retrieveQ = (topicId, pane) ->
 
       name = pane.name
       qNo = startQNumber
@@ -105,10 +105,11 @@
       pane.questions.push question
       $scope.renderMath()
 
-    $scope.testQ = (topicId, pane) ->
 
-      name = pane.name
-      qNo = startQNumber
+    # testQ is a stripped out version of retrieveQ that gets called in unit testing
+    $scope.testQ = (topicId, qNo = 1) ->
+
+      name = "unit-test"
 
       # some questions may have 2 or 3 part ids
       parts = topicId.split \:
@@ -121,44 +122,15 @@
           qNo = +qNo
 
       topicCounts[name] ||= {}
-      topicCounts[name][topicId] = qNo
 
-      seed = name+'/'+topicId+'/'+topicCounts[name][topicId]
-
-      # console.log "seed = #seed"
+      seed = name+'/'+topicId+'/'+qNo
 
       Math.seedrandom seed
 
       maker = config.topicMakerById topicId
       qa = maker()
 
-      # console.log "q=", qa[0]
-      # console.log "a=", qa[1]
-
-      path = if ('' + $location.port() == '80') then '/mathmoApp' else ''
-
-      question = {
-        exName: name
-        topicId: topicId
-        topic: config.topicTitleById topicId
-        seed: seed
-        url: 'http://' + $location.host() + ':' + $location.port() + path + '/#/mathmo/share/' + seed
-        graph: if maker.fn? then maker.fn.toString() else 'no fn'
-        q:qa[0]
-        a:qa[1]
-        f:qa[2]
-        g:qa[3]
-        isCollapsed: true
-        toggle: ->
-          @isCollapsed = !@isCollapsed
-        isGraph: ->
-          if @a.indexOf(gPrefix) == 0 then 'graph' else 'html'
-      }
-      question.graphData = qa[2](qa[3]) if question.isGraph()=='graph'
-
       [qa[0], qa[1]]
-      # pane.questions.push question
-      # $scope.renderMath()
 
     similarQ = (question, inc) ->
       name = question.exName
