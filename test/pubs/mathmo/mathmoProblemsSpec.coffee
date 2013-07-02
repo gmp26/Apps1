@@ -281,7 +281,7 @@ describe "mathmoController", ->
       "makeMatrix2"
       "F4"
       "Let $$A=\\left(\\begin{array}{cc}5&-4\\\\-5&1\\end{array}\\right)$$ $$B=\\left(\\begin{array}{cc}-4&2\\\\5&3\\end{array}\\right)$$.Compute: <ul class=\"exercise\"><li>\\(A+B\\)</li><li>\\(A \\times B\\)</li><li>\\(B^{-1}\\)</li></ul>"
-      "ul class=\"exercise\"><li>\\(\\left(\\begin{array}{cc}1&-2\\\\0&4\\end{array}\\right)\\)</li><li>\\(\\left(\\begin{array}{cc}-40&-2\\\\25&-7\\end{array}\\right)\\)</li><li>\\(\\left(\\begin{array}{cc}-\\frac{3}{22}&\\frac{1}{11}\\\\\\frac{5}{22}&\\frac{2}{11}\\end{array}\\right)\\)</li></ul>"
+      "<ul class=\"exercise\"><li>\\(\\left(\\begin{array}{cc}1&-2\\\\0&4\\end{array}\\right)\\)</li><li>\\(\\left(\\begin{array}{cc}-40&-2\\\\25&-7\\end{array}\\right)\\)</li><li>\\(\\left(\\begin{array}{cc}-\\frac{3}{22}&\\frac{1}{11}\\\\\\frac{5}{22}&\\frac{2}{11}\\end{array}\\right)\\)</li></ul>"
     ]
     [
       "makeTaylor"
