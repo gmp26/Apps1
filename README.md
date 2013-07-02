@@ -44,11 +44,11 @@ Follow the patterns and you'll get a complete development workflow, including:
 * Must have [Grunt](https://github.com/gruntjs/grunt) node package installed globally.  `npm install -g grunt-cli`
 
 ## Install Apps1
-Enter the following commands in the terminal.
+Enter the following commands at a command line:
 
-1. `git clone git://github.com/gmp26/Apps1.git`
-1. `cd Apps1`
-1. `npm install`
+    git clone git://github.com/gmp26/Apps1.git
+    cd Apps1
+    npm install
 
 ## Compile Apps1
 You have three options.
@@ -72,5 +72,5 @@ To work with plain old JavaScript run the following grunt task.
 ## Running Tests
 You have two options.
 
-1. [Jasmine](http://pivotal.github.com/jasmine/) HTML runner -  run `grunt` - Then open /test/runner.html in your browser to run the unit tests using Jasmine.
-2. [Karma](http://vojtajina.github.com/karma/) - `grunt test` -  Defaults to running the tests in chrome, but you can easily change this in karma.conf.js browsers section as required.
+1. [Jasmine](http://pivotal.github.com/jasmine/) HTML runner -  run `grunt` - Then open `/test/runner.html` in your browser to run the unit tests using Jasmine.
+2. [Karma](http://vojtajina.github.com/karma/) - `grunt test` -  Defaults to running the tests in Chrome, but you can easily change this in `karma.conf.js` browsers section as required.
