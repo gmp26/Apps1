@@ -61,6 +61,7 @@ angular.module('app').factory 'config', ->
     * title: "Differential equations"
       topicIds:
         * "C29"
+        * "F3a"
         ...
 
     * title: "Further Topics"
@@ -68,7 +69,6 @@ angular.module('app').factory 'config', ->
         * "F1"
           "F2"
           #"F3"
-          "F3a"
           "F4"
           "F5"
           "F6"
