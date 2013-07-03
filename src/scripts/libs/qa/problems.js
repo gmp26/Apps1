@@ -227,18 +227,18 @@ function makeVector()
 
 	//qString="Consider the four vectors$$\\begin\{array\}\{l\} \\mathbf\{A\}="+A[0].write()+", \\mathbf\{B\}="+A[1].write()+", \\mathbf\{C\}="+A[2].write()+", \\mathbf\{D\}="+A[3].write()+".\\\\ \\\\ \\mbox\{	(i) Order the vectors by magnitude.\}\\\\ \\\\ \\mbox\{	(ii) Use the scalar product to find the angles between (a) \}\\mathbf\{"+ntol(v[0])+"\} \\mbox\{ and \}\\mathbf\{"+ntol(v[1])+"\}, \\mbox\{(b) \}\\mathbf\{"+ntol(v[1])+"\} \\mbox\{ and \} \\mathbf\{"+ntol(v[2])+"\}.\\end\{array\}";
 	var qString = "Consider the four vectors";
-	qString += "$$\\mathbf{A}=" + A[0].write() + ", \\mathbf{B}=" + A[1].write() + "$$";
-	qString += "$$\\mathbf{C}=" + A[2].write() + ", \\mathbf{D}=" + A[3].write() + "$$";
+	qString += "$$\\mathbf{A}=" + A[0].write() + "\\,,\\; \\mathbf{B}=" + A[1].write() + "$$";
+	qString += "$$\\mathbf{C}=" + A[2].write() + "\\,,\\; \\mathbf{D}=" + A[3].write() + "$$";
 	qString += "<ol class=\"exercise\"><li>Order the vectors by magnitude.</li>";
-	qString += "<li>Use the scalar product<br>to find the angles between";
-	qString += "<ol class=\"exercise\"><li>\\(\\mathbf{" + ntol(v[0]) + "}\\) and \\(\\mathbf{" + ntol(v[1]) + "}\\),</li>";
+	qString += "<li>Use the scalar product to find the angles between";
+	qString += "<ol class=\"subexercise\"><li>\\(\\mathbf{" + ntol(v[0]) + "}\\) and \\(\\mathbf{" + ntol(v[1]) + "}\\),</li>";
 	qString += "<li>\\(\\mathbf{" + ntol(v[1]) + "}\\) and \\(\\mathbf{" + ntol(v[2]) + "}\\)</li></ol></ol>";
 
 	var aString = "<ol class=\"exercise\"><li>";
 	aString += "\\(|\\mathbf{" + ntol(B[0]) + "}|=\\sqrt{" + A[B[0]].mag();
-	aString += "}, |\\mathbf{" + ntol(B[1]) + "}|=\\sqrt{" + A[B[1]].mag();
-	aString += "},\\)<br>\\( |\\mathbf{" + ntol(B[2]) + "}|=\\sqrt{" + A[B[2]].mag();
-	aString += "}, |\\mathbf{" + ntol(B[3]) + "}|=\\sqrt{" + A[B[3]].mag();
+	aString += "},\\) \\(|\\mathbf{" + ntol(B[1]) + "}|=\\sqrt{" + A[B[1]].mag();
+	aString += "},\\) \\( |\\mathbf{" + ntol(B[2]) + "}|=\\sqrt{" + A[B[2]].mag();
+	aString += "}\\) and \\(|\\mathbf{" + ntol(B[3]) + "}|=\\sqrt{" + A[B[3]].mag();
 	aString += "}\\).</li>";
 
 	var top1=A[v[0]].dot(A[v[1]]);
@@ -252,7 +252,7 @@ function makeVector()
 	top2/=c;
 	bot2.a/=c;
 
-	aString+="<li><ol style=\"list-style-type:lower-alpha\"><li>\\(";
+	aString+="<li><ol class=\"subexercise\"><li>\\(";
 	if(top1==0) aString+="\\pi/2";
 	else if(top1==1&&bot1.n==1&&bot1.a==1) aString+="0";
 	else if(top1==-1&&bot1.n==1&&bot1.a==1) aString+="\\pi";
@@ -770,7 +770,7 @@ function makeTriangle()
 				angle="B";
 				break;
 		}
-		var qString="In triangle \\(ABC, "+shortv+"="+a+","+hyp+"="+b+",\\) and angle \\("+angle+"\\) is a right angle. Find \\("+other+"\\).";
+		var qString="In triangle \\(ABC\\), \\("+shortv+"="+a+"\\), \\("+hyp+"="+b+",\\) and angle \\("+angle+"\\) is a right angle. Find the length of \\("+other+"\\).";
 		var length=new sqroot(b*b-a*a);
 		var aString="$$"+other+"="+length.write()+"$$";
 		var qa=[qString,aString];
@@ -781,7 +781,7 @@ function makeTriangle()
 		var a=rand(2,8);
 		var b=rand(1,6);
 		var c=rand(Math.max(a,b)-Math.min(a,b)+1,a+b-1);
-		var qString="In triangle \\(ABC, AB="+c+",BC="+a+",\\) and \\(CA="+b+".\\) Find the angles of the triangle.";
+		var qString="In triangle \\(ABC\\), \\(AB="+c+"\\), \\(BC="+a+",\\) and \\(CA="+b+".\\) Find the angles of the triangle.";
 		var aa=new frac(b*b+c*c-a*a,2*b*c);
 		var bb=new frac(c*c+a*a-b*b,2*c*a);
 		var cc=new frac(a*a+b*b-c*c,2*a*b);
@@ -795,7 +795,7 @@ function makeTriangle()
 		var cc=pickrand(3,4,6);
 		var lb=a*Math.ceil(Math.sin(Math.PI/cc));
 		var c=rand(lb, Math.max(5, lb+1));
-		var qString="In triangle \\(ABC, AB="+c+", BC="+a+"\\) and angle \\(C=\\frac{\\pi}{"+cc+"}. \\) Find angle \\(A\\).";
+		var qString="In triangle \\(ABC\\), \\(AB="+c+"\\), \\(BC="+a+"\\) and angle \\(C=\\frac{\\pi}{"+cc+"}\\). Find angle \\(A\\).";
 		var d=new frac(a,2*c);
 		var aString="$$A=\\arcsin\\left("+d.write();
 		if(cc==3) aString+="\\sqrt{3}";
@@ -869,9 +869,9 @@ function makeVectorEq()
 		v[i]=new vector(3);
 		v[i].set(a[0]+l[i]*b[0],a[1]+l[i]*b[1],a[2]+l[i]*b[2]);
 	}
-	var qString="Show that the points with position vectors$$"+v[0].write()+","+v[1].write()+","+v[2].write()+"$$";
+	var qString="Show that the points with position vectors$$"+v[0].write()+"\\,,\\;"+v[1].write()+"\\,,\\;"+v[2].write()+"$$";
 	qString+="lie on a straight line, and give the equation of the line in the form \\(\\mathbf{r}=\\mathbf{a}+\\lambda\\mathbf{b}\\).";
-	var aString='$$'+a.write()+"+\\lambda"+b.write()+'$$';
+	var aString='$$'+a.write()+"+\\lambda\,"+b.write()+'$$';
 	var qa=[qString,aString];
 	return qa;
 }
@@ -1509,7 +1509,7 @@ function makeDE()
 	{
 		var roots=distrand(2, 4);
 		var p=p_quadratic(1, -roots[0]-roots[1], roots[0]*roots[1]);
-		var qString="Find the general solution of the following second-order ODE:$$"+p.write('D').replace("D^2", "\\frac{{\\,d^2}y}{{\\,dx}^2}").replace("D", "\\frac{\\,dy}{\\,dx}")+(p[0]==0?"":"y")+"=0"+"$$";
+		var qString="Find the general solution of the following second-order ODE:$$"+p.write('D').replace("D^2", "\\frac{{\\,\\mathrm{d}^2}y}{{\\,\\mathrm{d}x}^2}").replace("D", "\\frac{\\,\\mathrm{d}y}{\\,\\mathrm{d}x}")+(p[0]==0?"":"y")+"=0"+"$$";
 		var aString="$$y="+(roots[0]==0?"A":"Ae^{"+ascoeff(roots[0])+"x}")+"+"+(roots[1]==0?"B":"Be^{"+ascoeff(roots[1])+"x}") + '$$';
 		var qa=[qString,aString];
 		return qa;
@@ -1517,7 +1517,7 @@ function makeDE()
 	else
 	{
 		var b=randnz(6);
-		qString="Find the general solution of the following first-order ODE:$$x\\frac{\\,dy}{\\,dx}-y="+(-b)+"$$";
+		qString="Find the general solution of the following first-order ODE:$$x\\frac{\\,\\mathrm{d}y}{\\,\\mathrm{d}x}-y="+(-b)+"$$";
 		aString="$$y=Ax"+(b>0?'+':'')+b+'$$';
 		qa=[qString,aString];
 		return qa;
@@ -1633,7 +1633,7 @@ function makeDETwoHard()
 		roots[0]=new complex(-p[1]/2, Math.sqrt(-disc)/2);
 		roots[1]=new complex(-p[1]/2, -Math.sqrt(-disc)/2);
 	}
-	var qString="Find the general solution of the following second-order ODE:$$"+p.write('D').replace("D^2", "\\frac{{\\,d^2}y}{{\\,dx}^2}").replace("D", "\\frac{\\,dy}{\\,dx}")+(p[0]===0?"":"y")+"=0"+"$$";
+	var qString="Find the general solution of the following second-order ODE:$$"+p.write('D').replace("D^2", "\\frac{{\\,\\mathrm{d}^2}y}{{\\,\\mathrm{d}x}^2}").replace("D", "\\frac{\\,\\mathrm{d}y}{\\,\\mathrm{d}x}")+(p[0]===0?"":"y")+"=0"+"$$";
 	qString=qString.replace(/1y/g, "y");
 	var aString="";
 	if(disc>0)
@@ -1682,7 +1682,7 @@ function makeMatrixQ(dim,max)
 		B = B.add(I);
 	}
 
-	var qString="Let $$A="+A.write()+"$$ $$B="+B.write()+"$$.";
+	var qString="Let $$A="+A.write()+" \\qquad \\text{and} \\qquad B="+B.write()+"$$.";
 	qString += "Compute: <ul class=\"exercise\">";
 	qString += "<li>\\(A+B\\)</li>";
 	qString += "<li>\\(A \\times B\\)</li>";
@@ -1772,7 +1772,7 @@ function makeFurtherVector()
 	var a=new vector(3);a.setrand(5);
 	var b=new vector(3);b.setrand(5);
 	var c=new vector(3);c.setrand(5);
-	var qString="Let \\(a="+a.write()+"\\), \\(b="+b.write()+"\\), \\(c="+c.write()+"\\). ";
+	var qString="Let \\(a="+a.write()+"\\)\\,,\\; \\(b="+b.write()+"\\,\\) and \\(c="+c.write()+"\\). ";
 	qString += "Calculate: <ul class=\"exercise\">";
 	qString += "<li>the vector product, \\(a\\wedge b\\),</li>";
 	qString += "<li>the scalar triple product, \\([a, b, c]\\).</li>";
@@ -1806,7 +1806,7 @@ function makeNewtonRaphson()
 	var nq=new poly(1); np.diff(nq);
 	var n=rand(4, 6);
 	var x=new Array(n+1);x[0]=rand((which?0:2), 4);
-	var qString="Use the Newton-Raphson method to find the first \\("+n+"m\\) iterates in solving \\("+p.write()+" = "+fns[which].replace(/z/g, 'x')+"\\) with \\(x_0 = "+x[0]+"\\).";
+	var qString="Use the Newton-Raphson method to find the first \\("+n+"\\) iterates in solving \\("+p.write()+" = "+fns[which].replace(/z/g, 'x')+"\\) with \\(x_0 = "+x[0]+"\\).";
 	var aString="Iteration: \\begin{align*} x_{n+1}&=x_{n}-\\frac{"+fns[which].replace(/z/g, 'x_n')+np.write()+"}{"+difs[which].replace(/z/g, 'x_n')+nq.write()+"} \\\\[10pt]";
 	for(i=0;i<n;i++)
 	{

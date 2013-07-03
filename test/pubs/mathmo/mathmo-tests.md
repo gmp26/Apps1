@@ -1,5 +1,7 @@
 # Mathmo tests
 
+## Notes
+
 When you're populating `testlist` with questions and answers, remember to escape backslashes (`\\`) and quote marks (`\"`) correctly. I'm using a [TextExpander][te] snippet to escape these automatically. I have the following AppleScript:
 
     on findAndReplace(tofind, toreplace, TheString)
@@ -27,7 +29,7 @@ Notes on `problems.js`:
 
 * Use `\DeclareMathOperator*` (or even a global stylesheet) rather then `{\rm artanh}` where appropriate.
 * Fix `\,\mathrm{d}x` for integrals
-* Use an `align*` environment for Newton-Raphson (and possibly a `\phantom{-}` if we can manage it)
+* <strikethrough>Use an `align*` environment for Newton-Raphson (and possibly a `\phantom{-}` if we can manage it)</strikethrough>
 * Give the `<ul>`'s used in the exercises their own class in CSS, then the formatting can be consistent and global. (And use a list in some of the answers where it isn’t already.)
 * Fix `makeMatXforms`
 * Add non-breaking spaces in the `3 DP.`

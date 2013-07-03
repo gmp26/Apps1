@@ -57,8 +57,8 @@ describe "mathmoController", ->
     [
       "makeVector"
       "C5"
-      "Consider the four vectors$$\\mathbf{A}=\\left(\\begin{array}{c}-9\\\\0\\\\2\\end{array}\\right), \\mathbf{B}=\\left(\\begin{array}{c}-8\\\\-8\\\\4\\end{array}\\right)$$$$\\mathbf{C}=\\left(\\begin{array}{c}9\\\\0\\\\-2\\end{array}\\right), \\mathbf{D}=\\left(\\begin{array}{c}1\\\\-2\\\\5\\end{array}\\right)$$<ol class=\"exercise\"><li>Order the vectors by magnitude.</li><li>Use the scalar product<br>to find the angles between<ol class=\"exercise\"><li>\\(\\mathbf{D}\\) and \\(\\mathbf{C}\\),</li><li>\\(\\mathbf{C}\\) and \\(\\mathbf{B}\\)</li></ol></ol>"
-      "<ol class=\"exercise\"><li>\\(|\\mathbf{B}|=\\sqrt{144}, |\\mathbf{A}|=\\sqrt{85},\\)<br>\\( |\\mathbf{C}|=\\sqrt{85}, |\\mathbf{D}|=\\sqrt{30}\\).</li><li><ol style=\"list-style-type:lower-alpha\"><li>\\(\\arccos\\left(\\frac{-1}{5\\sqrt{102}}\\right)\\)</li><li>\\(\\arccos\\left(\\frac{-20}{3\\sqrt{85}}\\right)\\)</li></ol></li></ol>"
+      "Consider the four vectors$$\\mathbf{A}=\\left(\\begin{array}{c}-9\\\\0\\\\2\\end{array}\\right)\\,,\\; \\mathbf{B}=\\left(\\begin{array}{c}-8\\\\-8\\\\4\\end{array}\\right)$$$$\\mathbf{C}=\\left(\\begin{array}{c}9\\\\0\\\\-2\\end{array}\\right)\\,,\\; \\mathbf{D}=\\left(\\begin{array}{c}1\\\\-2\\\\5\\end{array}\\right)$$<ol class=\"exercise\"><li>Order the vectors by magnitude.</li><li>Use the scalar product to find the angles between<ol class=\"subexercise\"><li>\\(\\mathbf{D}\\) and \\(\\mathbf{C}\\),</li><li>\\(\\mathbf{C}\\) and \\(\\mathbf{B}\\)</li></ol></ol>"
+      "<ol class=\"exercise\"><li>\\(|\\mathbf{B}|=\\sqrt{144},\\) \\(|\\mathbf{A}|=\\sqrt{85},\\) \\( |\\mathbf{C}|=\\sqrt{85}\\) and \\(|\\mathbf{D}|=\\sqrt{30}\\).</li><li><ol class=\"subexercise\"><li>\\(\\arccos\\left(\\frac{-1}{5\\sqrt{102}}\\right)\\)</li><li>\\(\\arccos\\left(\\frac{-20}{3\\sqrt{85}}\\right)\\)</li></ol></li></ol>"
     ]
     [
       "makeLines"
@@ -145,21 +145,21 @@ describe "mathmoController", ->
     [
       "makeTriangle1"
       "C15"
-      "In triangle \\(ABC, AB=4,BC=5,\\) and angle \\(A\\) is a right angle. Find \\(CA\\)."
+      "In triangle \\(ABC\\), \\(AB=4\\), \\(BC=5,\\) and angle \\(A\\) is a right angle. Find the length of \\(CA\\)."
       "$$CA=3$$"
       2
     ]
     [
       "makeTriangle2"
       "C15"
-      "In triangle \\(ABC, AB=4,BC=3,\\) and \\(CA=5.\\) Find the angles of the triangle."
+      "In triangle \\(ABC\\), \\(AB=4\\), \\(BC=3,\\) and \\(CA=5.\\) Find the angles of the triangle."
       "$$\\cos A=\\frac{4}{5},\\cos B=0,\\cos C=\\frac{3}{5}.$$"
       5
     ]
     [
       "makeTriangle3"
       "C15"
-      "In triangle \\(ABC, AB=7, BC=6\\) and angle \\(C=\\frac{\\pi}{6}. \\) Find angle \\(A\\)."
+      "In triangle \\(ABC\\), \\(AB=7\\), \\(BC=6\\) and angle \\(C=\\frac{\\pi}{6}\\). Find angle \\(A\\)."
       "$$A=\\arcsin\\left(\\frac{3}{7}\\right)$$"
       3
     ]
@@ -178,8 +178,8 @@ describe "mathmoController", ->
     [
       "makeVectorEq"
       "C18"
-      "Show that the points with position vectors$$\\left(\\begin{array}{c}3\\\\-5\\\\-3\\end{array}\\right),\\left(\\begin{array}{c}8\\\\-35\\\\-8\\end{array}\\right),\\left(\\begin{array}{c}2\\\\1\\\\-2\\end{array}\\right)$$lie on a straight line, and give the equation of the line in the form \\(\\mathbf{r}=\\mathbf{a}+\\lambda\\mathbf{b}\\)."
-      "$$\\left(\\begin{array}{c}3\\\\-5\\\\-3\\end{array}\\right)+\\lambda\\left(\\begin{array}{c}1\\\\-6\\\\-1\\end{array}\\right)$$"
+      "Show that the points with position vectors$$\\left(\\begin{array}{c}3\\\\-5\\\\-3\\end{array}\\right)\\,,\\;\\left(\\begin{array}{c}8\\\\-35\\\\-8\\end{array}\\right)\\,,\\;\\left(\\begin{array}{c}2\\\\1\\\\-2\\end{array}\\right)$$lie on a straight line, and give the equation of the line in the form \\(\\mathbf{r}=\\mathbf{a}+\\lambda\\mathbf{b}\\)."
+      "$$\\left(\\begin{array}{c}3\\\\-5\\\\-3\\end{array}\\right)+\\lambda,\\left(\\begin{array}{c}1\\\\-6\\\\-1\\end{array}\\right)$$"
     ]
     [
       "makeImplicit"
@@ -250,7 +250,7 @@ describe "mathmoController", ->
     [
       "makeDE"
       "C29"
-      "Find the general solution of the following second-order ODE:$$\\frac{{\\,d^2}y}{{\\,dx}^2} + 6\\frac{\\,dy}{\\,dx} + 8y=0$$"
+      "Find the general solution of the following second-order ODE:$$\\frac{{\\,\\mathrm{d}^2}y}{{\\,\\mathrm{d}x}^2} + 6\\frac{\\,\\mathrm{d}y}{\\,\\mathrm{d}x} + 8y=0$$"
       "$$y=Ae^{-4x}+Be^{-2x}$$"
     ]
     [
@@ -274,13 +274,13 @@ describe "mathmoController", ->
     [
       "makeDETwoHard"
       "F3a"
-      "Find the general solution of the following second-order ODE:$$\\frac{{\\,d^2}y}{{\\,dx}^2} - 4\\frac{\\,dy}{\\,dx} + y=0$$"
+      "Find the general solution of the following second-order ODE:$$\\frac{{\\,\\mathrm{d}^2}y}{{\\,\\mathrm{d}x}^2} - 4\\frac{\\,\\mathrm{d}y}{\\,\\mathrm{d}x} + y=0$$"
       "$$y=Ae^{\\left(2+\\sqrt{3}\\right)x}+Be^{\\left(2-\\sqrt{3}\\right)x}$$"
     ]
     [
       "makeMatrix2"
       "F4"
-      "Let $$A=\\left(\\begin{array}{cc}5&-4\\\\-5&1\\end{array}\\right)$$ $$B=\\left(\\begin{array}{cc}-4&2\\\\5&3\\end{array}\\right)$$.Compute: <ul class=\"exercise\"><li>\\(A+B\\)</li><li>\\(A \\times B\\)</li><li>\\(B^{-1}\\)</li></ul>"
+      "Let $$A=\\left(\\begin{array}{cc}5&-4\\\\-5&1\\end{array}\\right) \\qquad \\text{and} \\qquad B=\\left(\\begin{array}{cc}-4&2\\\\5&3\\end{array}\\right)$$.Compute: <ul class=\"exercise\"><li>\\(A+B\\)</li><li>\\(A \\times B\\)</li><li>\\(B^{-1}\\)</li></ul>"
       "<ul class=\"exercise\"><li>\\(\\left(\\begin{array}{cc}1&-2\\\\0&4\\end{array}\\right)\\)</li><li>\\(\\left(\\begin{array}{cc}-40&-2\\\\25&-7\\end{array}\\right)\\)</li><li>\\(\\left(\\begin{array}{cc}-\\frac{3}{22}&\\frac{1}{11}\\\\\\frac{5}{22}&\\frac{2}{11}\\end{array}\\right)\\)</li></ul>"
     ]
     [
@@ -298,19 +298,19 @@ describe "mathmoController", ->
     [
       "makeMatrix3"
       "F7"
-      "Let $$A=\\left(\\begin{array}{ccc}3&1&2\\\\3&-3&1\\\\3&-4&-2\\end{array}\\right)$$ $$B=\\left(\\begin{array}{ccc}-4&-2&2\\\\-2&-2&3\\\\-3&3&2\\end{array}\\right)$$.Compute: <ul class=\"exercise\"><li>\\(A+B\\)</li><li>\\(A \\times B\\)</li><li>\\(B^{-1}\\)</li></ul>"
+      "Let $$A=\\left(\\begin{array}{ccc}3&1&2\\\\3&-3&1\\\\3&-4&-2\\end{array}\\right) \\qquad \\text{and} \\qquad B=\\left(\\begin{array}{ccc}-4&-2&2\\\\-2&-2&3\\\\-3&3&2\\end{array}\\right)$$.Compute: <ul class=\"exercise\"><li>\\(A+B\\)</li><li>\\(A \\times B\\)</li><li>\\(B^{-1}\\)</li></ul>"
       "<ul class=\"exercise\"><li>\\(\\left(\\begin{array}{ccc}-1&-1&4\\\\1&-5&4\\\\0&-1&0\\end{array}\\right)\\)</li><li>\\(\\left(\\begin{array}{ccc}-20&-2&13\\\\-9&3&-1\\\\2&-4&-10\\end{array}\\right)\\)</li><li>\\(\\left(\\begin{array}{ccc}-\\frac{13}{38}&\\frac{5}{19}&-\\frac{1}{19}\\\\-\\frac{5}{38}&-\\frac{1}{19}&\\frac{4}{19}\\\\-\\frac{6}{19}&\\frac{9}{19}&\\frac{2}{19}\\end{array}\\right)\\)</li></ul>"
     ]
     [
       "makeFurtherVector"
       "F8"
-      "Let \\(a=\\left(\\begin{array}{c}2\\\\2\\\\-5\\end{array}\\right)\\), \\(b=\\left(\\begin{array}{c}-2\\\\-3\\\\1\\end{array}\\right)\\), \\(c=\\left(\\begin{array}{c}3\\\\3\\\\-3\\end{array}\\right)\\). Calculate: <ul class=\"exercise\"><li>the vector product, \\(a\\wedge b\\),</li><li>the scalar triple product, \\([a, b, c]\\).</li></ul>"
+      "Let \\(a=\\left(\\begin{array}{c}2\\\\2\\\\-5\\end{array}\\right)\\)\\,,\\; \\(b=\\left(\\begin{array}{c}-2\\\\-3\\\\1\\end{array}\\right)\\,\\) and \\(c=\\left(\\begin{array}{c}3\\\\3\\\\-3\\end{array}\\right)\\). Calculate: <ul class=\"exercise\"><li>the vector product, \\(a\\wedge b\\),</li><li>the scalar triple product, \\([a, b, c]\\).</li></ul>"
       "<ul class=\"exercise\"><li>\\(\\left(\\begin{array}{c}-13\\\\8\\\\-2\\end{array}\\right)\\)</li><li>\\(-9\\)</li></ul>"
     ]
     [
       "makeNewtonRaphson"
       "F9"
-      "Use the Newton-Raphson method to find the first \\(4m\\) iterates in solving \\(x^2 - 2x - 1 = \\cos(x)\\) with \\(x_0 = 3\\)."
+      "Use the Newton-Raphson method to find the first \\(4\\) iterates in solving \\(x^2 - 2x - 1 = \\cos(x)\\) with \\(x_0 = 3\\)."
       "Iteration: \\begin{align*} x_{n+1}&=x_{n}-\\frac{\\cos(x_n)- x^2 + 2x + 1}{-\\sin(x_n)- 2x + 2} \\\\[10pt]x_{1} &= 2.277974922054657\\\\x_{2} &= 2.1926616449298555\\\\x_{3} &= 2.1911000725687817\\\\x_{4} &= 2.1910995316432778\\\\\\end{align*}"
     ]
     [
