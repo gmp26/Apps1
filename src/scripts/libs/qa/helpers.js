@@ -371,3 +371,15 @@ String.prototype.repeat = function(num)
 {
     return(new Array(num+1).join(this));
 };
+
+// Returns a number signed with + or - as a string
+// Useful for equations
+
+function signedNumber(x)
+{
+    if (x > 0) {
+        return "+" + x;
+    } else {
+        return x.toString();
+    }
+}
