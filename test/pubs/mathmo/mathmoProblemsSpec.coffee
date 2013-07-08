@@ -67,6 +67,12 @@ describe "mathmoController", ->
       "The angle between the lines is$$\\arccos\\left(\\frac{-1}{3\\sqrt{3}}\\right).$$The lines meet at the point$$\\left(-2,-3,0\\right).$$"
     ]
     [
+      "makeLines2D"
+      "C31"
+      "Find the equation of the line passing through \\((5,-2)\\) and \\((5,-5)\\)."
+      "$$x=5.$$"
+    ]
+    [
       "makeIneq2"
       "C7"
       "By factorizing a suitable polynomial, or otherwise, find the values of \\(x\\) which satisfy$$x^2 - 3x < 4$$"
