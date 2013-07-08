@@ -418,6 +418,50 @@ function makeLines()
 	return qa;
 }
 
+// Equation of lines in 2D
+function makeLines2D()
+{
+  function makeLines1()
+  {
+    var a=rand(5);
+    var b=rand(5);
+    var c=rand(5);
+    var d=rand(5);
+
+    while (a==c && b==d) // Check for degeneracy
+    {
+      c=rand(5);
+      d=rand(5);
+    }
+
+    var qString="Find the equation of the line passing through \\(("+a+","+b+")\\) and \\(("+c+","+d+")\\).";
+
+    if (b==d) // Vertical lines
+    {
+      var aString="$$y="+b+".$$";
+    }
+    else if (a==c) // Horizontal lines
+    {
+      var aString="$$x="+a+".$$";
+    }
+    else // Other case
+    {
+      var grad=new frac(d-b,c-a);
+      var intercept=new frac(b*(c-a)-(d-b)*a,c-a);
+
+      var ycoeff=c-a;
+      var xcoeff=d-b;
+      var concoeff=b*(c-a)-(d-b)*a;
+      var aString="$$y="+grad.write()+"x+"+intercept.write()+"\\qquad \\text{or} \\qquad "+ycoeff+"y"+signedNumber(xcoeff)+"x"+signedNumber(concoeff)+"=0.$$";
+    }
+
+    var qa=[qString,aString];
+    return qa;
+  }
+  var qa=makeLines1();
+  return qa;
+}
+
 function makeIneq()
 {
 	function makeIneq2()

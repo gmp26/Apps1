@@ -32,7 +32,7 @@ function sinpi(a,b)
 	if(a/b>1.5&&a/b<2)
 	{
 		A=new Array(6);
-		A=sinpi(2*b-a,b); 
+		A=sinpi(2*b-a,b);
 		for(i=0;i<6;i+=2) A[i]*=-1;
 		return A;
 	}
@@ -274,7 +274,7 @@ function ordt(n)
 function sqroot(n)
 {
 	var that = this;
-	
+
 	if(n!=Math.floor(n))
 		throw new Error("non-integer sent to square root");
 	var a=1;
@@ -297,7 +297,7 @@ function sqroot(n)
 	};
 }
 
-// vector object: can be set manually or randomly, dot product with another vector, its magnitude squared, write it in latex, 
+// vector object: can be set manually or randomly, dot product with another vector, its magnitude squared, write it in latex,
 function vector(dim)
 {
 	var that = this;
@@ -307,19 +307,19 @@ function vector(dim)
 		that.dim=that.set.arguments.length;
 		for(var i=0;i<that.dim;i++) that[i]=that.set.arguments[i];
 	};
-	
+
 	that.setrand=function(maxentry)
 	{
 		for(var i=0;i<that.dim;i++) that[i]=Math.round(-maxentry+2*maxentry*Math.random());
 	};
-	
+
 	that.dot=function(U)
 	{
 		var sum=0;
 		for(var i=0;i<dim;i++) sum+=that[i]*U[i];
 		return sum;
 	};
-	
+
 	that.cross=function(U)
 	{
 		if((that.dim==3)&&(U.dim==3))
@@ -347,17 +347,17 @@ function vector(dim)
 			return res; // jslint again
 		}
 	};
-	
+
 	that.mag=function()
 	{
 		return that.dot(that);
 	};
-	
+
 	that.write=function()
 	{
-		var q="\\left(\\begin{array}{c}"+that[0];
+		var q="\\begin{pmatrix}"+that[0];
 		for(var i=1;i<that.dim;i++) q=q+"\\\\"+that[i];
-		return q+"\\end{array}\\right)";
+		return q+"\\end{pmatrix}";
 	};
 }
 

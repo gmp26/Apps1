@@ -57,7 +57,7 @@ describe "mathmoController", ->
     [
       "makeVector"
       "C5"
-      "Consider the four vectors$$\\mathbf{A}=\\left(\\begin{array}{c}-9\\\\0\\\\2\\end{array}\\right)\\,,\\; \\mathbf{B}=\\left(\\begin{array}{c}-8\\\\-8\\\\4\\end{array}\\right)$$$$\\mathbf{C}=\\left(\\begin{array}{c}9\\\\0\\\\-2\\end{array}\\right)\\,,\\; \\mathbf{D}=\\left(\\begin{array}{c}1\\\\-2\\\\5\\end{array}\\right)$$<ol class=\"exercise\"><li>Order the vectors by magnitude.</li><li>Use the scalar product to find the angles between<ol class=\"subexercise\"><li>\\(\\mathbf{D}\\) and \\(\\mathbf{C}\\),</li><li>\\(\\mathbf{C}\\) and \\(\\mathbf{B}\\)</li></ol></ol>"
+      "Consider the four vectors$$\\mathbf{A}=\\begin{pmatrix}-9\\\\0\\\\2\\end{pmatrix}\\,,\\; \\mathbf{B}=\\begin{pmatrix}-8\\\\-8\\\\4\\end{pmatrix}$$$$\\mathbf{C}=\\begin{pmatrix}9\\\\0\\\\-2\\end{pmatrix}\\,,\\; \\mathbf{D}=\\begin{pmatrix}1\\\\-2\\\\5\\end{pmatrix}$$<ol class=\"exercise\"><li>Order the vectors by magnitude.</li><li>Use the scalar product to find the angles between<ol class=\"subexercise\"><li>\\(\\mathbf{D}\\) and \\(\\mathbf{C}\\),</li><li>\\(\\mathbf{C}\\) and \\(\\mathbf{B}\\)</li></ol></ol>"
       "<ol class=\"exercise\"><li>\\(|\\mathbf{B}|=\\sqrt{144},\\) \\(|\\mathbf{A}|=\\sqrt{85},\\) \\( |\\mathbf{C}|=\\sqrt{85}\\) and \\(|\\mathbf{D}|=\\sqrt{30}\\).</li><li><ol class=\"subexercise\"><li>\\(\\arccos\\left(\\frac{-1}{5\\sqrt{102}}\\right)\\)</li><li>\\(\\arccos\\left(\\frac{-20}{3\\sqrt{85}}\\right)\\)</li></ol></li></ol>"
     ]
     [
@@ -65,6 +65,12 @@ describe "mathmoController", ->
       "C6"
       "Consider the lines$$- x - 2=- y - 3=- 2z$$and$$- x - 3=y + 2=- z - 1$$Find the angle between them<br>and determine whether they<br>intersect."
       "The angle between the lines is$$\\arccos\\left(\\frac{-1}{3\\sqrt{3}}\\right).$$The lines meet at the point$$\\left(-2,-3,0\\right).$$"
+    ]
+    [
+      "makeLines2D"
+      "C31"
+      "Find the equation of the line passing through \\((5,-2)\\) and \\((5,-5)\\)."
+      "$$x=5.$$"
     ]
     [
       "makeIneq2"
@@ -178,8 +184,8 @@ describe "mathmoController", ->
     [
       "makeVectorEq"
       "C18"
-      "Show that the points with position vectors$$\\left(\\begin{array}{c}3\\\\-5\\\\-3\\end{array}\\right)\\,,\\;\\left(\\begin{array}{c}8\\\\-35\\\\-8\\end{array}\\right)\\,,\\;\\left(\\begin{array}{c}2\\\\1\\\\-2\\end{array}\\right)$$lie on a straight line, and give the equation of the line in the form \\(\\mathbf{r}=\\mathbf{a}+\\lambda\\mathbf{b}\\)."
-      "$$\\left(\\begin{array}{c}3\\\\-5\\\\-3\\end{array}\\right)+\\lambda,\\left(\\begin{array}{c}1\\\\-6\\\\-1\\end{array}\\right)$$"
+      "Show that the points with position vectors$$\\begin{pmatrix}3\\\\-5\\\\-3\\end{pmatrix}\\,,\\;\\begin{pmatrix}8\\\\-35\\\\-8\\end{pmatrix}\\,,\\;\\begin{pmatrix}2\\\\1\\\\-2\\end{pmatrix}$$lie on a straight line, and give the equation of the line in the form \\(\\mathbf{r}=\\mathbf{a}+\\lambda\\mathbf{b}\\)."
+      "$$\\begin{pmatrix}3\\\\-5\\\\-3\\end{pmatrix}+\\lambda,\\begin{pmatrix}1\\\\-6\\\\-1\\end{pmatrix}$$"
     ]
     [
       "makeImplicit"
@@ -304,8 +310,8 @@ describe "mathmoController", ->
     [
       "makeFurtherVector"
       "F8"
-      "Let \\(a=\\left(\\begin{array}{c}2\\\\2\\\\-5\\end{array}\\right)\\)\\,,\\; \\(b=\\left(\\begin{array}{c}-2\\\\-3\\\\1\\end{array}\\right)\\,\\) and \\(c=\\left(\\begin{array}{c}3\\\\3\\\\-3\\end{array}\\right)\\). Calculate: <ul class=\"exercise\"><li>the vector product, \\(a\\wedge b\\),</li><li>the scalar triple product, \\([a, b, c]\\).</li></ul>"
-      "<ul class=\"exercise\"><li>\\(\\left(\\begin{array}{c}-13\\\\8\\\\-2\\end{array}\\right)\\)</li><li>\\(-9\\)</li></ul>"
+      "Let \\(a=\\begin{pmatrix}2\\\\2\\\\-5\\end{pmatrix}\\)\\,,\\; \\(b=\\begin{pmatrix}-2\\\\-3\\\\1\\end{pmatrix}\\,\\) and \\(c=\\begin{pmatrix}3\\\\3\\\\-3\\end{pmatrix}\\). Calculate: <ul class=\"exercise\"><li>the vector product, \\(a\\wedge b\\),</li><li>the scalar triple product, \\([a, b, c]\\).</li></ul>"
+      "<ul class=\"exercise\"><li>\\(\\begin{pmatrix}-13\\\\8\\\\-2\\end{pmatrix}\\)</li><li>\\(-9\\)</li></ul>"
     ]
     [
       "makeNewtonRaphson"

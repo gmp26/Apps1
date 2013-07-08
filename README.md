@@ -12,7 +12,7 @@ Added some grunt tasks:
 * `grunt mask:<appname>` causes only the named add to be generated in the final dist.
 * `grunt unmask` causes all apps to be present. Useful for test purposes.
 
-Converted codebase to [livescript](http://livescript.net).
+Converted codebase to [LiveScript](http://livescript.net).
 
 Updated to grunt-0.4 in all but the playlist branch which is
 still at grunt-0.3.

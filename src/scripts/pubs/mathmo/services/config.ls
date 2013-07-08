@@ -31,6 +31,7 @@ angular.module('app').factory 'config', ->
         * "C15"
           "C16"
           "C6"
+          "C31"
 
     * title: "Sequences & series"
       topicIds:
@@ -108,6 +109,9 @@ angular.module('app').factory 'config', ->
       "C6":
         * "3D Lines"
           makeLines
+      "C31":
+        * "Equations of 2D lines"
+          makeLines2D
       "C7":
         * "Inequalities"
           makeIneq
