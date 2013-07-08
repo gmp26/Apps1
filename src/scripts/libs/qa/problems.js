@@ -418,6 +418,88 @@ function makeLines()
 	return qa;
 }
 
+// Equation of lines in 2D
+// You still need to account for signs, unit gradients, what if the intercept is 0
+// y=x is a good place to explode
+function makeLinesEq()
+{
+  function makeLines1()
+  {
+    var a=rand(5);
+    var b=rand(5);
+    var c=rand(5);
+    var d=rand(5);
+
+    while (a==c && b==d) // Check for degeneracy
+    {
+      c=rand(5);
+      d=rand(5);
+    }
+
+    var qString="Find the equation of the line passing through \\(("+a+","+b+")\\) and \\(("+c+","+d+")\\).";
+
+    if (b==d) // Vertical lines
+    {
+      var aString="$$y="+b+".$$";
+    }
+    else if (a==c) // Horizontal lines
+    {
+      var aString="$$x="+a+".$$";
+    }
+    else // Other case
+    {
+      if (d-b==c-a) {
+        var grad = "";
+      } else if (d-b==a-c) {
+        var grad = "-";
+      } else {
+        var grad=new frac(d-b,c-a);
+        grad=grad.write();
+      }
+
+      var intercept=new frac(Math.abs(b*(c-a)-(d-b)*a),Math.abs(c-a));
+      intercept=intercept.write();
+      if (b-(d-b)/(c-a)*a < 0) {
+        intercept = "-" + intercept;
+      } else if (b*(c-a)==(d-b)*a) {
+        intercept = "";
+      } else {
+        intercept = "+" + intercept;
+      }
+
+      if (c-a == 1) {
+        var ycoeff="";
+      } else if (a-c == 1) {
+        var ycoeff="-";
+      } else {
+        var ycoeff=c-a;
+      }
+
+      if (d-b == 1) {
+        var xcoeff="-";
+      } else if (b-d == 1) {
+        var xcoeff="+";
+      } else {
+        var xcoeff=b-d;
+      }
+
+      var concoeff=-b*(c-a)+(d-b)*a;
+
+      if (concoeff == 0) {
+        concoeff="";
+      }
+
+      var aString="$$y="+grad+"x"+intercept+"\\qquad \\text{or} \\qquad "+ycoeff+"y"+signedNumber(xcoeff)+"x"+signedNumber(concoeff)+"=0.$$";
+    }
+
+    var qa=[qString,aString];
+    return qa;
+  }
+  var qa=makeLines1();
+  return qa;
+}
+
+
 function makeIneq()
 {
 	function makeIneq2()
