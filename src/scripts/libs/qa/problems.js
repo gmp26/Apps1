@@ -419,7 +419,9 @@ function makeLines()
 }
 
 // Equation of lines in 2D
-function makeLines2D()
+// You still need to account for signs, unit gradients, what if the intercept is 0
+// y=x is a good place to explode
+function makeLinesEq()
 {
   function makeLines1()
   {
@@ -446,13 +448,48 @@ function makeLines2D()
     }
     else // Other case
     {
-      var grad=new frac(d-b,c-a);
-      var intercept=new frac(b*(c-a)-(d-b)*a,c-a);
+      if (d-b==c-a) {
+        var grad = "";
+      } else if (d-b==a-c) {
+        var grad = "-";
+      } else {
+        var grad=new frac(d-b,c-a);
+        grad=grad.write();
+      }
 
-      var ycoeff=c-a;
-      var xcoeff=d-b;
-      var concoeff=b*(c-a)-(d-b)*a;
-      var aString="$$y="+grad.write()+"x+"+intercept.write()+"\\qquad \\text{or} \\qquad "+ycoeff+"y"+signedNumber(xcoeff)+"x"+signedNumber(concoeff)+"=0.$$";
+      var intercept=new frac(Math.abs(b*(c-a)-(d-b)*a),Math.abs(c-a));
+      intercept=intercept.write();
+      if (b-(d-b)/(c-a)*a < 0) {
+        intercept = "-" + intercept;
+      } else if (b*(c-a)==(d-b)*a) {
+        intercept = "";
+      } else {
+        intercept = "+" + intercept;
+      }
+
+      if (c-a == 1) {
+        var ycoeff="";
+      } else if (a-c == 1) {
+        var ycoeff="-";
+      } else {
+        var ycoeff=c-a;
+      }
+
+      if (d-b == 1) {
+        var xcoeff="-";
+      } else if (b-d == 1) {
+        var xcoeff="+";
+      } else {
+        var xcoeff=b-d;
+      }
+
+      var concoeff=-b*(c-a)+(d-b)*a;
+
+      if (concoeff == 0) {
+        concoeff="";
+      }
+
+      var aString="$$y="+grad+"x"+intercept+"\\qquad \\text{or} \\qquad "+ycoeff+"y"+signedNumber(xcoeff)+"x"+signedNumber(concoeff)+"=0.$$";
     }
 
     var qa=[qString,aString];
@@ -461,6 +498,7 @@ function makeLines2D()
   var qa=makeLines1();
   return qa;
 }
+
 
 function makeIneq()
 {
