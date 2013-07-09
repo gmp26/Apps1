@@ -694,14 +694,23 @@ function makeCircLineInter()
     if (disc>0) {
       var aString="The line and the circle intersection in two points, specifically ";
 
+      // First solution
       var xint1=new frac(-B,2*A);
       var xint2=new frac(Math.abs(sq.a),2*A);
 
       var yint1=new frac(-B*m+2*A*c,2*A);
       var yint2=new frac(m*Math.abs(sq.a),2*A);
 
+      // Finish tinkering with this
+
       // First solution
-      aString+="$$\\textstyle\\left("+xint1.write()+"+"+xint2.write()+"\\sqrt{"+sq.n+"},"+yint1.write()+"+"+yint2.write()+"\\sqrt{"+sq.n+"}\\right)$$";
+      aString+="$$\\left(\\frac{"
+      if (xint1.bot==xint2.bot) {
+        aString+=xint1.top+signedNumber(xint2.top)+"\\sqrt{"+sq.n+"}}{"+xint1.bot+"}\\right)$$";
+      } else {
+        aString+=xint1.write();
+      }
+      aString+="$$\\textstyle\\left("+xint1.top+"+"+xint2.write()+"\\sqrt{"+sq.n+"},"+yint1.write()+"+"+yint2.write()+"\\sqrt{"+sq.n+"}\\right)$$";
 
       // // First solution
       // aString+=xint1.write()+"+"+new frac(sq.a,2*A).write()+"\\sqrt{"+sq.n+"}";
