@@ -42,7 +42,8 @@ require {
 
     'libs/qa/geometry':
       deps:
-        * 'libs/qa/helpers'
+        * 'libs/seedrandom'
+          'libs/qa/helpers'
 
     'libs/qa/problems':
       deps:
