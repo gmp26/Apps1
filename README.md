@@ -9,7 +9,7 @@ The aim is to make this app host a few related apps and form the basis of simila
 
 Added some grunt tasks:
 
-* `grunt mask:<appname>` causes only the named add to be generated in the final dist.
+* `grunt mask:<appname>` causes only the named app to be generated in the final dist.
 * `grunt unmask` causes all apps to be present. Useful for test purposes.
 
 Converted codebase to [LiveScript](http://livescript.net).
