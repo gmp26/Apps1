@@ -46,3 +46,53 @@ function circleEq2(a,b,r)
   eqString += "="+C;
   return eqString;
 }
+
+// Given two points (a,b) and (c,d) on a line, calculate the equation in the form
+// ay + bx + c = 0
+// If you have the line in the form y=mx+c, use x=0 and x=1
+//
+// TODO: You get a sign on the y-term if the x-term has zero coefficient. Fix this.
+function lineEq1(a,b,c,d)
+{
+  var xcoeff=b-d;
+  var ycoeff=c-a;
+  var concoeff=-b*(c-a)+(d-b)*a;
+
+  // Check the terms are in lowest common form
+  var h=gcd(xcoeff,ycoeff,concoeff);
+
+  xcoeff/=h;
+  ycoeff/=h;
+  concoeff/=h;
+
+  // Tidying it up for pretty printing
+  if (xcoeff<0) {
+    xcoeff*=-1;
+    ycoeff*=-1;
+    concoeff*=-1;
+  }
+
+  var eqString="";
+
+  if (xcoeff==1) {
+    eqString+="x";
+  } else if (xcoeff!==0) {
+    eqString+=xcoeff+"x";
+  }
+
+  if (ycoeff==1) {
+    eqString+="+y";
+  } else if (ycoeff==-1) {
+    eqString+="-y";
+  } else if (ycoeff!==0) {
+    eqString+=signedNumber(xcoeff)+"y";
+  }
+
+  if (concoeff!==0) {
+    eqString+=signedNumber(concoeff);
+  }
+
+  eqString+="=0";
+
+  return eqString;
+}

@@ -466,41 +466,7 @@ function makeLinesEq()
         intercept = "+" + intercept;
       }
 
-      // Calculate the equation of the line in the form
-      // ax + by + c = 0
-      var xcoeff=b-d;
-      var ycoeff=c-a;
-      var concoeff=-b*(c-a)+(d-b)*a;
-
-      // Check the terms are in lowest common form
-      var h=gcd(xcoeff,ycoeff,concoeff);
-
-      xcoeff/=h;
-      ycoeff/=h;
-      concoeff/=h;
-
-      // Tidying it up for pretty printing
-      if (ycoeff<0) {
-        xcoeff*=-1;
-        ycoeff*=-1;
-        concoeff*=-1;
-      }
-
-      if (ycoeff==1) {
-        ycoeff="";
-      }
-
-      if (xcoeff==1) {
-        xcoeff="+"
-      } else if (xcoeff==-1) {
-        xcoeff="-"
-      }
-
-      if (concoeff == 0) {
-        concoeff="";
-      }
-
-      var aString="$$y="+grad+"x"+intercept+"\\qquad \\text{or} \\qquad "+ycoeff+"y"+signedNumber(xcoeff)+"x"+signedNumber(concoeff)+"=0.$$";
+      var aString="$$y="+grad+"x"+intercept+"\\qquad \\text{or} \\qquad "+lineEq1(a,b,c,d)+".$$";
     }
 
     var qa=[qString,aString];
@@ -535,7 +501,7 @@ function makeCircleEq()
     } else {
       qString+="$$"+circleEq2(a,b,r)+".$$";
     }
-    var aString="The circle has centre \\(("+a+","+b+")\\) and radius \\(("+r+")\\).";
+    var aString="The circle has centre \\(("+a+","+b+")\\) and radius \\("+r+"  \\).";
     var qa=[qString,aString];
     return qa;
   }
