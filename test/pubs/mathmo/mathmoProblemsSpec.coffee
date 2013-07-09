@@ -269,7 +269,13 @@ describe "mathmoController", ->
       "makeCircleEq"
       "C32"
       "Find the centre and radius of the circle with equation$$x^2+6x+y^2+6y=6.$$"
-      "The circle has centre \\((-3,-3)\\) and radius \\((4)\\)."
+      "The circle has centre \\((-3,-3)\\) and radius \\(4  \\)."
+    ]
+    [
+      "makeLineParPerp"
+      "C33"
+      "Find the equation of the line passing through \\((0,2)\\) and perpendicular to the line \\(y=1\\)."
+      "$$x=0.$$"
     ]
     [
       "makeCArithmetic"

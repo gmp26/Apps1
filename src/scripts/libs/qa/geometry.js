@@ -81,11 +81,19 @@ function lineEq1(a,b,c,d)
   }
 
   if (ycoeff==1) {
-    eqString+="+y";
+    if (xcoeff==0) {
+      eqString+="y";
+    } else {
+      eqString+="+y";
+    }
   } else if (ycoeff==-1) {
     eqString+="-y";
   } else if (ycoeff!==0) {
-    eqString+=signedNumber(xcoeff)+"y";
+    if (xcoeff==0) {
+      eqString+=ycoeff+"y";
+    } else {
+      eqString+=signedNumber(ycoeff)+"y";
+    }
   }
 
   if (concoeff!==0) {
@@ -94,5 +102,29 @@ function lineEq1(a,b,c,d)
 
   eqString+="=0";
 
+  return eqString;
+}
+
+// Given a gradient and an intercept, it returns a LaTeX-formatted equation of the line in the form
+// y=mx+c
+function lineEq2(m,c)
+{
+  var eqString="y=";
+
+  if (m==-1) {
+    eqString+="-x";
+  } else if (m==1) {
+    eqString+="x";
+  } else if (m!==0) {
+    eqString+=m+"x";
+  }
+
+  if (c!==0) {
+    if (m==0) {
+      eqString+=c;
+    } else {
+      eqString+=signedNumber(c);
+    }
+  }
   return eqString;
 }

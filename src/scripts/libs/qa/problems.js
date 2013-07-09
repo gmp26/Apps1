@@ -476,6 +476,105 @@ function makeLinesEq()
   return qa;
 }
 
+// Lines parallel or perpendicular to a point
+function makeLineParPerp()
+{
+  var a=rand(5);
+  var b=rand(5);
+  var m=rand(6); // If m=6 then we treat it as vertical
+  var c=rand(5);
+
+  function makeLinePar(a,b,m,c) {
+
+    var qString="Find the equation of the line passing through \\(("+a+","+b+")\\) and parallel to the line ";
+
+    if (Math.abs(m)==6) {
+      while (a==c) {
+        c=rand(5);
+      }
+      qString += "\\(x="+e+"\\).";
+      var aString="$$x="+a+".$$";
+    } else {
+      if (rand()) {
+        qString += "\\("+lineEq1(0,c,1,m+c)+".\\)";
+      } else {
+        qString += "\\("+lineEq2(m,c)+".\\)";
+      }
+
+      var intercept=b-m*a;
+      var aString="$$"+lineEq2(m,intercept)+"\\qquad\\text{or}\\qquad "+lineEq1(0,intercept,1,m+intercept)+"$$";
+    }
+
+    var qa=[qString,aString];
+    return qa;
+  }
+
+  function makeLinePerp(a,b,m,c) {
+    var qString="Find the equation of the line passing through \\(("+a+","+b+")\\) and perpendicular to the line ";
+
+    // Vertical lines
+    if (Math.abs(m)==6) {
+      while (a==c) {
+        c=rand(5);
+      }
+      qString += "\\(x="+c+"\\).";
+      var aString="$$y="+b+".$$";
+    } else if (m==0) { // Horizontal lines
+      while (a==c) {
+        c=rand(5);
+      }
+      qString += "\\(y="+c+"\\).";
+      var aString="$$x="+a+".$$";
+    } else {
+
+      // Equation of line in the question
+      if(rand()) {
+        qString += "\\("+lineEq1(0,c,1,m+c)+".\\)";
+      } else {
+        qString += "\\("+lineEq2(m,c)+".\\)";
+      }
+
+      var aString="$$y=";
+
+      var grad=new frac(-1,m);
+      var intercept=new frac(b*m+a,m);
+      var C=(b*m+a)/m;
+
+      // Gradient in y=mx+c
+      if (m==-1) {
+        aString+="x";
+      } else if (m==1) {
+        aString+="-x";
+      } else {
+        aString+=grad.write()+"x";
+      }
+
+      // Intercept in y=mx+c
+      if (C%1==0) {
+        aString+=signedNumber(C);
+      } else {
+        if (C>0) {
+          aString+="+"+intercept.write();
+        } else {
+          aString+=intercept.write();
+        }
+      }
+
+      aString+="\\qquad\\text{or}\\qquad ";
+
+      aString+="x"+signedNumber(m)+"y"+signedNumber(-b*m-a)+"=0";
+
+      aString+=".$$";
+    }
+
+    var qa=[qString,aString];
+    return qa;
+  }
+
+  var qa=rand() ? makeLinePar(a,b,m,c) : makeLinePerp(a,b,m,c);
+  return qa;
+}
+
 // Equations of circles
 function makeCircleEq()
 {
