@@ -419,8 +419,7 @@ function makeLines()
 }
 
 // Equation of lines in 2D
-// You still need to account for signs, unit gradients, what if the intercept is 0
-// y=x is a good place to explode
+// This isn’t perfect, but it does the job. Some prettying of the output wouldn’t be amiss.
 function makeLinesEq()
 {
   function makeLines1()
@@ -467,29 +466,7 @@ function makeLinesEq()
         intercept = "+" + intercept;
       }
 
-      if (c-a == 1) {
-        var ycoeff="";
-      } else if (a-c == 1) {
-        var ycoeff="-";
-      } else {
-        var ycoeff=c-a;
-      }
-
-      if (d-b == 1) {
-        var xcoeff="-";
-      } else if (b-d == 1) {
-        var xcoeff="+";
-      } else {
-        var xcoeff=b-d;
-      }
-
-      var concoeff=-b*(c-a)+(d-b)*a;
-
-      if (concoeff == 0) {
-        concoeff="";
-      }
-
-      var aString="$$y="+grad+"x"+intercept+"\\qquad \\text{or} \\qquad "+ycoeff+"y"+signedNumber(xcoeff)+"x"+signedNumber(concoeff)+"=0.$$";
+      var aString="$$y="+grad+"x"+intercept+"\\qquad \\text{or} \\qquad "+lineEq1(a,b,c,d)+".$$";
     }
 
     var qa=[qString,aString];
@@ -499,6 +476,138 @@ function makeLinesEq()
   return qa;
 }
 
+// Lines parallel or perpendicular to a point
+function makeLineParPerp()
+{
+  var a=rand(5);
+  var b=rand(5);
+  var m=rand(6); // If m=6 then we treat it as vertical
+  var c=rand(5);
+
+  function makeLinePar(a,b,m,c) {
+
+    var qString="Find the equation of the line passing through \\(("+a+","+b+")\\) and parallel to the line ";
+
+    if (Math.abs(m)==6) {
+      while (a==c) {
+        c=rand(5);
+      }
+      qString += "\\(x="+e+"\\).";
+      var aString="$$x="+a+".$$";
+    } else {
+      if (rand()) {
+        qString += "\\("+lineEq1(0,c,1,m+c)+".\\)";
+      } else {
+        qString += "\\("+lineEq2(m,c)+".\\)";
+      }
+
+      var intercept=b-m*a;
+      var aString="$$"+lineEq2(m,intercept)+"\\qquad\\text{or}\\qquad "+lineEq1(0,intercept,1,m+intercept)+"$$";
+    }
+
+    var qa=[qString,aString];
+    return qa;
+  }
+
+  function makeLinePerp(a,b,m,c) {
+    var qString="Find the equation of the line passing through \\(("+a+","+b+")\\) and perpendicular to the line ";
+
+    // Vertical lines
+    if (Math.abs(m)==6) {
+      while (a==c) {
+        c=rand(5);
+      }
+      qString += "\\(x="+c+"\\).";
+      var aString="$$y="+b+".$$";
+    } else if (m==0) { // Horizontal lines
+      while (a==c) {
+        c=rand(5);
+      }
+      qString += "\\(y="+c+"\\).";
+      var aString="$$x="+a+".$$";
+    } else {
+
+      // Equation of line in the question
+      if(rand()) {
+        qString += "\\("+lineEq1(0,c,1,m+c)+".\\)";
+      } else {
+        qString += "\\("+lineEq2(m,c)+".\\)";
+      }
+
+      var aString="$$y=";
+
+      var grad=new frac(-1,m);
+      var intercept=new frac(b*m+a,m);
+      var C=(b*m+a)/m;
+
+      // Gradient in y=mx+c
+      if (m==-1) {
+        aString+="x";
+      } else if (m==1) {
+        aString+="-x";
+      } else {
+        aString+=grad.write()+"x";
+      }
+
+      // Intercept in y=mx+c
+      if (C%1==0) {
+        aString+=signedNumber(C);
+      } else {
+        if (C>0) {
+          aString+="+"+intercept.write();
+        } else {
+          aString+=intercept.write();
+        }
+      }
+
+      aString+="\\qquad\\text{or}\\qquad ";
+
+      aString+="x"+signedNumber(m)+"y"+signedNumber(-b*m-a)+"=0";
+
+      aString+=".$$";
+    }
+
+    var qa=[qString,aString];
+    return qa;
+  }
+
+  var qa=rand() ? makeLinePar(a,b,m,c) : makeLinePerp(a,b,m,c);
+  return qa;
+}
+
+// Equations of circles
+function makeCircleEq()
+{
+  var r=rand(1,6);
+  var a=rand(5);
+  var b=rand(5);
+
+  function makeCircleEq1(a,b,r) {
+    var qString="Find the equation of the circle with centre \\(("+a+","+b+")\\) and radius \\("+r+"\\).";
+    if(a==0&&b==0) {
+      var aString="$$"+circleEq1(a,b,r)+".$$";
+    } else {
+      var aString="$$"+circleEq1(a,b,r)+"\\qquad\\text{or}\\qquad "+circleEq2(a,b,r)+".$$";
+    }
+    var qa=[qString,aString];
+    return qa;
+  }
+
+  function makeCircleEq2(a,b,r) {
+    var qString="Find the centre and radius of the circle with equation";
+    if (rand()) {
+      qString+="$$"+circleEq1(a,b,r)+".$$";
+    } else {
+      qString+="$$"+circleEq2(a,b,r)+".$$";
+    }
+    var aString="The circle has centre \\(("+a+","+b+")\\) and radius \\("+r+"  \\).";
+    var qa=[qString,aString];
+    return qa;
+  }
+
+  var qa=rand() ? makeCircleEq1(a,b,r) : makeCircleEq2(a,b,r);
+  return qa;
+}
 
 function makeIneq()
 {
