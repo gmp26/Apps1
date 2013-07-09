@@ -16,7 +16,7 @@ require {
       deps:
         * 'libs/seedrandom'
           'libs/qa/helpers'
-        
+
     'libs/qa/polys':
       deps:
         * 'libs/seedrandom'
@@ -51,6 +51,7 @@ require {
           'libs/qa/helpers'
           'libs/qa/polys'
           'libs/qa/stats'
+          'libs/qa/geometry'
 
     'pubs/mathmo/services/config':
       deps:
@@ -174,7 +175,7 @@ require {
       deps:
         * 'libs/angular'
         ...
-    'app': 
+    'app':
       deps:
         * 'libs/angular'
           'libs/angular-resource'

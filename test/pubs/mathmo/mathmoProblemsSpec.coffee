@@ -67,12 +67,6 @@ describe "mathmoController", ->
       "The angle between the lines is$$\\arccos\\left(\\frac{-1}{3\\sqrt{3}}\\right).$$The lines meet at the point$$\\left(-2,-3,0\\right).$$"
     ]
     [
-      "makeLines2D"
-      "C31"
-      "Find the equation of the line passing through \\((5,-2)\\) and \\((5,-5)\\)."
-      "$$x=5.$$"
-    ]
-    [
       "makeIneq2"
       "C7"
       "By factorizing a suitable polynomial, or otherwise, find the values of \\(x\\) which satisfy$$x^2 - 3x < 4$$"
@@ -264,6 +258,18 @@ describe "mathmoController", ->
       "C30"
       "Simplify $$\\frac{x^{\\frac{1}{3}}\\times \\root 5 \\of{x^{-4}}}{x^{-\\frac{4}{5}}\\times x^{\\frac{1}{5}}\\times \\root 2 \\of{x^{3}}}$$"
       "$$x^{-\\frac{41}{30}}$$"
+    ]
+    [
+      "makeLines2D"
+      "C31"
+      "Find the equation of the line passing through \\((5,-2)\\) and \\((5,-5)\\)."
+      "$$x=5.$$"
+    ]
+    [
+      "makeCircleEq"
+      "C32"
+      "Find the centre and radius of the circle with equation$$x^2+6x+y^2+6y=6.$$"
+      "The circle has centre \\((-3,-3)\\) and radius \\((4)\\)."
     ]
     [
       "makeCArithmetic"

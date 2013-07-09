@@ -510,25 +510,37 @@ function makeLinesEq()
   return qa;
 }
 
-// Intersections of lines and circles
-// Work in progress
-function makeLinesCircles()
+// Equations of circles
+function makeCircleEq()
 {
-  // The equation of the line is a1*x + b1*y + c = 0
-  var a1=rand(5);
-  var b1=rand(5);
-  var c=rand(5);
+  var r=rand(1,6);
+  var a=rand(5);
+  var b=rand(5);
 
-  // Check for degeneracy
-  while (a1==0&&b1==0) {
-    a1=rand(5);
-    b1=rand(5);
+  function makeCircleEq1(a,b,r) {
+    var qString="Find the equation of the circle with centre \\(("+a+","+b+")\\) and radius \\("+r+"\\).";
+    if(a==0&&b==0) {
+      var aString="$$"+circleEq1(a,b,r)+".$$";
+    } else {
+      var aString="$$"+circleEq1(a,b,r)+"\\qquad\\text{or}\\qquad "+circleEq2(a,b,r)+".$$";
+    }
+    var qa=[qString,aString];
+    return qa;
   }
 
-  // var d=gcd(a1,b1,c);
-  // a1/=d; b1/=d; c/=d;
+  function makeCircleEq2(a,b,r) {
+    var qString="Find the centre and radius of the circle with equation";
+    if (rand()) {
+      qString+="$$"+circleEq1(a,b,r)+".$$";
+    } else {
+      qString+="$$"+circleEq2(a,b,r)+".$$";
+    }
+    var aString="The circle has centre \\(("+a+","+b+")\\) and radius \\(("+r+")\\).";
+    var qa=[qString,aString];
+    return qa;
+  }
 
-  var qa=[a1,b1];
+  var qa=rand() ? makeCircleEq1(a,b,r) : makeCircleEq2(a,b,r);
   return qa;
 }
 
