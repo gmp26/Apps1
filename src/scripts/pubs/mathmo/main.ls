@@ -40,9 +40,9 @@ require {
         * 'libs/seedrandom'
           'libs/qa/helpers'
 
-    # 'libs/qa/geometry':
-    #   deps:
-    #     * 'libs/qa/helpers'
+    'libs/qa/geometry':
+      deps:
+        * 'libs/qa/helpers'
 
     'libs/qa/problems':
       deps:
