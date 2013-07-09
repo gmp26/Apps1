@@ -32,7 +32,8 @@ angular.module('app').factory 'config', ->
           "C16"
           "C6"
           "C31"
-          # "C32"
+          "C32"
+          "C33"
 
     * title: "Sequences & series"
       topicIds:
@@ -188,9 +189,12 @@ angular.module('app').factory 'config', ->
       "C31":
         * "Equations of 2D lines"
           makeLinesEq
-      # "C32":
-      #   * "Equations of circles"
-      #     makeCircleEq
+      "C32":
+        * "Equations of circles"
+          makeCircleEq
+      "C33":
+        * "Parallel and perpendicular lines"
+          makeLineParPerp
 
       "F1":
         * "Complex Arithmetic"
