@@ -419,8 +419,7 @@ function makeLines()
 }
 
 // Equation of lines in 2D
-// You still need to account for signs, unit gradients, what if the intercept is 0
-// y=x is a good place to explode
+// This isn’t perfect, but it does the job. Some prettying of the output wouldn’t be amiss.
 function makeLinesEq()
 {
   function makeLines1()
@@ -467,23 +466,35 @@ function makeLinesEq()
         intercept = "+" + intercept;
       }
 
-      if (c-a == 1) {
-        var ycoeff="";
-      } else if (a-c == 1) {
-        var ycoeff="-";
-      } else {
-        var ycoeff=c-a;
-      }
-
-      if (d-b == 1) {
-        var xcoeff="-";
-      } else if (b-d == 1) {
-        var xcoeff="+";
-      } else {
-        var xcoeff=b-d;
-      }
-
+      // Calculate the equation of the line in the form
+      // ax + by + c = 0
+      var xcoeff=b-d;
+      var ycoeff=c-a;
       var concoeff=-b*(c-a)+(d-b)*a;
+
+      // Check the terms are in lowest common form
+      var h=gcd(xcoeff,ycoeff,concoeff);
+
+      xcoeff/=h;
+      ycoeff/=h;
+      concoeff/=h;
+
+      // Tidying it up for pretty printing
+      if (ycoeff<0) {
+        xcoeff*=-1;
+        ycoeff*=-1;
+        concoeff*=-1;
+      }
+
+      if (ycoeff==1) {
+        ycoeff="";
+      }
+
+      if (xcoeff==1) {
+        xcoeff="+"
+      } else if (xcoeff==-1) {
+        xcoeff="-"
+      }
 
       if (concoeff == 0) {
         concoeff="";
@@ -499,6 +510,27 @@ function makeLinesEq()
   return qa;
 }
 
+// Intersections of lines and circles
+// Work in progress
+function makeLinesCircles()
+{
+  // The equation of the line is a1*x + b1*y + c = 0
+  var a1=rand(5);
+  var b1=rand(5);
+  var c=rand(5);
+
+  // Check for degeneracy
+  while (a1==0&&b1==0) {
+    a1=rand(5);
+    b1=rand(5);
+  }
+
+  // var d=gcd(a1,b1,c);
+  // a1/=d; b1/=d; c/=d;
+
+  var qa=[a1,b1];
+  return qa;
+}
 
 function makeIneq()
 {
