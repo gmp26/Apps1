@@ -375,7 +375,7 @@ String.prototype.repeat = function(num)
 // Returns a number signed with + or - as a string
 // Useful for equations
 
-function signedNumber(x) // What about x = +/-1?
+function signedNumber(x)
 {
     if (x > 0) {
         return "+" + x;

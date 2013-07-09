@@ -609,6 +609,121 @@ function makeCircleEq()
   return qa;
 }
 
+function makeCircLineInter()
+{
+  function makeLLInter()
+  {
+    m1=rand(6);
+    m2=rand(6);
+    c1=rand(6);
+    c2=rand(6);
+
+    if (rand()) { // Artificially increase the number of parallel lines
+      m1=m2;
+    }
+
+    while(m1==m2&&c1==c2) {
+      m2=rand(6);
+      c2=rand(6);
+    }
+
+    var qString="Find whether the lines \\(";
+
+    if (rand()) {
+      qString+=lineEq1(0,c1,1,m1+c1);
+    } else {
+      qString+=lineEq2(m1,c1);
+    }
+
+    qString+="\\) and \\(";
+
+    if (rand()) {
+      qString+=lineEq1(0,c2,1,m2+c2);
+    } else {
+      qString+=lineEq2(m2,c2);
+    }
+
+    qString+="\\) intersect, and if they do, find their point of intersection."
+
+    if (m1==m2) {
+      var aString="The lines do not intersect.";
+    } else {
+      var xint=new frac(c2-c1,m1-m2);
+      var yint=new frac(m1*(c2-c1)+c1*(m1-m2),m1-m2);
+      var aString="The lines intersect in a single point, which occurs at \\(\\left("+xint.write()+","+yint.write()+"\\right)\\).";
+    }
+
+    var qa=[qString,aString];
+    return qa;
+  }
+
+  function makeCLInter() {
+    var a=rand(6);
+    var b=rand(6);
+    var r=rand(2,7);
+
+    var m=rand(6);
+    var c=rand(6);
+
+    var qString="Consider the line \\(";
+
+    if (rand()) {
+      qString+=lineEq1(0,c,1,m+c);
+    } else {
+      qString+=lineEq2(m,c);
+    }
+
+    qString+="\\) and the circle \\( "
+
+    if (rand()) {
+      qString+=circleEq1(a,b,r);
+    } else {
+      qString+=circleEq2(a,b,r);
+    }
+
+    qString+="\\). Find out how many points of intersection they have, and the location of any intersections."
+
+    // Variables to solve Ax^2 + Bx + C = 0
+    var A=m*m+1;
+    var B=-2*a+2*m*(c-b);
+    var C=(c-b)*(c-b)-r*r;
+
+    var disc=B*B-4*A*C;
+    var sq=new sqroot(disc);
+
+    if (disc>0) {
+      var aString="The line and the circle intersection in two points, specifically ";
+
+      var xint1=new frac(-B,2*A);
+      var xint2=new frac(Math.abs(sq.a),2*A);
+
+      var yint1=new frac(-B*m+2*A*c,2*A);
+      var yint2=new frac(m*Math.abs(sq.a),2*A);
+
+      // First solution
+      aString+="$$\\textstyle\\left("+xint1.write()+"+"+xint2.write()+"\\sqrt{"+sq.n+"},"+yint1.write()+"+"+yint2.write()+"\\sqrt{"+sq.n+"}\\right)$$";
+
+      // // First solution
+      // aString+=xint1.write()+"+"+new frac(sq.a,2*A).write()+"\\sqrt{"+sq.n+"}";
+      // aString+=sq.a+" "+sq.n+" and break "+sq.write();
+    } else if (disc<0) {
+      var aString="The line and the circle do not intersect in any points.";
+    } else if (disc==0) { // This never happens in practice; do we want to artificially increase it?
+      var xint=new frac(-B,2*A);
+      var yint=new frac(-B*m+c*2*A,2*A);
+      var aString="The line and the circle intersect in exactly one point, which occurs at \\(\\left("+xint.write()+","+yint.write()+"\\right)\\).";
+    } else {
+      console.log("The discriminant in the equation for x in makeCLInter is not a number.")
+    }
+
+    var qa=[qString,aString];
+    return qa;
+  }
+
+  var qa=makeCLInter();
+  return qa;
+}
+
 function makeIneq()
 {
 	function makeIneq2()
