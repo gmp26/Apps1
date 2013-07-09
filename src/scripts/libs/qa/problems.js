@@ -686,31 +686,41 @@ function makeCircLineInter()
     // Variables to solve Ax^2 + Bx + C = 0
     var A=m*m+1;
     var B=-2*a+2*m*(c-b);
-    var C=(c-b)*(c-b)-r*r;
+    var C=(c-b)*(c-b)-r*r+a*a;
 
     var disc=B*B-4*A*C;
     var sq=new sqroot(disc);
 
     if (disc>0) {
-      var aString="The line and the circle intersection in two points, specifically ";
+      var aString="The line and the circle intersect in two points, specifically ";
 
-      // First solution
       var xint1=new frac(-B,2*A);
-      var xint2=new frac(Math.abs(sq.a),2*A);
+      var xint2=new frac(sq.a,2*A);
 
       var yint1=new frac(-B*m+2*A*c,2*A);
-      var yint2=new frac(m*Math.abs(sq.a),2*A);
+      var yint2=new frac(m*sq.a,2*A);
 
       // Finish tinkering with this
 
       // First solution
       aString+="$$\\left(\\frac{"
       if (xint1.bot==xint2.bot) {
-        aString+=xint1.top+signedNumber(xint2.top)+"\\sqrt{"+sq.n+"}}{"+xint1.bot+"}\\right)$$";
+        aString+=xint1.top+"+"+xint2.top+"\\sqrt{"+sq.n+"}}{"+xint1.bot+"},";
       } else {
-        aString+=xint1.write();
+        aString+=xint1.top+"}{"+xint1.bot+"}+\\frac{"+xint2.top+"\\sqrt{"+sq.n+"}}{"+xint2.bot+"},";
       }
-      aString+="$$\\textstyle\\left("+xint1.top+"+"+xint2.write()+"\\sqrt{"+sq.n+"},"+yint1.write()+"+"+yint2.write()+"\\sqrt{"+sq.n+"}\\right)$$";
+      aString+="\\frac{";
+      if (yint1.bot==yint2.bot) {
+        aString+=yint1.top+signedNumber(yint2.top)+"\\sqrt{"+sq.n+"}}{"+yint1.bot+"}";
+      } else {
+        aString+=yint1.top+"}{"+yint1.bot+"}+\\frac{"+yint2.top+"\\sqrt{"+sq.n+"}}{"+yint2.bot+"}";
+      }
+      aString+="\\right)";
+
+      aString+="\\qquad\\text{and}\\qquad ";
+      aString+="$$";
+
+      // aString+="$$\\textstyle\\left("+xint1.top+"+"+xint2.write()+"\\sqrt{"+sq.n+"},"+yint1.write()+"+"+yint2.write()+"\\sqrt{"+sq.n+"}\\right)$$";
 
       // // First solution
       // aString+=xint1.write()+"+"+new frac(sq.a,2*A).write()+"\\sqrt{"+sq.n+"}";
