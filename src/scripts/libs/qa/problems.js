@@ -550,21 +550,25 @@ function makeLineParPerp()
       }
 
       // Intercept in y=mx+c
-      if (C%1==0) {
+      if (C%1==0&&C!==0) {
         aString+=signedNumber(C);
       } else {
         if (C>0) {
           aString+="+"+intercept.write();
-        } else {
+        } else if (C<0) {
           aString+=intercept.write();
         }
       }
 
       aString+="\\qquad\\text{or}\\qquad ";
 
-      aString+="x"+signedNumber(m)+"y"+signedNumber(-b*m-a)+"=0";
+      aString+="x"+signedNumber(m)+"y";
 
-      aString+=".$$";
+      if (-b*m-a!==0) {
+        aString+=signedNumber(-b*m-a);
+      }
+
+      aString+="=0.$$";
     }
 
     var qa=[qString,aString];
