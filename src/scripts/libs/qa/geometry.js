@@ -43,7 +43,12 @@ function circleEq2(a,b,r)
     eqString += "+y^2"+signedNumber(-2*b)+"y";
   }
 
-  eqString += "="+C;
+  if (C<0) {
+    eqString += signedNumber(-C)+"=0";
+  } else {
+    eqString += "="+C;
+  }
+
   return eqString;
 }
 
