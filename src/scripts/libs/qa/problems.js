@@ -424,15 +424,15 @@ function makeLinesEq()
 {
   function makeLines1()
   {
-    var a=rand(5);
-    var b=rand(5);
-    var c=rand(5);
-    var d=rand(5);
+    var a=rand(6);
+    var b=rand(6);
+    var c=rand(6);
+    var d=rand(6);
 
     while (a==c && b==d) // Check for degeneracy
     {
-      c=rand(5);
-      d=rand(5);
+      c=rand(6);
+      d=rand(6);
     }
 
     var qString="Find the equation of the line passing through \\(("+a+","+b+")\\) and \\(("+c+","+d+")\\).";
@@ -479,10 +479,10 @@ function makeLinesEq()
 // Lines parallel or perpendicular to a point
 function makeLineParPerp()
 {
-  var a=rand(5);
-  var b=rand(5);
+  var a=rand(6);
+  var b=rand(6);
   var m=rand(6); // If m=6 then we treat it as vertical
-  var c=rand(5);
+  var c=rand(6);
 
   function makeLinePar(a,b,m,c) {
 
@@ -578,9 +578,9 @@ function makeLineParPerp()
 // Equations of circles
 function makeCircleEq()
 {
-  var r=rand(1,6);
-  var a=rand(5);
-  var b=rand(5);
+  var r=rand(2,7);
+  var a=rand(6);
+  var b=rand(6);
 
   function makeCircleEq1(a,b,r) {
     var qString="Find the equation of the circle with centre \\(("+a+","+b+")\\) and radius \\("+r+"\\).";
@@ -606,6 +606,212 @@ function makeCircleEq()
   }
 
   var qa=rand() ? makeCircleEq1(a,b,r) : makeCircleEq2(a,b,r);
+  return qa;
+}
+
+function makeCircLineInter()
+{
+  function makeLLInter()
+  {
+    m1=rand(6);
+    m2=rand(6);
+    c1=rand(6);
+    c2=rand(6);
+
+    if (rand()) { // Artificially increase the number of parallel lines
+      m1=m2;
+    }
+
+    while(m1==m2&&c1==c2) {
+      m2=rand(6);
+      c2=rand(6);
+    }
+
+    var qString="Consider the lines \\(";
+
+    if (rand()) {
+      qString+=lineEq1(0,c1,1,m1+c1);
+    } else {
+      qString+=lineEq2(m1,c1);
+    }
+
+    qString+="\\) and \\(";
+
+    if (rand()) {
+      qString+=lineEq1(0,c2,1,m2+c2);
+    } else {
+      qString+=lineEq2(m2,c2);
+    }
+
+    qString+="\\). <br><br> Find out how many points of intersection they have, and the location of any intersections."
+
+    if (m1==m2) {
+      var aString="The lines do not intersect.";
+    } else {
+      var xint=new frac(c2-c1,m1-m2);
+      var yint=new frac(m1*(c2-c1)+c1*(m1-m2),m1-m2);
+      var aString="The lines intersect in a single point, which occurs at \\(\\left("+xint.write()+","+yint.write()+"\\right)\\).";
+    }
+
+    var qa=[qString,aString];
+    return qa;
+  }
+
+  function makeCLInter() {
+    var a=rand(6);
+    var b=rand(6);
+    var r=rand(2,7);
+
+    var m=rand(6);
+    var c=rand(6);
+
+    var qString="Consider the line \\(";
+
+    if (rand()) {
+      qString+=lineEq1(0,c,1,m+c);
+    } else {
+      qString+=lineEq2(m,c);
+    }
+
+    qString+="\\) and the circle \\( "
+
+    if (rand()) {
+      qString+=circleEq1(a,b,r);
+    } else {
+      qString+=circleEq2(a,b,r);
+    }
+
+    qString+="\\). <br><br> Find out how many points of intersection they have, and the location of any intersections."
+
+    // By substitution, we can get an equation of the form Ax^ + Bx + C = 0
+    // The roots are the points of intersection
+    // We compute these variables:
+    var A=m*m+1;
+    var B=-2*a+2*m*(c-b);
+    var C=(c-b)*(c-b)-r*r+a*a;
+
+    // Discriminant for the roots
+    var disc=B*B-4*A*C;
+    var sq=new sqroot(disc);
+
+    if (disc>0) {
+      var aString="The line and the circle intersect in two points, specifically ";
+
+      // First solution x1 = (-B+sqrt(disc))/2A, y=m*x1+c
+      aString+="$$\\left("
+      aString+=simplifySurd(-B,sq.a,sq.n,2*A);
+      aString+=","+simplifySurd(-m*B+2*c*A,m*sq.a,sq.n,2*A);
+      aString+="\\right)";
+
+      aString+="\\qquad\\text{and}\\qquad ";
+
+      // Second solution x2 = (-B-sqrt(disc))/2A, y=m*x2+c
+      aString+="\\left("
+      aString+=simplifySurd(-B,-sq.a,sq.n,2*A);
+      aString+=","+simplifySurd(-m*B+2*c*A,-m*sq.a,sq.n,2*A);
+      aString+="\\right)";
+
+      aString+="$$";
+    }
+    else if (disc<0)
+    {
+      var aString="The line and the circle do not intersect in any points.";
+    }
+    else if (disc==0)
+    { // This never happens in practice; do we want to artificially increase it?
+      var xint=new frac(-B,2*A);
+      var yint=new frac(-B*m+c*2*A,2*A);
+      var aString="The line and the circle intersect in exactly one point, which occurs at \\(\\left("+xint.write()+","+yint.write()+"\\right)\\).";
+    }
+
+    var qa=[qString,aString];
+    return qa;
+  }
+
+  function makeCCInter() {
+    var a1=rand(6);
+    var b1=rand(6);
+    var r1=rand(2,7);
+
+    var a2=rand(6);
+    var b2=rand(6);
+    var r2=rand(2,7);
+
+    while (a1==a2&&b1==b2&&r1==r2) {
+      a2=rand(6);
+      b2=rand(6);
+      r2=rand(2,7);
+    }
+
+    var qString="Consider the circles \\(";
+
+    if (rand()) {
+      qString+=circleEq1(a1,b1,r1);
+    } else {
+      qString+=circleEq2(a1,b1,r1);
+    }
+
+    qString+="\\) and \\("
+
+    if (rand()) {
+      qString+=circleEq1(a2,b2,r2);
+    } else {
+      qString+=circleEq2(a2,b2,r2);
+    }
+
+    qString+="\\). <br><br> Find out how many points of intersection they have, and the location of any intersections."
+
+    var D=Math.sqrt((b2-b1)*(b2-b1)+(a2-a1)*(a2-a1));
+    var DD=(b2-b1)*(b2-b1)+(a2-a1)*(a2-a1);
+    var R=r1+r2;
+    var RR=r1*r1-r2*r2;
+    var S=Math.abs(r1-r2);
+
+    // The formulae for the case of two intersections is cribbed from
+    // http://www.ambrsoft.com/TrigoCalc/Circles2/Circle2.htm
+
+    if (R>D&&D>S) {
+      var aString="The circles intersect in two points, which are";
+
+      var d=new sqroot(-DD*DD+2*DD*r1*r1-r1*r1*r1*r1+2*DD*r2*r2+2*r1*r1*r2*r2-r2*r2*r2*r2);
+
+      // First solution
+      aString+="$$\\left(";
+      aString+=simplifySurd((a1+a2)*DD+(a2-a1)*RR,(b1-b2)*d.a,d.n,2*DD);
+      aString+=","+simplifySurd((b1+b2)*DD+(b2-b1)*RR,(a2-a1)*d.a,d.n,2*DD);
+      aString+="\\right)";
+
+      aString+="\\qquad\\text{and}\\qquad ";
+
+      // Second solution
+      aString+="\\left(";
+      aString+=simplifySurd((a1+a2)*DD+(a2-a1)*RR,(b2-b1)*d.a,d.n,2*DD);
+      aString+=","+simplifySurd((b1+b2)*DD+(b2-b1)*RR,(a1-a2)*d.a,d.n,2*DD);
+      aString+="\\right)";
+
+      aString+="$$";
+    } else if (d==R) {
+      var x1=new frac(a1*R+r1*(a2-a1),R);
+      var y1=new frac(b1*R+r1*(b2-b1),R);
+      var aString="The circles intersect in a single point, which is \\(("+x1.write()+","+y1.write()+")\\).";
+    } else if (D>R||D<=S) {
+      var aString="The two circles do not intersect in any points.";
+    } else {
+      var aString="Uh oh";
+    }
+
+    var qa=[qString,aString];
+    return qa;
+  }
+
+  if (rand()) {
+    var qa=makeCLInter();
+  } else if (rand()) {
+    var qa=makeLLInter();
+  } else {
+    var qa=makeCCInter();
+  }
+
   return qa;
 }
 
@@ -1963,10 +2169,10 @@ function makeFurtherVector()
 	var a=new vector(3);a.setrand(5);
 	var b=new vector(3);b.setrand(5);
 	var c=new vector(3);c.setrand(5);
-	var qString="Let \\(a="+a.write()+"\\)\\,,\\; \\(b="+b.write()+"\\,\\) and \\(c="+c.write()+"\\). ";
+	var qString="Let \\(\\mathbf{a}="+a.write()+"\\,\\),\\; \\(\\mathbf{b}="+b.write()+"\\,\\) and \\(\\mathbf{c}="+c.write()+"\\). ";
 	qString += "Calculate: <ul class=\"exercise\">";
-	qString += "<li>the vector product, \\(a\\wedge b\\),</li>";
-	qString += "<li>the scalar triple product, \\([a, b, c]\\).</li>";
+	qString += "<li>the vector product, \\(\\mathbf{a}\\wedge \\mathbf{b}\\),</li>";
+	qString += "<li>the scalar triple product, \\([\\mathbf{a}, \\mathbf{b}, \\mathbf{c}]\\).</li>";
 	qString += "</ul>";
 	var axb=a.cross(b);
 	var abc=axb.dot(c);
@@ -2212,15 +2418,22 @@ function makeMatXforms()
 	for(var i=0;i<5;i++) {xfms[i]=new fmatrix(2);}
 	var cosines = [new frac(0), new frac(-1), new frac(0)];
 	var sines = [new frac(1), new frac(0), new frac(-1)];
-	xfms[0].set(cosines[a], -sines[a], sines[a], cosines[a]);
-	xfms[1].set(cosines[a], sines[a], sines[a], -cosines[a]);
+  var acosines = [new frac(0), new frac(1), new frac(0)];
+  var asines = [new frac(-1), new frac(0), new frac(1)];
+	xfms[0].set(cosines[a], asines[a], sines[a], cosines[a]); // first sin is -1
+	xfms[1].set(cosines[a], sines[a], sines[a], acosines[a]); // second cos is -1
 	xfms[2].set(1, a + 1, 0, 1);
 	xfms[3].set(1, 0, a + 1, 1);
 	xfms[4].set(a+2, 0, 0, a+2);
 	var f=new frac(a+1, 2);
-	var xft=["a rotation through \\("+fcoeff(f, "\\pi")+"\\) anticlockwise about O", "a reflection in the line \\("+["y=x","x=0","y=-x"][a]+"\\)", "a shear of element \\("+(a+1)+", x\\) axis invariant", "a shear of element \\("+(a+1)+", y\\) axis invariant", "an enlargement of scale factor \\("+(a+1)+"\\)"];
+	var xft=[
+    "a rotation through \\("+fcoeff(f, "\\pi")+"\\) anticlockwise about O",
+    "a reflection in the line \\("+["y=x","x=0","y=-x"][a]+"\\)",
+    "a shear of element \\("+(a+1)+", x\\) axis invariant",
+    "a shear of element \\("+(a+1)+", y\\) axis invariant",
+    "an enlargement of scale factor \\("+(a+1)+"\\)"];
 	var which=distrand(2, 0, 4);
-	var qString="Compute the matrix representing, in 2D, "+xft[which[0]]+" followed by "+xft[which[1]];
+	var qString="Compute the matrix representing, in 2D, "+xft[which[0]]+" followed by "+xft[which[1]]+".";
 	var ans=xfms[which[1]].times(xfms[which[0]]);
 	var aString="$$"+ans.write()+"$$";
 	var qa=[qString,aString];
