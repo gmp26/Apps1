@@ -281,7 +281,7 @@ function fmatrix(dim)
 	{
 		if(typeof(l)=='undefined')
 			l=["(",")"];
-		var res="\\left"+l[0]+"\\begin{array}{"+"c".repeat(this.dim)+"}";
+		var res="\\left"+l[0]+"\\begin{pmatrix}";
 		for(var i=0;i<this.dim;i++)
 		{
 			for(var j=0;j<this.dim;j++)
@@ -291,7 +291,7 @@ function fmatrix(dim)
 				{
 					if(i==this.dim-1)
 					{
-						res+="\\end{array}\\right"+l[1];
+						res+="\\end{pmatrix}\\right"+l[1];
 					}
 					else
 					{

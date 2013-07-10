@@ -304,8 +304,8 @@ describe "mathmoController", ->
     [
       "makeMatrix2"
       "F4"
-      "Let $$A=\\left(\\begin{array}{cc}5&-4\\\\-5&1\\end{array}\\right) \\qquad \\text{and} \\qquad B=\\left(\\begin{array}{cc}-4&2\\\\5&3\\end{array}\\right)$$.Compute: <ul class=\"exercise\"><li>\\(A+B\\)</li><li>\\(A \\times B\\)</li><li>\\(B^{-1}\\)</li></ul>"
-      "<ul class=\"exercise\"><li>\\(\\left(\\begin{array}{cc}1&-2\\\\0&4\\end{array}\\right)\\)</li><li>\\(\\left(\\begin{array}{cc}-40&-2\\\\25&-7\\end{array}\\right)\\)</li><li>\\(\\left(\\begin{array}{cc}-\\frac{3}{22}&\\frac{1}{11}\\\\\\frac{5}{22}&\\frac{2}{11}\\end{array}\\right)\\)</li></ul>"
+      "Let $$A=\\left(\\begin{pmatrix}5&-4\\\\-5&1\\end{pmatrix}\\right) \\qquad \\text{and} \\qquad B=\\left(\\begin{pmatrix}-4&2\\\\5&3\\end{pmatrix}\\right)$$.Compute: <ul class=\"exercise\"><li>\\(A+B\\)</li><li>\\(A \\times B\\)</li><li>\\(B^{-1}\\)</li></ul>"
+      "<ul class=\"exercise\"><li>\\(\\left(\\begin{pmatrix}1&-2\\\\0&4\\end{pmatrix}\\right)\\)</li><li>\\(\\left(\\begin{pmatrix}-40&-2\\\\25&-7\\end{pmatrix}\\right)\\)</li><li>\\(\\left(\\begin{pmatrix}-\\frac{3}{22}&\\frac{1}{11}\\\\\\frac{5}{22}&\\frac{2}{11}\\end{pmatrix}\\right)\\)</li></ul>"
     ]
     [
       "makeTaylor"
@@ -322,8 +322,8 @@ describe "mathmoController", ->
     [
       "makeMatrix3"
       "F7"
-      "Let $$A=\\left(\\begin{array}{ccc}3&1&2\\\\3&-3&1\\\\3&-4&-2\\end{array}\\right) \\qquad \\text{and} \\qquad B=\\left(\\begin{array}{ccc}-4&-2&2\\\\-2&-2&3\\\\-3&3&2\\end{array}\\right)$$.Compute: <ul class=\"exercise\"><li>\\(A+B\\)</li><li>\\(A \\times B\\)</li><li>\\(B^{-1}\\)</li></ul>"
-      "<ul class=\"exercise\"><li>\\(\\left(\\begin{array}{ccc}-1&-1&4\\\\1&-5&4\\\\0&-1&0\\end{array}\\right)\\)</li><li>\\(\\left(\\begin{array}{ccc}-20&-2&13\\\\-9&3&-1\\\\2&-4&-10\\end{array}\\right)\\)</li><li>\\(\\left(\\begin{array}{ccc}-\\frac{13}{38}&\\frac{5}{19}&-\\frac{1}{19}\\\\-\\frac{5}{38}&-\\frac{1}{19}&\\frac{4}{19}\\\\-\\frac{6}{19}&\\frac{9}{19}&\\frac{2}{19}\\end{array}\\right)\\)</li></ul>"
+      "Let $$A=\\left(\\begin{pmatrix}3&1&2\\\\3&-3&1\\\\3&-4&-2\\end{pmatrix}\\right) \\qquad \\text{and} \\qquad B=\\left(\\begin{pmatrix}-4&-2&2\\\\-2&-2&3\\\\-3&3&2\\end{pmatrix}\\right)$$.Compute: <ul class=\"exercise\"><li>\\(A+B\\)</li><li>\\(A \\times B\\)</li><li>\\(B^{-1}\\)</li></ul>"
+      "<ul class=\"exercise\"><li>\\(\\left(\\begin{pmatrix}-1&-1&4\\\\1&-5&4\\\\0&-1&0\\end{pmatrix}\\right)\\)</li><li>\\(\\left(\\begin{pmatrix}-20&-2&13\\\\-9&3&-1\\\\2&-4&-10\\end{pmatrix}\\right)\\)</li><li>\\(\\left(\\begin{pmatrix}-\\frac{13}{38}&\\frac{5}{19}&-\\frac{1}{19}\\\\-\\frac{5}{38}&-\\frac{1}{19}&\\frac{4}{19}\\\\-\\frac{6}{19}&\\frac{9}{19}&\\frac{2}{19}\\end{pmatrix}\\right)\\)</li></ul>"
     ]
     [
       "makeFurtherVector"
@@ -366,7 +366,7 @@ describe "mathmoController", ->
       "makeMatXforms"
       "F13"
       "Compute the matrix representing, in 2D, an enlargement of scale factor \\(3\\) followed by a rotation through \\(\\frac{3}{2}\\pi\\) anticlockwise about O."
-      "$$\\left(\\begin{array}{cc}0&4\\\\-4&0\\end{array}\\right)$$"
+      "$$\\left(\\begin{pmatrix}0&4\\\\-4&0\\end{pmatrix}\\right)$$"
     ]
     [
       "makeDiscreteDistn"
