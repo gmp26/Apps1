@@ -277,11 +277,9 @@ function fmatrix(dim)
 			res=res.add(this[i][i].top, this[i][i].bot);
 		return(res);
 	}
-	this.write=function(l)
+	this.write=function()
 	{
-		if(typeof(l)=='undefined')
-			l=["(",")"];
-		var res="\\left"+l[0]+"\\begin{pmatrix}";
+		var res="\\begin{pmatrix}";
 		for(var i=0;i<this.dim;i++)
 		{
 			for(var j=0;j<this.dim;j++)
@@ -291,7 +289,7 @@ function fmatrix(dim)
 				{
 					if(i==this.dim-1)
 					{
-						res+="\\end{pmatrix}\\right"+l[1];
+						res+="\\end{pmatrix};
 					}
 					else
 					{
