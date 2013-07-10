@@ -362,12 +362,12 @@ describe "mathmoController", ->
       "$$240\\pi$$"
       2
     ]
-    # [ # Removed because currently giving NaN answers :(
-    #   "makeMatXforms"
-    #   "F13"
-    #   "q-F13"
-    #   "a-F13"
-    # ]
+    [
+      "makeMatXforms"
+      "F13"
+      "Compute the matrix representing, in 2D, an enlargement of scale factor \\(3\\) followed by a rotation through \\(\\frac{3}{2}\\pi\\) anticlockwise about O."
+      "$$\\left(\\begin{array}{cc}0&4\\\\-4&0\\end{array}\\right)$$"
+    ]
     [
       "makeDiscreteDistn"
       "S1"

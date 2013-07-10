@@ -2418,15 +2418,22 @@ function makeMatXforms()
 	for(var i=0;i<5;i++) {xfms[i]=new fmatrix(2);}
 	var cosines = [new frac(0), new frac(-1), new frac(0)];
 	var sines = [new frac(1), new frac(0), new frac(-1)];
-	xfms[0].set(cosines[a], -sines[a], sines[a], cosines[a]);
-	xfms[1].set(cosines[a], sines[a], sines[a], -cosines[a]);
+  var acosines = [new frac(0), new frac(1), new frac(0)];
+  var asines = [new frac(-1), new frac(0), new frac(1)];
+	xfms[0].set(cosines[a], asines[a], sines[a], cosines[a]); // first sin is -1
+	xfms[1].set(cosines[a], sines[a], sines[a], acosines[a]); // second cos is -1
 	xfms[2].set(1, a + 1, 0, 1);
 	xfms[3].set(1, 0, a + 1, 1);
 	xfms[4].set(a+2, 0, 0, a+2);
 	var f=new frac(a+1, 2);
-	var xft=["a rotation through \\("+fcoeff(f, "\\pi")+"\\) anticlockwise about O", "a reflection in the line \\("+["y=x","x=0","y=-x"][a]+"\\)", "a shear of element \\("+(a+1)+", x\\) axis invariant", "a shear of element \\("+(a+1)+", y\\) axis invariant", "an enlargement of scale factor \\("+(a+1)+"\\)"];
+	var xft=[
+    "a rotation through \\("+fcoeff(f, "\\pi")+"\\) anticlockwise about O",
+    "a reflection in the line \\("+["y=x","x=0","y=-x"][a]+"\\)",
+    "a shear of element \\("+(a+1)+", x\\) axis invariant",
+    "a shear of element \\("+(a+1)+", y\\) axis invariant",
+    "an enlargement of scale factor \\("+(a+1)+"\\)"];
 	var which=distrand(2, 0, 4);
-	var qString="Compute the matrix representing, in 2D, "+xft[which[0]]+" followed by "+xft[which[1]];
+	var qString="Compute the matrix representing, in 2D, "+xft[which[0]]+" followed by "+xft[which[1]]+".";
 	var ans=xfms[which[1]].times(xfms[which[0]]);
 	var aString="$$"+ans.write()+"$$";
 	var qa=[qString,aString];
