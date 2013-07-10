@@ -262,20 +262,26 @@ describe "mathmoController", ->
     [
       "makeLines2D"
       "C31"
-      "Find the equation of the line passing through \\((5,-2)\\) and \\((5,-5)\\)."
-      "$$x=5.$$"
+      "Find the equation of the line passing through \\((6,-3)\\) and \\((6,-6)\\)."
+      "$$x=6.$$"
     ]
     [
       "makeCircleEq"
       "C32"
-      "Find the centre and radius of the circle with equation$$x^2+6x+y^2+6y=6.$$"
-      "The circle has centre \\((-3,-3)\\) and radius \\(4  \\)."
+      "Find the centre and radius of the circle with equation$$x^2+8x+y^2+6y=0.$$"
+      "The circle has centre \\((-4,-3)\\) and radius \\(5  \\)."
     ]
     [
       "makeLineParPerp"
       "C33"
-      "Find the equation of the line passing through \\((0,2)\\) and perpendicular to the line \\(y=1\\)."
-      "$$x=0.$$"
+      "Find the equation of the line passing through \\((1,2)\\) and perpendicular to the line \\(y=0\\)."
+      "$$x=1.$$"
+    ]
+    [
+      "makeCircLineInter"
+      "C34"
+      "Consider the line \\(x-y+1=0\\) and the circle \\( (x+5)^2+y^2=9\\). <br><br> Find out how many points of intersection they have, and the location of any intersections."
+      "The line and the circle intersect in two points, specifically $$\\left(\\frac{-6+\\sqrt{2}}{2},\\frac{-4+\\sqrt{2}}{2}\\right)\\qquad\\text{and}\\qquad \\left(\\frac{-6-\\sqrt{2}}{2},\\frac{-4-\\sqrt{2}}{2}\\right)$$"
     ]
     [
       "makeCArithmetic"

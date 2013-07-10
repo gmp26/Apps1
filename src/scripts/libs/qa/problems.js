@@ -627,7 +627,7 @@ function makeCircLineInter()
       c2=rand(6);
     }
 
-    var qString="Find whether the lines \\(";
+    var qString="Consider the lines \\(";
 
     if (rand()) {
       qString+=lineEq1(0,c1,1,m1+c1);
@@ -643,7 +643,7 @@ function makeCircLineInter()
       qString+=lineEq2(m2,c2);
     }
 
-    qString+="\\) intersect, and if they do, find their point of intersection."
+    qString+="\\). <br><br> Find out how many points of intersection they have, and the location of any intersections."
 
     if (m1==m2) {
       var aString="The lines do not intersect.";
@@ -681,7 +681,7 @@ function makeCircLineInter()
       qString+=circleEq2(a,b,r);
     }
 
-    qString+="\\). Find out how many points of intersection they have, and the location of any intersections."
+    qString+="\\). <br><br> Find out how many points of intersection they have, and the location of any intersections."
 
     // By substitution, we can get an equation of the form Ax^ + Bx + C = 0
     // The roots are the points of intersection
@@ -743,7 +743,7 @@ function makeCircLineInter()
       r2=rand(2,7);
     }
 
-    var qString="Consider the circles with equations \\(";
+    var qString="Consider the circles \\(";
 
     if (rand()) {
       qString+=circleEq1(a1,b1,r1);
@@ -761,24 +761,57 @@ function makeCircLineInter()
 
     qString+="\\). <br><br> Find out how many points of intersection they have, and the location of any intersections."
 
-    var d=Math.sqrt((b2-b1)*(b2-b1)+(a2-a1)*(a2-a1));
+    var D=Math.sqrt((b2-b1)*(b2-b1)+(a2-a1)*(a2-a1));
+    var DD=(b2-b1)*(b2-b1)+(a2-a1)*(a2-a1);
     var R=r1+r2;
+    var RR=r1*r1-r2*r2;
+    var S=Math.abs(r1-r2);
 
-    if (d>R) {
-      var aString="The two circles do not intersect in any points.";
-    } else if (d>R) {
-      var aString="Two intersections";
+    // The formulae for the case of two intersections is cribbed from
+    // http://www.ambrsoft.com/TrigoCalc/Circles2/Circle2.htm
+
+    if (R>D&&D>S) {
+      var aString="The circles intersect in two points, which are";
+
+      var d=new sqroot(-DD*DD+2*DD*r1*r1-r1*r1*r1*r1+2*DD*r2*r2+2*r1*r1*r2*r2-r2*r2*r2*r2);
+
+      // First solution
+      aString+="$$\\left(";
+      aString+=simplifySurd((a1+a2)*DD+(a2-a1)*RR,(b1-b2)*d.a,d.n,2*DD);
+      aString+=","+simplifySurd((b1+b2)*DD+(b2-b1)*RR,(a2-a1)*d.a,d.n,2*DD);
+      aString+="\\right)";
+
+      aString+="\\qquad\\text{and}\\qquad ";
+
+      // Second solution
+      aString+="\\left(";
+      aString+=simplifySurd((a1+a2)*DD+(a2-a1)*RR,(b2-b1)*d.a,d.n,2*DD);
+      aString+=","+simplifySurd((b1+b2)*DD+(b2-b1)*RR,(a1-a2)*d.a,d.n,2*DD);
+      aString+="\\right)";
+
+      aString+="$$";
     } else if (d==R) {
       var x1=new frac(a1*R+r1*(a2-a1),R);
       var y1=new frac(b1*R+r1*(b2-b1),R);
       var aString="The circles intersect in a single point, which is \\(("+x1.write()+","+y1.write()+")\\).";
+    } else if (D>R||D<=S) {
+      var aString="The two circles do not intersect in any points.";
+    } else {
+      var aString="Uh oh";
     }
 
     var qa=[qString,aString];
     return qa;
   }
 
-  var qa=makeCCInter();
+  if (rand()) {
+    var qa=makeCLInter();
+  } else if (rand()) {
+    var qa=makeLLInter();
+  } else {
+    var qa=makeCCInter();
+  }
+
   return qa;
 }
 
