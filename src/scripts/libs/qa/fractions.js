@@ -289,7 +289,7 @@ function fmatrix(dim)
 				{
 					if(i==this.dim-1)
 					{
-						res+="\\end{pmatrix};
+						res+="\\end{pmatrix}";
 					}
 					else
 					{

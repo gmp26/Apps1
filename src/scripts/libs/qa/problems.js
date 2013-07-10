@@ -492,7 +492,7 @@ function makeLineParPerp()
       while (a==c) {
         c=rand(5);
       }
-      qString += "\\(x="+e+"\\).";
+      qString += "\\(x="+c+"\\).";
       var aString="$$x="+a+".$$";
     } else {
       if (rand()) {
@@ -930,7 +930,7 @@ function makeFactor()
 		u[0]=a;v[0]=b;w[0]=c;
 		var x=polyexpand(polyexpand(u, v), w);
 		var qString="Use the factor theorem to factorise $$"+x.write()+".$$";
-		var aString=express([a, b, c]);
+		var aString="$$"+express([a, b, c])+"$$";
 		var qa=[qString,aString];
 		return qa;
 	}
@@ -1019,7 +1019,7 @@ function makeComplete()
 	if(rand())
 	{
 		qString="By completing the square, find (for real \\(x\\)) the minimum value of$$"+p.write()+".$$";
-		aString="The minimum value is \\("+b+"\\) which occurs at \\(x="+a+"\\)";
+		aString="The minimum value is \\("+b+",\\) which occurs at \\(x="+a+"\\).";
 	}
 	else
 	{
@@ -1061,7 +1061,7 @@ function makeLog()
 		var a=pickrand(2,3,5);
 		var m=rand(1,4);
 		var n=rand(1,4);if(n>=m) n++;
-		var qString="If \\("+Math.pow(a,m)+"="+Math.pow(a,n)+"^{x}\\) find \\(x\\).";
+		var qString="If \\("+Math.pow(a,m)+"="+Math.pow(a,n)+"^{x},\\) then find \\(x\\).";
 		var r=new frac(m,n);
 		var aString="$$x="+r.write()+"$$";
 		var qa=[qString,aString];
@@ -1081,7 +1081,7 @@ function makeLog()
 	{
 		var a=rand(2,7);
 		var b=Math.floor(Math.pow(a,7*Math.random()));
-		var qString="If \\("+a+"^{x}="+b+"\\), find \\(x\\) to three decimal places.";
+		var qString="If \\("+a+"^{x}="+b+"\\), then find \\(x\\) to three decimal places.";
 		var c=new Number(Math.log(b)/Math.log(a));
 		var aString="$$x="+c.toFixed(3)+"$$";
 		var qa=[qString,aString];
