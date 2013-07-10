@@ -2169,10 +2169,10 @@ function makeFurtherVector()
 	var a=new vector(3);a.setrand(5);
 	var b=new vector(3);b.setrand(5);
 	var c=new vector(3);c.setrand(5);
-	var qString="Let \\(a="+a.write()+"\\)\\,,\\; \\(b="+b.write()+"\\,\\) and \\(c="+c.write()+"\\). ";
+	var qString="Let \\(\\mathbf{a}="+a.write()+"\\,\\),\\; \\(\\mathbf{b}="+b.write()+"\\,\\) and \\(\\mathbf{c}="+c.write()+"\\). ";
 	qString += "Calculate: <ul class=\"exercise\">";
-	qString += "<li>the vector product, \\(a\\wedge b\\),</li>";
-	qString += "<li>the scalar triple product, \\([a, b, c]\\).</li>";
+	qString += "<li>the vector product, \\(\\mathbf{a}\\wedge \\mathbf{b}\\),</li>";
+	qString += "<li>the scalar triple product, \\([\\mathbf{a}, \\mathbf{b}, \\mathbf{c}]\\).</li>";
 	qString += "</ul>";
 	var axb=a.cross(b);
 	var abc=axb.dot(c);
