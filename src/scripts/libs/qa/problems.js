@@ -683,56 +683,45 @@ function makeCircLineInter()
 
     qString+="\\). Find out how many points of intersection they have, and the location of any intersections."
 
-    // Variables to solve Ax^2 + Bx + C = 0
+    // By substitution, we can get an equation of the form Ax^ + Bx + C = 0
+    // The roots are the points of intersection
+    // We compute these variables:
     var A=m*m+1;
     var B=-2*a+2*m*(c-b);
     var C=(c-b)*(c-b)-r*r+a*a;
 
+    // Discriminant for the roots
     var disc=B*B-4*A*C;
     var sq=new sqroot(disc);
 
     if (disc>0) {
       var aString="The line and the circle intersect in two points, specifically ";
 
-      var xint1=new frac(-B,2*A);
-      var xint2=new frac(sq.a,2*A);
-
-      var yint1=new frac(-B*m+2*A*c,2*A);
-      var yint2=new frac(m*sq.a,2*A);
-
-      // Finish tinkering with this
-
-      // First solution
-      aString+="$$\\left(\\frac{"
-      if (xint1.bot==xint2.bot) {
-        aString+=xint1.top+"+"+xint2.top+"\\sqrt{"+sq.n+"}}{"+xint1.bot+"},";
-      } else {
-        aString+=xint1.top+"}{"+xint1.bot+"}+\\frac{"+xint2.top+"\\sqrt{"+sq.n+"}}{"+xint2.bot+"},";
-      }
-      aString+="\\frac{";
-      if (yint1.bot==yint2.bot) {
-        aString+=yint1.top+signedNumber(yint2.top)+"\\sqrt{"+sq.n+"}}{"+yint1.bot+"}";
-      } else {
-        aString+=yint1.top+"}{"+yint1.bot+"}+\\frac{"+yint2.top+"\\sqrt{"+sq.n+"}}{"+yint2.bot+"}";
-      }
+      // First solution x1 = (-B+sqrt(disc))/2A, y=m*x1+c
+      aString+="$$\\left("
+      aString+=simplifySurd(-B,sq.a,sq.n,2*A);
+      aString+=","+simplifySurd(-m*B+2*c*A,m*sq.a,sq.n,2*A);
       aString+="\\right)";
 
       aString+="\\qquad\\text{and}\\qquad ";
+
+      // Second solution x2 = (-B-sqrt(disc))/2A, y=m*x2+c
+      aString+="\\left("
+      aString+=simplifySurd(-B,-sq.a,sq.n,2*A);
+      aString+=","+simplifySurd(-m*B+2*c*A,-m*sq.a,sq.n,2*A);
+      aString+="\\right)";
+
       aString+="$$";
-
-      // aString+="$$\\textstyle\\left("+xint1.top+"+"+xint2.write()+"\\sqrt{"+sq.n+"},"+yint1.write()+"+"+yint2.write()+"\\sqrt{"+sq.n+"}\\right)$$";
-
-      // // First solution
-      // aString+=xint1.write()+"+"+new frac(sq.a,2*A).write()+"\\sqrt{"+sq.n+"}";
-      // aString+=sq.a+" "+sq.n+" and break "+sq.write();
-    } else if (disc<0) {
+    }
+    else if (disc<0)
+    {
       var aString="The line and the circle do not intersect in any points.";
-    } else if (disc==0) { // This never happens in practice; do we want to artificially increase it?
+    }
+    else if (disc==0)
+    { // This never happens in practice; do we want to artificially increase it?
       var xint=new frac(-B,2*A);
       var yint=new frac(-B*m+c*2*A,2*A);
       var aString="The line and the circle intersect in exactly one point, which occurs at \\(\\left("+xint.write()+","+yint.write()+"\\right)\\).";
-    } else {
-      console.log("The discriminant in the equation for x in makeCLInter is not a number.")
     }
 
     var qa=[qString,aString];
