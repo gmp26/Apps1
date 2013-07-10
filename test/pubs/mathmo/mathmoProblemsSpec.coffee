@@ -95,7 +95,7 @@ describe "mathmoController", ->
       "makeFactor2"
       "C9"
       "Use the factor theorem to factorise $$x^3 + x^2 - 17x + 15.$$"
-      "(x - 3)(x - 1)(x + 5)"
+      "$$(x - 3)(x - 1)(x + 5)$$"
       10
     ]
     [
@@ -126,7 +126,7 @@ describe "mathmoController", ->
     [
       "makeLog"
       "C13"
-      "If \\(125=3125^{x}\\) find \\(x\\)."
+      "If \\(125=3125^{x},\\) then find \\(x\\)."
       "$$x=\\frac{3}{5}$$"
     ]
     [
@@ -262,20 +262,26 @@ describe "mathmoController", ->
     [
       "makeLines2D"
       "C31"
-      "Find the equation of the line passing through \\((5,-2)\\) and \\((5,-5)\\)."
-      "$$x=5.$$"
+      "Find the equation of the line passing through \\((6,-3)\\) and \\((6,-6)\\)."
+      "$$x=6.$$"
     ]
     [
       "makeCircleEq"
       "C32"
-      "Find the centre and radius of the circle with equation$$x^2+6x+y^2+6y=6.$$"
-      "The circle has centre \\((-3,-3)\\) and radius \\(4  \\)."
+      "Find the centre and radius of the circle with equation$$x^2+8x+y^2+6y=0.$$"
+      "The circle has centre \\((-4,-3)\\) and radius \\(5  \\)."
     ]
     [
       "makeLineParPerp"
       "C33"
-      "Find the equation of the line passing through \\((0,2)\\) and perpendicular to the line \\(y=1\\)."
-      "$$x=0.$$"
+      "Find the equation of the line passing through \\((1,2)\\) and perpendicular to the line \\(y=0\\)."
+      "$$x=1.$$"
+    ]
+    [
+      "makeCircLineInter"
+      "C34"
+      "Consider the line \\(x-y+1=0\\) and the circle \\( (x+5)^2+y^2=9\\). <br><br> Find out how many points of intersection they have, and the location of any intersections."
+      "The line and the circle intersect in two points, specifically $$\\left(\\frac{-6+\\sqrt{2}}{2},\\frac{-4+\\sqrt{2}}{2}\\right)\\qquad\\text{and}\\qquad \\left(\\frac{-6-\\sqrt{2}}{2},\\frac{-4-\\sqrt{2}}{2}\\right)$$"
     ]
     [
       "makeCArithmetic"
@@ -298,8 +304,8 @@ describe "mathmoController", ->
     [
       "makeMatrix2"
       "F4"
-      "Let $$A=\\left(\\begin{array}{cc}5&-4\\\\-5&1\\end{array}\\right) \\qquad \\text{and} \\qquad B=\\left(\\begin{array}{cc}-4&2\\\\5&3\\end{array}\\right)$$.Compute: <ul class=\"exercise\"><li>\\(A+B\\)</li><li>\\(A \\times B\\)</li><li>\\(B^{-1}\\)</li></ul>"
-      "<ul class=\"exercise\"><li>\\(\\left(\\begin{array}{cc}1&-2\\\\0&4\\end{array}\\right)\\)</li><li>\\(\\left(\\begin{array}{cc}-40&-2\\\\25&-7\\end{array}\\right)\\)</li><li>\\(\\left(\\begin{array}{cc}-\\frac{3}{22}&\\frac{1}{11}\\\\\\frac{5}{22}&\\frac{2}{11}\\end{array}\\right)\\)</li></ul>"
+      "Let $$A=\\begin{pmatrix}5&-4\\\\-5&1\\end{pmatrix} \\qquad \\text{and} \\qquad B=\\begin{pmatrix}-4&2\\\\5&3\\end{pmatrix}$$.Compute: <ul class=\"exercise\"><li>\\(A+B\\)</li><li>\\(A \\times B\\)</li><li>\\(B^{-1}\\)</li></ul>"
+      "<ul class=\"exercise\"><li>\\(\\begin{pmatrix}1&-2\\\\0&4\\end{pmatrix}\\)</li><li>\\(\\begin{pmatrix}-40&-2\\\\25&-7\\end{pmatrix}\\)</li><li>\\(\\begin{pmatrix}-\\frac{3}{22}&\\frac{1}{11}\\\\\\frac{5}{22}&\\frac{2}{11}\\end{pmatrix}\\)</li></ul>"
     ]
     [
       "makeTaylor"
@@ -316,13 +322,13 @@ describe "mathmoController", ->
     [
       "makeMatrix3"
       "F7"
-      "Let $$A=\\left(\\begin{array}{ccc}3&1&2\\\\3&-3&1\\\\3&-4&-2\\end{array}\\right) \\qquad \\text{and} \\qquad B=\\left(\\begin{array}{ccc}-4&-2&2\\\\-2&-2&3\\\\-3&3&2\\end{array}\\right)$$.Compute: <ul class=\"exercise\"><li>\\(A+B\\)</li><li>\\(A \\times B\\)</li><li>\\(B^{-1}\\)</li></ul>"
-      "<ul class=\"exercise\"><li>\\(\\left(\\begin{array}{ccc}-1&-1&4\\\\1&-5&4\\\\0&-1&0\\end{array}\\right)\\)</li><li>\\(\\left(\\begin{array}{ccc}-20&-2&13\\\\-9&3&-1\\\\2&-4&-10\\end{array}\\right)\\)</li><li>\\(\\left(\\begin{array}{ccc}-\\frac{13}{38}&\\frac{5}{19}&-\\frac{1}{19}\\\\-\\frac{5}{38}&-\\frac{1}{19}&\\frac{4}{19}\\\\-\\frac{6}{19}&\\frac{9}{19}&\\frac{2}{19}\\end{array}\\right)\\)</li></ul>"
+      "Let $$A=\\begin{pmatrix}3&1&2\\\\3&-3&1\\\\3&-4&-2\\end{pmatrix} \\qquad \\text{and} \\qquad B=\\begin{pmatrix}-4&-2&2\\\\-2&-2&3\\\\-3&3&2\\end{pmatrix}$$.Compute: <ul class=\"exercise\"><li>\\(A+B\\)</li><li>\\(A \\times B\\)</li><li>\\(B^{-1}\\)</li></ul>"
+      "<ul class=\"exercise\"><li>\\(\\begin{pmatrix}-1&-1&4\\\\1&-5&4\\\\0&-1&0\\end{pmatrix}\\)</li><li>\\(\\begin{pmatrix}-20&-2&13\\\\-9&3&-1\\\\2&-4&-10\\end{pmatrix}\\)</li><li>\\(\\begin{pmatrix}-\\frac{13}{38}&\\frac{5}{19}&-\\frac{1}{19}\\\\-\\frac{5}{38}&-\\frac{1}{19}&\\frac{4}{19}\\\\-\\frac{6}{19}&\\frac{9}{19}&\\frac{2}{19}\\end{pmatrix}\\)</li></ul>"
     ]
     [
       "makeFurtherVector"
       "F8"
-      "Let \\(a=\\begin{pmatrix}2\\\\2\\\\-5\\end{pmatrix}\\)\\,,\\; \\(b=\\begin{pmatrix}-2\\\\-3\\\\1\\end{pmatrix}\\,\\) and \\(c=\\begin{pmatrix}3\\\\3\\\\-3\\end{pmatrix}\\). Calculate: <ul class=\"exercise\"><li>the vector product, \\(a\\wedge b\\),</li><li>the scalar triple product, \\([a, b, c]\\).</li></ul>"
+      "Let \\(\\mathbf{a}=\\begin{pmatrix}2\\\\2\\\\-5\\end{pmatrix}\\,\\),\\; \\(\\mathbf{b}=\\begin{pmatrix}-2\\\\-3\\\\1\\end{pmatrix}\\,\\) and \\(\\mathbf{c}=\\begin{pmatrix}3\\\\3\\\\-3\\end{pmatrix}\\). Calculate: <ul class=\"exercise\"><li>the vector product, \\(\\mathbf{a}\\wedge \\mathbf{b}\\),</li><li>the scalar triple product, \\([\\mathbf{a}, \\mathbf{b}, \\mathbf{c}]\\).</li></ul>"
       "<ul class=\"exercise\"><li>\\(\\begin{pmatrix}-13\\\\8\\\\-2\\end{pmatrix}\\)</li><li>\\(-9\\)</li></ul>"
     ]
     [
@@ -356,12 +362,12 @@ describe "mathmoController", ->
       "$$240\\pi$$"
       2
     ]
-    # [ # Removed because currently giving NaN answers :(
-    #   "makeMatXforms"
-    #   "F13"
-    #   "q-F13"
-    #   "a-F13"
-    # ]
+    [
+      "makeMatXforms"
+      "F13"
+      "Compute the matrix representing, in 2D, an enlargement of scale factor \\(3\\) followed by a rotation through \\(\\frac{3}{2}\\pi\\) anticlockwise about O."
+      "$$\\begin{pmatrix}0&4\\\\-4&0\\end{pmatrix}$$"
+    ]
     [
       "makeDiscreteDistn"
       "S1"

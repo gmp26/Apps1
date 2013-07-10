@@ -20,7 +20,7 @@ function circleEq1(a,b,r)
     eqString += "+(y"+signedNumber(-b)+")^2=";
   }
 
-  eqString += +r^2;
+  eqString += +r*r;
   return eqString;
 }
 
@@ -28,7 +28,7 @@ function circleEq1(a,b,r)
 // x^2 - 2ax + y^2 - 2bx = c
 function circleEq2(a,b,r)
 {
-  var C=r^2-a^2-b^2;
+  var C=r*r-a*a-b*b;
   var eqString="";
 
   if (a==0) {
@@ -43,7 +43,12 @@ function circleEq2(a,b,r)
     eqString += "+y^2"+signedNumber(-2*b)+"y";
   }
 
-  eqString += "="+C;
+  if (C<0) {
+    eqString += signedNumber(-C)+"=0";
+  } else {
+    eqString += "="+C;
+  }
+
   return eqString;
 }
 
