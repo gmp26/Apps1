@@ -424,15 +424,15 @@ function makeLinesEq()
 {
   function makeLines1()
   {
-    var a=rand(5);
-    var b=rand(5);
-    var c=rand(5);
-    var d=rand(5);
+    var a=rand(6);
+    var b=rand(6);
+    var c=rand(6);
+    var d=rand(6);
 
     while (a==c && b==d) // Check for degeneracy
     {
-      c=rand(5);
-      d=rand(5);
+      c=rand(6);
+      d=rand(6);
     }
 
     var qString="Find the equation of the line passing through \\(("+a+","+b+")\\) and \\(("+c+","+d+")\\).";
@@ -479,10 +479,10 @@ function makeLinesEq()
 // Lines parallel or perpendicular to a point
 function makeLineParPerp()
 {
-  var a=rand(5);
-  var b=rand(5);
+  var a=rand(6);
+  var b=rand(6);
   var m=rand(6); // If m=6 then we treat it as vertical
-  var c=rand(5);
+  var c=rand(6);
 
   function makeLinePar(a,b,m,c) {
 
@@ -578,9 +578,9 @@ function makeLineParPerp()
 // Equations of circles
 function makeCircleEq()
 {
-  var r=rand(1,6);
-  var a=rand(5);
-  var b=rand(5);
+  var r=rand(2,7);
+  var a=rand(6);
+  var b=rand(6);
 
   function makeCircleEq1(a,b,r) {
     var qString="Find the equation of the circle with centre \\(("+a+","+b+")\\) and radius \\("+r+"\\).";
