@@ -1293,7 +1293,7 @@ function makeImplicit()
 		if(d2*a2-b2*c2==0) (d2>0?d2++:d2--);
 		var t=randnz(3);
 		while((c1*t+d1)==0||(c2*t+d2)==0) (t>0?t++:t--);
-		var qString="If $$y=\\frac{"+p_linear(a1, b1).write('t')+"}{"+p_linear(c1, d1).write('t')+"}$$ and $$x=\\frac{"+p_linear(a2, b2).write('t')+"}{"+p_linear(c2, d2).write('t')+"},$$find \\(\\frac{dy}{dx}\\) when \\(t="+t+"\\)";
+		var qString="If $$y=\\frac{"+p_linear(a1, b1).write('t')+"}{"+p_linear(c1, d1).write('t')+"}$$ and $$x=\\frac{"+p_linear(a2, b2).write('t')+"}{"+p_linear(c2, d2).write('t')+"},$$find \\(\\frac{\\mathrm{d}y}{\\mathrm{d}x}\\) when \\(t="+t+"\\).";
 		var a=new frac((a1*d1-b1*c1)*(c2*t+d2)*(c2*t+d2), (a2*d2-b2*c2)*(c1*t+d1)*(c1*t+d1));
 		var aString="$$"+a.write()+"$$";
 		var qa=[qString,aString];
@@ -1307,8 +1307,8 @@ function makeImplicit()
 		var p=new poly(rand(1, 3));
 		p.setrand(3);
 		var q=new poly(1);p.diff(q);
-		qString="If $$y+"+fns[which[0]].replace(/z/g, 'y')+"="+fns[which[1]].replace(/z/g, 'x')+(p[p.rank]>0?"+":"")+p.write('x')+",$$ find \\(\\frac{dy}{dx}\\) in terms of \\(y\\) and \\(x\\).";
-		aString="$$\\frac{dy}{dx} = \\frac{"+difs[which[1]].replace(/z/g, 'x')+(q[q.rank]>0?"+":"")+q.write('x')+"}{"+difs[which[0]].replace(/z/g, 'y')+"+1}$$";
+		qString="If $$y+"+fns[which[0]].replace(/z/g, 'y')+"="+fns[which[1]].replace(/z/g, 'x')+(p[p.rank]>0?"+":"")+p.write('x')+",$$ find \\(\\frac{\\mathrm{d}y}{\\mathrm{d}x}\\) in terms of \\(y\\) and \\(x\\).";
+		aString="$$\\frac{\\mathrm{d}y}{\\mathrm{d}x} = \\frac{"+difs[which[1]].replace(/z/g, 'x')+(q[q.rank]>0?"+":"")+q.write('x')+"}{"+difs[which[0]].replace(/z/g, 'y')+"+1}$$";
 		qa=[qString,aString];
 		return qa;
 	}
@@ -2005,7 +2005,7 @@ function makeCPolar()
 {
 	var z=(rand()?Complex.randnz(6, 6):Complex.randnz(6, 4));
 	var qString="Convert \\("+z.write()+"\\) to modulus-argument form.";
-	var ma=Complex.ctop(z);
+  var ma=Complex.ctop(z);
 	var r=Math.round(ma[0]);
 	var t=guessExact(ma[1]/Math.PI);
 	var aString="$$"+(r===1?"":r/*+"\\times "*/)+"e^{"+(t===0?"0":t===1?"\\pi i":t+"\\pi i")+"}$$";

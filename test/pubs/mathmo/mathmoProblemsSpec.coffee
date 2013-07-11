@@ -184,7 +184,7 @@ describe "mathmoController", ->
     [
       "makeImplicit"
       "C19"
-      "If $$y=\\frac{3t + 3}{t - 3}$$ and $$x=\\frac{t + 2}{t + 3},$$find \\(\\frac{dy}{dx}\\) when \\(t=-4\\)"
+      "If $$y=\\frac{3t + 3}{t - 3}$$ and $$x=\\frac{t + 2}{t + 3},$$find \\(\\frac{\\mathrm{d}y}{\\mathrm{d}x}\\) when \\(t=-4\\)."
       "$$-\\frac{12}{49}$$"
     ]
     [
