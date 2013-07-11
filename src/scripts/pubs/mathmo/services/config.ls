@@ -34,6 +34,7 @@ angular.module('app').factory 'config', ->
           "C31"
           "C32"
           "C33"
+          "C34"
 
     * title: "Sequences & series"
       topicIds:
@@ -195,6 +196,9 @@ angular.module('app').factory 'config', ->
       "C33":
         * "Parallel and perpendicular lines"
           makeLineParPerp
+      "C34":
+        * "Intersections of circles and lines"
+          makeCircLineInter
 
       "F1":
         * "Complex Arithmetic"

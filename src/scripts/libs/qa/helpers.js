@@ -369,17 +369,135 @@ function epsi(i, j, k)
 
 String.prototype.repeat = function(num)
 {
-    return(new Array(num+1).join(this));
+  return(new Array(num+1).join(this));
 };
 
 // Returns a number signed with + or - as a string
 // Useful for equations
-
-function signedNumber(x) // What about x = +/-1?
+function signedNumber(x)
 {
-    if (x > 0) {
-        return "+" + x;
+  if (x > 0) {
+    return "+" + x;
+  } else {
+    return x.toString();
+  }
+}
+
+// Simplifies a root of the form (a+b sqrt c)/d
+// Takes a 4-tuple [a,b,c,d] and returns a LaTeX formatted string
+function simplifySurd(a,b,c,d)
+{
+  var sq=new sqroot(c);
+  var B=sq.a*b;
+  var C=sq.n;
+  var eqString="";
+
+  if (d==0) { // This shouldn't happen, but let's throw a helpful error message
+    eqString+="Error; zero in denominator";
+  }
+  else if (a==0) // Surd of the form (b sqrt c)/d
+  {
+    var f=new frac(B,d);
+    if (f.top==1) {
+      var top="";
+    } else if (f.top==-1) {
+      var top="-";
     } else {
-        return x.toString();
+      var top=f.top;
     }
+
+    if (f.bot==1) {
+      eqString+=top + "\\sqrt{"+C+"}";
+    } else {
+      eqString+="\\frac{"+top+"\\sqrt{"+C+"}}{"+f.bot+"}";
+    }
+  }
+  else if (B==0||C==0) // This is the fairly simple a/d
+  {
+    var f=new frac(a,d);
+    eqString+=f.write();
+  }
+  else if (C==1) // Another simple case (a+b)/d
+  {
+    var f=new frac(a+b,d);
+    eqString+=f.write();
+  } else {
+    // Final case
+    // Here we have a non-trivial root, and every term is non-zero
+
+    // eqString+="non-trivial case";
+
+    // Simplify the terms
+    var h=gcd(a,B,d);
+    a/=h; B/=h; d/=h;
+
+    if (d<0) {
+      a*=-1;
+      B*=-1;
+      d*=-1;
+    }
+
+    function innerSurd(a,b,c)
+    // This simplifies the denominator a+b sqrt(c) and returns a LaTeX-formatted string
+    // It assumes that all arguments are non-zero and that c!=1
+    // These cases have already been caught earlier
+    {
+      var surdString=a;
+      if (b==1) {
+        surdString+="+\\sqrt{"+c+"}";
+      } else if (b==-1) {
+        surdString+="-\\sqrt{"+c+"}";
+      } else {
+        surdString+=signedNumber(b)+"\\sqrt{"+c+"}";
+      }
+      return surdString
+    }
+
+    if (d==1) {
+      eqString+=innerSurd(a,B,c);
+    } else {
+      eqString+="\\frac{"+innerSurd(a,B,c)+"}{"+d+"}";
+    }
+  }
+
+  // if (B==0) {
+  //   var f=new frac(a,d);
+  //   eqString+=f.write();
+  // }
+  // else if (C==1)
+  // {
+  //   var f=new frac(a+B,d);
+  //   eqString+=f.write();
+  // }
+  // else
+  // { // Non-trivial term in the root
+  //   var h=gcd(a,B,d);
+  //   a/=h; B/=h; d/=h;
+
+  //   if (B==1) {
+  //     B="+";
+  //   } else if (B==-1) {
+  //     B="-";
+  //   } else {
+  //     B=signedNumber(B);
+  //   }
+
+  //   if (d==1) // Unit denominator
+  //   {
+  //     eqString+=a+signedNumber(B)+"\\sqrt{"+C+"}";
+  //   }
+  //   else
+  //   {
+  //     if (a%d==0||B%d==0)
+  //     {
+  //       eqString+="still a bit to do";
+  //     }
+  //     else
+  //     {
+  //       // Both pieces are fractions
+  //       eqString+="\\frac{"+a+B+"\\sqrt{"+C+"}}{"+d+"}";
+  //     }
+  //   }
+  // }
+  return eqString;
 }
