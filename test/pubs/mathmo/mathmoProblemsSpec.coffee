@@ -179,7 +179,7 @@ describe "mathmoController", ->
       "makeVectorEq"
       "C18"
       "Show that the points with position vectors$$\\begin{pmatrix}3\\\\-5\\\\-3\\end{pmatrix}\\,,\\;\\begin{pmatrix}8\\\\-35\\\\-8\\end{pmatrix}\\,,\\;\\begin{pmatrix}2\\\\1\\\\-2\\end{pmatrix}$$lie on a straight line, and give the equation of the line in the form \\(\\mathbf{r}=\\mathbf{a}+\\lambda\\mathbf{b}\\)."
-      "$$\\begin{pmatrix}3\\\\-5\\\\-3\\end{pmatrix}+\\lambda,\\begin{pmatrix}1\\\\-6\\\\-1\\end{pmatrix}$$"
+      "$$\\begin{pmatrix}3\\\\-5\\\\-3\\end{pmatrix}+\\lambda\\,\\begin{pmatrix}1\\\\-6\\\\-1\\end{pmatrix}$$"
     ]
     [
       "makeImplicit"

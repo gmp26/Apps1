@@ -1282,7 +1282,7 @@ function makeVectorEq()
 	}
 	var qString="Show that the points with position vectors$$"+v[0].write()+"\\,,\\;"+v[1].write()+"\\,,\\;"+v[2].write()+"$$";
 	qString+="lie on a straight line, and give the equation of the line in the form \\(\\mathbf{r}=\\mathbf{a}+\\lambda\\mathbf{b}\\).";
-	var aString='$$'+a.write()+"+\\lambda\,"+b.write()+'$$';
+	var aString='$$'+a.write()+"+\\lambda\\,"+b.write()+'$$';
 	var qa=[qString,aString];
 	return qa;
 }
