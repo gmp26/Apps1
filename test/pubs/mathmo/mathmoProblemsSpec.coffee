@@ -328,7 +328,7 @@ describe "mathmoController", ->
     [
       "makeFurtherVector"
       "F8"
-      "Let \\(\\mathbf{a}=\\begin{pmatrix}2\\\\2\\\\-5\\end{pmatrix}\\,\\),\\; \\(\\mathbf{b}=\\begin{pmatrix}-2\\\\-3\\\\1\\end{pmatrix}\\,\\) and \\(\\mathbf{c}=\\begin{pmatrix}3\\\\3\\\\-3\\end{pmatrix}\\). Calculate: <ul class=\"exercise\"><li>the vector product, \\(\\mathbf{a}\\wedge \\mathbf{b}\\),</li><li>the scalar triple product, \\([\\mathbf{a}, \\mathbf{b}, \\mathbf{c}]\\).</li></ul>"
+      "Let \\(\\mathbf{a}=\\begin{pmatrix}2\\\\2\\\\-5\\end{pmatrix}\\,\\), \\(\\;\\mathbf{b}=\\begin{pmatrix}-2\\\\-3\\\\1\\end{pmatrix}\\,\\) and \\(\\mathbf{c}=\\begin{pmatrix}3\\\\3\\\\-3\\end{pmatrix}\\). Calculate: <ul class=\"exercise\"><li>the vector product, \\(\\mathbf{a}\\wedge \\mathbf{b}\\),</li><li>the scalar triple product, \\([\\mathbf{a}, \\mathbf{b}, \\mathbf{c}]\\).</li></ul>"
       "<ul class=\"exercise\"><li>\\(\\begin{pmatrix}-13\\\\8\\\\-2\\end{pmatrix}\\)</li><li>\\(-9\\)</li></ul>"
     ]
     [
