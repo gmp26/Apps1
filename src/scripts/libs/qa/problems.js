@@ -1125,7 +1125,7 @@ function makeStationary()
 		p.set(randnz(4), randnz(8), randnz(4));
 		var d=new frac(-p[1],2*p[2]);
 		var qString="Find the stationary point of $$y="+p.write()+",$$ and state whether it is a maximum or a minimum.";
-		var aString="\\(x="+d.write()+"\\),";
+		var aString="The stationary point occurs at \\(x="+d.write()+"\\), and it is a";
 		if(p[2]>0) aString+=" minimum.";
 		else aString+=" maximum.";
 		var qa=[qString,aString];
@@ -1139,9 +1139,13 @@ function makeStationary()
 		p.set(d, 3*c*a*b, -3*c*(a+b)/2, c);
 		var qString="Find the stationary points of $$y="+p.write()+",$$ and state their nature.";
 		var aString;
-		if(a==b) aString="\\(x="+a+",\\) point of inflexion.";
-		else if(c>0) aString="\\(x="+Math.min(a,b)+"\\), maximum,<br />and \\(x="+Math.max(a,b)+"\\), minimum";
-		else aString="\\(x="+Math.min(a,b)+"\\), minimum, <br />and \\(x="+Math.max(a,b)+"\\), maximum";
+		if (a==b) {
+      aString = "The stationary point occurs at \\(x="+a+",\\) and is a point of inflexion.";
+    } else if (c>0) {
+      aString = "The stationary points occur at \\(x="+Math.min(a,b)+"\\), a maximum, and \\(x="+Math.max(a,b)+"\\), a minimum";
+		} else {
+      aString = "The stationary points occur at \\(x="+Math.min(a,b)+"\\), a minimum, and \\(x="+Math.max(a,b)+"\\), a maximum";
+    }
 		var qa=[qString,aString];
 		return qa;
 	}
