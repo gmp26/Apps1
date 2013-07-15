@@ -305,7 +305,7 @@ describe "mathmoController", ->
       "makeMatrix2"
       "F4"
       "Let $$A=\\begin{pmatrix}5&-4\\\\-5&1\\end{pmatrix} \\qquad \\text{and} \\qquad B=\\begin{pmatrix}-4&2\\\\5&3\\end{pmatrix}$$.Compute: <ul class=\"exercise\"><li>\\(A+B\\)</li><li>\\(A \\times B\\)</li><li>\\(B^{-1}\\)</li></ul>"
-      "<ul class=\"exercise\"><li>\\(\\begin{pmatrix}1&-2\\\\0&4\\end{pmatrix}\\)</li><li>\\(\\begin{pmatrix}-40&-2\\\\25&-7\\end{pmatrix}\\)</li><li>\\(\\begin{pmatrix}-\\frac{3}{22}&\\frac{1}{11}\\\\\\frac{5}{22}&\\frac{2}{11}\\end{pmatrix}\\)</li></ul>"
+      "<ul class=\"exercise\"><li>\\(\\begin{pmatrix}1&-2\\\\0&4\\end{pmatrix}\\)</li><li>\\(\\begin{pmatrix}-40&-2\\\\25&-7\\end{pmatrix}\\)</li><li>\\(\\displaystyle \\frac{1}{22}\\textstyle \\begin{pmatrix} -3&2\\\\5&4\\end{pmatrix}\\)</li></ul>"
     ]
     [
       "makeTaylor"
@@ -323,7 +323,7 @@ describe "mathmoController", ->
       "makeMatrix3"
       "F7"
       "Let $$A=\\begin{pmatrix}3&1&2\\\\3&-3&1\\\\3&-4&-2\\end{pmatrix} \\qquad \\text{and} \\qquad B=\\begin{pmatrix}-4&-2&2\\\\-2&-2&3\\\\-3&3&2\\end{pmatrix}$$.Compute: <ul class=\"exercise\"><li>\\(A+B\\)</li><li>\\(A \\times B\\)</li><li>\\(B^{-1}\\)</li></ul>"
-      "<ul class=\"exercise\"><li>\\(\\begin{pmatrix}-1&-1&4\\\\1&-5&4\\\\0&-1&0\\end{pmatrix}\\)</li><li>\\(\\begin{pmatrix}-20&-2&13\\\\-9&3&-1\\\\2&-4&-10\\end{pmatrix}\\)</li><li>\\(\\begin{pmatrix}-\\frac{13}{38}&\\frac{5}{19}&-\\frac{1}{19}\\\\-\\frac{5}{38}&-\\frac{1}{19}&\\frac{4}{19}\\\\-\\frac{6}{19}&\\frac{9}{19}&\\frac{2}{19}\\end{pmatrix}\\)</li></ul>"
+      "<ul class=\"exercise\"><li>\\(\\begin{pmatrix}-1&-1&4\\\\1&-5&4\\\\0&-1&0\\end{pmatrix}\\)</li><li>\\(\\begin{pmatrix}-20&-2&13\\\\-9&3&-1\\\\2&-4&-10\\end{pmatrix}\\)</li><li>\\(\\displaystyle \\frac{1}{38}\\textstyle \\begin{pmatrix} -13&10&-2\\\\-5&-2&8\\\\-12&18&4\\end{pmatrix}\\)</li></ul>"
     ]
     [
       "makeFurtherVector"

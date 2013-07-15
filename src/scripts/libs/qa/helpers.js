@@ -9,6 +9,19 @@ function gcd()
 	return a+b;
 }
 
+// lcm of any list of integers
+function lcm()
+{
+  var a = Math.abs(lcm.arguments[0]);
+  var b = Math.abs(lcm.arguments[lcm.arguments.length-1]);
+  for (var i=lcm.arguments.length; i>2; i--) {
+    b = lcm(b, lcm.arguments[i-2])
+  }
+  if (a*b == 0) return 0; // if either is zero, then their lcm is zero
+  var d = gcd(a,b);
+  return a*b/d;
+}
+
 // sin of pi/6, pi/4 and multiples in the from a/b + csqrt2/d + esqrt3/f
 function sinpi(a,b)
 {
