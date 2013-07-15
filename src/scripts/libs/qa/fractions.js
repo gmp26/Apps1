@@ -303,7 +303,6 @@ function fmatrix(dim)
 		{
 			for(var j=0;j<this.dim;j++)
 			{
-        // new f = new frac
 				res+=this[i][j].top/this[i][j].bot*d;
 				if(j==this.dim-1)
 				{
