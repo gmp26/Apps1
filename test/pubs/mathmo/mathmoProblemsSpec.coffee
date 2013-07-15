@@ -179,12 +179,12 @@ describe "mathmoController", ->
       "makeVectorEq"
       "C18"
       "Show that the points with position vectors$$\\begin{pmatrix}3\\\\-5\\\\-3\\end{pmatrix}\\,,\\;\\begin{pmatrix}8\\\\-35\\\\-8\\end{pmatrix}\\,,\\;\\begin{pmatrix}2\\\\1\\\\-2\\end{pmatrix}$$lie on a straight line, and give the equation of the line in the form \\(\\mathbf{r}=\\mathbf{a}+\\lambda\\mathbf{b}\\)."
-      "$$\\begin{pmatrix}3\\\\-5\\\\-3\\end{pmatrix}+\\lambda,\\begin{pmatrix}1\\\\-6\\\\-1\\end{pmatrix}$$"
+      "$$\\begin{pmatrix}3\\\\-5\\\\-3\\end{pmatrix}+\\lambda\\,\\begin{pmatrix}1\\\\-6\\\\-1\\end{pmatrix}$$"
     ]
     [
       "makeImplicit"
       "C19"
-      "If $$y=\\frac{3t + 3}{t - 3}$$ and $$x=\\frac{t + 2}{t + 3},$$find \\(\\frac{dy}{dx}\\) when \\(t=-4\\)"
+      "If $$y=\\frac{3t + 3}{t - 3}$$ and $$x=\\frac{t + 2}{t + 3},$$find \\(\\frac{\\mathrm{d}y}{\\mathrm{d}x}\\) when \\(t=-4\\)."
       "$$-\\frac{12}{49}$$"
     ]
     [
@@ -280,7 +280,7 @@ describe "mathmoController", ->
     [
       "makeCircLineInter"
       "C34"
-      "Consider the line \\(x-y+1=0\\) and the circle \\( (x+5)^2+y^2=9\\). <br><br> Find out how many points of intersection they have, and the location of any intersections."
+      "Find all the points where the line \\(x-y+1=0\\) and the circle \\( (x+5)^2+y^2=9\\) intersect."
       "The line and the circle intersect in two points, specifically $$\\left(\\frac{-6+\\sqrt{2}}{2},\\frac{-4+\\sqrt{2}}{2}\\right)\\qquad\\text{and}\\qquad \\left(\\frac{-6-\\sqrt{2}}{2},\\frac{-4-\\sqrt{2}}{2}\\right)$$"
     ]
     [
@@ -305,7 +305,7 @@ describe "mathmoController", ->
       "makeMatrix2"
       "F4"
       "Let $$A=\\begin{pmatrix}5&-4\\\\-5&1\\end{pmatrix} \\qquad \\text{and} \\qquad B=\\begin{pmatrix}-4&2\\\\5&3\\end{pmatrix}$$.Compute: <ul class=\"exercise\"><li>\\(A+B\\)</li><li>\\(A \\times B\\)</li><li>\\(B^{-1}\\)</li></ul>"
-      "<ul class=\"exercise\"><li>\\(\\begin{pmatrix}1&-2\\\\0&4\\end{pmatrix}\\)</li><li>\\(\\begin{pmatrix}-40&-2\\\\25&-7\\end{pmatrix}\\)</li><li>\\(\\begin{pmatrix}-\\frac{3}{22}&\\frac{1}{11}\\\\\\frac{5}{22}&\\frac{2}{11}\\end{pmatrix}\\)</li></ul>"
+      "<ul class=\"exercise\"><li>\\(\\begin{pmatrix}1&-2\\\\0&4\\end{pmatrix}\\)</li><li>\\(\\begin{pmatrix}-40&-2\\\\25&-7\\end{pmatrix}\\)</li><li>\\(\\displaystyle \\frac{1}{22}\\textstyle \\begin{pmatrix} -3&2\\\\5&4\\end{pmatrix}\\)</li></ul>"
     ]
     [
       "makeTaylor"
@@ -323,12 +323,12 @@ describe "mathmoController", ->
       "makeMatrix3"
       "F7"
       "Let $$A=\\begin{pmatrix}3&1&2\\\\3&-3&1\\\\3&-4&-2\\end{pmatrix} \\qquad \\text{and} \\qquad B=\\begin{pmatrix}-4&-2&2\\\\-2&-2&3\\\\-3&3&2\\end{pmatrix}$$.Compute: <ul class=\"exercise\"><li>\\(A+B\\)</li><li>\\(A \\times B\\)</li><li>\\(B^{-1}\\)</li></ul>"
-      "<ul class=\"exercise\"><li>\\(\\begin{pmatrix}-1&-1&4\\\\1&-5&4\\\\0&-1&0\\end{pmatrix}\\)</li><li>\\(\\begin{pmatrix}-20&-2&13\\\\-9&3&-1\\\\2&-4&-10\\end{pmatrix}\\)</li><li>\\(\\begin{pmatrix}-\\frac{13}{38}&\\frac{5}{19}&-\\frac{1}{19}\\\\-\\frac{5}{38}&-\\frac{1}{19}&\\frac{4}{19}\\\\-\\frac{6}{19}&\\frac{9}{19}&\\frac{2}{19}\\end{pmatrix}\\)</li></ul>"
+      "<ul class=\"exercise\"><li>\\(\\begin{pmatrix}-1&-1&4\\\\1&-5&4\\\\0&-1&0\\end{pmatrix}\\)</li><li>\\(\\begin{pmatrix}-20&-2&13\\\\-9&3&-1\\\\2&-4&-10\\end{pmatrix}\\)</li><li>\\(\\displaystyle \\frac{1}{38}\\textstyle \\begin{pmatrix} -13&10&-2\\\\-5&-2&8\\\\-12&18&4\\end{pmatrix}\\)</li></ul>"
     ]
     [
       "makeFurtherVector"
       "F8"
-      "Let \\(\\mathbf{a}=\\begin{pmatrix}2\\\\2\\\\-5\\end{pmatrix}\\,\\),\\; \\(\\mathbf{b}=\\begin{pmatrix}-2\\\\-3\\\\1\\end{pmatrix}\\,\\) and \\(\\mathbf{c}=\\begin{pmatrix}3\\\\3\\\\-3\\end{pmatrix}\\). Calculate: <ul class=\"exercise\"><li>the vector product, \\(\\mathbf{a}\\wedge \\mathbf{b}\\),</li><li>the scalar triple product, \\([\\mathbf{a}, \\mathbf{b}, \\mathbf{c}]\\).</li></ul>"
+      "Let \\(\\mathbf{a}=\\begin{pmatrix}2\\\\2\\\\-5\\end{pmatrix}\\,\\), \\(\\;\\mathbf{b}=\\begin{pmatrix}-2\\\\-3\\\\1\\end{pmatrix}\\,\\) and \\(\\mathbf{c}=\\begin{pmatrix}3\\\\3\\\\-3\\end{pmatrix}\\). Calculate: <ul class=\"exercise\"><li>the vector product, \\(\\mathbf{a}\\wedge \\mathbf{b}\\),</li><li>the scalar triple product, \\([\\mathbf{a}, \\mathbf{b}, \\mathbf{c}]\\).</li></ul>"
       "<ul class=\"exercise\"><li>\\(\\begin{pmatrix}-13\\\\8\\\\-2\\end{pmatrix}\\)</li><li>\\(-9\\)</li></ul>"
     ]
     [
@@ -346,14 +346,14 @@ describe "mathmoController", ->
     [
       "makeSubstInt"
       "F11"
-      "Find $$\\int\\frac{2x - 2}{- 4x - 2x^2 + 4x^3 - x^4}\\,dx$$"
+      "Find $$\\int\\frac{2x - 2}{- 4x - 2x^2 + 4x^3 - x^4}\\,\\mathrm{d}x$$"
       "$${\\rm artanh}(- 1 - 2x + x^2)+c$$"
     ]
     [
       "makeRevolution"
       "F12"
-      "Find the volume of the solid formed when the area under$$y = \\sec(x)$$from \\(x = 0\\mbox{ to }x = 1\\) is rotated through \\(2\\pi\\) around the x-axis."
-      "$$\\left(\\tan(1)\\right)\\pi$$"
+      "Find the volume of the solid formed when the area under$$y = \\sec(x)$$from \\(x = 0\\) to \\(x = 1\\) is rotated through \\(2\\pi\\) around the x-axis."
+      "$$\\left(\\tan(1)\\right)\\,\\pi$$"
     ]
     [
       "makeRevolution"

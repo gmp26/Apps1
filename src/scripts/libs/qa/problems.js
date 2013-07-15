@@ -502,7 +502,11 @@ function makeLineParPerp()
       }
 
       var intercept=b-m*a;
-      var aString="$$"+lineEq2(m,intercept)+"\\qquad\\text{or}\\qquad "+lineEq1(0,intercept,1,m+intercept)+"$$";
+      if (m==0) {
+        var aString="$$y="+b+".$$";
+      } else {
+        var aString="$$"+lineEq2(m,intercept)+"\\qquad\\text{or}\\qquad "+lineEq1(0,intercept,1,m+intercept)+"$$";
+      }
     }
 
     var qa=[qString,aString];
@@ -562,7 +566,13 @@ function makeLineParPerp()
 
       aString+="\\qquad\\text{or}\\qquad ";
 
-      aString+="x"+signedNumber(m)+"y";
+      if (m==1) {
+        aString+="x+y";
+      } else if (m==-1) {
+        aString+="x-y";
+      } else {
+        aString+="x"+signedNumber(m)+"y";
+      }
 
       if (-b*m-a!==0) {
         aString+=signedNumber(-b*m-a);
@@ -631,7 +641,7 @@ function makeCircLineInter()
       c2=rand(6);
     }
 
-    var qString="Consider the lines \\(";
+    var qString="Find all the points where the line \\(";
 
     if (rand()) {
       qString+=lineEq1(0,c1,1,m1+c1);
@@ -639,7 +649,7 @@ function makeCircLineInter()
       qString+=lineEq2(m1,c1);
     }
 
-    qString+="\\) and \\(";
+    qString+="\\) and the line \\(";
 
     if (rand()) {
       qString+=lineEq1(0,c2,1,m2+c2);
@@ -647,7 +657,7 @@ function makeCircLineInter()
       qString+=lineEq2(m2,c2);
     }
 
-    qString+="\\). <br><br> Find out how many points of intersection they have, and the location of any intersections."
+    qString+="\\) intersect."
 
     if (m1==m2) {
       var aString="The lines do not intersect.";
@@ -669,7 +679,7 @@ function makeCircLineInter()
     var m=rand(6);
     var c=rand(6);
 
-    var qString="Consider the line \\(";
+    var qString="Find all the points where the line \\(";
 
     if (rand()) {
       qString+=lineEq1(0,c,1,m+c);
@@ -685,7 +695,7 @@ function makeCircLineInter()
       qString+=circleEq2(a,b,r);
     }
 
-    qString+="\\). <br><br> Find out how many points of intersection they have, and the location of any intersections."
+    qString+="\\) intersect."
 
     // By substitution, we can get an equation of the form Ax^ + Bx + C = 0
     // The roots are the points of intersection
@@ -747,7 +757,7 @@ function makeCircLineInter()
       r2=rand(2,7);
     }
 
-    var qString="Consider the circles \\(";
+    var qString="Find all the points where the circle \\(";
 
     if (rand()) {
       qString+=circleEq1(a1,b1,r1);
@@ -755,7 +765,7 @@ function makeCircLineInter()
       qString+=circleEq2(a1,b1,r1);
     }
 
-    qString+="\\) and \\("
+    qString+="\\) and the circle \\("
 
     if (rand()) {
       qString+=circleEq1(a2,b2,r2);
@@ -763,7 +773,7 @@ function makeCircLineInter()
       qString+=circleEq2(a2,b2,r2);
     }
 
-    qString+="\\). <br><br> Find out how many points of intersection they have, and the location of any intersections."
+    qString+="\\) intersect."
 
     var D=Math.sqrt((b2-b1)*(b2-b1)+(a2-a1)*(a2-a1));
     var DD=(b2-b1)*(b2-b1)+(a2-a1)*(a2-a1);
@@ -1115,7 +1125,7 @@ function makeStationary()
 		p.set(randnz(4), randnz(8), randnz(4));
 		var d=new frac(-p[1],2*p[2]);
 		var qString="Find the stationary point of $$y="+p.write()+",$$ and state whether it is a maximum or a minimum.";
-		var aString="\\(x="+d.write()+"\\),";
+		var aString="The stationary point occurs at \\(x="+d.write()+"\\), and it is a ";
 		if(p[2]>0) aString+=" minimum.";
 		else aString+=" maximum.";
 		var qa=[qString,aString];
@@ -1129,9 +1139,13 @@ function makeStationary()
 		p.set(d, 3*c*a*b, -3*c*(a+b)/2, c);
 		var qString="Find the stationary points of $$y="+p.write()+",$$ and state their nature.";
 		var aString;
-		if(a==b) aString="\\(x="+a+",\\) point of inflexion.";
-		else if(c>0) aString="\\(x="+Math.min(a,b)+"\\), maximum,<br />and \\(x="+Math.max(a,b)+"\\), minimum";
-		else aString="\\(x="+Math.min(a,b)+"\\), minimum, <br />and \\(x="+Math.max(a,b)+"\\), maximum";
+		if (a==b) {
+      aString = "The stationary point occurs at \\(x="+a+",\\) and is a point of inflexion.";
+    } else if (c>0) {
+      aString = "The stationary points occur at \\(x="+Math.min(a,b)+"\\), a maximum, and \\(x="+Math.max(a,b)+"\\), a minimum";
+		} else {
+      aString = "The stationary points occur at \\(x="+Math.min(a,b)+"\\), a minimum, and \\(x="+Math.max(a,b)+"\\), a maximum";
+    }
 		var qa=[qString,aString];
 		return qa;
 	}
@@ -1272,7 +1286,7 @@ function makeVectorEq()
 	}
 	var qString="Show that the points with position vectors$$"+v[0].write()+"\\,,\\;"+v[1].write()+"\\,,\\;"+v[2].write()+"$$";
 	qString+="lie on a straight line, and give the equation of the line in the form \\(\\mathbf{r}=\\mathbf{a}+\\lambda\\mathbf{b}\\).";
-	var aString='$$'+a.write()+"+\\lambda\,"+b.write()+'$$';
+	var aString='$$'+a.write()+"+\\lambda\\,"+b.write()+'$$';
 	var qa=[qString,aString];
 	return qa;
 }
@@ -1293,7 +1307,7 @@ function makeImplicit()
 		if(d2*a2-b2*c2==0) (d2>0?d2++:d2--);
 		var t=randnz(3);
 		while((c1*t+d1)==0||(c2*t+d2)==0) (t>0?t++:t--);
-		var qString="If $$y=\\frac{"+p_linear(a1, b1).write('t')+"}{"+p_linear(c1, d1).write('t')+"}$$ and $$x=\\frac{"+p_linear(a2, b2).write('t')+"}{"+p_linear(c2, d2).write('t')+"},$$find \\(\\frac{dy}{dx}\\) when \\(t="+t+"\\)";
+		var qString="If $$y=\\frac{"+p_linear(a1, b1).write('t')+"}{"+p_linear(c1, d1).write('t')+"}$$ and $$x=\\frac{"+p_linear(a2, b2).write('t')+"}{"+p_linear(c2, d2).write('t')+"},$$find \\(\\frac{\\mathrm{d}y}{\\mathrm{d}x}\\) when \\(t="+t+"\\).";
 		var a=new frac((a1*d1-b1*c1)*(c2*t+d2)*(c2*t+d2), (a2*d2-b2*c2)*(c1*t+d1)*(c1*t+d1));
 		var aString="$$"+a.write()+"$$";
 		var qa=[qString,aString];
@@ -1307,8 +1321,8 @@ function makeImplicit()
 		var p=new poly(rand(1, 3));
 		p.setrand(3);
 		var q=new poly(1);p.diff(q);
-		qString="If $$y+"+fns[which[0]].replace(/z/g, 'y')+"="+fns[which[1]].replace(/z/g, 'x')+(p[p.rank]>0?"+":"")+p.write('x')+",$$ find \\(\\frac{dy}{dx}\\) in terms of \\(y\\) and \\(x\\).";
-		aString="$$\\frac{dy}{dx} = \\frac{"+difs[which[1]].replace(/z/g, 'x')+(q[q.rank]>0?"+":"")+q.write('x')+"}{"+difs[which[0]].replace(/z/g, 'y')+"+1}$$";
+		qString="If $$y+"+fns[which[0]].replace(/z/g, 'y')+"="+fns[which[1]].replace(/z/g, 'x')+(p[p.rank]>0?"+":"")+p.write('x')+",$$ find \\(\\frac{\\mathrm{d}y}{\\mathrm{d}x}\\) in terms of \\(y\\) and \\(x\\).";
+		aString="$$\\frac{\\mathrm{d}y}{\\mathrm{d}x} = \\frac{"+difs[which[1]].replace(/z/g, 'x')+(q[q.rank]>0?"+":"")+q.write('x')+"}{"+difs[which[0]].replace(/z/g, 'y')+"+1}$$";
 		qa=[qString,aString];
 		return qa;
 	}
@@ -1918,7 +1932,12 @@ function makeDE()
 	else
 	{
 		var b=randnz(6);
-		qString="Find the general solution of the following first-order ODE:$$x\\frac{\\,\\mathrm{d}y}{\\,\\mathrm{d}x}-y="+(-b)+"$$";
+		qString="Find the general solution of the following first-order ODE:$$x\\frac{\\,\\mathrm{d}y}{\\,\\mathrm{d}x}-y"
+    if (b>0) {
+      qString += signedNumber(-b)+"=0.$$";
+    } else {
+      qString += "="+(-b)+"$$";
+    }
 		aString="$$y=Ax"+(b>0?'+':'')+b+'$$';
 		qa=[qString,aString];
 		return qa;
@@ -2005,7 +2024,7 @@ function makeCPolar()
 {
 	var z=(rand()?Complex.randnz(6, 6):Complex.randnz(6, 4));
 	var qString="Convert \\("+z.write()+"\\) to modulus-argument form.";
-	var ma=Complex.ctop(z);
+  var ma=Complex.ctop(z);
 	var r=Math.round(ma[0]);
 	var t=guessExact(ma[1]/Math.PI);
 	var aString="$$"+(r===1?"":r/*+"\\times "*/)+"e^{"+(t===0?"0":t===1?"\\pi i":t+"\\pi i")+"}$$";
@@ -2173,7 +2192,7 @@ function makeFurtherVector()
 	var a=new vector(3);a.setrand(5);
 	var b=new vector(3);b.setrand(5);
 	var c=new vector(3);c.setrand(5);
-	var qString="Let \\(\\mathbf{a}="+a.write()+"\\,\\),\\; \\(\\mathbf{b}="+b.write()+"\\,\\) and \\(\\mathbf{c}="+c.write()+"\\). ";
+	var qString="Let \\(\\mathbf{a}="+a.write()+"\\,\\), \\(\\;\\mathbf{b}="+b.write()+"\\,\\) and \\(\\mathbf{c}="+c.write()+"\\). ";
 	qString += "Calculate: <ul class=\"exercise\">";
 	qString += "<li>the vector product, \\(\\mathbf{a}\\wedge \\mathbf{b}\\),</li>";
 	qString += "<li>the scalar triple product, \\([\\mathbf{a}, \\mathbf{b}, \\mathbf{c}]\\).</li>";
@@ -2331,20 +2350,20 @@ function makeSubstInt() /* Has issues with polys which are never in the domain o
 	// special cases: polys and ln
 	if(which===0)
 	{
-		qString+=ldt[what].replace(/y/g, 'x').replace(/F/g, fsq[which].replace(/A/g, ascoeff(a))).replace(/z/g, 'x').replace(/A/g, a)+"\\,dx";
+		qString+=ldt[what].replace(/y/g, 'x').replace(/F/g, fsq[which].replace(/A/g, ascoeff(a))).replace(/z/g, 'x').replace(/A/g, a);
 	}
 	else if(which===2)
 	{
 		var r=polyexpand(p, p);
 		r.xthru(pm[what]);
 		r[0]++;
-		qString+=pdt[what].replace(/y/g, difs[which]).replace(/F/g, r.rwrite('z')).replace(/z/g, 'x')+"\\,dx";
+		qString+=pdt[what].replace(/y/g, difs[which]).replace(/F/g, r.rwrite('z')).replace(/z/g, 'x');
 	}
 	else
 	{
-		qString+=dt[what].replace(/y/g, difs[which]).replace(/F/g, fsq[which]).replace(/z/g, 'x').replace("2A", ascoeff(2*a)).replace(/A/g, ascoeff(a))+"\\,dx";
+		qString+=dt[what].replace(/y/g, difs[which]).replace(/F/g, fsq[which]).replace(/z/g, 'x').replace("2A", ascoeff(2*a)).replace(/A/g, ascoeff(a));
 	}
-	qString += "$$";
+	qString += "\\,\\mathrm{d}x$$";
 	var aString="$$"+t[what].replace(/f/g, fns[which]).replace(/z/g, 'x').replace(/A/g, ascoeff(a))+"+c$$";
 	var qa=[qString,aString];
 	return qa;
@@ -2363,7 +2382,7 @@ function makeRevolution()
 		var x=rand(x0+1, x0+((which===2)?4:1));
 		var qString="Find the volume of the solid formed when the area under";
 		qString+="$$y = "+fns[which].replace(/z/g, 'x')+"$$";
-		qString+="from \\(x = "+x0+"\\mbox{ to }x = "+x+"\\) is rotated through \\(2\\pi\\) around the x-axis.";
+		qString+="from \\(x = "+x0+"\\) to \\(x = "+x+"\\) is rotated through \\(2\\pi\\) around the x-axis.";
 		var ans;
 		if(which===2)
 		{
@@ -2371,10 +2390,10 @@ function makeRevolution()
 		}
 		else
 		{
-			ans="\\left("+iss[which].replace(/z/g, x)+(isf[which](x0)===0?"":"-"+iss[which].replace(/z/g, x0))+"\\right)";
+			ans="\\left("+iss[which].replace(/z/g, x)+(isf[which](x0)===0?"":"-"+iss[which].replace(/z/g, x0))+"\\right)\\,";
 			ans=ans.replace(/--/g, "+");
 		}
-		var aString="$$"+ans+"\\pi$$";
+    var aString = "$$"+ans+"\\pi$$";
 		var qa=[qString,aString];
 		return(qa);
 	}
