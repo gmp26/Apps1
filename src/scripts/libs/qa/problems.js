@@ -566,7 +566,13 @@ function makeLineParPerp()
 
       aString+="\\qquad\\text{or}\\qquad ";
 
-      aString+="x"+signedNumber(m)+"y";
+      if (m==1) {
+        aString+="x+y";
+      } else if (m==-1) {
+        aString+="x-y";
+      } else {
+        aString+="x"+signedNumber(m)+"y";
+      }
 
       if (-b*m-a!==0) {
         aString+=signedNumber(-b*m-a);

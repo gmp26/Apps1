@@ -53,10 +53,8 @@ function circleEq2(a,b,r)
 }
 
 // Given two points (a,b) and (c,d) on a line, calculate the equation in the form
-// ay + bx + c = 0
+// ax + by + c = 0
 // If you have the line in the form y=mx+c, use x=0 and x=1
-//
-// TODO: You get a sign on the y-term if the x-term has zero coefficient. Fix this.
 function lineEq1(a,b,c,d)
 {
   var xcoeff=b-d;
