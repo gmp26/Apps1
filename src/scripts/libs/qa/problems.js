@@ -1125,7 +1125,7 @@ function makeStationary()
 		p.set(randnz(4), randnz(8), randnz(4));
 		var d=new frac(-p[1],2*p[2]);
 		var qString="Find the stationary point of $$y="+p.write()+",$$ and state whether it is a maximum or a minimum.";
-		var aString="The stationary point occurs at \\(x="+d.write()+"\\), and it is a";
+		var aString="The stationary point occurs at \\(x="+d.write()+"\\), and it is a ";
 		if(p[2]>0) aString+=" minimum.";
 		else aString+=" maximum.";
 		var qa=[qString,aString];
@@ -2390,14 +2390,10 @@ function makeRevolution()
 		}
 		else
 		{
-			ans="\\left("+iss[which].replace(/z/g, x)+(isf[which](x0)===0?"":"-"+iss[which].replace(/z/g, x0))+"\\right)";
+			ans="\\left("+iss[which].replace(/z/g, x)+(isf[which](x0)===0?"":"-"+iss[which].replace(/z/g, x0))+"\\right)\\,";
 			ans=ans.replace(/--/g, "+");
 		}
-    if (ans%1 == 0 || ans.constructor == frac) {
-      var aString = "$$"+ans+"\\pi$$";
-    } else {
-      var aString = "$$"+ans+"\\,\\pi$$";
-    }
+    var aString = "$$"+ans+"\\pi$$";
 		var qa=[qString,aString];
 		return(qa);
 	}
