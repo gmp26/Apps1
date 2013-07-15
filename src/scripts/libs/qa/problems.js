@@ -502,7 +502,11 @@ function makeLineParPerp()
       }
 
       var intercept=b-m*a;
-      var aString="$$"+lineEq2(m,intercept)+"\\qquad\\text{or}\\qquad "+lineEq1(0,intercept,1,m+intercept)+"$$";
+      if (m==0) {
+        var aString="$$y="+b+".$$";
+      } else {
+        var aString="$$"+lineEq2(m,intercept)+"\\qquad\\text{or}\\qquad "+lineEq1(0,intercept,1,m+intercept)+"$$";
+      }
     }
 
     var qa=[qString,aString];
