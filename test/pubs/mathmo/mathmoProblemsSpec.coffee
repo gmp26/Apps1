@@ -280,7 +280,7 @@ describe "mathmoController", ->
     [
       "makeCircLineInter"
       "C34"
-      "Consider the line \\(x-y+1=0\\) and the circle \\( (x+5)^2+y^2=9\\). <br><br> Find out how many points of intersection they have, and the location of any intersections."
+      "Find all the points where the line \\(x-y+1=0\\) and the circle \\( (x+5)^2+y^2=9\\) intersect."
       "The line and the circle intersect in two points, specifically $$\\left(\\frac{-6+\\sqrt{2}}{2},\\frac{-4+\\sqrt{2}}{2}\\right)\\qquad\\text{and}\\qquad \\left(\\frac{-6-\\sqrt{2}}{2},\\frac{-4-\\sqrt{2}}{2}\\right)$$"
     ]
     [

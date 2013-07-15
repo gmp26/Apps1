@@ -641,7 +641,7 @@ function makeCircLineInter()
       c2=rand(6);
     }
 
-    var qString="Consider the lines \\(";
+    var qString="Find all the points where the line \\(";
 
     if (rand()) {
       qString+=lineEq1(0,c1,1,m1+c1);
@@ -649,7 +649,7 @@ function makeCircLineInter()
       qString+=lineEq2(m1,c1);
     }
 
-    qString+="\\) and \\(";
+    qString+="\\) and the line \\(";
 
     if (rand()) {
       qString+=lineEq1(0,c2,1,m2+c2);
@@ -657,7 +657,7 @@ function makeCircLineInter()
       qString+=lineEq2(m2,c2);
     }
 
-    qString+="\\). <br><br> Find out how many points of intersection they have, and the location of any intersections."
+    qString+="\\) intersect."
 
     if (m1==m2) {
       var aString="The lines do not intersect.";
@@ -679,7 +679,7 @@ function makeCircLineInter()
     var m=rand(6);
     var c=rand(6);
 
-    var qString="Consider the line \\(";
+    var qString="Find all the points where the line \\(";
 
     if (rand()) {
       qString+=lineEq1(0,c,1,m+c);
@@ -695,7 +695,7 @@ function makeCircLineInter()
       qString+=circleEq2(a,b,r);
     }
 
-    qString+="\\). <br><br> Find out how many points of intersection they have, and the location of any intersections."
+    qString+="\\) intersect."
 
     // By substitution, we can get an equation of the form Ax^ + Bx + C = 0
     // The roots are the points of intersection
@@ -757,7 +757,7 @@ function makeCircLineInter()
       r2=rand(2,7);
     }
 
-    var qString="Consider the circles \\(";
+    var qString="Find all the points where the circle \\(";
 
     if (rand()) {
       qString+=circleEq1(a1,b1,r1);
@@ -765,7 +765,7 @@ function makeCircLineInter()
       qString+=circleEq2(a1,b1,r1);
     }
 
-    qString+="\\) and \\("
+    qString+="\\) and the circle \\("
 
     if (rand()) {
       qString+=circleEq1(a2,b2,r2);
@@ -773,7 +773,7 @@ function makeCircLineInter()
       qString+=circleEq2(a2,b2,r2);
     }
 
-    qString+="\\). <br><br> Find out how many points of intersection they have, and the location of any intersections."
+    qString+="\\) intersect."
 
     var D=Math.sqrt((b2-b1)*(b2-b1)+(a2-a1)*(a2-a1));
     var DD=(b2-b1)*(b2-b1)+(a2-a1)*(a2-a1);
