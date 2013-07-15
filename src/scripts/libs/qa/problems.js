@@ -1928,7 +1928,12 @@ function makeDE()
 	else
 	{
 		var b=randnz(6);
-		qString="Find the general solution of the following first-order ODE:$$x\\frac{\\,\\mathrm{d}y}{\\,\\mathrm{d}x}-y="+(-b)+"$$";
+		qString="Find the general solution of the following first-order ODE:$$x\\frac{\\,\\mathrm{d}y}{\\,\\mathrm{d}x}-y"
+    if (b>0) {
+      qString += signedNumber(-b)+"=0.$$";
+    } else {
+      qString += "="+(-b)+"$$";
+    }
 		aString="$$y=Ax"+(b>0?'+':'')+b+'$$';
 		qa=[qString,aString];
 		return qa;
