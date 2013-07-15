@@ -2331,20 +2331,20 @@ function makeSubstInt() /* Has issues with polys which are never in the domain o
 	// special cases: polys and ln
 	if(which===0)
 	{
-		qString+=ldt[what].replace(/y/g, 'x').replace(/F/g, fsq[which].replace(/A/g, ascoeff(a))).replace(/z/g, 'x').replace(/A/g, a)+"\\,dx";
+		qString+=ldt[what].replace(/y/g, 'x').replace(/F/g, fsq[which].replace(/A/g, ascoeff(a))).replace(/z/g, 'x').replace(/A/g, a);
 	}
 	else if(which===2)
 	{
 		var r=polyexpand(p, p);
 		r.xthru(pm[what]);
 		r[0]++;
-		qString+=pdt[what].replace(/y/g, difs[which]).replace(/F/g, r.rwrite('z')).replace(/z/g, 'x')+"\\,dx";
+		qString+=pdt[what].replace(/y/g, difs[which]).replace(/F/g, r.rwrite('z')).replace(/z/g, 'x');
 	}
 	else
 	{
-		qString+=dt[what].replace(/y/g, difs[which]).replace(/F/g, fsq[which]).replace(/z/g, 'x').replace("2A", ascoeff(2*a)).replace(/A/g, ascoeff(a))+"\\,dx";
+		qString+=dt[what].replace(/y/g, difs[which]).replace(/F/g, fsq[which]).replace(/z/g, 'x').replace("2A", ascoeff(2*a)).replace(/A/g, ascoeff(a));
 	}
-	qString += "$$";
+	qString += "\\,\\mathrm{d}x$$";
 	var aString="$$"+t[what].replace(/f/g, fns[which]).replace(/z/g, 'x').replace(/A/g, ascoeff(a))+"+c$$";
 	var qa=[qString,aString];
 	return qa;

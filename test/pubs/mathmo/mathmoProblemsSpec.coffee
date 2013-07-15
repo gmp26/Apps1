@@ -346,7 +346,7 @@ describe "mathmoController", ->
     [
       "makeSubstInt"
       "F11"
-      "Find $$\\int\\frac{2x - 2}{- 4x - 2x^2 + 4x^3 - x^4}\\,dx$$"
+      "Find $$\\int\\frac{2x - 2}{- 4x - 2x^2 + 4x^3 - x^4}\\,\\mathrm{d}x$$"
       "$${\\rm artanh}(- 1 - 2x + x^2)+c$$"
     ]
     [
