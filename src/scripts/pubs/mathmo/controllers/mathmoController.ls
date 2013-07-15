@@ -166,9 +166,11 @@
       $scope.renderMath()
 
     $scope.prevOnTopic = (qa) ->
+      qa.isCollapsed = true
       similarQ(qa, -1)
 
     $scope.nextOnTopic = (qa) ->
+      qa.isCollapsed = true
       similarQ(qa, +1)
 
     $scope.topicAvailable = (topicId) ->
