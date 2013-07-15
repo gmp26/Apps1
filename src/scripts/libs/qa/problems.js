@@ -2389,7 +2389,7 @@ function makeRevolution()
 			ans="\\left("+iss[which].replace(/z/g, x)+(isf[which](x0)===0?"":"-"+iss[which].replace(/z/g, x0))+"\\right)";
 			ans=ans.replace(/--/g, "+");
 		}
-    if (ans%1 == 0) {
+    if (ans%1 == 0 || ans.constructor == frac) {
       var aString = "$$"+ans+"\\pi$$";
     } else {
       var aString = "$$"+ans+"\\,\\pi$$";
