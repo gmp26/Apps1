@@ -352,8 +352,8 @@ describe "mathmoController", ->
     [
       "makeRevolution"
       "F12"
-      "Find the volume of the solid formed when the area under$$y = \\sec(x)$$from \\(x = 0\\mbox{ to }x = 1\\) is rotated through \\(2\\pi\\) around the x-axis."
-      "$$\\left(\\tan(1)\\right)\\pi$$"
+      "Find the volume of the solid formed when the area under$$y = \\sec(x)$$from \\(x = 0\\) to \\(x = 1\\) is rotated through \\(2\\pi\\) around the x-axis."
+      "$$\\left(\\tan(1)\\right)\\,\\pi$$"
     ]
     [
       "makeRevolution"

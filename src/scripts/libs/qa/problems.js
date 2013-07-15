@@ -2378,7 +2378,7 @@ function makeRevolution()
 		var x=rand(x0+1, x0+((which===2)?4:1));
 		var qString="Find the volume of the solid formed when the area under";
 		qString+="$$y = "+fns[which].replace(/z/g, 'x')+"$$";
-		qString+="from \\(x = "+x0+"\\mbox{ to }x = "+x+"\\) is rotated through \\(2\\pi\\) around the x-axis.";
+		qString+="from \\(x = "+x0+"\\) to \\(x = "+x+"\\) is rotated through \\(2\\pi\\) around the x-axis.";
 		var ans;
 		if(which===2)
 		{
@@ -2389,7 +2389,11 @@ function makeRevolution()
 			ans="\\left("+iss[which].replace(/z/g, x)+(isf[which](x0)===0?"":"-"+iss[which].replace(/z/g, x0))+"\\right)";
 			ans=ans.replace(/--/g, "+");
 		}
-		var aString="$$"+ans+"\\pi$$";
+    if (ans%1 == 0) {
+      var aString = "$$"+ans+"\\pi$$";
+    } else {
+      var aString = "$$"+ans+"\\,\\pi$$";
+    }
 		var qa=[qString,aString];
 		return(qa);
 	}
