@@ -279,12 +279,31 @@ function fmatrix(dim)
 	}
 	this.write=function()
 	{
-		var res="\\begin{pmatrix}";
+    var fbot = [];
+
+    for (var i=0; i<this.dim; i++) {
+      for (var j=0; j<this.dim; j++) {
+        fbot.push(this[i][j].bot);
+      }
+    }
+
+    var d = lcm(fbot[0], fbot[1]);
+    for (var i=2; i<fbot.length; i++) {
+      d = lcm(d, fbot[i]);
+    }
+
+    if (d == 1) {
+      var res = "\\begin{pmatrix}";
+    } else {
+      var f = new frac(1,d);
+      var res = "\\displaystyle "+ f.write()+"\\textstyle \\begin{pmatrix} ";
+    }
+
 		for(var i=0;i<this.dim;i++)
 		{
 			for(var j=0;j<this.dim;j++)
 			{
-				res+=this[i][j].write();
+				res+=this[i][j].top/this[i][j].bot*d;
 				if(j==this.dim-1)
 				{
 					if(i==this.dim-1)
