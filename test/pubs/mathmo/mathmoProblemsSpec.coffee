@@ -133,14 +133,14 @@ describe "mathmoController", ->
       "makeStationary2"
       "C14"
       "Find the stationary point of $$y=- x^2 - 8x + 3,$$ and state whether it is a maximum or a minimum."
-      "\\(x=-4\\), maximum."
+      "The stationary point occurs at \\(x=-4\\), and it is a maximum."
       6
     ]
     [
       "makeStationary3"
       "C14"
       "Find the stationary points of $$y=3x^3 - 81x + 2,$$ and state their nature."
-      "\\(x=-3\\), maximum,<br />and \\(x=3\\), minimum"
+      "The stationary points occur at \\(x=-3\\), a maximum, and \\(x=3\\), a minimum"
     ]
     [
       "makeTriangle1"

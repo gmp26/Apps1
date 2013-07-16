@@ -1126,8 +1126,8 @@ function makeStationary()
 		var d=new frac(-p[1],2*p[2]);
 		var qString="Find the stationary point of $$y="+p.write()+",$$ and state whether it is a maximum or a minimum.";
 		var aString="The stationary point occurs at \\(x="+d.write()+"\\), and it is a ";
-		if(p[2]>0) aString+=" minimum.";
-		else aString+=" maximum.";
+		if(p[2]>0) aString+="minimum.";
+		else aString+="maximum.";
 		var qa=[qString,aString];
 		return qa;
 	}
