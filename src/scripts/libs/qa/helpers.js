@@ -472,45 +472,5 @@ function simplifySurd(a,b,c,d)
       eqString+="\\frac{"+innerSurd(a,B,c)+"}{"+d+"}";
     }
   }
-
-  // if (B==0) {
-  //   var f=new frac(a,d);
-  //   eqString+=f.write();
-  // }
-  // else if (C==1)
-  // {
-  //   var f=new frac(a+B,d);
-  //   eqString+=f.write();
-  // }
-  // else
-  // { // Non-trivial term in the root
-  //   var h=gcd(a,B,d);
-  //   a/=h; B/=h; d/=h;
-
-  //   if (B==1) {
-  //     B="+";
-  //   } else if (B==-1) {
-  //     B="-";
-  //   } else {
-  //     B=signedNumber(B);
-  //   }
-
-  //   if (d==1) // Unit denominator
-  //   {
-  //     eqString+=a+signedNumber(B)+"\\sqrt{"+C+"}";
-  //   }
-  //   else
-  //   {
-  //     if (a%d==0||B%d==0)
-  //     {
-  //       eqString+="still a bit to do";
-  //     }
-  //     else
-  //     {
-  //       // Both pieces are fractions
-  //       eqString+="\\frac{"+a+B+"\\sqrt{"+C+"}}{"+d+"}";
-  //     }
-  //   }
-  // }
   return eqString;
 }
