@@ -5,45 +5,57 @@ require {
         * 'libs/seedrandom'
         ...
 
+    'libs/qa/helpers2':
+      deps:
+        * 'libs/seedrandom'
+        ...
+
     'libs/qa/complex':
       deps:
         * 'libs/seedrandom'
           'libs/qa/polys'
           'libs/qa/guessExact'
           'libs/qa/helpers'
+          'libs/qa/helpers2'
 
     'libs/qa/fractions':
       deps:
         * 'libs/seedrandom'
           'libs/qa/helpers'
+          'libs/qa/helpers2'
 
     'libs/qa/polys':
       deps:
         * 'libs/seedrandom'
           'libs/qa/guessExact'
           'libs/qa/helpers'
+          'libs/qa/helpers2'
 
     'libs/qa/fpolys':
       deps:
         * 'libs/seedrandom'
           'libs/qa/helpers'
+          'libs/qa/helpers2'
           'libs/qa/fractions'
 
     'libs/qa/guessExact':
       deps:
         * 'libs/seedrandom'
           'libs/qa/helpers'
+          'libs/qa/helpers2'
           'libs/qa/fractions'
 
     'libs/qa/stats':
       deps:
         * 'libs/seedrandom'
           'libs/qa/helpers'
+          'libs/qa/helpers2'
 
     'libs/qa/geometry':
       deps:
         * 'libs/seedrandom'
           'libs/qa/helpers'
+          'libs/qa/helpers2'
 
     'libs/qa/problems':
       deps:
@@ -53,6 +65,7 @@ require {
           'libs/qa/fractions'
           'libs/qa/guessExact'
           'libs/qa/helpers'
+          'libs/qa/helpers2'
           'libs/qa/polys'
           'libs/qa/stats'
           'libs/qa/geometry'
