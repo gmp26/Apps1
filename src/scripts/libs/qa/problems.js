@@ -804,14 +804,15 @@ function makeCircLineInter()
       aString+="\\right)";
 
       aString+="$$";
-    } else if (d==R) {
+    } else if (DD==R*R) {
       var x1=new frac(a1*R+r1*(a2-a1),R);
       var y1=new frac(b1*R+r1*(b2-b1),R);
       var aString="The circles intersect in a single point, which is \\(("+x1.write()+","+y1.write()+")\\).";
     } else if (D>R||D<=S) {
       var aString="The two circles do not intersect in any points.";
     } else {
-      var aString="Uh oh";
+      // This shouldn't occur in practice, but I'd rather get a unique error than debug a bunch of JavaScript
+      var aString="Uh oh, something went wrong. Please try another question.";
     }
 
     var qa=[qString,aString];
