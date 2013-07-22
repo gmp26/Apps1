@@ -158,7 +158,7 @@ ranking = (a) ->
 # Returns n distinct random integers in the range [min, max].
 # If max omitted, then [-|min|, |min|].
 # If both omitted, then [1, n]
-distrand = (n, min = 1, max = n) ->
+distrand = (n, min, max) ->
 
   if typeof max is "undefined"
     if typeof min is "undefined"
@@ -236,6 +236,84 @@ randnz = (min, max) ->
   else
     a = rand(min, max)
   return a
+
+
+
+# root object a*sqrt(n): reduces itself, write in LaTeX
+class sqroot
+  (n) ->
+    if n is not Math.floor(n)
+      throw new Error "non-integer sent to square root"
+    else
+      @n = n
+      @a = 1
+      i = 2
+
+    while i^2 <= @n
+      if @n % i^2 is 0
+        @n /= i^2
+        @a *= i^2
+      i++
+
+    throw new Error "a is not an integer" if @a % 1 is not 0
+
+  write: ->
+    if @@ is 1 and @n is 1 then "1"
+    else if @a is 1 then "\\sqrt{" + @n + "}"
+    else if @n is 1 then return @a
+    else @a + "\\sqrt{" + @n + "}"
+
+
+
+# vector object
+# * can be set manually or randomly
+# * dot product with another vector
+# * its magnitude squared
+# * write it in LaTeX
+class vector
+  (dim) ->
+    @dim = dim
+
+  set: ->
+    @dim = @set.arguments.length
+    for i from 0 to @dim - 1
+      @[i] = @set.arguments[i]
+
+  setrand: (maxentry) ->
+    for i from 0 to @dim - 1
+      @[i] = Math.round(-maxentry + 2 * maxentry * Math.random())
+
+  dot: (U) ->
+    sum = 0
+    for i from 0 to @dim - 1
+      sum += @[i] * U[i]
+    throw new Error "dot product is not an integer" if sum % 1 is not 0
+    return sum
+
+  cross: (U) ->
+    if @dim is 3 and U.dim is 3
+      res = new vector(3)
+      res.set(0,0,0)
+
+      for i from 0 to 2
+        for j from 0 to 2
+          for k from 0 to 2
+            # (a x b)_i = e_ijk a_j b_k
+            res[i] += epsi(i,j,k) * @[j] * U[k]
+
+      return res
+    else
+      throw new Error "cross product called on vectors other than 3D"
+
+  mag: ->
+    throw new Error "magnitude is not an integer" if this.dot(this) % 1 is not 0
+    this.dot(this)
+
+  write: ->
+    q = "\\begin{pmatrix}"
+    for i from 0 to @dim - 1
+      q += "\\\\" + @[i]
+    return q + "\\end{pmatrix}"
 
 
 
