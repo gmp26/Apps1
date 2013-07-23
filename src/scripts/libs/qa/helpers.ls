@@ -221,6 +221,7 @@ distrandnz = (n, min, max) ->
 
 # returns a random number between min and max, but not zero, one argument becomes -min to min
 randnz = (min, max) ->
+
   if typeof max is "undefined"
     if min > 0 then min *= -1
     max = -1 * min
@@ -255,10 +256,11 @@ class sqroot
         @a *= i^2
       i++
 
+    # shouldn't happen but useful for debugging
     throw new Error "a is not an integer" if @a % 1 is not 0
 
   write: ->
-    if @@ is 1 and @n is 1 then "1"
+    if @a is 1 and @n is 1 then "1"
     else if @a is 1 then "\\sqrt{" + @n + "}"
     else if @n is 1 then return @a
     else @a + "\\sqrt{" + @n + "}"
@@ -305,6 +307,8 @@ class vector
     else
       throw new Error "cross product called on vectors other than 3D"
 
+  # in mathmo, we only deal with vectors in Z^2 or Z^3
+  # a non-integer (magnitude) causes problems later on
   mag: ->
     throw new Error "magnitude is not an integer" if this.dot(this) % 1 is not 0
     this.dot(this)
