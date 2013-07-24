@@ -45,8 +45,8 @@ class frac
     if @top is b.top and @bot is b.bot then 1 else 0
 
   # updates in place
-  add: (c,d) ->
-    if typeof d is void then d = 1
+  add: (c,d = 1) ->
+    # if typeof d is void then d = 1
     @set(@top * d + @bot * c, @bot * d)
     @reduce()
     return this
@@ -156,18 +156,19 @@ class fmatrix
 
   det: ->
     if @dim is 1
-      return @[0][0]
+      return @[0][0].clone()
 
     else if @dim is 2
       f = @[0][1].clone().prod(@[1][0]).prod(-1)
       g = @[0][0].clone().prod(@[1][1]).add(f.top, f.bot)
+      return g.clone()
 
     # Laplace expansion by first row.
     # It's slow, but it still works (and it's more maintainable than the other, quicker algos).
     # Besides, we're only going up to 3x3.  It's still bugged though :S
     else
-      res = new frac(0,1)
 
+      res = new frac(0,1)
       for i from 0 to @dim - 1
         minor = new fmatrix(@dim - 1)
 
@@ -175,9 +176,9 @@ class fmatrix
           minor[j] = new Array(@dim - 1)
           for k from 0 to @dim - 2
             if k >= i
-              minor[j][k] = @[j+1][k+1].clone()
+              minor[j][k] = @[j + 1][k + 1].clone()
             else
-              minor[j][k] = @[j+1][k].clone()
+              minor[j][k] = @[j + 1][k].clone()
 
         if i % 2 is 1
           f = minor.det().prod(-1).prod(@[0][i])
@@ -198,7 +199,7 @@ class fmatrix
     return res
 
   inv: ->
-    d = @det
+    d = @det()
 
     if d.top is 0
       throw new Error "Singular matrix sent to matrix.inv()"
@@ -231,7 +232,7 @@ class fmatrix
               minor[k][l] = @[kk][ll].clone()
 
           if (i + j) % 2 is 1
-            f = minor.det().prod(-1,1)
+            f = minor.det().prod(-1)
           else
             f = minor.det()
 

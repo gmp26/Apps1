@@ -80,16 +80,16 @@ class fpoly
     d.rank = rank - 1
     for i from 0 to @rank - 1
       d[i] = @[i+1]
-      d[i].prod(frac(i+1, 1))
+      d[i].prod(frac(i + 1, 1))
     return d
 
   integ: (d) ->
     d.rank = @rank + 1
     d[0] = new frac()
     for i from 0 to @rank
-      d[i+1] = @[i]
-      d[i+1].bot *= i + 1
-      d[i+1].reduce()
+      d[i + 1] = @[i]
+      d[i + 1].bot *= i + 1
+      d[i + 1].reduce()
     return d
 
   write: ->
