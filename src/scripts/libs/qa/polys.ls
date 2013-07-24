@@ -45,7 +45,7 @@ express = (a) ->
 
 polyexpand = (a,b) ->
   p = new poly(a.rank + b.rank)
-  p.setrand() # set all entries to 0
+  p.setrand(0) # set all entries to 0
 
   for i from 0 to a.rank
     for j from 0 to b.rank
@@ -69,6 +69,7 @@ p_linear = (a,b) ->
 
 # a
 p_const = (a) ->
+  p = new poly(0)
   p.set(a)
   return p
 
@@ -97,11 +98,13 @@ class poly
     @rank = @set.arguments.length - 1
     for i from 0 to @rank
       @[i] = @set.arguments[i]
+    return @
 
   setrand: (maxentry) ->
     for i from 0 to @rank
       @[i] = Math.round(-maxentry + 2 * maxentry * Math.random())
       if @[@rank] is 0 then @[@rank] = maxentry
+    return @
 
   compute: (x) ->
     y = 0
@@ -118,15 +121,17 @@ class poly
   xthru: (x) ->
     for i from 0 to @rank
       @[i] = @[i] * x
+    return @
 
   addp: (x) ->
     for i from 0 to @rank
-      @[i] += x[i]
+      @[i] = @[i] + x[i]
+    return @
 
   diff: (d) ->
-    d.rank = rank - 1
+    d.rank = @rank - 1
     for i from 0 to @rank - 1
-      d[i] = @[i+1] * (i + 1)
+      d[i] = @[i + 1] * (i + 1)
 
   integ: (d) ->
     d.rank = rank + 1
