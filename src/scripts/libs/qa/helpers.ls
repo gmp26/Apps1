@@ -223,8 +223,8 @@ distrandnz = (n, min, max) ->
 randnz = (min, max) ->
 
   if typeof max is "undefined"
-    if min > 0 then min *= -1
-    max = -1 * min
+    min = -Math.abs(min)
+    max =  Math.abs(min)
 
   if min is 0 then min++
   if max is 0 then max--
