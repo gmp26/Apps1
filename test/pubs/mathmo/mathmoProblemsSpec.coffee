@@ -57,14 +57,14 @@ describe "mathmoController", ->
     [
       "makeVector"
       "C5"
-      "Consider the four vectors$$\\mathbf{A}=\\begin{pmatrix}\\\\-4\\\\-3\\\\0\\end{pmatrix}\\,,\\; \\mathbf{B}=\\begin{pmatrix}\\\\2\\\\-6\\\\0\\end{pmatrix}$$$$\\mathbf{C}=\\begin{pmatrix}\\\\-4\\\\2\\\\5\\end{pmatrix}\\,,\\; \\mathbf{D}=\\begin{pmatrix}\\\\-1\\\\-3\\\\-7\\end{pmatrix}$$<ol class=\"exercise\"><li>Order the vectors by magnitude.</li><li>Use the scalar product to find the angles between<ol class=\"subexercise\"><li>\\(\\mathbf{D}\\) and \\(\\mathbf{A}\\),</li><li>\\(\\mathbf{A}\\) and \\(\\mathbf{C}\\)</li></ol></ol>"
-      "<ol class=\"exercise\"><li>\\(|\\mathbf{D}|=\\sqrt{59},\\) \\(|\\mathbf{C}|=\\sqrt{45},\\) \\( |\\mathbf{B}|=\\sqrt{40}\\) and \\(|\\mathbf{A}|=\\sqrt{25}\\).</li><li><ol class=\"subexercise\"><li>\\(\\arccos\\left(\\frac{13}{25\\sqrt{59}}\\right)\\)</li><li>\\(\\arccos\\left(\\frac{2}{45\\sqrt{5}}\\right)\\)</li></ol></li></ol>"
+      "Consider the four vectors$$\\mathbf{A}=\\begin{pmatrix}-4\\\\-3\\\\0\\end{pmatrix}\\,,\\; \\mathbf{B}=\\begin{pmatrix}2\\\\-6\\\\0\\end{pmatrix}$$$$\\mathbf{C}=\\begin{pmatrix}-4\\\\2\\\\5\\end{pmatrix}\\,,\\; \\mathbf{D}=\\begin{pmatrix}-1\\\\-3\\\\-7\\end{pmatrix}$$<ol class=\"exercise\"><li>Order the vectors by magnitude.</li><li>Use the scalar product to find the angles between<ol class=\"subexercise\"><li>\\(\\mathbf{D}\\) and \\(\\mathbf{A}\\),</li><li>\\(\\mathbf{A}\\) and \\(\\mathbf{C}\\)</li></ol></ol>"
+      "<ol class=\"exercise\"><li>\\(|\\mathbf{D}|=\\sqrt{59},\\) \\(|\\mathbf{C}|=\\sqrt{45},\\) \\( |\\mathbf{B}|=\\sqrt{40}\\) and \\(|\\mathbf{A}|=\\sqrt{25}\\).</li><li><ol class=\"subexercise\"><li>\\(\\arccos\\left(\\frac{13}{5\\sqrt{59}}\\right)\\)</li><li>\\(\\arccos\\left(\\frac{2}{3\\sqrt{5}}\\right)\\)</li></ol></li></ol>"
     ]
     [
       "makeLines"
       "C6"
       "Consider the lines$$3x - 2=y - 2=3z - 3$$and$$2x - 0.6666666666666666=y - 1.3333333333333333=- 2z + 2.6666666666666665$$Find the angle between them<br>and determine whether they<br>intersect."
-      "The angle between the lines is$$\\arccos\\left(\\frac{-36}{36\\sqrt{66}}\\right).$$The lines do not meet."
+      "The angle between the lines is$$\\arccos\\left(\\frac{-6}{\\sqrt{66}}\\right).$$The lines do not meet."
     ]
     [
       "makeIneq2"
@@ -75,8 +75,8 @@ describe "mathmoController", ->
     [
       "makeIneq3"
       "C7"
-      "By factorizing a suitable polynomial, or otherwise, find the values of \\(x\\) which satisfy$$x^2 - 4x < 0$$"
-      "$$0 < x < 4$$"
+      "By factorizing a suitable polynomial, or otherwise, find the values of \\(x\\) which satisfy$$x^2 - 6x < -5$$"
+      "$$1 < x < 5$$"
       2
     ]
     [
@@ -109,7 +109,7 @@ describe "mathmoController", ->
       "makeQuadratic"
       "C10"
       "Find the real roots, if any, of$$x^2 - 4x - 1=0$$"
-      "$$x=2\\pm2\\sqrt{5}$$"
+      "$$x=2\\pm\\sqrt{5}$$"
     ]
     [
       "makeComplete"
@@ -166,7 +166,7 @@ describe "mathmoController", ->
     [
       "makeCircle"
       "C16"
-      "Find, for a sector of angle \\(\\frac{14\\pi}{8}\\) of a disc of radius \\(6:\\)<br>i. the length of the perimeter; and<br>ii. the area."
+      "Find, for a sector of angle \\(\\frac{7\\pi}{4}\\) of a disc of radius \\(6:\\)<br>i. the length of the perimeter; and<br>ii. the area."
       "i. \\(12+\\frac{21}{2}\\pi\\)<br>ii. \\(\\frac{63}{2}\\pi\\)"
     ]
     [
@@ -178,8 +178,8 @@ describe "mathmoController", ->
     [
       "makeVectorEq"
       "C18"
-      "Show that the points with position vectors$$\\begin{pmatrix}\\\\2\\\\-9\\\\-14\\end{pmatrix}\\,,\\;\\begin{pmatrix}\\\\-2\\\\-3\\\\-6\\end{pmatrix}\\,,\\;\\begin{pmatrix}\\\\0\\\\-6\\\\-10\\end{pmatrix}$$lie on a straight line, and give the equation of the line in the form \\(\\mathbf{r}=\\mathbf{a}+\\lambda\\mathbf{b}\\)."
-      "$$\\begin{pmatrix}\\\\-4\\\\0\\\\-2\\end{pmatrix}+\\lambda\\,\\begin{pmatrix}\\\\-2\\\\3\\\\4\\end{pmatrix}$$"
+      "Show that the points with position vectors$$\\begin{pmatrix}2\\\\-9\\\\-14\\end{pmatrix}\\,,\\;\\begin{pmatrix}-2\\\\-3\\\\-6\\end{pmatrix}\\,,\\;\\begin{pmatrix}0\\\\-6\\\\-10\\end{pmatrix}$$lie on a straight line, and give the equation of the line in the form \\(\\mathbf{r}=\\mathbf{a}+\\lambda\\mathbf{b}\\)."
+      "$$\\begin{pmatrix}-4\\\\0\\\\-2\\end{pmatrix}+\\lambda\\,\\begin{pmatrix}-2\\\\3\\\\4\\end{pmatrix}$$"
     ]
     [
       "makeImplicit"
@@ -281,18 +281,18 @@ describe "mathmoController", ->
       "makeCircLineInter"
       "C34"
       "Find all the points where the line \\(4x-y+3=0\\) and the circle \\( x^2+(y+5)^2=36\\) intersect."
-      "The line and the circle intersect in two points, specifically $$\\left(\\frac{-4+\\sqrt{548}}{2.125},\\frac{-77+32\\sqrt{548}}{17}\\right)\\qquad\\text{and}\\qquad \\left(\\frac{-4-\\sqrt{548}}{2.125},\\frac{-77-32\\sqrt{548}}{17}\\right)$$"
+      "The line and the circle intersect in two points, specifically $$\\left(\\frac{-16+\\sqrt{137}}{8.5},\\frac{-77+8\\sqrt{137}}{17}\\right)\\qquad\\text{and}\\qquad \\left(\\frac{-16-\\sqrt{137}}{8.5},\\frac{-77-8\\sqrt{137}}{17}\\right)$$"
     ]
     [
       "makeCArithmetic"
       "F1"
-      "Given \\(z=-\\frac{1}{2} + \\frac{\\sqrt{3}}{2}i\\) and \\(w=\\frac{3}{2} -\\frac{9\\sqrt{3}}{2}i\\), compute:<ul class=\"exercise\"><li>\\(z+w\\)</li><li>\\(z\\times w\\)</li><li>\\(\\frac{z}{w}\\)</li><li>\\(\\frac{w}{z}\\)</li></ul>"
-      "<ul class=\"exercise\"><li>\\(1 -\\sqrt{3}i\\)</li><li>\\(\\frac{3}{2} + \\frac{9\\sqrt{3}}{2}i\\)</li><li>\\(-\\frac{1}{3}\\)</li><li>\\(-3\\)</li></ul>"
+      "Given \\(z=-\\frac{1}{2} + \\frac{\\sqrt{3}}{2}i\\) and \\(w=\\frac{3}{2} -\\frac{3\\sqrt{3}}{2}i\\), compute:<ul class=\"exercise\"><li>\\(z+w\\)</li><li>\\(z\\times w\\)</li><li>\\(\\frac{z}{w}\\)</li><li>\\(\\frac{w}{z}\\)</li></ul>"
+      "<ul class=\"exercise\"><li>\\(1 -\\sqrt{3}i\\)</li><li>\\(\\frac{3}{2} + \\frac{3\\sqrt{3}}{2}i\\)</li><li>\\(-\\frac{1}{3}\\)</li><li>\\(-3\\)</li></ul>"
     ]
     [
       "makeCPolar"
       "F2"
-      "Convert \\(\\frac{3}{2} + \\frac{9\\sqrt{3}}{2}i\\) to modulus-argument form."
+      "Convert \\(\\frac{3}{2} + \\frac{3\\sqrt{3}}{2}i\\) to modulus-argument form."
       "$$3e^{\\frac{1}{3}\\pi i}$$"
     ]
     [
@@ -305,7 +305,7 @@ describe "mathmoController", ->
       "makeMatrix2"
       "F4"
       "Let $$A=\\begin{pmatrix}2&6\\\\2&-5\\end{pmatrix} \\qquad \\text{and} \\qquad B=\\begin{pmatrix}-5&-2\\\\-6&3\\end{pmatrix}$$.Compute: <ul class=\"exercise\"><li>\\(A+B\\)</li><li>\\(A \\times B\\)</li><li>\\(B^{-1}\\)</li></ul>"
-      "<ul class=\"exercise\"><li>\\(\\begin{pmatrix}-3&4\\\\-4&-2\\end{pmatrix}\\)</li><li>\\(\\begin{pmatrix}-46&14\\\\20&-19\\end{pmatrix}\\)</li><li>\\(\\displaystyle \\frac{1}{27}\\textstyle \\begin{pmatrix}-3&-2\\\\-6&5\\end{pmatrix}\\)</li></ul>"
+      "<ul class=\"exercise\"><li>\\(\\begin{pmatrix}-3&4\\\\-4&-2\\end{pmatrix}\\)</li><li>\\(\\begin{pmatrix}-46&14\\\\20&-19\\end{pmatrix}\\)</li><li>\\(\\displaystyle \\frac{1}{27}\\textstyle \\begin{pmatrix} -3&-2\\\\-6&5\\end{pmatrix}\\)</li></ul>"
     ]
     [
       "makeTaylor"
@@ -323,13 +323,13 @@ describe "mathmoController", ->
       "makeMatrix3"
       "F7"
       "Let $$A=\\begin{pmatrix}2&3&-2\\\\-1&-1&2\\\\1&0&2\\end{pmatrix} \\qquad \\text{and} \\qquad B=\\begin{pmatrix}1&4&-1\\\\1&-2&1\\\\0&-4&0\\end{pmatrix}$$.Compute: <ul class=\"exercise\"><li>\\(A+B\\)</li><li>\\(A \\times B\\)</li><li>\\(B^{-1}\\)</li></ul>"
-      "<ul class=\"exercise\"><li>\\(\\begin{pmatrix}3&7&-3\\\\0&-3&3\\\\1&-4&2\\end{pmatrix}\\)</li><li>\\(\\begin{pmatrix}5&10&1\\\\-2&-10&0\\\\1&-4&-1\\end{pmatrix}\\)</li><li>\\(\\displaystyle \\frac{1}{8}\\textstyle \\begin{pmatrix}4&4&2\\\\0&0&-2\\\\-4&4&-6\\end{pmatrix}\\)</li></ul>"
+      "<ul class=\"exercise\"><li>\\(\\begin{pmatrix}3&7&-3\\\\0&-3&3\\\\1&-4&2\\end{pmatrix}\\)</li><li>\\(\\begin{pmatrix}5&10&1\\\\-2&-10&0\\\\1&-4&-1\\end{pmatrix}\\)</li><li>\\(\\displaystyle \\frac{1}{4}\\textstyle \\begin{pmatrix} 2&2&1\\\\0&0&-1\\\\-2&2&-3\\end{pmatrix}\\)</li></ul>"
     ]
     [
       "makeFurtherVector"
       "F8"
-      "Let \\(\\mathbf{a}=\\begin{pmatrix}\\\\-2\\\\0\\\\3\\end{pmatrix}\\,\\), \\(\\;\\mathbf{b}=\\begin{pmatrix}\\\\-4\\\\3\\\\0\\end{pmatrix}\\,\\) and \\(\\mathbf{c}=\\begin{pmatrix}\\\\-3\\\\4\\\\5\\end{pmatrix}\\). Calculate: <ul class=\"exercise\"><li>the vector product, \\(\\mathbf{a}\\wedge \\mathbf{b}\\),</li><li>the scalar triple product, \\([\\mathbf{a}, \\mathbf{b}, \\mathbf{c}]\\).</li></ul>"
-      "<ul class=\"exercise\"><li>\\(\\begin{pmatrix}\\\\-9\\\\-12\\\\-6\\end{pmatrix}\\)</li><li>\\(-51\\)</li></ul>"
+      "Let \\(\\mathbf{a}=\\begin{pmatrix}-2\\\\0\\\\3\\end{pmatrix}\\,\\), \\(\\;\\mathbf{b}=\\begin{pmatrix}-4\\\\3\\\\0\\end{pmatrix}\\,\\) and \\(\\mathbf{c}=\\begin{pmatrix}-3\\\\4\\\\5\\end{pmatrix}\\). Calculate: <ul class=\"exercise\"><li>the vector product, \\(\\mathbf{a}\\wedge \\mathbf{b}\\),</li><li>the scalar triple product, \\([\\mathbf{a}, \\mathbf{b}, \\mathbf{c}]\\).</li></ul>"
+      "<ul class=\"exercise\"><li>\\(\\begin{pmatrix}-9\\\\-12\\\\-6\\end{pmatrix}\\)</li><li>\\(-51\\)</li></ul>"
     ]
     [
       "makeNewtonRaphson"
@@ -340,8 +340,8 @@ describe "mathmoController", ->
     [
       "makeFurtherIneq"
       "F10"
-      "Find the range of values of \\(x\\) for which$$\\frac{-4}{3x + 5} < \\frac{-2}{- 4x + 3}$$"
-      "$$-\\frac{5}{3} < x < \\frac{1}{11}\\mbox{ or }\\frac{3}{4} < x$$"
+      "Find the range of values of \\(x\\) for which$$\\frac{-4}{4x + 5} < \\frac{-2}{- 4x + 3}$$"
+      "$$-\\frac{5}{4} < x < \\frac{1}{12}\\mbox{ or }\\frac{3}{4} < x$$"
     ]
     [
       "makeSubstInt"
