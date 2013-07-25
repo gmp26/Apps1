@@ -11,12 +11,12 @@ class frac
   (top, bot) ->
     if typeof top is "undefined" then @top = 0 else @top = top
     if typeof bot is "undefined" then @bot = 1 else @bot = bot
+    @reduce()
 
   write: ->
-    @reduce()
     if @bot is 1 then return @top
     if @top is 0 then return "0"
-    else if @top >0 then return "\\frac{" + @top + "}{" + @bot + "}"
+    else if @top > 0 then return "\\frac{" + @top + "}{" + @bot + "}"
     else return "-\\frac{" + Math.abs(@top) + "}{" + @bot + "}"
 
   reduce: ->
@@ -27,8 +27,6 @@ class frac
     c = gcd(Math.abs(@top), @bot)
     @top /= c
     @bot /= c
-
-    return this
 
   set: (a,b) ->
     @top = a
@@ -46,17 +44,16 @@ class frac
 
   # updates in place
   add: (c,d = 1) ->
-    # if typeof d is void then d = 1
     @set(@top * d + @bot * c, @bot * d)
     @reduce()
-    return this
+    return @
 
   # updates in place
   prod: (c) ->
     c = toFrac(c)
     @set(@top * c.top, @bot * c.bot)
     @reduce()
-    return this
+    return @
 
 
 
@@ -247,21 +244,22 @@ class fmatrix
     return res
 
   write: ->
-    fbot = []
+    d = 1
 
     for i from 0 to @dim - 1
       for j from 0 to @dim - 1
-        fbot.push(@[i][j].bot)
+        @[i][j].reduce()
+        d = lcm(d, @[i][j].bot)
 
-    d = lcm(fbot[0], fbot[1])
-    for i from 2 to fbot.length - 1
-      d = lcm(d, fbot[i])
+    # d = lcm(fbot[0], fbot[1])
+    # for i from 2 to fbot.length - 1
+    #   d = lcm(d, fbot[i])
 
     if d is 1
       res = "\\begin{pmatrix}"
     else
       f = new frac(1,d)
-      res = "\\displaystyle " + f.write() + "\\textstyle \\begin{pmatrix}"
+      res = "\\displaystyle " + f.write() + "\\textstyle \\begin{pmatrix} "
 
     for i from 0 to @dim - 1
       for j from 0 to @dim - 1
