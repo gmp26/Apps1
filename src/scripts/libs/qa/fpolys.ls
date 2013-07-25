@@ -62,6 +62,7 @@ class fpoly
     for i from 0 to @rank
       y.add(@[i].top * (x.top)^i, @[i].bot * (x.bot)^i)
     y.reduce()
+    return y
 
   gcd: ->
     g = new frac(0,1)
