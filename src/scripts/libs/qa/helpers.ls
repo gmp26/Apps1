@@ -41,7 +41,7 @@ lcm = ->
 sinpi = (a,b) ->
 
   # get the fraction in lowest terms
-  c= gcd(a,b)
+  c = gcd(a,b)
   a /= c; b /= c;
 
   if a is 0 then return [0,1,0,1,0,1]
@@ -51,7 +51,7 @@ sinpi = (a,b) ->
   if a is 1 and b is 2 then return [1,1,0,1,0,1]
   if a is 1 and b is 1 then return [0,1,0,1,0,1]
 
-  if a / b > 0.5 and a <= b then return sinpi b - a, b
+  if a / b > 0.5 and a <= b then return sinpi(b - a, b)
 
   if a / b > 1 and a / b <= 1.5
     A = new Array(6)
@@ -80,15 +80,36 @@ cospi = (a,b) -> sinpi(2 * a + b, 2 * b)
 rand = (min, max) ->
   if typeof min is "undefined" then return Math.round(Math.random())
   if typeof max is "undefined"
-    if min > 0 then min *= -1
-    max = -1 * min
-  min + Math.floor((max - min + 1) * Math.random())
+    min = -Math.abs(min)
+    max =  Math.abs(min)
+  return min + Math.floor((max - min + 1) * Math.random())
+
+
+
+# returns a random number between min and max, but not zero, one argument becomes -min to min
+randnz = (min, max) ->
+
+  if typeof max is "undefined"
+    min = -Math.abs(min)
+    max =  Math.abs(min)
+
+  if min is 0 then min++
+  if max is 0 then max--
+
+  if min > max then return min
+
+  if (min < 0) and (max > 0)
+    a = rand(min, max - 1)
+    if a >= 0 then a++
+  else
+    a = rand(min, max)
+  return a
 
 
 
 # orders the arguments after r low to high and returns rth. r = 0 returns max.
 rank = (r) ->
-  n = rank.arguments.length-1
+  n = rank.arguments.length - 1
   if r is 0 then r = n
   list = new Array(n)
 
@@ -96,13 +117,13 @@ rank = (r) ->
     list[i] = rank.arguments[i + 1]
 
   for i from 0 to n - 1
-    if list[i] > list[i+1]
+    if list[i] > list[i + 1]
       c = list[i]
-      list[i] = list[i+1]
-      list[i+1] = c
+      list[i] = list[i + 1]
+      list[i + 1] = c
       i = -1
 
-  list[r-1]
+  list[r - 1]
 
 
 
@@ -179,7 +200,7 @@ distrand = (n, min, max) ->
     res[i] = list[s]
     list[s] = list[i]
 
-  res
+  return res
 
 
 
@@ -199,15 +220,15 @@ distrandnz = (n, min, max) ->
   if min is 0 then min++
   if max is 0 then max--
 
-  if min > max then [min]
+  if min > max then return [min]
   else
-    if min < 0 and max > 0 then a = 0 else a = 1
+    if ((min < 0) and (max > 0)) then a = 0 else a = 1
     list = new Array(max + a - min)
     res = new Array(n)
 
     for i from 0 to max + a - min - 1
       list[i] = i + min
-      if a and list[i] >= 0
+      if a is 0 and list[i] >= 0
         list[i]++
 
     for i from 0 to n - 1
@@ -219,51 +240,33 @@ distrandnz = (n, min, max) ->
 
 
 
-# returns a random number between min and max, but not zero, one argument becomes -min to min
-randnz = (min, max) ->
-
-  if typeof max is "undefined"
-    min = -Math.abs(min)
-    max =  Math.abs(min)
-
-  if min is 0 then min++
-  if max is 0 then max--
-
-  if min > max then return min
-
-  if min < 0 and max > 0
-    a = rand(min, max - 1)
-    if a >= 0 then a++
-  else
-    a = rand(min, max)
-  return a
-
-
-
 # root object a*sqrt(n): reduces itself, write in LaTeX
 class sqroot
   (n) ->
     if n is not Math.floor(n)
       throw new Error "non-integer sent to square root"
     else
-      @n = n
-      @a = 1
+      N = n
+      A = 1
       i = 2
 
-    while i^2 <= @n
-      if @n % i^2 is 0
-        @n /= i^2
-        @a *= i^2
-      i++
+      while i^2 <= N
+        if N % i^2 is 0
+          N /= i^2
+          A *= i
+        i++
+
+      @n = N
+      @a = A
 
     # shouldn't happen but useful for debugging
     throw new Error "a is not an integer" if @a % 1 is not 0
 
   write: ->
-    if @a is 1 and @n is 1 then "1"
-    else if @a is 1 then "\\sqrt{" + @n + "}"
+    if @a is 1 and @n is 1 then return "1"
+    else if @a is 1 then return "\\sqrt{" + @n + "}"
     else if @n is 1 then return @a
-    else @a + "\\sqrt{" + @n + "}"
+    else return @a + "\\sqrt{" + @n + "}"
 
 
 
@@ -310,12 +313,12 @@ class vector
   # in mathmo, we only deal with vectors in Z^2 or Z^3
   # a non-integer (magnitude) causes problems later on
   mag: ->
-    throw new Error "magnitude is not an integer" if this.dot(this) % 1 is not 0
-    this.dot(this)
+    throw new Error "magnitude is not an integer" if @dot(@) % 1 is not 0
+    return @dot(@)
 
   write: ->
-    q = "\\begin{pmatrix}"
-    for i from 0 to @dim - 1
+    q = "\\begin{pmatrix}" + @[0]
+    for i from 1 to @dim - 1
       q += "\\\\" + @[i]
     return q + "\\end{pmatrix}"
 
@@ -344,7 +347,7 @@ ordt = (n) ->
 
 
 # returns a random number from the list sent to the function
-pickrand = -> pickrand.arguments[rand(0, pickrand.arguments.length-1)]
+pickrand = -> pickrand.arguments[rand(0, pickrand.arguments.length - 1)]
 
 
 
@@ -388,12 +391,12 @@ simplifySurd = (a,b,c,d) ->
   # Case a / d
   else if B is 0 or C is 0
     f = new frac(a,d)
-    f.write()
+    return f.write()
 
   # Case (a + b) / d
   else if C is 1
-    f = new frac(a + b, d)
-    f.write()
+    f = new frac(a + B, d)
+    return f.write()
 
   # Final case
   # Non-trivial root, every term is non-zero
@@ -403,15 +406,18 @@ simplifySurd = (a,b,c,d) ->
     h = gcd(a,B,d)
     a /= h; B /= h; d /= h;
 
-    if d < 0 then a *= -1; B *= -1; d *= -1
+    if d < 0
+      a *= -1
+      B *= -1
+      d *= -1
 
     # returns a LaTeX string for the numerator
-    # assumes all terms are non-zero, root simplified, c != 1
+    # assumes all terms are non-zero, root simplified, C != 1
     # these cases are already caught
-    innerSurd = (a,b,c) ->
-      if b is 1 then a + "+\\sqrt{" + c + "}"
-      else if b is -1 then a + "-\\sqrt{" + c + "}"
-      else a + signedNumber(b) + "\\sqrt{" + c + "}"
+    innerSurd = (x,y,z) ->
+      if y is 1 then x + "+\\sqrt{" + z + "}"
+      else if y is -1 then x + "-\\sqrt{" + z + "}"
+      else x + signedNumber(y) + "\\sqrt{" + z + "}"
 
-    if d is 1 then innerSurd(a,B,c)
-    else "\\frac{" + innerSurd(a,B,c) + "}{" + d + "}"
+    if d is 1 then innerSurd(a,B,C)
+    else "\\frac{" + innerSurd(a,B,C) + "}{" + d + "}"
