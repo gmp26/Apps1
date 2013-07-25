@@ -57,7 +57,7 @@ class complex
 
   divide: (u,v) ->
     d = u^2 + v^2
-    w = new complex((u * @Re + @Im) / d, (u * @Im - v * @Re) / d)
+    w = new complex((u * @Re + v * @Im) / d, (u * @Im - v * @Re) / d)
     return w
 
   equals: (u,v) -> @Re is u and @Im is v
