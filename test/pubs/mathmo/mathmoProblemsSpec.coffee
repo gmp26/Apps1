@@ -51,7 +51,7 @@ describe "mathmoController", ->
     [
       "makeTrigInt"
       "C4"
-      "Evaluate$$\\int_{0}^{\\pi/4}-3\\cos{6x}\\,\\mathrm{d}x$$"
+      "Evaluate$$\\int_{0}^{\\pi / 4} - 3\\cos{6x}\\,\\mathrm{d}x$$"
       "$$\\frac{1}{2}$$"
     ]
     [
@@ -335,7 +335,7 @@ describe "mathmoController", ->
       "makeNewtonRaphson"
       "F9"
       "Use the Newton-Raphson method to find the first \\(5\\) iterates in solving \\(x^2 - 6x + 2 = \\cos(x)\\) with \\(x_0 = 1\\)."
-      "Iteration: \\begin{align*} x_{n+1}&=x_{n}-\\frac{\\cos(x_n)- x^2 + 6x - 2}{-\\sin(x_n)- 2x + 6} \\\\[10pt]x_{1} &= -0.12087059793966048\\\\x_{2} &= 0.15373518794855623\\\\x_{3} &= 0.17413764894094896\\\\x_{4} &= 0.1742511318168274\\\\x_{5} &= 0.17425113532534733\\\\\\end{align*}"
+      "Iteration: \\begin{align*} x_{n + 1} &= x_{n} - \\frac{\\cos(x_n)- x^2 + 6x - 2}{ - \\sin(x_n)- 2x + 6} \\\\[10pt]x_{1} &= -0.12087059793966048\\\\x_{2} &= 0.15373518794855623\\\\x_{3} &= 0.17413764894094896\\\\x_{4} &= 0.1742511318168274\\\\x_{5} &= 0.17425113532534733\\\\\\end{align*}"
     ]
     [
       "makeFurtherIneq"
@@ -347,31 +347,31 @@ describe "mathmoController", ->
       "makeSubstInt"
       "F11"
       "Find $$\\int\\frac{4x + 1}{\\sqrt{5 - 4x - 7x^2 + 4x^3 + 4x^4}}\\,\\mathrm{d}x$$"
-      "$${\\rm arsinh}(- 2 + x + 2x^2)+c$$"
+      "$${\\rm arsinh}(- 2 + x + 2x^2) + c$$"
     ]
     [
       "makeRevolution"
       "F12"
-      "Find the volume of the solid formed when the area under$$y = \\sqrt{x}$$from \\(x = 0\\) to \\(x = 2\\) is rotated through \\(2\\pi\\) around the x-axis."
+      "Find the volume of the solid formed when the area under$$y = \\sqrt{x}$$from \\(x = 0\\) to \\(x = 2\\) is rotated through \\(2\\pi\\) around the \\(x\\)-axis."
       "$$2\\pi$$"
     ]
     [
       "makeRevolution"
       "F12"
-      "Find the area of the surface formed when the curve$$y = 5x^2 + 4x + 4$$from \\(x = 0\\mbox{ to }x = 1\\) is rotated through \\(2\\pi\\) around the x-axis."
+      "Find the area of the surface formed when the curve$$y = 5x^2 + 4x + 4$$from \\(x = 0\\mbox{ to }x = 1\\) is rotated through \\(2\\pi\\) around the \\(x\\)-axis."
       "$$\\frac{46}{3}\\pi$$"
       2
     ]
     [
       "makeMatXforms"
       "F13"
-      "Compute the matrix representing, in 2D, an enlargement of scale factor \\(3\\) followed by a reflection in the line \\(y=-x\\)."
+      "Compute the matrix representing, in 2D, an enlargement of scale factor \\(3\\) followed by a reflection in the line \\(y = - x\\)."
       "$$\\begin{pmatrix}0&-4\\\\-4&0\\end{pmatrix}$$"
     ]
     [
       "makeDiscreteDistn"
       "S1"
-      "The random variable \\(X\\) is distributed as$${\\rm Po}(2).$$  Find \\(\\mathbb{P}(X=1)\\)"
+      "The random variable \\(X\\) is distributed as$${\\rm Po}(2).$$ Find \\(\\mathbb{P}(X = 1)\\)"
       "$$0.270671$$"
     ]
     [
@@ -389,7 +389,7 @@ describe "mathmoController", ->
     [
       "makeConfidInt"
       "S4"
-      "The random variable \\(X\\) has a normal distribution with unknown parameters. A sample of size \\(20\\) is taken for which $$\\sum{x}=70.096$$$$\\mbox{and}\\sum{x^2}=389.091.$$Compute, to 3 DP., a \\(90\\)% confidence interval for the mean of \\(X\\).<br />"
+      "The random variable \\(X\\) has a normal distribution with unknown parameters. A sample of size \\(20\\) is taken for which $$\\sum{x} = 70.096$$$$\\mbox{and}\\sum{x^2} = 389.091.$$Compute, to 3 DP., a \\(90\\)% confidence interval for the mean of \\(X\\).<br/>"
       "$$[2.443, 4.567]$$"
     ]
     [
@@ -402,7 +402,7 @@ describe "mathmoController", ->
       "makeProductMomen"
       "S6"
       "For the following data,<ul class=\"exercise\"><li>compute the product moment correlation coefficient, \\({\\bf r}\\)</li><li>find the regression line of \\(y\\) on \\(x\\)$$\\begin{array}{c|c}x&y\\\\-3.747&4.948\\\\-5.152&-4.150\\\\-4.576&9.131\\\\-4.771&5.621\\\\-4.975&6.307\\\\-5.926&-9.308\\\\\\end{array}$$</li></ul>"
-      "<ul class=\"exercise\"><li>\\({\\bf r}=0.740\\)</li><li>\\(y=7.410x+38.089\\)."
+      "<ul class=\"exercise\"><li>\\({\\bf r} = 0.740\\)</li><li>\\(y = 7.410x + 38.089\\)."
     ]
   ]
 
