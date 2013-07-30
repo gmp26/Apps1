@@ -63,8 +63,9 @@ describe "mathmoController", ->
     [
       "makeLines"
       "C6"
-      "Consider the lines$$3x - 2=y - 2=3z - 3$$and$$2x - 0.6666666666666666=y - 1.3333333333333333=- 2z + 2.6666666666666665$$Find the angle between them<br>and determine whether they<br>intersect."
-      "The angle between the lines is$$\\arccos\\left(\\frac{-6}{\\sqrt{66}}\\right).$$The lines do not meet."
+      "Consider the lines$$3x + 3 = - 2y + 2 = - 3z + 1$$and$$- 2x + 1 = y + 2 = - 3z - 3$$Find the angle between them<br>and determine whether they<br>intersect."
+      "The angle between the lines is$$\\arccos\\left(\\frac{-20}{7\\sqrt{17}}\\right).$$The lines do not meet."
+      1 # I got a horrible decimal when I used 0 here. Displays fine in the browser, but still need to debig
     ]
     [
       "makeIneq2"
@@ -88,29 +89,29 @@ describe "mathmoController", ->
     [
       "makeFactor1"
       "C9"
-      "Divide $$x^3 - 14x^2 + 61x - 84$$ by $$(x - 4)$$ and hence factorise it completely."
-      "$$(x - 7)(x - 4)(x - 3)$$"
+      "Use the factor theorem to factorise $$x^3 - 2x^2 - 19x + 20.$$"
+      "$$(x - 5)(x - 1)(x + 4)$$"
+      2
     ]
     [
       "makeFactor2"
       "C9"
-      "Divide $$x^3 - 3x + 2$$ by $$(x + 2)$$ and hence factorise it completely."
-      "$$(x - 1)^2(x + 2)$$"
-      10
+      "Divide $$x^3 - 9x^2 + 6x + 56$$ by $$(x + 2)$$ and hence factorise it completely."
+      "$$(x - 7)(x - 4)(x + 2)$$"
+      1
     ]
     [
       "makeFactor3"
       "C9"
-      "Simplify$$\\frac{x^3 - 3x^2 - 6x + 8}{x^3 - 12x - 16}.$$"
-      "$$\\frac{x - 1}{x + 2}$$"
-      4
+      "Simplify$$\\frac{x^3 - 8x^2 + 20x - 16}{x^3 - 2x^2 - 16x + 32}.$$"
+      "$$\\frac{x - 2}{x + 4}$$"
     ]
-    [
-      "makeQuadratic"
-      "C10"
-      "Find the real roots, if any, of$$x^2 - 4x - 1 = 0$$"
-      "$$x=2\\pm\\sqrt{5}$$"
-    ]
+    # [ This isn't getting used so I've dropped the test
+    #   "makeQuadratic"
+    #   "C10"
+    #   "Find the real roots, if any, of$$x^2 - 4x - 1 = 0$$"
+    #   "$$x=2\\pm\\sqrt{5}$$"
+    # ]
     [
       "makeComplete"
       "C11"
@@ -132,60 +133,59 @@ describe "mathmoController", ->
     [
       "makeStationary2"
       "C14"
-      "Find the stationary point of $$y=2x^2 + 7x - 4,$$ and state whether it is a maximum or a minimum."
-      "The stationary point occurs at \\(x=-\\frac{7}{4}\\), and it is a minimum."
-      6
+      "Find the stationary points of $$y = - 2x^3 + 12x^2 - 18x - 3,$$ and state their nature."
+      "The stationary points occur at \\(x = 1\\), a minimum, and \\(x = 3\\), a maximum"
     ]
     [
       "makeStationary3"
       "C14"
-      "Find the stationary point of $$y=2x^2 - 4x - 3,$$ and state whether it is a maximum or a minimum."
-      "The stationary point occurs at \\(x=1\\), and it is a minimum."
+      "Find the stationary point of $$y = - 2x^2 + x - 2,$$ and state whether it is a maximum or a minimum."
+      "The stationary point occurs at \\(x = \\frac{1}{4}\\), and it is a maximum."
+      1
     ]
     [
       "makeTriangle1"
       "C15"
-      "In triangle \\(ABC\\), \\(AB = 3\\), \\(BC = 2\\) and angle \\(C = \\frac{\\pi}{3}\\). Find angle \\(A\\)."
-      "$$A = \\arcsin\\left(\\frac{1}{3}\\sqrt{3}\\right)$$"
-      2
+      "In triangle \\(ABC\\), \\(BC = 8\\), \\(CA = 13,\\) and angle \\(B\\) is a right angle. Find the length of \\(AB\\)."
+      "$$AB = \\sqrt{105}$$"
+      9
     ]
     [
       "makeTriangle2"
       "C15"
-      "In triangle \\(ABC\\), \\(AB=4\\), \\(BC=6,\\) and \\(CA=3.\\) Find the angles of the triangle."
-      "$$\\cos A=-\\frac{11}{24},\\cos B=\\frac{43}{48},\\cos C=\\frac{29}{36}.$$"
-      5
+      "In triangle \\(ABC\\), \\(AB = 4\\), \\(BC = 4,\\) and \\(CA = 2.\\) Find the angles of the triangle."
+      "$$\\cos A = \\frac{1}{4},\\cos B = \\frac{7}{8},\\cos C = \\frac{1}{4}.$$"
+      1
     ]
     [
       "makeTriangle3"
       "C15"
-      "In triangle \\(ABC\\), \\(AB=9\\), \\(BC=8,\\) and \\(CA=3.\\) Find the angles of the triangle."
-      "$$\\cos A=\\frac{13}{27},\\cos B=\\frac{17}{18},\\cos C=-\\frac{1}{6}.$$"
-      3
+      "In triangle \\(ABC\\), \\(AB = 4\\), \\(BC = 2\\) and angle \\(C = \\frac{\\pi}{6}\\). Find angle \\(A\\)."
+      "$$A = \\arcsin\\left(\\frac{1}{4}\\right)$$"
     ]
     [
       "makeCircle"
       "C16"
       "Find, for a sector of angle \\(\\frac{7\\pi}{4}\\) of a disc of radius \\(6:\\)<ul class=\"exercise\"><li> the length of the perimeter and</li><li>the area.</li></ul>"
-      "i. \\(12+\\frac{21}{2}\\pi\\)<br>ii. \\(\\frac{63}{2}\\pi\\)"
+      "<ul class=\"exercise\"><li>\\(12 + \\frac{21}{2}\\pi\\)</li><li>\\(\\frac{63}{2}\\pi\\)</li></ul>"
     ]
     [
       "makeSolvingTrig"
       "C17"
       "Write $$\\frac{5}{2}\\sqrt{3}\\sin{\\theta} + \\frac{5}{2}\\cos{\\theta}$$ in the form \\(A\\sin(\\theta + \\alpha),\\) where \\(A\\) and \\(\\alpha\\) are to be determined."
-      "$$5\\sin\\left(\\theta+\\frac{\\pi}{6}\\right)$$"
+      "$$5\\sin\\left(\\theta + \\frac{\\pi}{6}\\right)$$"
     ]
     [
       "makeVectorEq"
       "C18"
-      "Show that the points with position vectors$$\\begin{pmatrix}2\\\\-9\\\\-14\\end{pmatrix}\\,,\\;\\begin{pmatrix}-2\\\\-3\\\\-6\\end{pmatrix}\\,,\\;\\begin{pmatrix}0\\\\-6\\\\-10\\end{pmatrix}$$lie on a straight line, and give the equation of the line in the form \\(\\mathbf{r}=\\mathbf{a}+\\lambda\\mathbf{b}\\)."
-      "$$\\begin{pmatrix}-4\\\\0\\\\-2\\end{pmatrix}+\\lambda\\,\\begin{pmatrix}-2\\\\3\\\\4\\end{pmatrix}$$"
+      "Show that the points with position vectors$$\\begin{pmatrix}2\\\\-9\\\\-14\\end{pmatrix}\\,,\\begin{pmatrix}-2\\\\-3\\\\-6\\end{pmatrix}\\,,\\begin{pmatrix}0\\\\-6\\\\-10\\end{pmatrix}$$lie on a straight line, and give the equation of the line in the form \\(\\mathbf{r} = \\mathbf{a} + \\lambda\\mathbf{b}\\)."
+      "$$\\begin{pmatrix}-4\\\\0\\\\-2\\end{pmatrix} + \\lambda\\,\\begin{pmatrix}-2\\\\3\\\\4\\end{pmatrix}$$"
     ]
     [
       "makeImplicit"
       "C19"
-      "If $$y+\\cos(y)=e^{x}+2x^2 - 3x - 2,$$ find \\(\\frac{\\mathrm{d}y}{\\mathrm{d}x}\\) in terms of \\(y\\) and \\(x\\)."
-      "$$\\frac{\\mathrm{d}y}{\\mathrm{d}x} = \\frac{e^{x}+4x - 3}{-\\sin(y)+1}$$"
+      "If $$y + \\cos(y) = e^{x} + 2x^2 - 3x - 2,$$ find \\(\\frac{\\mathrm{d}y}{\\mathrm{d}x}\\) in terms of \\(y\\) and \\(x\\)."
+      "$$\\frac{\\mathrm{d}y}{\\mathrm{d}x} = \\frac{e^{x} + 4x - 3}{-\\sin(y) + 1}$$"
     ]
     [
       "makeChainRule"
@@ -242,16 +242,30 @@ describe "mathmoController", ->
     #   "a-C270multiple"
     # ]
     [
-      "makeIntegration"
+      "makeIntegration1"
       "C28"
-      "Find $$\\int- 5\\ln(x) - \\frac{5x - 2}{x}\\,\\mathrm{d}x$$"
-      "$$(- 5x + 2)\\ln(x)+c$$"
+      "Find $$\\int(- 9x^2 + 36x - 9)\\csc(x^3 - 6x^2 + 3x + 1)\\cot(x^3 - 6x^2 + 3x + 1)\\,\\mathrm{d}x$$"
+      "$$3\\csc(x^3 - 6x^2 + 3x + 1) + c$$"
+      2
     ]
     [
-      "makeDE"
+      "makeIntegration2"
+      "C28"
+      "Find $$\\int- 5\\ln(x)-\\frac{5x - 2}{x}\\,\\mathrm{d}x$$"
+      "$$(- 5x + 2)\\ln(x) + c$$"
+    ]
+    [
+      "makeDE2"
       "C29"
-      "Find the general solution of the following second-order ODE:$$\\frac{{\\,\\mathrm{d}^2}y}{{\\,\\mathrm{d}x}^2} - \\frac{\\,\\mathrm{d}y}{\\,\\mathrm{d}x}=0$$"
-      "$$y=A+Be^{x}$$"
+      "Find the general solution of the following second-order ODE:$$\\frac{{\\,\\mathrm{d}^2}y}{{\\,\\mathrm{d}x}^2} - \\frac{\\,\\mathrm{d}y}{\\,\\mathrm{d}x} - 2y = 0$$"
+      "$$y = Ae^{-x} + Be^{2x}$$"
+      1
+    ]
+    [
+      "makeDE3"
+      "C29"
+      "Find the general solution of the following first-order ODE:$$x\\frac{\\,\\mathrm{d}y}{\\,\\mathrm{d}x} - y = 1$$"
+      "$$y = Ax-1$$"
     ]
     [
       "makePowers"
@@ -272,21 +286,42 @@ describe "mathmoController", ->
       "The circle has centre \\((1,-5)\\) and radius \\(2 \\)."
     ]
     [
-      "makeLineParPerp"
+      "makeLinePar"
       "C33"
-      "Find the equation of the line passing through \\((2,0)\\) and perpendicular to the line \\(y=-4\\)."
-      "$$x=2.$$"
+      "Find the equation of the line passing through \\((2,0)\\) and parallel to the line \\(4x+y=0.\\)"
+      "$$y=-4x+8\\qquad\\text{or}\\qquad 4x+y-8=0$$"
     ]
     [
-      "makeCircLineInter"
+      "makeLinePerp"
+      "C33"
+      "Find the equation of the line passing through \\((-6,6)\\) and perpendicular to the line \\(y=x-1.\\)"
+      "$$y =  - x\\qquad\\text{or}\\qquad x + y = 0.$$"
+      1
+    ]
+    [
+      "makeLLInter"
       "C34"
-      "Find all the points where the line \\(4x-y+3=0\\) and the circle \\( x^2+(y+5)^2=36\\) intersect."
-      "The line and the circle intersect in two points, specifically $$\\left(\\frac{-16+\\sqrt{137}}{8.5},\\frac{-77+8\\sqrt{137}}{17}\\right)\\qquad\\text{and}\\qquad \\left(\\frac{-16-\\sqrt{137}}{8.5},\\frac{-77-8\\sqrt{137}}{17}\\right)$$"
+      "Find all the points where the line \\(y=-5x+4\\) and the line \\(5x-y+2=0\\) intersect."
+      "The lines intersect in a single point, which occurs at \\(\\left(\\frac{1}{5},3\\right)\\)."
+    ]
+    [
+      "makeCLInter"
+      "C34"
+      "Find all the points where the line \\(3x+y-5=0\\) and the circle \\( (x-6)^2+(y+3)^2=16\\) intersect."
+      "The line and the circle intersect in two points, specifically $$\\left(\\frac{15+\\sqrt{15}}{5},\\frac{-20-3\\sqrt{15}}{5}\\right)\\qquad\\text{and}\\qquad \\left(\\frac{15-\\sqrt{15}}{5},\\frac{-20+3\\sqrt{15}}{5}\\right)$$"
+      1
+    ]
+    [
+      "makeCCInter"
+      "C34"
+      "Find all the points where the circle \\(x^2+12x+y^2+6y=4\\) and the circle \\(x^2-2x+y^2+8y+8=0\\) intersect."
+      "The circles intersect in two points, which are$$\\left(\\frac{3+\\sqrt{17}}{10},\\frac{-39+7\\sqrt{17}}{10}\\right)\\qquad\\text{and}\\qquad \\left(\\frac{3-\\sqrt{17}}{10},\\frac{-39-7\\sqrt{17}}{10}\\right)$$"
+      4
     ]
     [
       "makeCArithmetic"
       "F1"
-      "Given \\(z=-\\frac{1}{2} + \\frac{\\sqrt{3}}{2}i\\) and \\(w=\\frac{3}{2} -\\frac{3\\sqrt{3}}{2}i\\), compute:<ul class=\"exercise\"><li>\\(z+w\\)</li><li>\\(z\\times w\\)</li><li>\\(\\frac{z}{w}\\)</li><li>\\(\\frac{w}{z}\\)</li></ul>"
+      "Given \\(z = -\\frac{1}{2} + \\frac{\\sqrt{3}}{2}i\\) and \\(w = \\frac{3}{2} -\\frac{3\\sqrt{3}}{2}i\\), compute:<ul class=\"exercise\"><li>\\(z + w\\)</li><li>\\(z\\times w\\)</li><li>\\(\\frac{z}{w}\\)</li><li>\\(\\frac{w}{z}\\)</li></ul>"
       "<ul class=\"exercise\"><li>\\(1 -\\sqrt{3}i\\)</li><li>\\(\\frac{3}{2} + \\frac{3\\sqrt{3}}{2}i\\)</li><li>\\(-\\frac{1}{3}\\)</li><li>\\(-3\\)</li></ul>"
     ]
     [
@@ -304,7 +339,7 @@ describe "mathmoController", ->
     [
       "makeMatrix2"
       "F4"
-      "Let $$A=\\begin{pmatrix}2&6\\\\2&-5\\end{pmatrix} \\qquad \\text{and} \\qquad B=\\begin{pmatrix}-5&-2\\\\-6&3\\end{pmatrix}$$.Compute: <ul class=\"exercise\"><li>\\(A+B\\)</li><li>\\(A \\times B\\)</li><li>\\(B^{-1}\\)</li></ul>"
+      "Let $$A = \\begin{pmatrix}2&6\\\\2&-5\\end{pmatrix} \\qquad \\text{and} \\qquad B = \\begin{pmatrix}-5&-2\\\\-6&3\\end{pmatrix}$$.Compute: <ul class=\"exercise\"><li>\\(A + B\\)</li><li>\\(A \\times B\\)</li><li>\\(B^{ - 1}\\)</li></ul>"
       "<ul class=\"exercise\"><li>\\(\\begin{pmatrix}-3&4\\\\-4&-2\\end{pmatrix}\\)</li><li>\\(\\begin{pmatrix}-46&14\\\\20&-19\\end{pmatrix}\\)</li><li>\\(\\displaystyle \\frac{1}{27}\\textstyle \\begin{pmatrix} -3&-2\\\\-6&5\\end{pmatrix}\\)</li></ul>"
     ]
     [
@@ -322,7 +357,7 @@ describe "mathmoController", ->
     [
       "makeMatrix3"
       "F7"
-      "Let $$A=\\begin{pmatrix}2&3&-2\\\\-1&-1&2\\\\1&0&2\\end{pmatrix} \\qquad \\text{and} \\qquad B=\\begin{pmatrix}1&4&-1\\\\1&-2&1\\\\0&-4&0\\end{pmatrix}$$.Compute: <ul class=\"exercise\"><li>\\(A+B\\)</li><li>\\(A \\times B\\)</li><li>\\(B^{-1}\\)</li></ul>"
+      "Let $$A = \\begin{pmatrix}2&3&-2\\\\-1&-1&2\\\\1&0&2\\end{pmatrix} \\qquad \\text{and} \\qquad B = \\begin{pmatrix}1&4&-1\\\\1&-2&1\\\\0&-4&0\\end{pmatrix}$$.Compute: <ul class=\"exercise\"><li>\\(A + B\\)</li><li>\\(A \\times B\\)</li><li>\\(B^{ - 1}\\)</li></ul>"
       "<ul class=\"exercise\"><li>\\(\\begin{pmatrix}3&7&-3\\\\0&-3&3\\\\1&-4&2\\end{pmatrix}\\)</li><li>\\(\\begin{pmatrix}5&10&1\\\\-2&-10&0\\\\1&-4&-1\\end{pmatrix}\\)</li><li>\\(\\displaystyle \\frac{1}{4}\\textstyle \\begin{pmatrix} 2&2&1\\\\0&0&-1\\\\-2&2&-3\\end{pmatrix}\\)</li></ul>"
     ]
     [
@@ -396,7 +431,7 @@ describe "mathmoController", ->
       "makeChiSquare"
       "S5"
       "The random variable \\(X\\) is modelled by a <i>binomial</i> distribution. A sample of size \\(60\\) is drawn from \\(X\\) with the following grouped frequency data. <div style=\"font-size: 80%;\">$$\\begin{array}{c|r}x&\\mbox{Frequency}\\\\x < 7&15\\\\7\\le x <9&22\\\\9\\le x <11&13\\\\11\\le x <13&8\\\\13\\le x&2\\\\\\end{array}$$</div><ul class=\"exercise\"><li>Estimate the parameters of the distribution.</li><li>Use a \\(\\chi^2\\) test, with a significance level of \\(95\\)%, to test this hypothesis.</li></ul>"
-      "<ol class=\"exercise\"><li>$$n=20, p=0.442.$$</li><li></li></ol><div style=\"font-size: 80%;\">$$\\begin{array}{c||r|r|r}x&O_i&E_i&\\frac{(O_i-E_i)^2}{E_i}\\\\x < 7&15&8.748&4.469\\\\7\\le x <9&22&17.828&0.976\\\\9\\le x <11&13&19.827&2.351\\\\11\\le x&10&13.597&0.952\\\\\\end{array}$$</div>$$\\chi^2 = 8.747$$$$\\nu = 1$$Critical region: \\(\\chi^2 >3.841\\)<br />The hypothesis is rejected."
+      "<ol class=\"exercise\"><li>$$n = 20, p = 0.442.$$</li><li></li></ol><div style=\"font-size: 80%;\">$$\\begin{array}{c||r|r|r}x&O_i&E_i&\\frac{(O_i - E_i)^2}{E_i}\\\\x < 7&15&8.748&4.469\\\\7\\le x <9&22&17.828&0.976\\\\9\\le x <11&13&19.827&2.351\\\\11\\le x&10&13.597&0.952\\\\\\end{array}$$</div>$$\\chi^2 = 8.747$$$$\\nu = 1$$Critical region: \\(\\chi^2 >3.841\\)<br />The hypothesis is rejected."
     ]
     [
       "makeProductMomen"

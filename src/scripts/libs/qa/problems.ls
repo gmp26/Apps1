@@ -362,7 +362,7 @@ makeLines = ->
   else if ch < 10
     a2 = randnz(2); b2 = randnz(2); c2 = randnz(2)
 
-    if (a1 * b1 * c1) % 3 is 0 and (a1 * b1 * c1) % 2 is 0
+    if (a1 * b1 * c1) % 6 is 0
       if rand()
         if a1 % 3 is 0 then a1 /= 3
         if b1 % 3 is 0 then b1 /= 3
@@ -392,8 +392,7 @@ makeLines = ->
     if m2 > 4 then d2 -= 2; e2 -= 2; f2 -= 2
 
     m1 = gcd(a2, b2, c2, d2, e2, f2)
-    if m1 > 1
-      a2/=m1; b2 /= m1; c2 /= m1; d2 /= m1; e2 /= m1; f2 /= m1;
+    if m1 > 1 then a2 /= m1; b2 /= m1; c2 /= m1; d2 /= m1; e2 /= m1; f2 /= m1;
 
   else
     sn = randnz(2)
@@ -415,16 +414,16 @@ makeLines = ->
 
   if (a1 * b2) is (b1 * a2) and (b1 * c2) is (c1 * b2)
     if (a2 * b2 * d1 - b2 * a1 * d2) is (a2 * b2 * e1 - a2 * b1 * e2) and (b2 * c2 * e1 - c2 * b1 * e2) is (b2 * c2 * f1 - b2 * c1 * f2)
-      aString = "\\mbox{The lines are identical.}"
+      aString += "\\mbox{The lines are identical.}"
     else
-      aString = "The lines are parallel and do not meet."
+      aString += "The lines are parallel and do not meet."
 
   else
     cosbot = new sqroot((b1^2 * c1^2 + c1^2 * a1^2 + a1^2 * b1^2) * (b2^2 * c2^2 + c2^2 * a2^2 + a2^2 * b2^2))
     costh = new frac(b1 * b2 * c1 * c2 + c1 * c2 * a1 * a2 + a1 * a2 * b1 * b2, cosbot.a)
     cosbot.a = costh.bot
 
-    aString = "The angle between the lines is$$"
+    aString += "The angle between the lines is$$"
 
     if costh.top is 0
       aString += "\\pi / 2.$$"
@@ -593,7 +592,7 @@ makeLineParPerp = ->
       else
         aString += "x" + signedNumber(m) + "y"
 
-      if (-b * m - a!) is 0
+      if (-b * m - a) is not 0
         aString += signedNumber(-b * m - a)
 
       aString += " = 0.$$"
@@ -601,7 +600,7 @@ makeLineParPerp = ->
     qa = [qString, aString]
     return qa
 
-  qa = pickrand(makeLinePar, makeLineParPerp)(a, b, m, c)
+  qa = pickrand(makeLinePar, makeLinePerp)(a, b, m, c)
   return qa
 
 
@@ -984,7 +983,7 @@ makeQuadratic = ->
           aString += r1.write()
         aString += + "\\pm"
 
-        if r2.top is not 1 or r2.bot is not 1
+        if (r2.top is not 1) or (r2.bot is not 1)
           aString += r2.write()
         aString += "\\sqrt{" + disc.n + "}$$"
 
@@ -1550,8 +1549,8 @@ makeImplicit = ->
 
 makeChainRule = ->
   fns = new Array("\\ln(z)", "\\csc(z)", "\\sec(z)", "\\sin(z)", "\\tan(z)", "\\cos(z)")
-  difs = new Array("\\frac{y}{z}", " - y\\csc(z)\\cot(z)", "y\\sec(z)\\tan(z)", "y\\cos(z)", "y\\sec^2(z)", " - y\\sin(z)")
-  even = new Array(-1, 1, - 1, 1, 1, - 1)
+  difs = new Array("\\frac{y}{z}", "-y\\csc(z)\\cot(z)", "y\\sec(z)\\tan(z)", "y\\cos(z)", "y\\sec^2(z)", "-y\\sin(z)")
+  even = new Array(-1, 1, -1, 1, 1, -1)
   which = rand(0, 5)
 
   a = new poly(rand(1, 3))
@@ -1561,7 +1560,7 @@ makeChainRule = ->
 
   qString = "Differentiate \\(" + fns[which].replace(/z/g, a.write()) + "\\)"
 
-  if difs[which].charAt(0) is " - "
+  if difs[which].charAt(0) is "-"
     difs[which] = difs[which].slice(1)
     b.xthru(-1)
 
@@ -1576,10 +1575,8 @@ makeChainRule = ->
 
   if b.terms() > 1 and which
     aString = "(" + b.write() + ')'
-
-  if b.rank is 0 and which
+  else if b.rank is 0 and which
     aString = ascoeff(b[0])
-
   else aString = b.write()
 
   aString = "$$" + difs[which].replace(/z/g, a.write()).replace(/y/g, aString) + "$$"
@@ -1865,7 +1862,7 @@ makeIntegration = ->
 
   makeIntegration1 = ->
     fns = new Array("\\ln(z)", "\\csc(z)", "\\sec(z)", "\\sin(z)", "\\tan(z)", "\\cos(z)")
-    difs = new Array("\\frac{y}{z}", " - y\\csc(z)\\cot(z)", "y\\sec(z)\\tan(z)", "y\\cos(z)", "y\\sec^2(z)", "-y\\sin(z)")
+    difs = new Array("\\frac{y}{z}", "-y\\csc(z)\\cot(z)", "y\\sec(z)\\tan(z)", "y\\cos(z)", "y\\sec^2(z)", "-y\\sin(z)")
     even = new Array(-1, 1, -1, 1, 1, -1)
     which = rand(0, 5)
 
@@ -1880,7 +1877,7 @@ makeIntegration = ->
 
     aString = '$$' + p_linear(u, 0).write(fns[which].replace(/z/g, a.write())) + " + c$$"
 
-    if difs[which].charAt(0) is " - "
+    if difs[which].charAt(0) is "-"
       difs[which] = difs[which].slice(1)
       b.xthru(-1)
 
@@ -1899,8 +1896,8 @@ makeIntegration = ->
 
   makeIntegration2 = ->
     fns = new Array("\\ln(z)", "\\csc(z)", "\\sec(z)", "\\sin(z)", "\\tan(z)", "\\cos(z)")
-    difs = new Array("\\frac{y}{z}", " - y\\csc(z)\\cot(z)", "y\\sec(z)\\tan(z)", "y\\cos(z)", "y\\sec^2(z)", " - y\\sin(z)")
-    even = new Array(-1, 1, - 1, 1, 1, - 1)
+    difs = new Array("\\frac{y}{z}", "-y\\csc(z)\\cot(z)", "y\\sec(z)\\tan(z)", "y\\cos(z)", "y\\sec^2(z)", "-y\\sin(z)")
+    even = new Array(-1, 1, -1, 1, 1, -1)
     which = rand(0, 5)
 
     a = new poly(rand(1, 3))
@@ -1917,22 +1914,22 @@ makeIntegration = ->
 
     qString = "Find $$\\int"
     if b.terms() > 1
-      qString += '(' + b.write() + ')'
+      qString += "(" + b.write() + ")"
     else if b[0] is 1
-      qString += ''
+      qString += ""
     else if b[0] is -1
-      qString += ' - '
+      qString += "-"
     else
       qString += b.write()
 
-    if difs[which].charAt(0) is " - "
+    if difs[which].charAt(0) is "-"
       difs[which] = difs[which].slice(1)
       a.xthru(-1)
 
     if a[a.rank] > 0
-      qString += fns[which].replace(/z/g, 'x') + ' + '
+      qString += fns[which].replace(/z/g, 'x') + "+"
     else
-      qString += fns[which].replace(/z/g, 'x') + ' - '
+      qString += fns[which].replace(/z/g, 'x') + "-"
       a.xthru(-1)
 
     if which is 0 and a[0] is 0 # deal with eg. D(axlnx) = alnx + ax / x = alnx + a
@@ -1952,7 +1949,7 @@ makeIntegration = ->
     qa = [qString, aString]
     return qa
 
-  if rand() then qa = makeIntegration1() else qa = makeIntegration2
+  qa = pickrand(makeIntegration1, makeIntegration2)()
   return qa
 
 
@@ -2924,7 +2921,7 @@ makeChiSquare = ->
     y = Math.floor((sample[i] - min) / 2)
     freq[y]++
 
-  qString += "<div style=\"font-size: 80%\">$$\\begin{array}{c|r}x&\\mbox{Frequency}\\\\"
+  qString += "<div style=\"font-size: 80%;\">$$\\begin{array}{c|r}x&\\mbox{Frequency}\\\\"
 
   Sx = 0; Sxx = 0
 
@@ -2953,8 +2950,8 @@ makeChiSquare = ->
     | 99 => p = 6
 
   xbar = Sx / n
-  SS = (Sxx - Sx * Sx / n) / (n - 1)
-  hypparms = [0,0]
+  SS = (Sxx - Sx ^ 2 / n) / (n - 1)
+  hypparms = [0, 0]
   aString = "<ol class=\"exercise\">"
 
   # calculate parameters
@@ -2987,7 +2984,8 @@ makeChiSquare = ->
     if hypparms[0] < 1
       aString += "</ol>"
       aString += "<p>The binomial model cannot fit these data</p>"
-      return [qString, aString]
+      qa = [qString, aString]
+      return qa
 
   else
     aString += "<li>$$" + parmnames[which][0] + " = " + hypparms[0].toFixed(3)
@@ -3004,7 +3002,7 @@ makeChiSquare = ->
   nrows = Math.ceil((max + 1 - min) / 2)
   row = [] # [Xl, Xh, O, E, ((O - E)^2) / E]
 
-  for i from 0 to nrows - 1
+  for i from 0 to (nrows - 1)
     x = min + (i * 2)
     row[i] = [x, x + 2, freq[i], 0, 0]
 
@@ -3035,7 +3033,7 @@ makeChiSquare = ->
 
     else
       if i is 0 then j1 = 0 else j1 = x
-      if i is (nrows - 1) then j2 = (x + 100) else j2 = (x + 2)
+      if i is (nrows - 1) then j2 = (x + 99) else j2 = (x + 1)
 
       for j from j1 to j2 # not perfect, we're assuming the tail after 100 is essentially flat zero
         row[i][3] += massfn[which](j, hypparms[0], hypparms[1]) * n
@@ -3068,7 +3066,7 @@ makeChiSquare = ->
   row2.push(crow)
   chisq += crow[4]
 
-  aString += "<div style=\"font-size: 80%\">$$\\begin{array}{c||r|r|r}"
+  aString += "<div style=\"font-size: 80%;\">$$\\begin{array}{c||r|r|r}"
   aString += "x&O_i&E_i&\\frac{(O_i - E_i)^2}{E_i}\\\\"
 
   for i from 0 to (row2.length - 1)

@@ -88,7 +88,12 @@ lineEq1 = (a,b,c,d) ->
     else if ycoeff != 0
       eqString += signedNumber(ycoeff)+"y"
 
-  eqString += signedNumber(concoeff) + "=0";
+  if concoeff is not 0
+    eqString += signedNumber(concoeff) + "=0"
+  else
+    eqString += "=0"
+
+  return eqString
 
 # Given a gradient and an intercept, return a
 # LaTeX-formatted equation in the form
