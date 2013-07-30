@@ -270,12 +270,16 @@ makeVector = ->
     A[i].setrand(10)
 
   B = new Array(0, 1, 2, 3)
-  for i from 0 to 2
+
+  # I had to discard the FOR loop in JS because LS doesn't process the variables correctly
+  i = 0
+  while i < 3
     if A[B[i]].mag() < A[B[i + 1]].mag()
       c = B[i]
       B[i] = B[i + 1]
       B[i + 1] = c
       i = -1
+    i++
 
   v = distrand(3, 0, 3)
 
@@ -2920,7 +2924,7 @@ makeChiSquare = ->
     y = Math.floor((sample[i] - min) / 2)
     freq[y]++
 
-  qString += "<div style = \"font - size: 80%\">$$\\begin{array}{c|r}x&\\mbox{Frequency}\\\\"
+  qString += "<div style=\"font-size: 80%\">$$\\begin{array}{c|r}x&\\mbox{Frequency}\\\\"
 
   Sx = 0; Sxx = 0
 
@@ -3064,7 +3068,7 @@ makeChiSquare = ->
   row2.push(crow)
   chisq += crow[4]
 
-  aString += "<div style = \"font - size: 80%\">$$\\begin{array}{c||r|r|r}"
+  aString += "<div style=\"font-size: 80%\">$$\\begin{array}{c||r|r|r}"
   aString += "x&O_i&E_i&\\frac{(O_i - E_i)^2}{E_i}\\\\"
 
   for i from 0 to (row2.length - 1)

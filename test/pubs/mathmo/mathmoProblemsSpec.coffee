@@ -57,8 +57,8 @@ describe "mathmoController", ->
     [
       "makeVector"
       "C5"
-      "Consider the four vectors$$\\mathbf{A}=\\begin{pmatrix}-4\\\\-3\\\\0\\end{pmatrix}\\,,\\; \\mathbf{B}=\\begin{pmatrix}2\\\\-6\\\\0\\end{pmatrix}$$$$\\mathbf{C}=\\begin{pmatrix}-4\\\\2\\\\5\\end{pmatrix}\\,,\\; \\mathbf{D}=\\begin{pmatrix}-1\\\\-3\\\\-7\\end{pmatrix}$$<ol class=\"exercise\"><li>Order the vectors by magnitude.</li><li>Use the scalar product to find the angles between<ol class=\"subexercise\"><li>\\(\\mathbf{D}\\) and \\(\\mathbf{A}\\),</li><li>\\(\\mathbf{A}\\) and \\(\\mathbf{C}\\)</li></ol></ol>"
-      "<ol class=\"exercise\"><li>\\(|\\mathbf{D}|=\\sqrt{59},\\) \\(|\\mathbf{C}|=\\sqrt{45},\\) \\( |\\mathbf{B}|=\\sqrt{40}\\) and \\(|\\mathbf{A}|=\\sqrt{25}\\).</li><li><ol class=\"subexercise\"><li>\\(\\arccos\\left(\\frac{13}{5\\sqrt{59}}\\right)\\)</li><li>\\(\\arccos\\left(\\frac{2}{3\\sqrt{5}}\\right)\\)</li></ol></li></ol>"
+      "Consider the four vectors$$\\mathbf{A} = \\begin{pmatrix}-4\\\\-3\\\\0\\end{pmatrix}\\,,\\ \\mathbf{B} = \\begin{pmatrix}2\\\\-6\\\\0\\end{pmatrix}$$$$\\mathbf{C} = \\begin{pmatrix}-4\\\\2\\\\5\\end{pmatrix}\\,,\\ \\mathbf{D} = \\begin{pmatrix}-1\\\\-3\\\\-7\\end{pmatrix}$$<ol class=\"exercise\"><li>Order the vectors by magnitude.</li><li>Use the scalar product to find the angles between<ol class=\"subexercise\"><li>\\(\\mathbf{D}\\) and \\(\\mathbf{A}\\),</li><li>\\(\\mathbf{A}\\) and \\(\\mathbf{C}\\)</li></ol></ol>"
+      "<ol class=\"exercise\"><li>\\(|\\mathbf{D}| = \\sqrt{59},\\) \\(|\\mathbf{C}| = \\sqrt{45},\\) \\( |\\mathbf{B}| = \\sqrt{40}\\) and \\(|\\mathbf{A}| = \\sqrt{25}\\).</li><li><ol class=\"subexercise\"><li>\\(\\arccos\\left(\\frac{13}{5\\sqrt{59}}\\right)\\)</li><li>\\(\\arccos\\left(\\frac{2}{3\\sqrt{5}}\\right)\\)</li></ol></li></ol>"
     ]
     [
       "makeLines"
@@ -69,15 +69,15 @@ describe "mathmoController", ->
     [
       "makeIneq2"
       "C7"
-      "By factorizing a suitable polynomial, or otherwise, find the values of \\(x\\) which satisfy$$x^2 + 7x < -12$$"
-      "$$-4 < x < -3$$"
+      "By factorising a suitable polynomial, or otherwise, find the values of \\(x\\) which satisfy$$x^2 - 4 < 3x$$"
+      "$$-1 < x < 4$$"
+      4
     ]
     [
       "makeIneq3"
       "C7"
-      "By factorizing a suitable polynomial, or otherwise, find the values of \\(x\\) which satisfy$$x^2 - 6x < -5$$"
-      "$$1 < x < 5$$"
-      2
+      "By factorising a suitable polynomial, or otherwise, find the values of \\(y\\) which satisfy$$y^3 + 12 < - 8y^2 - 19y$$"
+      "$$y < -4$$and$$-3 < y < -1$$"
     ]
     [
       "makeAP"
@@ -108,14 +108,14 @@ describe "mathmoController", ->
     [
       "makeQuadratic"
       "C10"
-      "Find the real roots, if any, of$$x^2 - 4x - 1=0$$"
+      "Find the real roots, if any, of$$x^2 - 4x - 1 = 0$$"
       "$$x=2\\pm\\sqrt{5}$$"
     ]
     [
       "makeComplete"
       "C11"
       "By completing the square, find (for real \\(x\\)) the minimum value of$$x^2 + 4x + 9.$$"
-      "The minimum value is \\(5,\\) which occurs at \\(x=-2\\)."
+      "The minimum value is \\(5,\\) which occurs at \\(x = -2\\)."
     ]
     [
       "makeBinExp"
@@ -126,8 +126,8 @@ describe "mathmoController", ->
     [
       "makeLog"
       "C13"
-      "If \\(5^{x}=2\\), then find \\(x\\) to three decimal places."
-      "$$x=0.431$$"
+      "If \\(5^{x} = 2\\), then find \\(x\\) to three decimal places."
+      "$$x = 0.431$$"
     ]
     [
       "makeStationary2"
@@ -145,8 +145,8 @@ describe "mathmoController", ->
     [
       "makeTriangle1"
       "C15"
-      "In triangle \\(ABC\\), \\(AB=3\\), \\(BC=2\\) and angle \\(C=\\frac{\\pi}{3}\\). Find angle \\(A\\)."
-      "$$A=\\arcsin\\left(\\frac{1}{3}\\sqrt{3}\\right)$$"
+      "In triangle \\(ABC\\), \\(AB = 3\\), \\(BC = 2\\) and angle \\(C = \\frac{\\pi}{3}\\). Find angle \\(A\\)."
+      "$$A = \\arcsin\\left(\\frac{1}{3}\\sqrt{3}\\right)$$"
       2
     ]
     [
@@ -166,13 +166,13 @@ describe "mathmoController", ->
     [
       "makeCircle"
       "C16"
-      "Find, for a sector of angle \\(\\frac{7\\pi}{4}\\) of a disc of radius \\(6:\\)<br>i. the length of the perimeter; and<br>ii. the area."
+      "Find, for a sector of angle \\(\\frac{7\\pi}{4}\\) of a disc of radius \\(6:\\)<ul class=\"exercise\"><li> the length of the perimeter and</li><li>the area.</li></ul>"
       "i. \\(12+\\frac{21}{2}\\pi\\)<br>ii. \\(\\frac{63}{2}\\pi\\)"
     ]
     [
       "makeSolvingTrig"
       "C17"
-      "Write $$\\frac{5}{2}\\sqrt{3}\\sin{\\theta}+\\frac{5}{2}\\cos{\\theta}$$ in the form \\(A\\sin(\\theta+\\alpha),\\) where \\(A\\) and \\(\\alpha\\) are to be determined."
+      "Write $$\\frac{5}{2}\\sqrt{3}\\sin{\\theta} + \\frac{5}{2}\\cos{\\theta}$$ in the form \\(A\\sin(\\theta + \\alpha),\\) where \\(A\\) and \\(\\alpha\\) are to be determined."
       "$$5\\sin\\left(\\theta+\\frac{\\pi}{6}\\right)$$"
     ]
     [
@@ -208,7 +208,7 @@ describe "mathmoController", ->
     [
       "makeGP"
       "C23"
-      "Evaluate $$\\sum_{r=0}^{5} \\left(-9\\right)^{r}$$"
+      "Evaluate $$\\sum_{r = 0}^{5} \\left(-9\\right)^{r}$$"
       "$$-53144$$"
     ]
     # [ # Omitted because this has a graphical solution
@@ -263,13 +263,13 @@ describe "mathmoController", ->
       "makeLines2D"
       "C31"
       "Find the equation of the line passing through \\((-2,5)\\) and \\((6,2)\\)."
-      "$$y=-\\frac{3}{8}x+\\frac{17}{4}\\qquad \\text{or} \\qquad 3x+8y-34=0.$$"
+      "$$y = -\\frac{3}{8}x + \\frac{17}{4}\\qquad \\text{or} \\qquad 3x+8y-34=0.$$"
     ]
     [
       "makeCircleEq"
       "C32"
       "Find the centre and radius of the circle with equation$$x^2-2x+y^2+10y+22=0.$$"
-      "The circle has centre \\((1,-5)\\) and radius \\(2  \\)."
+      "The circle has centre \\((1,-5)\\) and radius \\(2 \\)."
     ]
     [
       "makeLineParPerp"
@@ -298,8 +298,8 @@ describe "mathmoController", ->
     [
       "makeDETwoHard"
       "F3a"
-      "Find the general solution of the following second-order ODE:$$\\frac{{\\,\\mathrm{d}^2}y}{{\\,\\mathrm{d}x}^2}=0$$"
-      "y=Ax+B"
+      "Find the general solution of the following second-order ODE:$$\\frac{{\\,\\mathrm{d}^2}y}{{\\,\\mathrm{d}x}^2} = 0$$"
+      "$$y = Ax + B$$"
     ]
     [
       "makeMatrix2"
@@ -310,7 +310,7 @@ describe "mathmoController", ->
     [
       "makeTaylor"
       "F5"
-      "Find the Taylor series of \\(\\arctan(\\frac{3}{5}x)\\) about \\(x=0\\) up to and including the term in \\(x^3\\)"
+      "Find the Taylor series of \\(\\arctan(\\frac{3}{5}x)\\) about \\(x = 0\\) up to and including the term in \\(x^3\\)"
       "$$\\frac{3}{5}x - \\frac{9}{125}x^3$$"
     ]
     # [ # Omitted because this has a graphical solution
@@ -328,7 +328,7 @@ describe "mathmoController", ->
     [
       "makeFurtherVector"
       "F8"
-      "Let \\(\\mathbf{a}=\\begin{pmatrix}-2\\\\0\\\\3\\end{pmatrix}\\,\\), \\(\\;\\mathbf{b}=\\begin{pmatrix}-4\\\\3\\\\0\\end{pmatrix}\\,\\) and \\(\\mathbf{c}=\\begin{pmatrix}-3\\\\4\\\\5\\end{pmatrix}\\). Calculate: <ul class=\"exercise\"><li>the vector product, \\(\\mathbf{a}\\wedge \\mathbf{b}\\),</li><li>the scalar triple product, \\([\\mathbf{a}, \\mathbf{b}, \\mathbf{c}]\\).</li></ul>"
+      "Let \\(\\mathbf{a} = \\begin{pmatrix}-2\\\\0\\\\3\\end{pmatrix}\\,\\), \\(\\mathbf{b} = \\begin{pmatrix}-4\\\\3\\\\0\\end{pmatrix}\\,\\) and \\(\\mathbf{c} = \\begin{pmatrix}-3\\\\4\\\\5\\end{pmatrix}\\). Calculate: <ul class=\"exercise\"><li>the vector product, \\(\\mathbf{a}\\wedge \\mathbf{b}\\),</li><li>the scalar triple product, \\([\\mathbf{a}, \\mathbf{b}, \\mathbf{c}]\\).</li></ul>"
       "<ul class=\"exercise\"><li>\\(\\begin{pmatrix}-9\\\\-12\\\\-6\\end{pmatrix}\\)</li><li>\\(-51\\)</li></ul>"
     ]
     [
@@ -389,7 +389,7 @@ describe "mathmoController", ->
     [
       "makeConfidInt"
       "S4"
-      "The random variable \\(X\\) has a normal distribution with unknown parameters. A sample of size \\(20\\) is taken for which $$\\sum{x} = 70.096$$$$\\mbox{and}\\sum{x^2} = 389.091.$$Compute, to 3 DP., a \\(90\\)% confidence interval for the mean of \\(X\\).<br/>"
+      "The random variable \\(X\\) has a normal distribution with unknown parameters. A sample of size \\(20\\) is taken for which $$\\sum{x} = 70.096$$$$\\mbox{and}\\sum{x^2} = 389.091.$$Compute, to 3 DP., a \\(90\\)% confidence interval for the mean of \\(X\\).<br />"
       "$$[2.443, 4.567]$$"
     ]
     [
