@@ -211,6 +211,9 @@ angular.module('app').factory 'config', ->
       "C37":
         * "Integer solutions to equations"
           makeDiophantine
+      "C38":
+        * "Distance between points"
+          makeDistance
 
       "F1":
         * "Complex Arithmetic"

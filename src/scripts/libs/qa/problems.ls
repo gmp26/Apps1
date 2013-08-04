@@ -2185,6 +2185,21 @@ makeDiophantine = ->
 
 
 
+makeDistance = ->
+  a = rand(10); b = rand(10)
+  c = rand(10); d = rand(10)
+
+  while (c is a) and (d is b)
+    c = rand(10); d = rand(10)
+
+  qString = "Find the distance between the points \\((" + a + "," + b + ")\\) and \\((" + c + "," + d + ")\\)."
+
+  n = new sqroot((d - b)^2 + (c - a)^2)
+  aString = "$$" + n.write() + "$$"
+
+  qa = [qString, aString]
+  return qa
+
 /**************************\
 |*  START OF FP MATERIAL  *|
 \**************************/
