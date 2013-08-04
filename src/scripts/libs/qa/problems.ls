@@ -2159,15 +2159,26 @@ makeDiophantine = ->
   else
     coeffs = lincombination(a,b)
 
-    # next find the + kz, z i Z term that you need to add
-    # and adjust the coefficients to match the LHS
+    printSol = (c1, varname, c2) ->
+      eqString = varname + " = "
+      if c1 is not 0 then eqString += c1
+
+      if (c2 < 0)
+        if (c2 is -1) then eqString += "-" else eqString += c2
+        eqString += "r"
+      else if (c2 > 0)
+        if c1 is not 0
+          if (c2 is 1) then eqString += "+" else eqString += signedNumber(c2)
+        else
+          if (c2 is not 1) then eqString += c2
+        eqString += "r"
+
+      return eqString
 
     aString = "The solutions are $$"
-    aString += "m = " + (c / d * coeffs[0]) + "+ " + b / d + "r, \\qquad\\text{and}\\qquad "
-    aString += "n = " + (c / d * coeffs[1]) + "- " + b / d + "r,"
+    aString += printSol(c / d * coeffs[0], "m", b / d) + ", \\qquad\\text{and}\\qquad "
+    aString += printSol(c / d * coeffs[1], "n", -b / d)
     aString += "$$ where \\(r\\) is an integer."
-
-    # to-finish with " + (c / d * coeffs[0]) + " and " + (c / d * coeffs[1])
 
   qa = [qString, aString]
   return qa

@@ -331,6 +331,12 @@ describe "mathmoController", ->
       "$$720$$"
     ]
     [
+      "makeDiophantine"
+      "C37"
+      "Find all integer solutions \\(m\\) and \\(n\\) to the equation \\(627m + 484n = -836\\)."
+      "The solutions are $$m = -1292+44r, \\qquad\\text{and}\\qquad n = 1672-44r$$ where \\(r\\) is an integer."
+    ]
+    [
       "makeCArithmetic"
       "F1"
       "Given \\(z = -\\frac{1}{2} + \\frac{\\sqrt{3}}{2}i\\) and \\(w = \\frac{3}{2} -\\frac{3\\sqrt{3}}{2}i\\), compute:<ul class=\"exercise\"><li>\\(z + w\\)</li><li>\\(z\\times w\\)</li><li>\\(\\frac{z}{w}\\)</li><li>\\(\\frac{w}{z}\\)</li></ul>"
