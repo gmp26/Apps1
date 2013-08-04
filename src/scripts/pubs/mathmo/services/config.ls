@@ -17,6 +17,8 @@ angular.module('app').factory 'config', ->
           "C30"
           "C13"
           "C17"
+          "C35"
+          "C36"
 
     * title: "Curve sketching"
       topicIds:
@@ -199,6 +201,12 @@ angular.module('app').factory 'config', ->
       "C34":
         * "Intersections of circles and lines"
           makeCircLineInter
+      "C35":
+        * "Highest common factors"
+          makeHCF
+      "C36":
+        * "Least common multiples"
+          makeLCM
 
       "F1":
         * "Complex Arithmetic"

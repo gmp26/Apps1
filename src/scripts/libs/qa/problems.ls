@@ -1767,10 +1767,6 @@ makeGP = ->
 
 
 
-
-
-
-
 makeImplicitFunction = ->
 
   mIF1 = ->
@@ -2095,6 +2091,44 @@ makePowers = ->
     aString = "$$x$$"
   else
     aString = "$$x^{" + res.write() + "}$$"
+
+  qa = [qString, aString]
+  return qa
+
+
+
+makeHCF = ->
+  a = rand(1, 99999)
+  b = rand(1, 99999)
+
+  if rand()
+    while (gcd(a, b) is 1)
+      b = rand(1, 99999)
+
+  while (a is b)
+    b = rand(1, 99999)
+
+  qString = "Find the highest common factor of \\(" + a + "\\) and \\(" + b + "\\)."
+  aString = "$$" + gcd(a,b) + "$$"
+
+  qa = [qString, aString]
+  return qa
+
+
+
+makeLCM = ->
+  a = rand(1, 200)
+  b = rand(1, 200)
+
+  if rand()
+    while (gcd(a, b) is 1)
+      b = rand(1, 200)
+
+  while (a is b)
+    b = rand(1, 200)
+
+  qString = "Find the least common multiple of \\(" + a + "\\) and \\(" + b + "\\)."
+  aString = "$$" + lcm(a,b) + "$$"
 
   qa = [qString, aString]
   return qa

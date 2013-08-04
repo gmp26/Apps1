@@ -319,6 +319,18 @@ describe "mathmoController", ->
       4
     ]
     [
+      "makeHCF"
+      "C35"
+      "Find the highest common factor of \\(31616\\) and \\(94894\\)."
+      "$$2$$"
+    ]
+    [
+      "makeLCM"
+      "C36"
+      "Find the least common multiple of \\(15\\) and \\(144\\)."
+      "$$720$$"
+    ]
+    [
       "makeCArithmetic"
       "F1"
       "Given \\(z = -\\frac{1}{2} + \\frac{\\sqrt{3}}{2}i\\) and \\(w = \\frac{3}{2} -\\frac{3\\sqrt{3}}{2}i\\), compute:<ul class=\"exercise\"><li>\\(z + w\\)</li><li>\\(z\\times w\\)</li><li>\\(\\frac{z}{w}\\)</li><li>\\(\\frac{w}{z}\\)</li></ul>"
