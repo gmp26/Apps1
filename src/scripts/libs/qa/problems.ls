@@ -2135,6 +2135,45 @@ makeLCM = ->
 
 
 
+makeDiophantine = ->
+  a = rand(1, 999)
+  b = rand(1, 999)
+
+  if rand()
+    while (gcd(a,b) is 1)
+      b = rand(1, 999)
+
+  while (a is b)
+    b = rand(1, 200)
+
+  c = rand(999)
+  while (a is c) or (b is c)
+    c = rand(999)
+
+  qString = "Find all integer solutions \\(m\\) and \\(n\\) to the equation \\(" + a + "m + " + b + "n = " + c + "\\)."
+
+  d = gcd(a,b)
+
+  if (c % d) is not 0
+    aString = "There are no integer solutions to the equation."
+  else
+    coeffs = lincombination(a,b)
+
+    # next find the + kz, z i Z term that you need to add
+    # and adjust the coefficients to match the LHS
+
+    aString = "The solutions are $$"
+    aString += "m = " + (c / d * coeffs[0]) + "+ " + b / d + "r, \\qquad\\text{and}\\qquad "
+    aString += "n = " + (c / d * coeffs[1]) + "- " + b / d + "r,"
+    aString += "$$ where \\(r\\) is an integer."
+
+    # to-finish with " + (c / d * coeffs[0]) + " and " + (c / d * coeffs[1])
+
+  qa = [qString, aString]
+  return qa
+
+
+
 /**************************\
 |*  START OF FP MATERIAL  *|
 \**************************/

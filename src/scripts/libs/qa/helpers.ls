@@ -37,6 +37,30 @@ lcm = ->
 
 
 
+# express gcd(a,b) as a linear combination of a and b: gcd(a,b) = am + bn
+# returns [m,n]
+# uses the extended Euclidean algorithm
+lincombination = (a,b) ->
+
+  x = 0; lastx = 1;
+  y = 1; lasty = 0
+
+  while b is not 0
+    quoti = Math.floor(a / b)
+
+    c1 = a; c2 = b
+    a = c2; b = c1 % c2
+
+    d1 = x; d2 = lastx
+    x = d2 - quoti * d1; lastx = d1
+
+    e1 = y; e2 = lasty
+    y = e2 - quoti * e1; lasty = e1
+
+  return [lastx, lasty]
+
+
+
 # sin of pi/6, pi/4 and multiples in the form a/b + c sqrt(2)/d + e sqrt(3)/f
 sinpi = (a,b) ->
 

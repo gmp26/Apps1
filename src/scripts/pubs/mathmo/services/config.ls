@@ -19,6 +19,7 @@ angular.module('app').factory 'config', ->
           "C17"
           "C35"
           "C36"
+          "C37"
 
     * title: "Curve sketching"
       topicIds:
@@ -207,6 +208,9 @@ angular.module('app').factory 'config', ->
       "C36":
         * "Least common multiples"
           makeLCM
+      "C37":
+        * "Integer solutions to equations"
+          makeDiophantine
 
       "F1":
         * "Complex Arithmetic"
