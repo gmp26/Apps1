@@ -38,6 +38,7 @@ angular.module('app').factory 'config', ->
           "C32"
           "C33"
           "C34"
+          "C38"
 
     * title: "Sequences & series"
       topicIds:

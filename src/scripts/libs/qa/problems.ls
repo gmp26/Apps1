@@ -2186,19 +2186,71 @@ makeDiophantine = ->
 
 
 makeDistance = ->
-  a = rand(10); b = rand(10)
-  c = rand(10); d = rand(10)
 
-  while (c is a) and (d is b)
-    c = rand(10); d = rand(10)
+  maxdist = 10
 
-  qString = "Find the distance between the points \\((" + a + "," + b + ")\\) and \\((" + c + "," + d + ")\\)."
+  # two integer coordinates
+  makeDistII = ->
+    a1 = rand(maxdist); a2 = rand(maxdist)
+    b1 = rand(maxdist); b2 = rand(maxdist)
 
-  n = new sqroot((d - b)^2 + (c - a)^2)
-  aString = "$$" + n.write() + "$$"
+    while (b1 is a1) and (b2 is a2)
+      b1 = rand(maxdist); b2 = rand(maxdist)
 
-  qa = [qString, aString]
+    if rand() # working in R2 or R3
+      a3 = rand(maxdist); b3 = rand(maxdist)
+      a3str = "," + a3; b3str = "," + b3
+    else
+      a3 = 0; b3 = 0
+      a3str = ""; b3str = ""
+
+    qString = "Find the distance between the points \\((" + a1 + "," + a2 + a3str + ")\\) and \\((" + b1 + "," + b2 + b3str + ")\\)."
+
+    sq = new sqroot((b1 - a1)^2 + (b2 - a2)^2 + (b3 - a3)^2)
+    aString = "$$" + sq.write() + "$$"
+
+    qa = [qString, aString]
+    return qa
+
+  # two fractional coordinates
+  makeDistFF = ->
+
+    # points (a1/a2, b1/b2) and (c1/c2, d1/d2)
+    a1 = new frac(rand(maxdist), randnz(maxdist))
+    a2 = new frac(rand(maxdist), randnz(maxdist))
+    b1 = new frac(rand(maxdist), randnz(maxdist))
+    b2 = new frac(rand(maxdist), randnz(maxdist))
+
+    if rand() # working in R2 or R3
+      a3 = new frac(rand(maxdist), randnz(maxdist))
+      b3 = new frac(rand(maxdist), randnz(maxdist))
+      a3str = "," + a3.write(); b3str = "," + b3.write()
+    else
+      a3 = new frac(0, 1); b3 = new frac(0, 1)
+      a3str = ""; b3str = ""
+
+    qString = "Find the distance between the points \\((" + a1.write() + "," + a2.write() + a3str + ")\\) and \\((" + b1.write() + "," + b2.write() + b3str + ")\\)."
+
+    # scale the coordinate grid to only integer points
+    denom = a1.bot * a2.bot * a3.bot * b1.bot * b2.bot * b3.bot
+
+    s1 = denom / a1.bot * a1.top
+    s2 = denom / a2.bot * a2.top
+    s3 = denom / a3.bot * a3.top
+    t1 = denom / b1.bot * b1.top
+    t2 = denom / b2.bot * b2.top
+    t3 = denom / b3.bot * b3.top
+
+    sq = new sqroot((t1 - s1)^2 + (t2 - s2)^2 + (t3 - s3)^2)
+    aString = "$$" + simplifySurd(0, sq.a, sq.n, denom) + "$$"
+
+    qa = [qString, aString]
+    return qa
+
+  qa = pickrand(makeDistII, makeDistFF)()
   return qa
+
+
 
 /**************************\
 |*  START OF FP MATERIAL  *|

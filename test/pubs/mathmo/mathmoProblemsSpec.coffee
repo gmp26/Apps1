@@ -337,6 +337,19 @@ describe "mathmoController", ->
       "The solutions are $$m = -1292+44r, \\qquad\\text{and}\\qquad n = 1672-44r$$ where \\(r\\) is an integer."
     ]
     [
+      "makeDistance" # integer-integer
+      "C38"
+      "Find the distance between the points \\((2,3)\\) and \\((-3,6)\\)."
+      "$$\\sqrt{34}$$"
+      1
+    ]
+    [
+      "makeDistance" # frac-frac
+      "C38"
+      "Find the distance between the points \\((-\\frac{8}{7},\\frac{5}{8})\\) and \\((\\frac{4}{9},-\\frac{3}{5})\\)."
+      "$$\\frac{\\sqrt{25529569}}{2520}$$"
+    ]
+    [
       "makeCArithmetic"
       "F1"
       "Given \\(z = -\\frac{1}{2} + \\frac{\\sqrt{3}}{2}i\\) and \\(w = \\frac{3}{2} -\\frac{3\\sqrt{3}}{2}i\\), compute:<ul class=\"exercise\"><li>\\(z + w\\)</li><li>\\(z\\times w\\)</li><li>\\(\\frac{z}{w}\\)</li><li>\\(\\frac{w}{z}\\)</li></ul>"
