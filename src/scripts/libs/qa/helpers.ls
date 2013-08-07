@@ -403,14 +403,17 @@ simplifySurd = (a,b,c,d) ->
   else if a is 0
     f = new frac(B,d)
 
-    if f.top is 1 then top = ""
-    else if f.top is -1 then top = "-"
-    else top = f.top
-
-    if f.bot is 1
-      return top + "\\sqrt{" + C + "}"
+    if C is 1
+      return f.write()
     else
-    return "\\frac{" + top + "\\sqrt{" + C + "}}{" + f.bot + "}"
+      if f.top is 1 then top = ""
+      else if f.top is -1 then top = "-"
+      else top = f.top
+
+      if f.bot is 1
+        return top + "\\sqrt{" + C + "}"
+      else
+      return "\\frac{" + top + "\\sqrt{" + C + "}}{" + f.bot + "}"
 
   # Case a / d
   else if B is 0 or C is 0
