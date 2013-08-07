@@ -39,6 +39,7 @@ angular.module('app').factory 'config', ->
           "C33"
           "C34"
           "C38"
+          "C39"
 
     * title: "Sequences & series"
       topicIds:
@@ -215,6 +216,9 @@ angular.module('app').factory 'config', ->
       "C38":
         * "Distance between points"
           makeDistance
+      "C39":
+        * "Circle passing through three points"
+          makeCircumCircle
 
       "F1":
         * "Complex Arithmetic"

@@ -2252,6 +2252,35 @@ makeDistance = ->
 
 
 
+makeCircumCircle = ->
+  maxdist = 10
+
+  a1 = rand(maxdist); a2 = rand(maxdist)
+  b1 = rand(maxdist); b2 = rand(maxdist)
+  c1 = rand(maxdist); c2 = rand(maxdist)
+
+  qString = "Find the centre and radius of the circle passing through the points "
+  qString += "\\((" + a1 + "," + a2 + ")\\), "
+  qString += "\\((" + b1 + "," + b2 + ")\\) and "
+  qString += "\\((" + c1 + "," + c2 + ")\\)."
+
+  d = 2 * (a1 * (b2 - c2) + b1 * (c2 - a2) + c1 * (a2 - b2))
+  console.log "d = " + d
+  # d = 1
+
+  x = new frac((a1^2 + a2^2) * (b2 - c2) + (b1^2 + b2^2) * (c2 - a2) + (c1^2 + c2^2) * (a2 - b2), d)
+  y = new frac((a1^2 + a2^2) * (b1 - c1) + (b1^2 + b2^2) * (c1 - a1) + (c1^2 + c2^2) * (a1 - b1), d)
+
+  aString = "The centre is "
+  aString += "\\((" + x.write() + "," + y.write() + ")\\) and "
+
+  sq = new sqroot((x.top - a1 * d)^2 + (y.top - a2 * d)^2)
+  aString += "the radius is \\(" + simplifySurd(0, sq.a, sq.n, d) + "\\)."
+
+  qa = [qString, aString]
+  return qa
+
+
 /**************************\
 |*  START OF FP MATERIAL  *|
 \**************************/
