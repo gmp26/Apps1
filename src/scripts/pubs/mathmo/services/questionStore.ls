@@ -15,13 +15,19 @@ angular.module('app').factory 'questionStore', [
     # We store the mathmo version number in case a future version needs
     # to update the stored data
     #
+
+    save = (qSets) -> 
+      localStore.setItem "qSets", JSON.stringify qSets
+
+    load = -> JSON.parse localStore.getItem "qSets"
+
     clear = ->
-      localStore.qSets = JSON.stringify {mathmo:semver}
+      localStore.setItem "qSets", JSON.stringify {mathmo:semver}
 
     # constructor
     init = ->
       try
-        qSets = JSON.parse localStore.qSets
+        qSets = load!
       catch e
         qSets = {}
 
@@ -33,14 +39,14 @@ angular.module('app').factory 'questionStore', [
 
     # append a question
     appendQ = (name, topicId) ->
-      qSets = JSON.parse localStore.qSets
+      qSets = load!
       qSets = {} unless angular.isObject qSets
       qSets[name].push topicId
-      localStore.qSets = JSON.stringify qSets
+      save(qSets)
 
     # update a question number after prev or next
     updateQ = (name, topicId, qNo) ->
-      qSets = JSON.parse localStore.qSets
+      qSets = JSON.parse localStore.getItem "qSets"
       set = qSets[name]
       if set
         # copy the exercise, while editing qNo for question at topicId
@@ -50,35 +56,35 @@ angular.module('app').factory 'questionStore', [
             parts[1] = qNo
             q = parts.join \:
           return q
-        localStore.qSets = JSON.stringify qSets
+        save(qSets)
 
     # Save this question set in local storage by name
     # We have to serialise and deserialise using JSON
     # since localStorage only saves strings.
     saveAs = (name, topicIds) ->
-      qSets = JSON.parse localStore.qSets
+      qSets = JSON.parse localStore.getItem "qSets"
       qSets = {} unless angular.isObject qSets
       qSets["mathmo"] = semver
       qSets[name] = topicIds
-      localStore.qSets = JSON.stringify qSets
+      save(qSets)
       return topicIds
 
     newQSet = (name) ->
       return saveAs(name, [])
 
     getQSet = (name) ->
-      qSets = JSON.parse localStore.qSets
+      qSets = JSON.parse localStore.getItem "qSets"
       return qSets[name]
 
     # forget about a saved question set
     remove = (name) -> 
-      qSets = JSON.parse localStore.qSets
+      qSets = JSON.parse localStore.getItem "qSets"
       delete qSets[name]
-      localStore.qSets = JSON.stringify qSets
+      save(qSets)
 
     # list all stored qSets by name
     list = ->
-      qSets = JSON.parse localStore.qSets
+      qSets = JSON.parse localStore.getItem "qSets"
       [name for name of qSets when name != 'mathmo']
 
     return
