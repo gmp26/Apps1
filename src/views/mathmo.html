@@ -17,8 +17,8 @@
     </form>
   </div>
 
-  <tabs>
-    <pane id="helpTab" heading="Help">
+  <tabset>
+    <tab id="helpTab" heading="Help">
       <h5>Getting Started</h5>
       <p>
       Use the input box in the <a ng-click="openAbout()" href="">Mathmo</a> header to add a new named exercise. Each exercise appears in a new tab. Click on the tab to add questions on any of a large choice of topics. These same questions stay with you until you choose to delete them.
@@ -41,8 +41,8 @@
       <h5>Sharing</h5>
       <p>You can share questions with your friends. Press the share button to see available methods.</p>
 
-    </pane>
-    <pane ng-repeat="pane in panes" heading="{{pane.name}}" active="pane.active">
+    </tab>
+    <tab ng-repeat="pane in panes" heading="{{pane.name}}" active="pane.active">
       <!--
       <div style="margin-bottom:20px;">
         <button class="btn btn-primary" style="float:left" ng-click="openAddQ(pane)">Add a question</button>
@@ -111,8 +111,8 @@
         <button class="btn btn-danger" tooltip="Delete exercise {{pane.name}}" tooltip-placement="left" style="float:right" ng-click="delQSet($index)"><i class="icon-remove icon-white"></i></button>
       </div>
 
-    </pane>
-  </tabs>
+    </tab>
+  </tabset>
 
 
   <hr/>
@@ -155,6 +155,7 @@
 
   <div modal="addQOpen" close="closeAddQ()" options="addQOpts">
     <div class="modal-header">
+      <button class="btn btn-warning cancel pull-right" ng-click="closeAddQ()">Close</button>
       <h3>Add a question</h3>
       <h4>on topic</h4>
     </div>
@@ -167,14 +168,12 @@
         </accordion-group>
       </accordion>
     </div>
-    <div class="modal-footer">
-      <button class="btn btn-warning cancel" ng-click="closeAddQ()">Close</button>
-    </div>
   </div>
 
   <div modal="aboutOpen" close="closeAbout()" options="aboutOpts">
 
     <div class="modal-header">
+      <button class="btn btn-warning cancel pull-right" ng-click="closeAbout()">Close</button>
       <h4><img src="scripts/pubs/mathmo/img/icon.png" style="width:60px;height:60px"> About Mathmo</h4>
     </div>
     <div class="modal-body">
@@ -194,7 +193,10 @@
        Tom White, Edward Cree, with unit tests by Ben Millwood.
       </p>
       <p>
-      <a href="http://github.com/gmp26/mathmo">HTML5/Angular Implementation:</a> Mike Pearson.
+      Unit tests rewritten for Angular/Karma and extended, new questions added, multiple TeX improvements, and conversion of base problem generators to LiveScript by <a href="https://github.com/alexwlchan">Alex Chan</a>.
+      </p>
+      <p>
+      <a href="http://github.com/gmp26/Apps1">HTML5/Angular Implementation:</a> Mike Pearson.
       </p>
 
       <p>
@@ -209,8 +211,5 @@
 
     </div>
 
-    <div class="modal-footer">
-        <button class="btn btn-warning cancel" ng-click="closeAbout()">Close</button>
-    </div>
   </div>
 </div>
