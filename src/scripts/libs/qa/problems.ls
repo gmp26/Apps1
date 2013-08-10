@@ -2569,7 +2569,7 @@ makeNewtonRaphson = ->
     if Math.abs(x[i + 1]) < 1e - 7
       x[i + 1] = 0
 
-    aString += "x_{" + (i + 1) + "} &= " + x[i + 1] + "\\\\"  /* + "&" + p.write('x_{' + (i + 1) + '}') + ' = ' + p.compute(x[i + 1]) + "&" + fns[which].replace(/z/g, 'x_{' + (i + 1) + '}') + " = " + fnf[which](x[i + 1]) */
+    aString += "x_{" + (i + 1) + "} &= " + x[i + 1].toPrecision(6) + "\\\\"  /* + "&" + p.write('x_{' + (i + 1) + '}') + ' = ' + p.compute(x[i + 1]) + "&" + fns[which].replace(/z/g, 'x_{' + (i + 1) + '}') + " = " + fnf[which](x[i + 1]) */
 
   aString += "\\end{align*}"
   if isNaN(x[n])

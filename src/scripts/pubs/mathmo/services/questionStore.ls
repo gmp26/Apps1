@@ -16,16 +16,42 @@ angular.module('app').factory 'questionStore', [
     # to update the stored data
     #
 
-    save = (qSets) -> 
-      localStore.setItem "qSets", JSON.stringify qSets
 
-    load = -> JSON.parse localStore.getItem "qSets"
+    var lsok
+
+    unavail = ->
+      alert "Storage unavailable. Mathmo will forget your questions."
+      lsok := false
 
     clear = ->
-      localStore.setItem "qSets", JSON.stringify {mathmo:semver}
+      if lsok
+        try
+          localStore.setItem "qSets", JSON.stringify {mathmo:semver}
+
+    save = (qSets) ->
+      if lsok
+        try
+          localStore.setItem "qSets", JSON.stringify qSets
+        catch e
+          alert "Local storage exceeded and is being cleared"
+          clear!
+          try
+            localStore.setItem "qSets", JSON.stringify qSets
+          catch e
+            unavail!
+
+    load = ->
+      if lsok
+        try
+          JSON.parse localStore.getItem "qSets"
+        catch e
+          unavail!
+
 
     # constructor
     init = ->
+      unavail = "Storage unavailable. Mathmo will forget your questions."
+      lsok := true
       try
         qSets = load!
       catch e
@@ -33,9 +59,9 @@ angular.module('app').factory 'questionStore', [
 
       # clear it unless it's already initialised for mathmo
       if not qSets? or not qSets.mathmo
-        clear()
+        clear!
 
-    init()
+    init!
 
     # append a question
     appendQ = (name, topicId) ->
@@ -90,7 +116,7 @@ angular.module('app').factory 'questionStore', [
     return
       init: init
       clear: clear
-      appendQ: appendQ
+      appendQ: appendQ # can throw 
       updateQ: updateQ
       saveAs: saveAs
       newQSet: newQSet

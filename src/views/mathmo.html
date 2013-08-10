@@ -155,6 +155,7 @@
 
   <div modal="addQOpen" close="closeAddQ()" options="addQOpts">
     <div class="modal-header">
+      <button class="btn btn-warning cancel pull-right" ng-click="closeAddQ()">Close</button>
       <h3>Add a question</h3>
       <h4>on topic</h4>
     </div>
@@ -167,14 +168,12 @@
         </accordion-group>
       </accordion>
     </div>
-    <div class="modal-footer">
-      <button class="btn btn-warning cancel" ng-click="closeAddQ()">Close</button>
-    </div>
   </div>
 
   <div modal="aboutOpen" close="closeAbout()" options="aboutOpts">
 
     <div class="modal-header">
+      <button class="btn btn-warning cancel pull-right" ng-click="closeAbout()">Close</button>
       <h4><img src="scripts/pubs/mathmo/img/icon.png" style="width:60px;height:60px"> About Mathmo</h4>
     </div>
     <div class="modal-body">
@@ -212,8 +211,5 @@
 
     </div>
 
-    <div class="modal-footer">
-        <button class="btn btn-warning cancel" ng-click="closeAbout()">Close</button>
-    </div>
   </div>
 </div>
