@@ -18,10 +18,10 @@ files = [
 	'./dist/scripts/**/services/*.js',
 
 	/* test scripts */
-	// './dist_test/scripts/controllers/*.js',
-	// './dist_test/scripts/directives/*.js',
-	// './dist_test/scripts/filters/*.js',
-	// './dist_test/scripts/services/*.js',
+	'./dist_test/scripts/controllers/*.js',
+	'./dist_test/scripts/directives/*.js',
+	'./dist_test/scripts/filters/*.js',
+	'./dist_test/scripts/services/*.js',
 
   /* This line needs to be specific or bootstrap.js throws an error :( */
   /* See http://stackoverflow.com/questions/9227406/ */
