@@ -78,7 +78,7 @@ require {
         * 'app'
           'pubs/mathmo/controllers/mathmoController'
           'directives/d3Vis'
-          'services/d3LineChart'
+          'services/d3MultiLineChart'
           'libs/d3.v3'
 
     'controllers/appController':
@@ -159,10 +159,11 @@ require {
       deps:
         * 'app'
         ...
-    'services/d3LineChart':
+    'services/d3MultiLineChart':
       deps:
         * 'app'
         'libs/d3.v3'
+        ...
     'bootstrap':
       deps:
         * 'app'
