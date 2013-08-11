@@ -350,6 +350,12 @@ describe "mathmoController", ->
       "$$\\frac{\\sqrt{25529569}}{2520}$$"
     ]
     [
+      "makeCircumCircle" # frac-frac
+      "C39"
+      "Find the centre and radius of the circle passing through the points \\((-5,3)\\), \\((7,-7)\\) and \\((8,10)\\)."
+      "The centre is \\((\\frac{437}{107},\\frac{182}{107})\\) and the radius is \\(\\frac{\\sqrt{964105}}{107}\\)."
+    ]
+    [
       "makeCArithmetic"
       "F1"
       "Given \\(z = -\\frac{1}{2} + \\frac{\\sqrt{3}}{2}i\\) and \\(w = \\frac{3}{2} -\\frac{3\\sqrt{3}}{2}i\\), compute:<ul class=\"exercise\"><li>\\(z + w\\)</li><li>\\(z\\times w\\)</li><li>\\(\\frac{z}{w}\\)</li><li>\\(\\frac{w}{z}\\)</li></ul>"
