@@ -126,6 +126,15 @@ module.exports = (grunt) ->
           expand: true       
         ]
 
+      # Copy fonts
+      fonts:
+        files: [
+          cwd: './src/'
+          src: ['**/*.ttf','**/*.svg','**/*.woff']
+          dest: './.temp/'
+          expand: true
+        ]
+
       # Copies js files to the temp directory
       js:
         files: [
@@ -458,15 +467,6 @@ module.exports = (grunt) ->
       styleFileContent += grunt.util.normalizelf(imp + '\n')
     grunt.file.write('./src/scripts/pubs/styles.less', styleFileContent)
 
-  ###
-  # Read and apply the application mask
-  grunt.registerTask 'restrict', "Read and apply the application mask", ->
-    mask = ''
-    if grunt.file.exists '.appmask'
-      mask = grunt.file.read '.appmask'
-    if mask.length > 0 then grunt.task.run [ "copy:"+mask ]
-  ###
-
   # Read and apply the application mask
   grunt.registerTask 'restrict', "Read and apply the application mask", ->
     mask = ''
@@ -475,7 +475,7 @@ module.exports = (grunt) ->
 
     # if mask is non trivial
     if mask.length > 0
-      # discover whether custom a copy:<mask> exists
+      # discover whether a custom copy:<mask> exists
       customConfig = grunt.config 'copy.'+mask
       if customConfig?
         grunt.log.writeln "Running copy:"+mask
@@ -569,6 +569,7 @@ module.exports = (grunt) ->
     'less'
     'template:views'
     'copy:img'
+    'copy:fonts'
     'template:dev'
     'restrict'
     'copy:dev'
@@ -594,6 +595,7 @@ module.exports = (grunt) ->
     'less'
     'template:views'
     'copy:img'
+    'copy:fonts'
     'template:prod'
     'restrict'
     'imagemin'

@@ -25,6 +25,10 @@ input[type="text"]:focus.ng-invalid {
   width: 80%;
 }
 
+.modal-body.share ul {
+  margin-left:40px;
+}
+
 .exercise {
   list-style-type: lower-roman;
 }
@@ -33,13 +37,58 @@ input[type="text"]:focus.ng-invalid {
   list-style-type: lower-alpha;
 }
 
-/*
-.container {
-    margin-left:15px;
-    min-width:50%;
-    -moz-transition:width 100ms;
-    -webkit-transition:width 100ms;
-    -o-transition:width 100ms;
-    -transition:width 100ms;
+/* sharing icons in font */
+@font-face {
+  font-family: 'mathmoShare';
+  src:url('../fonts/mathmoShare.eot');
+  src:url('../fonts/mathmoShare.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/mathmoShare.woff') format('woff'),
+    url('../fonts/mathmoShare.ttf') format('truetype'),
+    url('../fonts/mathmoShare.svg#mathmoShare') format('svg');
+  font-weight: normal;
+  font-style: normal;
 }
+
+/* Use the following CSS code if you want to use data attributes for inserting your icons */
+[data-icon]:before {
+  font-family: 'mathmoShare';
+  content: attr(data-icon);
+  speak: none;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Use the following CSS code if you want to have a class per icon */
+/*
+Instead of a list of all class selectors,
+you can use the generic selector below, but it's slower:
+[class*="share-"] {
 */
+.share-facebook, .share-twitter, .share-mail, .share-google-plus, .share-linkedin {
+  font-family: 'mathmoShare';
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+}
+.share-facebook:before {
+  content: "\e005";
+}
+.share-twitter:before {
+  content: "\e004";
+}
+.share-mail:before {
+  content: "\e000";
+}
+.share-google-plus:before {
+  content: "\e003";
+}
+.share-linkedin:before {
+  content: "\e006";
+}

@@ -72,15 +72,15 @@
 
       seed = name+'/'+topicId+'/'+topicCounts[name][topicId]
 
-      console.log "seed = #seed"
+      #console.log "seed = #seed"
 
       Math.seedrandom seed
 
       maker = config.topicMakerById topicId
       qa = maker()
 
-      console.log "q=", qa[0]
-      console.log "a=", qa[1]
+      #console.log "q=", qa[0]
+      #console.log "a=", qa[1]
 
       path = if ('' + $location.port() == '80') then '/mathmoApp' else ''
 
@@ -175,6 +175,9 @@
 
     $scope.topicAvailable = (topicId) ->
       pane = $scope.activePane
+      console.log "activePane = #{pane.name}"
+      console.log "topicId = #{topicId}"
+      console.log "topicCounts = #{topicCounts[pane.name]?[topicId]?}"
       return not topicCounts[pane.name]?[topicId]?
 
     $scope.appendQ = (topicId, pane = null) ->
@@ -281,7 +284,8 @@
     $scope.openShare = (qa) ->
       $scope.currentQuestion = qa
       $scope.shareOpen = true
-      $scope.shareText = '#mathmo #nrichmaths Working on '+qa.url
+      $scope.shareUrl = $window.encodeURIComponent qa.url
+      $scope.shareText = $window.encodeURIComponent '#mathmo #nrichmaths Working on '+qa.url
 
     $scope.closeShare = -> $scope.shareOpen = false;
 
@@ -322,5 +326,6 @@
       swarnings := false
 
     $scope.showSketchWarning = -> swarnings
+
 ]
 
