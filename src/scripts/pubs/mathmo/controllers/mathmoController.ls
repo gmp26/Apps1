@@ -55,6 +55,7 @@
 
       name = pane.name
       qNo = startQNumber
+      shared = false
 
       # some questions may have 2 or 3 part ids
       parts = topicId.split \:
@@ -65,12 +66,14 @@
         if parts.length == 3
           [topicId, qNo, name] = parts
           qNo = +qNo
+          shared = true
+
 
       topicCounts[name] ||= {}
-      topicCounts[name][topicId] = qNo
+      topicCounts[name][topicId] = {qNo: qNo, shared:shared}
 
 
-      seed = name+'/'+topicId+'/'+topicCounts[name][topicId]
+      seed = name+'/'+topicId+'/'+topicCounts[name][topicId].qNo
 
       #console.log "seed = #seed"
 
@@ -79,14 +82,12 @@
       maker = config.topicMakerById topicId
       qa = maker()
 
-      #console.log "q=", qa[0]
-      #console.log "a=", qa[1]
-
       path = if ('' + $location.port() == '80') then '/mathmoApp' else ''
 
       question = {
         exName: name
         topicId: topicId
+        shared: shared
         topic: config.topicTitleById topicId
         seed: seed
         url: 'http://' + $location.host() + ':' + $location.port() + path + '/#/mathmo/share/' + seed
@@ -103,6 +104,8 @@
       }
       question.graphData = qa[2](qa[3]) if question.isGraph()=='graph'
       pane.questions.push question
+
+      # This should move to a directive that watches a '$scope.renderMathNeeded' var
       $scope.renderMath()
 
 
@@ -137,9 +140,13 @@
       topicId = question.topicId
 
       topicCounts[name] ||= {}
-      topicCounts[name][topicId] ||= startQNumber
 
-      j = (topicCounts[name][topicId] += inc)
+      console.log("cloning exercise #{name}")
+
+      # TODO: test this better
+      topicCounts[name][topicId] ||= {qNo:startQNumber, shared:false}
+
+      j = (topicCounts[name][topicId].qNo += inc)
 
       qStore.updateQ(name, topicId, j)
       seed = name+'/'+topicId+'/'+j
@@ -151,8 +158,8 @@
       maker = config.topicMakerById topicId
       qa = maker()
 
-      console.log "q=", qa[0]
-      console.log "a=", qa[1]
+      #console.log "q=", qa[0]
+      #console.log "a=", qa[1]
 
       question.graph = if maker.fn? then maker.fn.toString() else 'no fn'
       question.url = $location.absUrl() + '/' + seed
@@ -175,10 +182,13 @@
 
     $scope.topicAvailable = (topicId) ->
       pane = $scope.activePane
-      console.log "activePane = #{pane.name}"
-      console.log "topicId = #{topicId}"
-      console.log "topicCounts = #{topicCounts[pane.name]?[topicId]?}"
-      return not topicCounts[pane.name]?[topicId]?
+      #console.log "activePane = #{pane.name}"
+      #console.log "topicId = #{topicId}"
+      #console.log "topicCounts = #{topicCounts[pane.name]?[topicId]?}"
+      qStatus = topicCounts[pane.name]?[topicId]
+      return if qStatus? then qStatus.shared else true
+
+      #return not topicCounts[pane.name]?[topicId]?
 
     $scope.appendQ = (topicId, pane = null) ->
       if pane == null
@@ -217,6 +227,14 @@
       pane = $scope.panes[paneIndex]
       qStore.remove(pane.name)
       $scope.panes.splice paneIndex, 1
+
+      # Deleting the shared pane should delete all counts that have shared status
+      # test this!
+      if pane.name == "shared"
+        for exName, topicIds in topicCounts
+          topicCounts[exName] = for id, qStatus in topicIds when not qStatus.shared
+            qStatus
+
       delete topicCounts[name]
 
     $scope.clearAll = ->
