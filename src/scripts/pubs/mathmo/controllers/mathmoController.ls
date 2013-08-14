@@ -45,11 +45,16 @@
     sharedQNo = (parts) -> parts[1]
     sharedExercise = (parts) -> parts[2]
 
+    #
+    # TODO: Move this to the mathWatch directive,
+    # and parameterise it so it renders only the element that mathWatch
+    # decorates.
+    #
 
-    $scope.renderMath = ->
-      $timeout ->
-        MathJax.Hub.Queue ["Typeset", MathJax.Hub]
-      , 10
+    # $scope.renderMath = ->
+    #   $timeout ->
+    #     MathJax.Hub.Queue ["Typeset", MathJax.Hub]
+    #   , 10
 
     retrieveQ = (topicId, pane) ->
 
@@ -106,7 +111,10 @@
       pane.questions.push question
 
       # This should move to a directive that watches a '$scope.renderMathNeeded' var
-      $scope.renderMath()
+      #$scope.renderMath()
+      #$scope.triggerMathJAX++
+
+
 
 
     # testQ is a stripped out version of retrieveQ that gets called in unit testing
@@ -135,7 +143,7 @@
 
       [qa[0], qa[1]]
 
-    similarQ = (question, inc) ->
+    similarQ = (question, inc, targetScope) ->
       name = question.exName
       topicId = question.topicId
 
@@ -170,15 +178,13 @@
       question.g = qa[3]
       question.graphData = qa[2](qa[3]) if question.isGraph()=='graph'
 
-      $scope.renderMath()
-
-    $scope.prevOnTopic = (qa) ->
+    $scope.prevOnTopic = (qa, targetScope) ->
       qa.isCollapsed = true
-      similarQ(qa, -1)
+      similarQ(qa, -1, targetScope)
 
-    $scope.nextOnTopic = (qa) ->
+    $scope.nextOnTopic = (qa, targetScope) ->
       qa.isCollapsed = true
-      similarQ(qa, +1)
+      similarQ(qa, +1, targetScope)
 
     $scope.topicAvailable = (topicId) ->
       pane = $scope.activePane

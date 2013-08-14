@@ -44,12 +44,13 @@
     </tab>
     <tab ng-repeat="pane in panes" heading="{{pane.name}}" active="pane.active">
       <div ng-repeat="qa in pane.questions" class="well well-large" style="background-color:#F4F9F8">
-        <h5 style="float:left">Q{{$index+1}}: {{qa.topic}}</h5>
+        <h5 style="float:left" >Q{{$index+1}}: {{qa.topic}}</h5>
         <div class="btn-group pull-right" tooltip="Similar questions" tooltip-placement="top">
-          <button class="btn" ng-click="prevOnTopic(qa)">Prev</button>
-          <button class="btn" ng-click="nextOnTopic(qa)">Next</button>
+          <!-- $parent is the scope that will need a mathJax render -->
+          <button class="btn" ng-click="prevOnTopic(qa, $parent)">Prev</button>
+          <button class="btn" ng-click="nextOnTopic(qa, $parent)">Next</button>
         </div>
-        <p ng-bind-html-unsafe="qa.q" style="clear:both"></p>
+        <p ng-bind-html-unsafe="qa.q" style="clear:both" math-watch="qa.q"></p>
 
         <button class="btn pull-right"
           ng-click="openShare(qa)"
@@ -68,8 +69,9 @@
           </span>
         </a>
 
+
         <!--<div collapse="qa.isCollapsed">-->
-        <div ng-hide="qa.isCollapsed">
+        <div ng-hide="qa.isCollapsed" math-watch="qa.a">
            <div ng-switch on="qa.isGraph()" >
             <div ng-switch-when="html">
               <div ng-bind-html-unsafe="qa.a"></div>

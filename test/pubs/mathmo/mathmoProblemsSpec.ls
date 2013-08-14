@@ -90,12 +90,11 @@ describe "mathmoController", ->
       "C9"
       "Simplify$$\\frac{x^3 - 8x^2 + 20x - 16}{x^3 - 2x^2 - 16x + 32}.$$"
       "$$\\frac{x - 2}{x + 4}$$"
-    # [ This isn't getting used so I've dropped the test
-    #   "makeQuadratic"
+    # This isn't getting used so I've dropped the test
+    # * "makeQuadratic"
     #   "C10"
     #   "Find the real roots, if any, of$$x^2 - 4x - 1 = 0$$"
     #   "$$x=2\\pm\\sqrt{5}$$"
-    # ]
     * "makeComplete"
       "C11"
       "By completing the square, find (for real \\(x\\)) the minimum value of$$x^2 + 4x + 9.$$"
@@ -354,8 +353,8 @@ describe "mathmoController", ->
   console.log "-----------------------------------------"
   console.log ""
 
-  for i in testlist
-    qatest i
+  for testData in testlist
+    qatest testData
 
     # if i.length == 4
     #   qatest(i[0], i[1], i[2], i[3])

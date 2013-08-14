@@ -72,6 +72,7 @@ require {
         * 'app'
           'pubs/mathmo/services/config'
           'pubs/mathmo/services/questionStore'
+          'directives/mathWatch'
 
     'pubs/mathmo/directives/mathmoPlot':
       deps:
@@ -151,6 +152,10 @@ require {
       deps:
         * 'app'
           'libs/d3.v3'
+    'directives/mathWatch':
+      deps:
+        * 'app'
+        ...
     'directives/appVersion':
       deps:
         * 'app'
