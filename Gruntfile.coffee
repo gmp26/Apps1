@@ -17,7 +17,7 @@ module.exports = (grunt) ->
         ]
 
     #compile livescript (.ls) files to javascript (.js)
-    livescript:
+    lsc:
       scripts:
         files: [
           cwd: './src/'
@@ -335,7 +335,7 @@ module.exports = (grunt) ->
         ]
         tasks: [
           'coffee:scripts'
-          'livescript:scripts'
+          'lsc:scripts'
           'copy:js'
           'copy:scripts'
           'restrict'
@@ -403,7 +403,7 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks 'grunt-contrib-watch'
 
   # livescript compiler
-  grunt.loadNpmTasks('grunt-livescript')
+  grunt.loadNpmTasks('grunt-lsc')
 
   # Express server + LiveReload
   grunt.loadNpmTasks 'grunt-express'
@@ -563,7 +563,7 @@ module.exports = (grunt) ->
   grunt.registerTask 'default', "Default dev build", [
     'clean:working'
     'coffee:scripts'
-    'livescript:scripts'
+    'lsc:scripts'
     'copy:js'
     'appstyles'
     'less'
@@ -589,7 +589,7 @@ module.exports = (grunt) ->
   grunt.registerTask 'prod', "Production build for currently masked apps", [
     'clean:working'
     'coffee:scripts'
-    'livescript:scripts'
+    'lsc:scripts'
     'copy:js'
     'appstyles'
     'less'
