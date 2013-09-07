@@ -1,16 +1,12 @@
-angular.module('app').directive 'svgCheck',
-[
-  '$timeout', '$window'
-  ($timeout, $window) ->
+angular.module('app').directive 'svgCheck', <[$timeout $window]> ++ ($timeout, $window) ->
 
-    restrict: 'A'
-    templateUrl: '/views/directives/svgCheck.html'
-    replace: false
-    transclude: true
+  restrict: 'A'
+  templateUrl: '/views/directives/svgCheck.html'
+  replace: false
+  transclude: true
 
-    link: (scope, element, attrs) ->
+  link: (scope, element, attrs) ->
 
-      # check that browser is SVG capable.
-      scope.svgOK = $window.document.implementation.hasFeature("http://www.w3.org/TR/SVG11/feature" + \#BasicStructure, "1.1")
-      console.log("svgCheck scope = ", scope.$id)
-]
+    # check that browser is SVG capable.
+    scope.svgOK = $window.document.implementation.hasFeature("http://www.w3.org/TR/SVG11/feature" + \#BasicStructure, "1.1")
+    console.log("svgCheck scope = ", scope.$id)

@@ -1,5 +1,4 @@
-(angular.module 'app')
-.controller 'mathmoController', [
+angular.module 'app' .controller 'mathmoController', [
   '$scope'
   '$window'
   'config'

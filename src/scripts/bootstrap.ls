@@ -6,4 +6,5 @@ angular.bootstrap document, [
   'ui.bootstrap.collapse'
   'ui.bootstrap.pagination'
   'ui.bootstrap.alert'
+  'ui.bootstrap.tabs'
 ]

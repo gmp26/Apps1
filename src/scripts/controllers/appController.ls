@@ -5,13 +5,7 @@
 #
 # import prelude
 
-angular.module('app').controller('appController', [
-  '$scope'
-  '$location'
-  '$resource'
-  '$rootScope'
-
-($scope, $location, $resource, $rootScope) ->
+angular.module 'app' .controller 'appController', <[$scope $location $resource $rootScope]> ++ ($scope, $location, $resource, $rootScope) ->
 
   # Uses the url to determine if the selected
   # menu item should have the class active.
@@ -37,5 +31,5 @@ angular.module('app').controller('appController', [
       return 'active'
     else
       return ''
-])
+
 
