@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<!-- saved from url=(0085)http://stackoverflow.com/questions/16625598/testing-modular-angularjs-w-jasmine-karma -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        
+    <title>Testing modular AngularJS w/ Jasmine &amp; Karma - Stack Overflow</title>
+    <link rel="shortcut icon" href="http://cdn.sstatic.net/stackoverflow/img/favicon.ico">
+    <link rel="apple-touch-icon image_src" href="http://cdn.sstatic.net/stackoverflow/img/apple-touch-icon.png">
+    <link rel="search" type="application/opensearchdescription+xml" title="Stack Overflow" href="http://stackoverflow.com/opensearch.xml">
+    
+    <script type="text/javascript" async="" src="./Testing modular AngularJS w  Jasmine & Karma - Stack Overflow_files/adzerk1_2_4_43,adzerk2_2_17_45"></script><script type="text/javascript" async="" src="./Testing modular AngularJS w  Jasmine & Karma - Stack Overflow_files/ga.js"></script><script type="text/javascript" async="" src="./Testing modular AngularJS w  Jasmine & Karma - Stack Overflow_files/quant.js"></script><script type="text/javascript" src="./Testing modular AngularJS w  Jasmine & Karma - Stack Overflow_files/jquery.min.js"></script>
+    <script type="text/javascript" src="./Testing modular AngularJS w  Jasmine & Karma - Stack Overflow_files/stub.js"></script>
+    <link rel="stylesheet" type="text/css" href="./Testing modular AngularJS w  Jasmine & Karma - Stack Overflow_files/all.css">
+    
+    <link rel="canonical" href="./Testing modular AngularJS w  Jasmine & Karma - Stack Overflow_files/Testing modular AngularJS w  Jasmine & Karma - Stack Overflow.html">
+    <link rel="alternate" type="application/atom+xml" title="Feed for question &#39;Testing modular AngularJS w/ Jasmine &amp; Karma&#39;" href="http://stackoverflow.com/feeds/question/16625598">
+    <script type="text/javascript">
+        
+        StackExchange.ready(function () {
+            StackExchange.using("postValidation", function () {
+                StackExchange.postValidation.initOnBlurAndSubmit($('#post-form'), 2, 'answer');
+            });
+
+            
+            StackExchange.question.init({canOpenBounty:true,votesCast:[],totalCommentCount:2,shownCommentCount:2,highlightColor:'#F4A83D',backgroundColor:'#FFF',questionId:16625598});
+
+            styleCode();
+
+                StackExchange.realtime.subscribeToQuestion('1', '16625598');
+            
+                    });
+    </script>
+
+
+    <script type="text/javascript">
+        StackExchange.ready(function () {
+            StackExchange.realtime.init('sockets.ny.stackexchange.com:80');
+            StackExchange.realtime.subscribeToInboxNotifications();
+                    StackExchange.realtime.subscribeToReputationNotifications('1');
+                });
+    </script>
+    <script type="text/javascript">
+        StackExchange.init({"stackAuthUrl":"https://stackauth.com","serverTime":1376639901,"styleCode":true,"enableUserHovercards":true,"site":{"name":"Stack Overflow","description":"Q&A for professional and enthusiast programmers","isNoticesTabEnabled":true,"recaptchaPublicKey":"6LdchgIAAAAAAJwGpIzRQSOFaO0pU6s44Xt8aTwc","enableSocialMediaInSharePopup":true},"user":{"fkey":"f7c1815b74248a4cacbcb13d6c21be51","isRegistered":true,"userId":1228691,"accountId":1272770,"gravatar":"<div class=\"\"><img src=\"https://www.gravatar.com/avatar/3dcdd9c1e27943dd6701e5152e884a14?s=32&d=identicon&r=PG\" alt=\"\" width=\"32\" height=\"32\"></div>","profileUrl":"http://stackoverflow.com/users/1228691/grumplet","notificationsUnviewedCount":1,"inboxUnviewedCount":1}});
+        StackExchange.using.setCacheBreakers({"js/prettify-full.js":"6c261bebf56a","js/moderator.js":"ed7a8238b2f8","js/full-anon.js":"8e3cb6aa3a57","js/full.js":"cc02d108ab7b","js/wmd.js":"cff10cca4fd9","js/third-party/jquery.autocomplete.min.js":"e5f01e97f7c3","js/mobile.js":"7da2df1c9caf","js/help.js":"6e6623243cf6","js/tageditor.js":"450c9e8426fc","js/tageditornew.js":"b6c68ad4c7dd","js/inline-tag-editing.js":"8e84e8a137f7","js/revisions.js":"d3e781ee5528","js/review.js":"947758ba83ea","js/tagsuggestions.js":"aa48ef6154df","js/post-validation.js":"bb996020492a","js/explore-qlist.js":"1c5bbd79b562","js/events.js":"ca3108f28dca"});
+        
+    </script>
+    <script type="text/javascript">
+        StackExchange.using("gps", function() {
+             StackExchange.gps.init(true);
+        });
+    </script>
+    
+<script async="" type="text/javascript" src="./Testing modular AngularJS w  Jasmine & Karma - Stack Overflow_files/full.js"></script><script async="" type="text/javascript" src="./Testing modular AngularJS w  Jasmine & Karma - Stack Overflow_files/post-validation.js"></script><script async="" type="text/javascript" src="./Testing modular AngularJS w  Jasmine & Karma - Stack Overflow_files/prettify-full.js"></script><script async="" type="text/javascript" src="./Testing modular AngularJS w  Jasmine & Karma - Stack Overflow_files/wmd.js"></script><script type="text/javascript" src="./Testing modular AngularJS w  Jasmine & Karma - Stack Overflow_files/adFeedback.js"></script><link rel="stylesheet" href="http://static.adzerk.net/Extensions/adFeedback.css"><link href="./Testing modular AngularJS w  Jasmine & Karma - Stack Overflow_files/sidebar.min.css" type="text/css" rel="stylesheet"></head>
+<body class="question-page">
+    <noscript>&lt;div id="noscript-padding"&gt;&lt;/div&gt;</noscript>
+    <div id="notify-container"></div>
+    <div id="overlay-header"></div>
+    <div id="custom-header"></div>
+
+    <div class="container">
+        <div id="header">
+            <div id="portalLink">
+                <a class="genu" onclick="StackExchange.ready(function(){genuwine.click();});return false;">Stack Exchange</a>
+                    <a class="unreadCount" style="margin-top: 3px; opacity: 1;" title="unread messages in your inbox">1</a>
+                        <script type="text/javascript">
+                            StackExchange.ready(function () {
+                                genuwine.animateInbox();
+                            });
+                        </script>
+            </div>
+            <div id="topbar">
+                <div id="hlinks">
+                    
+<span id="hlinks-user">        <span class="profile-triangle">▼</span><a href="http://stackoverflow.com/users/1228691/grumplet" class="profile-link">grumplet</a>&nbsp;<a href="http://stackoverflow.com/users/1228691/grumplet?tab=reputation"><span class="reputation-score" title="your reputation; view reputation changes" dir="ltr">145</span></a><span title="1 silver badge"><span class="badge2"></span><span class="badgecount">1</span></span><span title="11 bronze badges"><span class="badge3"></span><span class="badgecount">11</span></span>
+ <span class="lsep">|</span>
+
+</span>
+<span id="hlinks-nav"></span>
+<span id="hlinks-custom">            <a href="http://chat.stackoverflow.com/">chat</a>
+
+ <span class="lsep">|</span>
+                <a href="http://meta.stackoverflow.com/">meta</a>
+
+ <span class="lsep">|</span>
+            <a href="http://stackoverflow.com/about">about</a>
+
+ <span class="lsep">|</span>
+            <a href="http://stackoverflow.com/help">help</a>
+</span>
+                </div>
+                <div id="hsearch">
+                    <form id="search" action="http://stackoverflow.com/search" method="get" autocomplete="off">
+                        <div>
+                            <input autocomplete="off" name="q" class="textbox" placeholder="search" tabindex="1" type="text" maxlength="240" size="28" value="">
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <br class="cbt">
+            <div id="hlogo">
+                <a href="http://stackoverflow.com/">
+                    Stack Overflow
+                </a>
+            </div>
+            <div id="hmenus">
+                <div class="nav mainnavs ">
+                    <ul>
+                            <li class="youarehere"><a id="nav-questions" href="http://stackoverflow.com/questions">Questions</a></li>
+                            <li><a id="nav-tags" href="http://stackoverflow.com/tags">Tags</a></li>
+                            <li><a id="nav-users" href="http://stackoverflow.com/users">Users</a></li>
+                            <li><a id="nav-badges" href="http://stackoverflow.com/help/badges">Badges</a></li>
+                            <li><a id="nav-unanswered" href="http://stackoverflow.com/unanswered">Unanswered</a></li>
+                    </ul>
+                </div>
+                <div class="nav askquestion">
+                    <ul>
+                        <li>
+                            <a id="nav-askquestion" href="http://stackoverflow.com/questions/ask">Ask Question</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+
+
+
+        <div id="content">
+            
+
+<div itemscope="" itemtype="http://schema.org/Article">
+<link itemprop="image" href="http://cdn.sstatic.net/stackoverflow/img/apple-touch-icon.png">
+<div id="question-header">
+    <h1 itemprop="name"><a href="./Testing modular AngularJS w  Jasmine & Karma - Stack Overflow_files/Testing modular AngularJS w  Jasmine & Karma - Stack Overflow.html" class="question-hyperlink">Testing modular AngularJS w/ Jasmine &amp; Karma</a></h1>
+</div>
+<div id="mainbar">
+
+    
+
+<div class="question" data-questionid="16625598" id="question">
+    
+                <div class="everyonelovesstackoverflow adzerk-vote" id="adzerk1"><a href="http://engine.adzerk.net/r?e=eyJhdiI6NDE0LCJhdCI6NCwiY20iOjI5MTEsImNoIjoxMTc4LCJjciI6MTA3NjksImRpIjoiMjU1YjEzNDc3NDdlNDM4YmIzOTVkNGRiNzkwNmFmZGYiLCJkbSI6MSwiZmMiOjE2ODc1LCJmbCI6NzQ3Miwia3ciOiJ1bml0LXRlc3RpbmcsYW5ndWxhcmpzLGphc21pbmUsa2FybWEtcnVubmVyLHgtdXNlci1yZWdpc3RlcmVkIiwibnciOjIyLCJyZiI6Imh0dHBzOi8vd3d3Lmdvb2dsZS5jby51ay8iLCJydiI6MCwicHIiOjE2MDQsInN0Ijo4Mjc3LCJ6biI6NDMsInVyIjoiaHR0cDovL2NhcmVlcnMuc3RhY2tvdmVyZmxvdy5jb20vam9icy90ZWxlY29tbXV0ZSJ9&s=6-FLQbqTza9tG_ITPKOgBnVTah8" rel="nofollow" target="_blank" title=""><img src="./Testing modular AngularJS w  Jasmine & Karma - Stack Overflow_files/d893babe671c41118c1fece177e0a21a.jpg" title="" alt="" border="0" width="728" height="90"></a><div class="adzerk-vote-controls" style="display: none;"><div class="adzerk-vote-option adzerk-vote-up"><div class="adzerk-vote-icon"></div></div><div class="adzerk-vote-option adzerk-vote-down"><div class="adzerk-vote-icon"></div></div></div><div class="adzerk-vote-survey" style="display:none;"><form><span>No problem. We won't show you that ad again. Why didn't you like it?</span><ul><li><label><input type="radio" value="12" name="downvoteReason">Uninteresting</label></li><li><label><input type="radio" value="13" name="downvoteReason">Misleading</label></li><li><label><input type="radio" value="14" name="downvoteReason">Offensive</label></li><li><label><input type="radio" value="15" name="downvoteReason">Repetitive</label></li></ul><a href="http://stackoverflow.com/questions/16625598/testing-modular-angularjs-w-jasmine-karma#" class="adzerk-vote-cancel">Oops! I didn't mean to do this.</a></form></div><img height="0px" width="0px" border="0" src="./Testing modular AngularJS w  Jasmine & Karma - Stack Overflow_files/i.gif"></div>
+
+
+    <table>
+        <tbody><tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="16625598">
+    <a class="vote-up-off" title="This question shows research effort; it is useful and clear">up vote</a>
+    <span class="vote-count-post ">1</span>
+    <a class="vote-down-off" title="This question does not show any research effort; it is unclear or not useful">down vote</a>
+    
+    <a class="star-off" href="http://stackoverflow.com/questions/16625598/testing-modular-angularjs-w-jasmine-karma#" title="This is a favorite question (click again to undo)">favorite</a>
+    <div class="favoritecount"><b></b></div>   
+
+</div>
+
+            </td>
+            
+<td class="postcell">
+<div>
+    <div class="post-text" itemprop="description">
+
+        <p>Struggling to get unit testing set up in Jasmine/Karma. I have a controller with a service dependency, and that service has another service dependency. I am not organizing my modules by type (Directives, Services, etc), but rather by feature (layout, summaryView, etc). </p>
+
+<p>Here's the architecture: </p>
+
+<pre class="default prettyprint prettyprinted" style=""><code><span class="pln">angular</span><span class="pun">.</span><span class="kwd">module</span><span class="pun">(</span><span class="str">'myApp'</span><span class="pun">,</span><span class="pln"> </span><span class="pun">[</span><span class="str">'ngResource'</span><span class="pun">,</span><span class="pln"> </span><span class="str">'myApp.base'</span><span class="pun">,</span><span class="pln"> </span><span class="str">'myApp.layout'</span><span class="pun">,</span><span class="str">'myApp.common'</span><span class="pun">]);</span><span class="pln">
+angular</span><span class="pun">.</span><span class="kwd">module</span><span class="pun">(</span><span class="str">'myApp.base'</span><span class="pun">,</span><span class="pln"> </span><span class="pun">[</span><span class="str">'myApp.common'</span><span class="pun">]);</span><span class="pln">
+angular</span><span class="pun">.</span><span class="kwd">module</span><span class="pun">(</span><span class="str">'myApp.common'</span><span class="pun">,[]);</span><span class="pln">
+angular</span><span class="pun">.</span><span class="kwd">module</span><span class="pun">(</span><span class="str">'myApp.layout'</span><span class="pun">,[</span><span class="str">'myApp.common'</span><span class="pun">]);</span></code></pre>
+
+<p>Controller: </p>
+
+<pre class="default prettyprint prettyprinted" style=""><code><span class="pln">angular</span><span class="pun">.</span><span class="kwd">module</span><span class="pun">(</span><span class="str">'myApp.layout'</span><span class="pun">)</span><span class="pln">
+    </span><span class="pun">.</span><span class="pln">controller</span><span class="pun">(</span><span class="str">'LayoutCtrl'</span><span class="pun">,</span><span class="pln"> </span><span class="pun">[</span><span class="str">'$scope'</span><span class="pun">,</span><span class="pln"> </span><span class="str">'$rootScope'</span><span class="pun">,</span><span class="pln"> </span><span class="str">'$timeout'</span><span class="pun">,</span><span class="pln"> </span><span class="str">'layoutService'</span><span class="pun">,</span><span class="pln"> </span><span class="str">'urlService'</span><span class="pun">,</span><span class="pln"> </span><span class="str">'BaseService'</span><span class="pun">,</span><span class="pln">
+        </span><span class="kwd">function</span><span class="pln"> </span><span class="pun">(</span><span class="pln">$scope</span><span class="pun">,</span><span class="pln"> $rootScope</span><span class="pun">,</span><span class="pln"> $timeout</span><span class="pun">,</span><span class="pln"> layoutService</span><span class="pun">,</span><span class="pln"> urlService</span><span class="pun">,</span><span class="pln"> </span><span class="typ">BaseService</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+            </span><span class="com">//controller code here</span><span class="pln">
+    </span><span class="pun">});</span></code></pre>
+
+<p>Layout Service: </p>
+
+<pre class="default prettyprint prettyprinted" style=""><code><span class="pln"> angular</span><span class="pun">.</span><span class="kwd">module</span><span class="pun">(</span><span class="str">'myApp.layout'</span><span class="pun">)</span><span class="pln">
+    </span><span class="pun">.</span><span class="pln">service</span><span class="pun">(</span><span class="str">'layoutService'</span><span class="pun">,</span><span class="pln"> </span><span class="pun">[</span><span class="str">'$http'</span><span class="pun">,</span><span class="pln"> </span><span class="str">'$resource'</span><span class="pun">,</span><span class="pln"> </span><span class="str">'$rootScope'</span><span class="pun">,</span><span class="pln"> </span><span class="str">'$location'</span><span class="pun">,</span><span class="pln"> </span><span class="str">'$route'</span><span class="pun">,</span><span class="pln"> </span><span class="str">'errorHandlingService'</span><span class="pun">,</span><span class="pln"> </span><span class="str">'utilService'</span><span class="pun">,</span><span class="pln">
+        </span><span class="kwd">function</span><span class="pln"> </span><span class="pun">(</span><span class="pln">$http</span><span class="pun">,</span><span class="pln"> $resource</span><span class="pun">,</span><span class="pln"> $rootScope</span><span class="pun">,</span><span class="pln"> $location</span><span class="pun">,</span><span class="pln"> $route</span><span class="pun">,</span><span class="pln"> errorHandlingService</span><span class="pun">,</span><span class="pln"> utilService</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+            </span><span class="com">//service code here</span><span class="pln">
+    </span><span class="pun">});</span></code></pre>
+
+<p>From what I understand, if I simply include <code>beforeEach(module('myApp.layout'));</code>, I should have access to my controllers, services, filters, and directives in my layout module.</p>
+
+<p>Instead, the following code fails: </p>
+
+<pre class="default prettyprint prettyprinted" style=""><code><span class="pln">describe</span><span class="pun">(</span><span class="str">'Layout Controller'</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">function</span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+  </span><span class="kwd">var</span><span class="pln"> ctrl</span><span class="pun">,</span><span class="pln"> scope</span><span class="pun">,</span><span class="pln"> service</span><span class="pun">;</span><span class="pln">
+
+  beforeEach</span><span class="pun">(</span><span class="kwd">module</span><span class="pun">(</span><span class="str">'myApp'</span><span class="pun">));</span><span class="pln">
+  beforeEach</span><span class="pun">(</span><span class="kwd">module</span><span class="pun">(</span><span class="str">'myApp.layout'</span><span class="pun">));</span><span class="pln">
+  beforeEach</span><span class="pun">(</span><span class="pln">inject</span><span class="pun">(</span><span class="kwd">function</span><span class="pun">(</span><span class="pln">$controller</span><span class="pun">,</span><span class="pln"> $rootScope</span><span class="pun">,</span><span class="pln"> layoutService</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+
+      scope </span><span class="pun">=</span><span class="pln"> $rootScope</span><span class="pun">.</span><span class="pln">$new</span><span class="pun">();</span><span class="pln">
+      service </span><span class="pun">=</span><span class="pln"> layoutService</span><span class="pun">;</span><span class="pln">
+      </span><span class="com">//Create the controller with the new scope</span><span class="pln">
+      ctrl </span><span class="pun">=</span><span class="pln"> $controller</span><span class="pun">(</span><span class="str">'LayoutCtrl'</span><span class="pun">,</span><span class="pln"> </span><span class="pun">{</span><span class="pln">$scope</span><span class="pun">:</span><span class="pln"> scope</span><span class="pun">,</span><span class="pln"> layoutService</span><span class="pun">:</span><span class="pln"> service</span><span class="pun">});</span><span class="pln">
+      </span><span class="kwd">dump</span><span class="pun">(</span><span class="pln">scope</span><span class="pun">);</span><span class="pln">
+    </span><span class="pun">}));</span><span class="pln">
+    it</span><span class="pun">(</span><span class="str">'should exist'</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">function</span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+        expect</span><span class="pun">(</span><span class="pln">ctrl</span><span class="pun">).</span><span class="pln">toBeDefined</span><span class="pun">();</span><span class="pln">
+    </span><span class="pun">});</span><span class="pln">
+</span><span class="pun">});</span></code></pre>
+
+<p>With this error: </p>
+
+<pre class="default prettyprint prettyprinted" style=""><code><span class="typ">Chrome</span><span class="pln"> </span><span class="lit">26.0</span><span class="pln"> </span><span class="pun">(</span><span class="typ">Mac</span><span class="pun">)</span><span class="pln"> </span><span class="typ">Layout</span><span class="pln"> </span><span class="typ">Controller</span><span class="pln"> should exist FAILED
+    </span><span class="typ">Error</span><span class="pun">:</span><span class="pln"> </span><span class="typ">Unknown</span><span class="pln"> provider</span><span class="pun">:</span><span class="pln"> layoutServiceProvider </span><span class="pun">&lt;-</span><span class="pln"> layoutService
+        at </span><span class="typ">Error</span><span class="pln"> </span><span class="pun">(&lt;</span><span class="pln">anonymous</span><span class="pun">&gt;)</span><span class="pln">
+        at http</span><span class="pun">:</span><span class="com">//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js:28:236</span><span class="pln">
+        at </span><span class="typ">Object</span><span class="pun">.</span><span class="pln">c </span><span class="pun">[</span><span class="kwd">as</span><span class="pln"> </span><span class="kwd">get</span><span class="pun">]</span><span class="pln"> </span><span class="pun">(</span><span class="pln">http</span><span class="pun">:</span><span class="com">//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js:26:13)</span><span class="pln">
+        at http</span><span class="pun">:</span><span class="com">//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js:28:317</span><span class="pln">
+        at c </span><span class="pun">(</span><span class="pln">http</span><span class="pun">:</span><span class="com">//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js:26:13)</span><span class="pln">
+        at </span><span class="typ">Object</span><span class="pun">.</span><span class="pln">d </span><span class="pun">[</span><span class="kwd">as</span><span class="pln"> invoke</span><span class="pun">]</span><span class="pln"> </span><span class="pun">(</span><span class="pln">http</span><span class="pun">:</span><span class="com">//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js:26:147)</span><span class="pln">
+        at workFn </span><span class="pun">(</span><span class="pln">http</span><span class="pun">:</span><span class="com">//code.angularjs.org/1.0.4/angular-mocks.js:1754:20)</span><span class="pln">
+    </span><span class="typ">Error</span><span class="pun">:</span><span class="pln"> </span><span class="typ">Declaration</span><span class="pln"> </span><span class="typ">Location</span><span class="pln">
+        at window</span><span class="pun">.</span><span class="pln">jasmine</span><span class="pun">.</span><span class="pln">window</span><span class="pun">.</span><span class="pln">inject</span><span class="pun">.</span><span class="pln">angular</span><span class="pun">.</span><span class="pln">mock</span><span class="pun">.</span><span class="pln">inject </span><span class="pun">(</span><span class="pln">http</span><span class="pun">:</span><span class="com">//code.angularjs.org/1.0.4/angular-mocks.js:1740:25)</span><span class="pln">
+        at </span><span class="kwd">null</span><span class="pun">.&lt;</span><span class="pln">anonymous</span><span class="pun">&gt;</span><span class="pln"> </span><span class="pun">(</span><span class="str">/Users/</span><span class="pln">scottsilvi</span><span class="pun">/</span><span class="pln">svn</span><span class="pun">/</span><span class="pln">BARO</span><span class="pun">/</span><span class="pln">web</span><span class="pun">/</span><span class="pln">src</span><span class="pun">/</span><span class="pln">test</span><span class="pun">/</span><span class="pln">js</span><span class="pun">/</span><span class="pln">unit</span><span class="pun">/</span><span class="pln">myApp</span><span class="pun">.</span><span class="pln">layoutModule</span><span class="pun">.</span><span class="pln">js</span><span class="pun">:</span><span class="lit">6</span><span class="pun">:</span><span class="lit">14</span><span class="pun">)</span><span class="pln">
+        at </span><span class="pun">/</span><span class="typ">Users</span><span class="pun">/</span><span class="pln">scottsilvi</span><span class="pun">/</span><span class="pln">svn</span><span class="pun">/</span><span class="pln">BARO</span><span class="pun">/</span><span class="pln">web</span><span class="pun">/</span><span class="pln">src</span><span class="pun">/</span><span class="pln">test</span><span class="pun">/</span><span class="pln">js</span><span class="pun">/</span><span class="pln">unit</span><span class="pun">/</span><span class="pln">myApp</span><span class="pun">.</span><span class="pln">layoutModule</span><span class="pun">.</span><span class="pln">js</span><span class="pun">:</span><span class="lit">1</span><span class="pun">:</span><span class="lit">1</span><span class="pln">
+    </span><span class="typ">Expected</span><span class="pln"> </span><span class="kwd">undefined</span><span class="pln"> to be </span><span class="kwd">defined</span><span class="pun">.</span><span class="pln">
+    </span><span class="typ">Error</span><span class="pun">:</span><span class="pln"> </span><span class="typ">Expected</span><span class="pln"> </span><span class="kwd">undefined</span><span class="pln"> to be </span><span class="kwd">defined</span><span class="pun">.</span><span class="pln">
+        at </span><span class="kwd">null</span><span class="pun">.&lt;</span><span class="pln">anonymous</span><span class="pun">&gt;</span><span class="pln"> </span><span class="pun">(</span><span class="str">/Users/</span><span class="pln">scottsilvi</span><span class="pun">/</span><span class="pln">svn</span><span class="pun">/</span><span class="pln">BARO</span><span class="pun">/</span><span class="pln">web</span><span class="pun">/</span><span class="pln">src</span><span class="pun">/</span><span class="pln">test</span><span class="pun">/</span><span class="pln">js</span><span class="pun">/</span><span class="pln">unit</span><span class="pun">/</span><span class="pln">myApp</span><span class="pun">.</span><span class="pln">layoutModule</span><span class="pun">.</span><span class="pln">js</span><span class="pun">:</span><span class="lit">15</span><span class="pun">:</span><span class="lit">16</span><span class="pun">)</span><span class="pln">
+</span><span class="typ">Chrome</span><span class="pln"> </span><span class="lit">26.0</span><span class="pln"> </span><span class="pun">(</span><span class="typ">Mac</span><span class="pun">):</span><span class="pln"> </span><span class="typ">Executed</span><span class="pln"> </span><span class="lit">10</span><span class="pln"> of </span><span class="lit">10</span><span class="pln"> </span><span class="pun">(</span><span class="lit">1</span><span class="pln"> FAILED</span><span class="pun">)</span><span class="pln"> </span><span class="pun">(</span><span class="lit">0.36</span><span class="pln"> secs </span><span class="pun">/</span><span class="pln"> </span><span class="lit">0.014</span><span class="pln"> secs</span><span class="pun">)</span></code></pre>
+
+<p>Thoughts? </p>
+
+    </div>
+    <div class="post-taglist">
+        <a href="http://stackoverflow.com/questions/tagged/unit-testing" class="post-tag" title="" rel="tag">unit-testing</a> <a href="http://stackoverflow.com/questions/tagged/angularjs" class="post-tag" title="show questions tagged &#39;angularjs&#39;" rel="tag">angularjs</a> <a href="http://stackoverflow.com/questions/tagged/jasmine" class="post-tag" title="show questions tagged &#39;jasmine&#39;" rel="tag">jasmine</a> <a href="http://stackoverflow.com/questions/tagged/karma-runner" class="post-tag" title="" rel="tag">karma-runner</a> 
+    </div>
+    <table class="fw">
+    <tbody><tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="http://stackoverflow.com/q/16625598/1228691" title="short permalink to this question" class="short-link" id="link-post-16625598">share</a><span class="lsep">|</span><a href="http://stackoverflow.com/posts/16625598/edit" class="suggest-edit-post" title="revise and improve this post">edit</a><span class="lsep">|</span><a href="http://stackoverflow.com/questions/16625598/testing-modular-angularjs-w-jasmine-karma#" class="flag-post-link" title="flag this post for serious problems or moderator attention" data-postid="16625598">flag</a></div>        
+    </td>
+    <td class="post-signature owner">
+        
+
+    <div class="user-info user-hover">
+        <div class="user-action-time">
+            
+
+                    asked <span title="2013-05-18 14:53:30Z" class="relativetime">May 18 at 14:53</span>
+        </div>
+        <div class="user-gravatar32">
+            <a href="http://stackoverflow.com/users/585152/scott-silvi"><div class=""><img src="./Testing modular AngularJS w  Jasmine & Karma - Stack Overflow_files/09aa1159e104607363b2ad0ee7b670b5" alt="" width="32" height="32"></div></a>
+        </div>
+        <div class="user-details">
+            <a href="http://stackoverflow.com/users/585152/scott-silvi">Scott Silvi</a><br>
+            <span class="reputation-score" title="reputation score" dir="ltr">1,096</span><span title="5 silver badges"><span class="badge2"></span><span class="badgecount">5</span></span><span title="27 bronze badges"><span class="badge3"></span><span class="badgecount">27</span></span>
+        </div>
+    </div>
+
+    </td>
+    </tr>
+    </tbody></table>
+</div>
+</td>
+        </tr>
+
+
+<tr>
+<td class="votecell"></td>
+<td>
+    <div id="comments-16625598" class="comments">
+        <table>
+        <tbody>
+                    
+    <tr id="comment-23962421" class="comment" data-commentid="23962421">
+        <td class="comment-actions"><table><tbody><tr>
+<td class="comment-score">
+<span title="number of &#39;useful comment&#39; votes received" class="cool">2</span>
+</td>
+<td>
+<a class="comment-up comment-up-off" title="this comment adds something useful to the post">upvote</a>
+</td></tr>
+<tr><td>&nbsp;</td><td><a class="comment-flag" title="flag this comment as unconstructive, offensive, or spam">flag</a></td></tr></tbody></table></td>
+        <td class="comment-text"><div><span class="comment-copy">Are you sure that all files are being loaded and are being loaded in the correct order?</span> –&nbsp;<a href="http://stackoverflow.com/users/2316696/jmr" title="458 reputation" class="comment-user">Jmr</a> <span class="comment-date" dir="ltr"><a class="comment-link" href="http://stackoverflow.com/questions/16625598/testing-modular-angularjs-w-jasmine-karma#comment23962421_16625598"><span title="2013-05-20 20:06:08Z" class="relativetime-clean">May 20 at 20:06</span></a></span></div></td>
+    </tr>
+            
+    <tr id="comment-23963118" class="comment" data-commentid="23963118">
+        <td class="comment-actions"><table><tbody><tr>
+<td class="comment-score">
+<span>&nbsp;</span>
+</td>
+<td>
+<a class="comment-up comment-up-off" title="this comment adds something useful to the post">upvote</a>
+</td></tr>
+<tr><td>&nbsp;</td><td><a class="comment-flag" title="flag this comment as unconstructive, offensive, or spam">flag</a></td></tr></tbody></table></td>
+        <td class="comment-text"><div><span class="comment-copy">yeah that turned out to be the issue. Some of the dependencies in myApp module weren't being loaded. As soon as I loaded them all, the tests started working. Go ahead and file an answer and I'll mark as correct. Thx.</span> –&nbsp;<a href="http://stackoverflow.com/users/585152/scott-silvi" title="1096 reputation" class="comment-user owner">Scott Silvi</a> <span class="comment-date" dir="ltr"><a class="comment-link" href="http://stackoverflow.com/questions/16625598/testing-modular-angularjs-w-jasmine-karma#comment23963118_16625598"><span title="2013-05-20 20:30:10Z" class="relativetime-clean">May 20 at 20:30</span></a></span></div></td>
+    </tr>
+
+        </tbody>
+    
+        <tfoot>
+            <tr>
+                <td></td>
+                <td class="comment-form"><form id="add-comment-16625598" data-placeholdertext="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”."></form></td>
+            </tr>
+        </tfoot>
+    
+        </table>
+    </div>
+    <a id="comments-link-16625598" class="comments-link" data-comments-counts="0" title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”." href="http://stackoverflow.com/questions/16625598/testing-modular-angularjs-w-jasmine-karma#">add comment</a>
+</td>
+</tr>                  <tr class="bounty-notification">
+          <td class="votecell"></td>
+          <td>
+          <div style="margin-top:20px">
+            <a class="bounty-link bounty" title="offer some of your reputation for better answers">
+                start a bounty
+            </a>
+          </div>
+          </td>
+          </tr>
+    </tbody></table>    
+</div>
+
+
+    <div id="answers">
+
+    <a name="tab-top"></a>
+    <div id="answers-header">
+        <div class="subheader answers-subheader">
+            <h2>
+                    1 Answer
+            </h2>
+            <div id="tabs">
+                <a href="http://stackoverflow.com/questions/16625598/testing-modular-angularjs-w-jasmine-karma?answertab=active#tab-top" title="Answers with the latest activity first">active</a>
+<a href="http://stackoverflow.com/questions/16625598/testing-modular-angularjs-w-jasmine-karma?answertab=oldest#tab-top" title="Answers in the order they were provided">oldest</a>
+<a class="youarehere" href="http://stackoverflow.com/questions/16625598/testing-modular-angularjs-w-jasmine-karma?answertab=votes#tab-top" title="Answers with the highest score first">votes</a>
+
+            </div>
+        </div>    
+    </div>    
+
+
+
+
+  
+<a name="16659877"></a>
+<div id="answer-16659877" class="answer accepted-answer" data-answerid="16659877">
+    <table>
+        <tbody><tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="16659877">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">3</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+        <span class="vote-accepted-on load-accepted-answer-date" title="loading when this answer was accepted...">accepted</span>
+</div>
+
+            </td>
+            
+
+
+<td class="answercell">
+    <div class="post-text"><p>Often a Unknown Provider error comes from files not being loaded, or being loaded in the incorrect order. Check which files are present while your tests are running.</p>
+</div>
+    <table class="fw">
+    <tbody><tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="http://stackoverflow.com/a/16659877/1228691" title="short permalink to this answer" class="short-link" id="link-post-16659877">share</a><span class="lsep">|</span><a href="http://stackoverflow.com/posts/16659877/edit" class="suggest-edit-post" title="revise and improve this post">edit</a><span class="lsep">|</span><a href="http://stackoverflow.com/questions/16625598/testing-modular-angularjs-w-jasmine-karma#" class="flag-post-link" title="flag this post for serious problems or moderator attention" data-postid="16659877">flag</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    
+
+    <div class="user-info ">
+        <div class="user-action-time">
+            
+
+                        answered <span title="2013-05-20 23:29:19Z" class="relativetime">May 20 at 23:29</span>
+        </div>
+        <div class="user-gravatar32">
+            <a href="http://stackoverflow.com/users/2316696/jmr"><div class=""><img src="./Testing modular AngularJS w  Jasmine & Karma - Stack Overflow_files/ec8150609d2d6616944b3751ef3309ec" alt="" width="32" height="32"></div></a>
+        </div>
+        <div class="user-details">
+            <a href="http://stackoverflow.com/users/2316696/jmr">Jmr</a><br>
+            <span class="reputation-score" title="reputation score" dir="ltr">458</span><span title="8 bronze badges"><span class="badge3"></span><span class="badgecount">8</span></span>
+        </div>
+    </div>
+
+    </td>
+    </tr>
+    </tbody></table>
+</td>
+        </tr>
+
+
+
+<tr>
+<td class="votecell"></td>
+<td>
+    <div id="comments-16659877" class="comments dno">
+        <table>
+        <tbody>
+        
+            <tr><td></td><td></td></tr>
+        
+        </tbody>
+    
+        <tfoot>
+            <tr>
+                <td></td>
+                <td class="comment-form"><form id="add-comment-16659877" data-placeholdertext="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”."></form></td>
+            </tr>
+        </tfoot>
+    
+        </table>
+    </div>
+    <a id="comments-link-16659877" class="comments-link" data-comments-counts="0" title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”." href="http://stackoverflow.com/questions/16625598/testing-modular-angularjs-w-jasmine-karma#">add comment</a>
+</td>
+</tr>
+    </tbody></table>
+</div>
+    <a name="new-answer"></a>
+    <form id="post-form" action="http://stackoverflow.com/questions/16625598/answer/submit" method="post" class="post-form">
+        <input type="hidden" id="post-id" value="16625598">
+        <h2 class="space">Your Answer</h2>
+
+
+
+    
+<script type="text/javascript">
+    StackExchange.ready(function() {
+        initTagRenderer("".split(" "), "".split(" "));
+         
+        prepareEditor({
+            heartbeatType: 'answer',
+            bindNavPrevention: true,
+            postfix: "",
+            onDemand: false,
+            discardSelector: ".discard-answer"
+            
+        });
+        
+
+    });  
+</script>
+
+
+<div id="post-editor" class="post-editor">
+
+    <div style="position: relative;">     
+        <div class="wmd-container">
+            <div id="wmd-button-bar" class="wmd-button-bar"><ul id="wmd-button-row" class="wmd-button-row"><li class="wmd-button" id="wmd-bold-button" title="Strong &lt;strong&gt; Ctrl+B" style="left: 0px;"><span style="background-position: 0px 0px;"></span></li><li class="wmd-button" id="wmd-italic-button" title="Emphasis &lt;em&gt; Ctrl+I" style="left: 25px;"><span style="background-position: -20px 0px;"></span></li><li class="wmd-spacer wmd-spacer1" id="wmd-spacer1"></li><li class="wmd-button" id="wmd-link-button" title="Hyperlink &lt;a&gt; Ctrl+L" style="left: 75px;"><span style="background-position: -40px 0px;"></span></li><li class="wmd-button" id="wmd-quote-button" title="Blockquote &lt;blockquote&gt; Ctrl+Q" style="left: 100px;"><span style="background-position: -60px 0px;"></span></li><li class="wmd-button" id="wmd-code-button" title="Code Sample &lt;pre&gt;&lt;code&gt; Ctrl+K" style="left: 125px;"><span style="background-position: -80px 0px;"></span></li><li class="wmd-button" id="wmd-image-button" title="Image &lt;img&gt; Ctrl+G" style="left: 150px;"><span style="background-position: -100px 0px;"></span></li><li class="wmd-spacer wmd-spacer2" id="wmd-spacer2"></li><li class="wmd-button" id="wmd-olist-button" title="Numbered List &lt;ol&gt; Ctrl+O" style="left: 200px;"><span style="background-position: -120px 0px;"></span></li><li class="wmd-button" id="wmd-ulist-button" title="Bulleted List &lt;ul&gt; Ctrl+U" style="left: 225px;"><span style="background-position: -140px 0px;"></span></li><li class="wmd-button" id="wmd-heading-button" title="Heading &lt;h1&gt;/&lt;h2&gt; Ctrl+H" style="left: 250px;"><span style="background-position: -160px 0px;"></span></li><li class="wmd-button" id="wmd-hr-button" title="Horizontal Rule &lt;hr&gt; Ctrl+R" style="left: 275px;"><span style="background-position: -180px 0px;"></span></li><li class="wmd-spacer wmd-spacer3" id="wmd-spacer3"></li><li class="wmd-button" id="wmd-undo-button" title="Undo - Ctrl+Z" style="left: 325px;"><span style="background-position: -200px -20px;"></span></li><li class="wmd-button" id="wmd-redo-button" title="Redo - Ctrl+Shift+Z" style="left: 350px;"><span style="background-position: -220px -20px;"></span></li><li class="wmd-button wmd-help-button" id="wmd-help-button" title="Markdown Editing Help" style="right: 0px;"><span style="background-position: -240px 0px;"></span></li></ul></div>
+            <textarea id="wmd-input" class="wmd-input processed" name="post-text" cols="92" rows="15" tabindex="101" data-min-length=""></textarea>
+        <div class="grippie" style="margin-right: 0px;"></div></div>
+    </div>
+
+    <div class="fl" style="margin-top: 8px; height:24px;">&nbsp;</div>
+    <div id="draft-saved" class="draft-saved community-option fl" style="margin-top: 8px; height:24px; display:none;">draft saved</div>
+
+    <div id="draft-discarded" class="draft-discarded community-option fl" style="margin-top: 8px; height:24px; display:none;">draft discarded</div>
+
+    <div class="community-option">
+        <input id="communitymode" name="communitymode" type="checkbox">
+        <label for="communitymode" title="Marking an answer community wiki encourages others to edit it by lowering the reputation barrier required to edit. However, you will not gain any upvote reputation from it. This cannot be undone.">community wiki</label>
+    </div>
+
+
+    <div id="wmd-preview" class="wmd-preview"></div>
+    <div></div>
+    <div class="edit-block">
+        <input id="fkey" name="fkey" type="hidden" value="f7c1815b74248a4cacbcb13d6c21be51">
+        <input id="author" name="author" type="text">
+    </div>
+</div>
+        <div style="position: relative;"> 
+        </div>
+           
+            <div class="form-submit cbt">
+            <input id="submit-button" type="submit" value="Post Your Answer" tabindex="110">
+            <a href="http://stackoverflow.com/questions/16625598/testing-modular-angularjs-w-jasmine-karma#" class="discard-answer dno">discard</a>
+        </div>
+    </form>
+
+
+
+        <h2 class="bottom-notice">
+                Not the answer you're looking for? 
+            Browse other questions tagged <a href="http://stackoverflow.com/questions/tagged/unit-testing" class="post-tag" title="show questions tagged &#39;unit-testing&#39;" rel="tag">unit-testing</a> <a href="http://stackoverflow.com/questions/tagged/angularjs" class="post-tag" title="show questions tagged &#39;angularjs&#39;" rel="tag">angularjs</a> <a href="http://stackoverflow.com/questions/tagged/jasmine" class="post-tag" title="show questions tagged &#39;jasmine&#39;" rel="tag">jasmine</a> <a href="http://stackoverflow.com/questions/tagged/karma-runner" class="post-tag" title="show questions tagged &#39;karma-runner&#39;" rel="tag">karma-runner</a> 
+                or <a href="http://stackoverflow.com/questions/ask">ask your own question</a>.
+        </h2>
+</div>
+</div>
+<div id="sidebar" class="show-votes">
+        <div class="module question-stats">
+        <p class="label-key">tagged</p>
+        <div class="tagged"><a href="http://stackoverflow.com/questions/tagged/unit-testing" class="post-tag" title="show questions tagged &#39;unit-testing&#39;" rel="tag">unit-testing</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">×</span>&nbsp;<span class="item-multiplier-count">19544</span></span><br>
+<a href="http://stackoverflow.com/questions/tagged/angularjs" class="post-tag" title="show questions tagged &#39;angularjs&#39;" rel="tag">angularjs</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">×</span>&nbsp;<span class="item-multiplier-count">10395</span></span><br>
+<a href="http://stackoverflow.com/questions/tagged/jasmine" class="post-tag" title="show questions tagged &#39;jasmine&#39;" rel="tag">jasmine</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">×</span>&nbsp;<span class="item-multiplier-count">1029</span></span><br>
+<a href="http://stackoverflow.com/questions/tagged/karma-runner" class="post-tag" title="show questions tagged &#39;karma-runner&#39;" rel="tag">karma-runner</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">×</span>&nbsp;<span class="item-multiplier-count">153</span></span><br>
+</div>
+        <table id="qinfo">
+            <tbody><tr>
+                <td><p class="label-key">asked</p></td>
+                <td style="padding-left:10px"><p class="label-key" title="2013-05-18 14:53:30Z"><b>2 months ago</b></p></td>
+            </tr>
+            <tr>
+                <td><p class="label-key">viewed</p></td>
+
+                <td style="padding-left:10px">
+                    <p class="label-key">
+                        <b>1471 times</b>
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td><p class="label-key">active</p></td>
+                <td style="padding-left:10px"><p class="label-key"><b><a href="http://stackoverflow.com/questions/16625598/testing-modular-angularjs-w-jasmine-karma?lastactivity" class="lastactivity-link" title="2013-05-20 23:29:19Z">2 months ago</a></b></p></td>
+            </tr>
+        </tbody></table>
+    </div>
+        
+                    <script type="text/javascript">
+                    var scriptSrc = "http://engine.adzerk.net/z/8277/adzerk1_2_4_43,adzerk2_2_17_45?keywords=unit-testing,angularjs,jasmine,karma-runner,x-user-registered";
+                    if (document.referrer) {
+                        if (/\?/.test(scriptSrc))
+                            scriptSrc += "&";
+                        else
+                            scriptSrc += "?";
+                        scriptSrc += "xReferrer=" + document.referrer;
+                    }
+                    StackExchange.ready(function() {
+                        var z = document.createElement("script");
+                        z.type = "text/javascript";
+                        z.async = "true";
+                        z.src = scriptSrc;
+                        var s = document.getElementsByTagName("script")[0];
+                        s.parentNode.insertBefore(z, s);
+                    });
+                </script>
+            
+    <div id="hireme"> <a href="http://careers.stackoverflow.com/jobs?a=288" class="top" target="_blank"></a> <ul class="jobs"> <li> <a href="http://careers.stackoverflow.com/jobs/37900/software-engineer-up-to-35-000-negotiable-plus-travis-perkins?a=KdSougvK" target="_blank" title="Software Engineer up to £35,000 (negotiable) + benefits Northampton at Travis Perkins. Click to learn more."> Software Engineer up to £35,000 (negotiable) + benefits…<br> <span class="company">Travis Perkins</span> <span class="location">Northampton, United Kingdom</span> </a> </li> <li> <a href="http://careers.stackoverflow.com/jobs/37186/senior-developer-and-leader-scala-java-tim-group?a=JlT3vhzG" target="_blank" title="Senior Developer and Leader - Scala, Java , Backbone,js, Bootstrap at TIM Group. Click to learn more."> Senior Developer and Leader - Scala, Java , Backbone,js,…<br> <span class="company">TIM Group</span> <span class="location">Boston, MA; London, United…</span> </a> </li> <li> <a href="http://careers.stackoverflow.com/jobs/38551/php-developer-ttnc-limited?a=L142ebAI" target="_blank" title="PHP Developer at TTNC Limited. Click to learn more."> PHP Developer<br> <span class="company">TTNC Limited</span> <span class="location">Chelmsford, United Kingdom</span> </a> </li> <li> <a href="http://careers.stackoverflow.com/jobs/37989/front-end-developer-javascript-html-css-unibet?a=Kkzimses" target="_blank" title="Front End Developer (Javascript/HTML/CSS) at Unibet. Click to learn more."> Front End Developer (Javascript/HTML/CSS)<br> <span class="company">Unibet</span> <span class="location">Wimbledon, United Kingdom</span> </a> </li> <li> <a href="http://careers.stackoverflow.com/jobs/33146/back-end-node-js-developer-xara-group?a=EqmAAyQ0" target="_blank" title="Back-end Node.js Developer at Xara Group. Click to learn more."> Back-end Node.js Developer<br> <span class="company">Xara Group</span> <span class="location">Hemel Hempstead, United Kingdom</span> </a> </li> <li> <a href="http://careers.stackoverflow.com/jobs/38496/php-web-developer-taskhub-co-uk-piccadilly-taskhub?a=KWUbDHTa" target="_blank" title="PHP Web Developer | taskhub.co.uk | Piccadilly Circus, London at Taskhub. Click to learn more."> PHP Web Developer | taskhub.co.uk | Piccadilly Circus,…<br> <span class="company">Taskhub</span> <span class="location">London, United Kingdom</span> </a> </li> </ul> <img alt="" class="impression" src="./Testing modular AngularJS w  Jasmine & Karma - Stack Overflow_files/KdSougvK-L142ebAI-JlT3vhzG-Kkzimses-EqmAAyQ0-KWUbDHTa-288" style="display:none"></div>
+
+
+
+      
+    
+    <div class="module sidebar-related">
+        <h4 id="h-related">Related</h4>
+        <div class="related" data-tracker="rq=1">
+            <div class="spacer">
+<a href="http://stackoverflow.com/q/15924136?rq=1" title="Vote score (upvotes - downvotes)">
+        <div class="answer-votes answered-accepted default">1</div>
+</a>
+<a href="http://stackoverflow.com/questions/15924136/test-angularjs-factory-function-with-jasmine?rq=1" class="question-hyperlink">Test AngularJS factory function with Jasmine</a>
+</div>
+<div class="spacer">
+<a href="http://stackoverflow.com/q/15992494?rq=1" title="Vote score (upvotes - downvotes)">
+        <div class="answer-votes answered-accepted default">0</div>
+</a>
+<a href="http://stackoverflow.com/questions/15992494/angularjs-karma-testacular-unit-test-failing?rq=1" class="question-hyperlink">AngularJS + Karma (Testacular) - Unit Test failing</a>
+</div>
+<div class="spacer">
+<a href="http://stackoverflow.com/q/16028647?rq=1" title="Vote score (upvotes - downvotes)">
+        <div class="answer-votes answered-accepted default">4</div>
+</a>
+<a href="http://stackoverflow.com/questions/16028647/karma-not-executing-any-unit-tests?rq=1" class="question-hyperlink">Karma not executing any unit tests</a>
+</div>
+<div class="spacer">
+<a href="http://stackoverflow.com/q/16242568?rq=1" title="Vote score (upvotes - downvotes)">
+        <div class="answer-votes default">0</div>
+</a>
+<a href="http://stackoverflow.com/questions/16242568/angularjs-jasmine-test-scripts-failing-fn-is-not-function?rq=1" class="question-hyperlink">AngularJS + Jasmine test scripts failing fn is not function</a>
+</div>
+<div class="spacer">
+<a href="http://stackoverflow.com/q/16563967?rq=1" title="Vote score (upvotes - downvotes)">
+        <div class="answer-votes default">1</div>
+</a>
+<a href="http://stackoverflow.com/questions/16563967/angularjs-karma-reuse-a-mock-service-when-unit-testing-directives-or-controll?rq=1" class="question-hyperlink">AngularJS + Karma: reuse a mock service when unit testing directives or controllers</a>
+</div>
+<div class="spacer">
+<a href="http://stackoverflow.com/q/16661082?rq=1" title="Vote score (upvotes - downvotes)">
+        <div class="answer-votes default">1</div>
+</a>
+<a href="http://stackoverflow.com/questions/16661082/testing-angularjs-with-jasmine-via-karma?rq=1" class="question-hyperlink">Testing AngularJS with Jasmine via Karma</a>
+</div>
+<div class="spacer">
+<a href="http://stackoverflow.com/q/16958203?rq=1" title="Vote score (upvotes - downvotes)">
+        <div class="answer-votes default">1</div>
+</a>
+<a href="http://stackoverflow.com/questions/16958203/testing-angularjs-controllers-with-resource-services?rq=1" class="question-hyperlink">Testing AngularJS controllers with resource services</a>
+</div>
+<div class="spacer">
+<a href="http://stackoverflow.com/q/17095738?rq=1" title="Vote score (upvotes - downvotes)">
+        <div class="answer-votes answered-accepted default">1</div>
+</a>
+<a href="http://stackoverflow.com/questions/17095738/calling-scope-methods-in-jasmine?rq=1" class="question-hyperlink">Calling $scope methods in jasmine</a>
+</div>
+<div class="spacer">
+<a href="http://stackoverflow.com/q/17554727?rq=1" title="Vote score (upvotes - downvotes)">
+        <div class="answer-votes default">0</div>
+</a>
+<a href="http://stackoverflow.com/questions/17554727/mocking-angular-module-dependencies-in-jasmine-unit-tests?rq=1" class="question-hyperlink">Mocking Angular module dependencies in Jasmine unit tests</a>
+</div>
+<div class="spacer">
+<a href="http://stackoverflow.com/q/17601744?rq=1" title="Vote score (upvotes - downvotes)">
+        <div class="answer-votes default">1</div>
+</a>
+<a href="http://stackoverflow.com/questions/17601744/using-karma-runner-with-angularjs-jasmine-coffescript?rq=1" class="question-hyperlink">Using Karma-runner with AngularJS, Jasmine, CoffeScript</a>
+</div>
+
+        </div>
+    </div>
+</div>
+
+<div id="feed-link">
+    <div id="feed-link-text"><a href="http://stackoverflow.com/feeds/question/16625598" title="feed of this question and its answers"><span class="feed-icon"></span>question feed</a></div>
+</div>
+<script type="text/javascript">
+StackExchange.ready(function(){$.get('/posts/16625598/ivc/c48a');});
+</script>
+<noscript>
+    &lt;div&gt;&lt;img src="/posts/16625598/ivc/c48a" class="dno" alt="" width="0" height="0"&gt;&lt;/div&gt;
+</noscript><div style="display:none" id="prettify-lang">default</div></div>
+
+
+        </div>
+    </div>
+    <div id="footer" class="categories">
+        <div class="footerwrap">
+            <div id="footer-menu">
+                <div class="top-footer-links">
+                        <a href="http://stackoverflow.com/about">about</a>
+                    <a href="http://stackoverflow.com/help">help</a>
+                    <a href="http://blog.stackexchange.com/?blb=1">blog</a>
+                        <a href="http://chat.stackoverflow.com/">chat</a>
+                    <a href="http://data.stackexchange.com/">data</a>
+                    <a href="http://stackexchange.com/legal">legal</a>
+                    <a href="http://stackexchange.com/legal/privacy-policy">privacy policy</a>
+                    <a href="http://stackexchange.com/about/hiring">jobs</a>
+                    <a href="http://engine.adzerk.net/r?e=eyJhdiI6NDE0LCJhdCI6MjAsImNtIjo5NTQsImNoIjoxMTc4LCJjciI6Mjc3NiwiZG0iOjQsImZjIjoyODYyLCJmbCI6Mjc1MSwibnciOjIyLCJydiI6MCwicHIiOjExNSwic3QiOjAsInVyIjoiaHR0cDovL3N0YWNrb3ZlcmZsb3cuY29tL2Fib3V0L2NvbnRhY3QiLCJyZSI6MX0&s=hRods5B22XvRBwWIwtIMekcyNF8">advertising info</a>
+
+                    <a onclick="StackExchange.switchMobile(&quot;on&quot;, &quot;/questions/16625598/testing-modular-angularjs-w-jasmine-karma&quot;)">mobile</a>
+                    <b><a href="http://stackoverflow.com/contact">contact us</a></b>
+                        <b><a href="http://meta.stackoverflow.com/">feedback</a></b>
+                    
+                </div>
+                <div id="footer-sites">
+                    <table>
+    <tbody><tr>
+            <th colspan="3">
+                Technology
+            </th>
+            <th>
+                Life / Arts
+            </th>
+            <th>
+                Culture / Recreation
+            </th>
+            <th>
+                Science
+            </th>
+            <th>
+                Other
+            </th>
+    </tr>
+    <tr>
+            <td>
+                <ol>
+                        <li><a href="http://stackoverflow.com/" title="professional and enthusiast programmers">Stack Overflow</a></li>
+                        <li><a href="http://serverfault.com/" title="professional system and network administrators">Server Fault</a></li>
+                        <li><a href="http://superuser.com/" title="computer enthusiasts and power users">Super User</a></li>
+                        <li><a href="http://webapps.stackexchange.com/" title="power users of web applications">Web Applications</a></li>
+                        <li><a href="http://askubuntu.com/" title="Ubuntu users and developers">Ask Ubuntu</a></li>
+                        <li><a href="http://webmasters.stackexchange.com/" title="pro webmasters">Webmasters</a></li>
+                        <li><a href="http://gamedev.stackexchange.com/" title="professional and independent game developers">Game Development</a></li>
+                        <li><a href="http://tex.stackexchange.com/" title="users of TeX, LaTeX, ConTeXt, and related typesetting systems">TeX - LaTeX</a></li>
+                            </ol></td><td><ol>
+                        <li><a href="http://programmers.stackexchange.com/" title="professional programmers interested in conceptual questions about software development">Programmers</a></li>
+                        <li><a href="http://unix.stackexchange.com/" title="users of Linux, FreeBSD and other Un*x-like operating systems.">Unix &amp; Linux</a></li>
+                        <li><a href="http://apple.stackexchange.com/" title="power users of Apple hardware and software">Ask Different (Apple)</a></li>
+                        <li><a href="http://wordpress.stackexchange.com/" title="WordPress developers and administrators">WordPress Answers</a></li>
+                        <li><a href="http://gis.stackexchange.com/" title="cartographers, geographers and GIS professionals">Geographic Information Systems</a></li>
+                        <li><a href="http://electronics.stackexchange.com/" title="electronics and electrical engineering professionals, students, and enthusiasts">Electrical Engineering</a></li>
+                        <li><a href="http://android.stackexchange.com/" title="enthusiasts and power users of the Android operating system">Android Enthusiasts</a></li>
+                        <li><a href="http://security.stackexchange.com/" title="IT security professionals">IT Security</a></li>
+                            </ol></td><td><ol>
+                        <li><a href="http://dba.stackexchange.com/" title="database professionals who wish to improve their database skills and learn from others in the community">Database Administrators</a></li>
+                        <li><a href="http://drupal.stackexchange.com/" title="Drupal developers and administrators">Drupal Answers</a></li>
+                        <li><a href="http://sharepoint.stackexchange.com/" title="SharePoint enthusiasts">SharePoint</a></li>
+                        <li><a href="http://ux.stackexchange.com/" title="user experience researchers and experts">User Experience</a></li>
+                        <li><a href="http://mathematica.stackexchange.com/" title="users of Mathematica">Mathematica</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#technology" class="more">
+                                more (13)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://photo.stackexchange.com/" title="professional, enthusiast and amateur photographers">Photography</a></li>
+                        <li><a href="http://scifi.stackexchange.com/" title="science fiction and fantasy enthusiasts">Science Fiction &amp; Fantasy</a></li>
+                        <li><a href="http://cooking.stackexchange.com/" title="professional and amateur chefs">Seasoned Advice (cooking)</a></li>
+                        <li><a href="http://diy.stackexchange.com/" title="contractors and serious DIYers">Home Improvement</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#lifearts" class="more">
+                                more (13)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://english.stackexchange.com/" title="linguists, etymologists, and serious English language enthusiasts">English Language &amp; Usage</a></li>
+                        <li><a href="http://skeptics.stackexchange.com/" title="scientific skepticism">Skeptics</a></li>
+                        <li><a href="http://judaism.stackexchange.com/" title="those who base their lives on Jewish law and tradition and anyone interested in learning more">Mi Yodeya (Judaism)</a></li>
+                        <li><a href="http://travel.stackexchange.com/" title="road warriors and seasoned travelers">Travel</a></li>
+                        <li><a href="http://christianity.stackexchange.com/" title="committed Christians, experts in Christianity and those interested in learning more">Christianity</a></li>
+                        <li><a href="http://gaming.stackexchange.com/" title="passionate videogamers on all platforms">Arqade (gaming)</a></li>
+                        <li><a href="http://bicycles.stackexchange.com/" title="people who build and repair bicycles, people who train cycling, or commute on bicycles">Bicycles</a></li>
+                        <li><a href="http://rpg.stackexchange.com/" title="gamemasters and players of tabletop, paper-and-pencil role-playing games">Role-playing Games</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#culturerecreation" class="more">
+                                more (21)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://math.stackexchange.com/" title="people studying math at any level and professionals in related fields">Mathematics</a></li>
+                        <li><a href="http://stats.stackexchange.com/" title="statisticians, data analysts, data miners and data visualization experts">Cross Validated (stats)</a></li>
+                        <li><a href="http://cstheory.stackexchange.com/" title="theoretical computer scientists and researchers in related fields">Theoretical Computer Science</a></li>
+                        <li><a href="http://physics.stackexchange.com/" title="active researchers, academics and students of physics">Physics</a></li>
+                        <li><a href="http://mathoverflow.net/" title="professional mathematicians">MathOverflow</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#science" class="more">
+                                more (7)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://stackapps.com/" title="apps, scripts, and development with the Stack Exchange API">Stack Apps</a></li>
+                        <li><a href="http://meta.stackoverflow.com/" title="meta-discussion of the Stack Exchange family of Q&amp;A websites">Meta Stack Overflow</a></li>
+                        <li><a href="http://area51.stackexchange.com/" title="proposing new sites in the Stack Exchange network">Area 51</a></li>
+                        <li><a href="http://careers.stackoverflow.com/">Stack Overflow Careers</a></li>
+                    
+                </ol>
+            </td>
+    </tr>
+</tbody></table>
+                </div>
+            </div>
+
+            <div id="copyright">
+                site design / logo © 2013 stack exchange inc; 
+                user contributions licensed under <a href="http://creativecommons.org/licenses/by-sa/3.0/" rel="license">cc-wiki</a> 
+                with <a href="http://blog.stackoverflow.com/2009/06/attribution-required/" rel="license">attribution required</a>
+            </div>
+            <div id="footer-flair">
+                <a href="http://creativecommons.org/licenses/by-sa/3.0/" class="cc-wiki-link"></a>
+            </div>
+            <div id="svnrev">
+                rev 2013.8.15.947
+            </div>
+            
+        </div>
+    </div>
+    <noscript>
+        &lt;div id="noscript-warning"&gt;Stack Overflow works best with JavaScript enabled&lt;img src="http://pixel.quantserve.com/pixel/p-c1rF4kxgLUzNc.gif" alt="" class="dno"&gt;&lt;/div&gt;
+    </noscript>
+
+    <script type="text/javascript">var _gaq=_gaq||[];_gaq.push(['_setAccount','UA-5620270-1']);
+        _gaq.push(['_setCustomVar', 1, 'tags', '|unit-testing|angularjs|jasmine|karma-runner|']); 
+        _gaq.push(['_setCustomVar', 2, 'accountid', '1272770',2]); 
+_gaq.push(['_trackPageview']);
+    var _qevents = _qevents || [];
+    (function () {
+        var ssl='https:'==document.location.protocol,
+            s=document.getElementsByTagName('script')[0],
+            ga=document.createElement('script');
+        ga.type='text/javascript';
+        ga.async=true;
+        ga.src=(ssl?'https://ssl':'http://www')+'.google-analytics.com/ga.js';
+        s.parentNode.insertBefore(ga,s);
+        var sc=document.createElement('script');
+        sc.type='text/javascript';
+        sc.async=true;
+        sc.src=(ssl?'https://secure':'http://edge')+'.quantserve.com/quant.js';
+        s.parentNode.insertBefore(sc,s);
+    })();
+    _qevents.push({ qacct: "p-c1rF4kxgLUzNc" });
+    </script>        
+    
+
+</body></html>

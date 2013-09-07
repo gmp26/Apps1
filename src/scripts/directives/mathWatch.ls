@@ -36,9 +36,7 @@ angular.module('app').directive 'mathWatch', [
           $window.addEventListener "load", _renderMath
 
       # 
-      # Trigger a MathJax render on the watched element on creation
+      # Watch for TeX changes
       # 
-      # renderMath!
-
       scope.$watch attrs.mathWatch, renderMath, false
 ]

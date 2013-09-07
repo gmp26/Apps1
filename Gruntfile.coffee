@@ -223,16 +223,16 @@ module.exports = (grunt) ->
           server: path.resolve './server'
 
     # Compresses png files
-    imagemin:
-      img:
-        files: [
-          cwd: './src/'
-          src: '**/*.png'
-          dest: './.temp/'
-          expand: true
-        ]
-        options:
-          optimizationLevel: 7
+    # imagemin:
+    #   img:
+    #     files: [
+    #       cwd: './src/'
+    #       src: '**/*.png'
+    #       dest: './.temp/'
+    #       expand: true
+    #     ]
+    #     options:
+    #       optimizationLevel: 7
 
     # Compile LESS (.less) files to CSS (.css).
     less:
@@ -396,7 +396,7 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks 'grunt-contrib-clean'
   grunt.loadNpmTasks 'grunt-contrib-coffee'
   grunt.loadNpmTasks 'grunt-contrib-copy'
-  grunt.loadNpmTasks 'grunt-contrib-imagemin'
+  #grunt.loadNpmTasks 'grunt-contrib-imagemin'
   grunt.loadNpmTasks 'grunt-contrib-less'
   grunt.loadNpmTasks 'grunt-contrib-livereload'
   grunt.loadNpmTasks 'grunt-contrib-requirejs'
@@ -598,7 +598,7 @@ module.exports = (grunt) ->
     'copy:fonts'
     'template:prod'
     'restrict'
-    'imagemin'
+    #'imagemin'
     'ngTemplateCache'
     'requirejs'
     'minifyHtml'
