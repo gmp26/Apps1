@@ -1,3 +1,14 @@
+# DO NOT USE FOR NEW APPS
+
+Instead use [yeoman](http://yeoman.io) and our [LiveScript app generator](http://github.com/gmp26/generator-angular-ls).
+
+The result is much easier to update and maintain - and it's much better if each app has its own repo rather than
+have them all piled in here.
+
+You will need to install angular-ui/bootstrap from bower if you need it.
+You may want then want to remove jQuery from the generated app.
+
+
 # Apps1
 A collection of Apps for [NRICH](http://nrich.maths.org)
 *By [@grumplet](https://twitter.com/grumplet)*
