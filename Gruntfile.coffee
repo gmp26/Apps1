@@ -17,7 +17,7 @@ module.exports = (grunt) ->
         ]
 
     #compile livescript (.ls) files to javascript (.js)
-    livescript:
+    lsc:
       scripts:
         files: [
           cwd: './src/'
@@ -126,6 +126,15 @@ module.exports = (grunt) ->
           expand: true       
         ]
 
+      # Copy fonts
+      fonts:
+        files: [
+          cwd: './src/'
+          src: ['**/*.ttf','**/*.svg','**/*.woff']
+          dest: './.temp/'
+          expand: true
+        ]
+
       # Copies js files to the temp directory
       js:
         files: [
@@ -213,7 +222,7 @@ module.exports = (grunt) ->
           monitor: {}
           server: path.resolve './server'
 
-    # Compresses png files
+    #Compresses png files
     imagemin:
       img:
         files: [
@@ -241,16 +250,6 @@ module.exports = (grunt) ->
         files:
           './.temp/index.min.html': './.temp/index.html'
 
-    # Gathers all views and creates a file to push views directly into the $templateCache
-    # This will produce a file with the following content.
-    #
-    # angular.module('app').run(['$templateCache', function ($templateCache) {
-    #   $templateCache.put('/views/directives/tab.html', '<div class="tab-pane" ng-class="{active: selected}" ng-transclude></div>');
-    #   $templateCache.put('/views/directives/tabs.html', '<div class="tabbable"> <ul class="nav nav-tabs"> <li ng-repeat="tab in tabs" ng-class="{active:tab.selected}"> <a href="http://localhost:3005/scripts/views.js" ng-click="select(tab)">{{tab.caption}}</a> </li> </ul> <div class="tab-content" ng-transclude></div> </div>');
-    #   $templateCache.put('/views/people.html', '<ul ng-hide="!people.length"> <li class="row" ng-repeat="person in people | orderBy:\'name\'"> <a ng-href="#/people/{{person.id}}" ng-bind="person.name"></a> </li> </ul>');
-    #   $templateCache.put('/views/repos.html', '<ul ng-hide="!repos.length"> <li ng-repeat="repo in repos | orderBy:\'pushed_at\':true"> <a ng-href="{{repo.url}}" ng-bind="repo.name" target="_blank"></a> <div ng-bind="repo.description"></div> </li> </ul>');
-    #   $templateCache.put('/views/tweets.html', '<ul ng-hide="!tweets.length"> <li class="row" ng-repeat="tweet in tweets"> <div class="span1 thumbnail"> <img ng-src="{{tweet.profile_image_url}}"/> </div> <div class="span6"> <div> <b ng-bind="tweet.from_user_name"></b> <a ng-href="https://twitter.com/{{tweet.from_user}}" ng-bind="tweet.from_user | twitterfy" target="_blank"></a> </div> <div ng-bind="tweet.text"></div> </div> </li> </ul>');
-    # }]);
     #
     # This file is then included in the output automatically.  AngularJS will use it instead of going to the file system for the views, saving requests.  Notice that the view content is actually minified.  :)
     ngTemplateCache:
@@ -336,7 +335,7 @@ module.exports = (grunt) ->
         ]
         tasks: [
           'coffee:scripts'
-          'livescript:scripts'
+          'lsc:scripts'
           'copy:js'
           'copy:scripts'
           'restrict'
@@ -404,7 +403,7 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks 'grunt-contrib-watch'
 
   # livescript compiler
-  grunt.loadNpmTasks('grunt-livescript')
+  grunt.loadNpmTasks('grunt-lsc')
 
   # Express server + LiveReload
   grunt.loadNpmTasks 'grunt-express'
@@ -468,15 +467,6 @@ module.exports = (grunt) ->
       styleFileContent += grunt.util.normalizelf(imp + '\n')
     grunt.file.write('./src/scripts/pubs/styles.less', styleFileContent)
 
-  ###
-  # Read and apply the application mask
-  grunt.registerTask 'restrict', "Read and apply the application mask", ->
-    mask = ''
-    if grunt.file.exists '.appmask'
-      mask = grunt.file.read '.appmask'
-    if mask.length > 0 then grunt.task.run [ "copy:"+mask ]
-  ###
-
   # Read and apply the application mask
   grunt.registerTask 'restrict', "Read and apply the application mask", ->
     mask = ''
@@ -485,7 +475,7 @@ module.exports = (grunt) ->
 
     # if mask is non trivial
     if mask.length > 0
-      # discover whether custom a copy:<mask> exists
+      # discover whether a custom copy:<mask> exists
       customConfig = grunt.config 'copy.'+mask
       if customConfig?
         grunt.log.writeln "Running copy:"+mask
@@ -573,12 +563,13 @@ module.exports = (grunt) ->
   grunt.registerTask 'default', "Default dev build", [
     'clean:working'
     'coffee:scripts'
-    'livescript:scripts'
+    'lsc:scripts'
     'copy:js'
     'appstyles'
     'less'
     'template:views'
     'copy:img'
+    'copy:fonts'
     'template:dev'
     'restrict'
     'copy:dev'
@@ -598,12 +589,13 @@ module.exports = (grunt) ->
   grunt.registerTask 'prod', "Production build for currently masked apps", [
     'clean:working'
     'coffee:scripts'
-    'livescript:scripts'
+    'lsc:scripts'
     'copy:js'
     'appstyles'
     'less'
     'template:views'
     'copy:img'
+    'copy:fonts'
     'template:prod'
     'restrict'
     'imagemin'

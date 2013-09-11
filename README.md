@@ -1,3 +1,14 @@
+# DO NOT USE FOR NEW APPS
+
+Instead use [yeoman](http://yeoman.io) and our [LiveScript app generator](http://github.com/gmp26/generator-angular-ls).
+
+The result is much easier to update and maintain - and it's much better if each app has its own repo rather than
+have them all piled in here.
+
+You will need to install angular-ui/bootstrap from bower if you need it.
+You may want then want to remove jQuery from the generated app.
+
+
 # Apps1
 A collection of Apps for [NRICH](http://nrich.maths.org)
 *By [@grumplet](https://twitter.com/grumplet)*
@@ -16,6 +27,26 @@ Converted codebase to [LiveScript](http://livescript.net).
 
 Updated to grunt-0.4 in all but the playlist branch which is
 still at grunt-0.3.
+
+## Now using grunt-lsc updated to LiveScript 1.2.0
+
+Until npm module grunt-lsc is published at v1.0.1 - the one that uses Livescript 1.2.0 - use [this trick](http://www.devthought.com/2012/02/17/npm-tricks/) to link it from a copy cloned from the github repo which is already at v1.0.1:
+
+
+```
+$ git clone https://github.com/gwwfps/grunt-lsc.git
+$ cd grunt-lsc
+$ npm link
+$ cd ~/angular/Apps1
+
+# this will install your local version of grunt-lsc
+$ npm link grunt-lsc
+
+# since grunt-lsc is now installed, npm install will ignore it:
+$ npm install
+
+``` 
+
 
 ## About
 Apps1 is an [AngularJS](http://angularjs.org/) app collection.

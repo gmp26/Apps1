@@ -17,6 +17,9 @@ angular.module('app').factory 'config', ->
           "C30"
           "C13"
           "C17"
+          "C35"
+          "C36"
+          "C37"
 
     * title: "Curve sketching"
       topicIds:
@@ -35,6 +38,8 @@ angular.module('app').factory 'config', ->
           "C32"
           "C33"
           "C34"
+          "C38"
+          "C39"
 
     * title: "Sequences & series"
       topicIds:
@@ -75,7 +80,7 @@ angular.module('app').factory 'config', ->
           #"F3"
           "F4"
           "F5"
-          "F6"
+          # "F6"
           "F7"
           "F8"
           "F9"
@@ -199,6 +204,21 @@ angular.module('app').factory 'config', ->
       "C34":
         * "Intersections of circles and lines"
           makeCircLineInter
+      "C35":
+        * "Highest common factors"
+          makeHCF
+      "C36":
+        * "Least common multiples"
+          makeLCM
+      "C37":
+        * "Integer solutions to equations"
+          makeDiophantine
+      "C38":
+        * "Distance between points"
+          makeDistance
+      "C39":
+        * "Circle passing through three points"
+          makeCircumCircle
 
       "F1":
         * "Complex Arithmetic"

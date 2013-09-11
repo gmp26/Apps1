@@ -17,8 +17,8 @@
     </form>
   </div>
 
-  <tabs>
-    <pane id="helpTab" heading="Help">
+  <tabset>
+    <tab id="helpTab" heading="Help">
       <h5>Getting Started</h5>
       <p>
       Use the input box in the <a ng-click="openAbout()" href="">Mathmo</a> header to add a new named exercise. Each exercise appears in a new tab. Click on the tab to add questions on any of a large choice of topics. These same questions stay with you until you choose to delete them.
@@ -41,21 +41,16 @@
       <h5>Sharing</h5>
       <p>You can share questions with your friends. Press the share button to see available methods.</p>
 
-    </pane>
-    <pane ng-repeat="pane in panes" heading="{{pane.name}}" active="pane.active">
-      <!--
-      <div style="margin-bottom:20px;">
-        <button class="btn btn-primary" style="float:left" ng-click="openAddQ(pane)">Add a question</button>
-        <button class="btn btn-danger" tooltip="Delete exercise {{pane.name}}" tooltip-placement="left" style="float:right" ng-click="delQSet($index)"><i class="icon-remove icon-white"></i></button>
-      </div>
-      -->
+    </tab>
+    <tab ng-repeat="pane in panes" heading="{{pane.name}}" active="pane.active">
       <div ng-repeat="qa in pane.questions" class="well well-large" style="background-color:#F4F9F8">
-        <h5 style="float:left">Q{{$index+1}}: {{qa.topic}}</h5>
+        <h5 style="float:left" >Q{{$index+1}}: {{qa.topic}}</h5>
         <div class="btn-group pull-right" tooltip="Similar questions" tooltip-placement="top">
-          <button class="btn" ng-click="prevOnTopic(qa)">Prev</button>
-          <button class="btn" ng-click="nextOnTopic(qa)">Next</button>
+          <!-- $parent is the scope that will need a mathJax render -->
+          <button class="btn" ng-click="prevOnTopic(qa, $parent)">Prev</button>
+          <button class="btn" ng-click="nextOnTopic(qa, $parent)">Next</button>
         </div>
-        <p ng-bind-html-unsafe="qa.q" style="clear:both"></p>
+        <p ng-bind-html-unsafe="qa.q" style="clear:both" math-watch="qa.q"></p>
 
         <button class="btn pull-right"
           ng-click="openShare(qa)"
@@ -74,8 +69,9 @@
           </span>
         </a>
 
+
         <!--<div collapse="qa.isCollapsed">-->
-        <div ng-hide="qa.isCollapsed">
+        <div ng-hide="qa.isCollapsed" math-watch="qa.a">
            <div ng-switch on="qa.isGraph()" >
             <div ng-switch-when="html">
               <div ng-bind-html-unsafe="qa.a"></div>
@@ -111,8 +107,8 @@
         <button class="btn btn-danger" tooltip="Delete exercise {{pane.name}}" tooltip-placement="left" style="float:right" ng-click="delQSet($index)"><i class="icon-remove icon-white"></i></button>
       </div>
 
-    </pane>
-  </tabs>
+    </tab>
+  </tabset>
 
 
   <hr/>
@@ -126,35 +122,44 @@
 
   <div modal="shareOpen" close="closeShare()" options="shareOpts">
     <div class="modal-header">
-      <h3>Share Question</h3>
+        <button class="btn btn-warning cancel pull-right" ng-click="closeShare()">Close</button>
+        <h3>Share this question</h3>
     </div>
     <div class="modal-body share">
-      <textarea rows="3">{{shareText}}</textarea>
-      <p>to one of these services:</p>
-
-      <ul class="btn-group unstyled">
-        <li class="btn"tooltip="Email" tooltip-placement="bottom"><a ng-href="mailto:?subject={{encodeURI(currentQuestion.url)}}&amp;body={{encodeURI(shareText)}}" target="_blank"><img src="https://sharenice.org/images/icon-email.png"  alt="email_icon" title="email" ></a></li>
-
-        <li class="btn" tooltip="Facebook" tooltip-placement="bottom"><a ng-href="http://www.facebook.com/sharer.php?u={{encodeURI(currentQuestion.url)}}&amp;t=Demo%20shareNice" target="_blank"><img src="https://sharenice.org/images/facebook_com.png" alt="facebook.com_icon" title="facebook.com"></a></li>
-
-        <li class="btn" tooltip="Twitter" tooltip-placement="bottom"><a ng-href="http://twitter.com/?status={{encodeURI(shareText)}}" target="_blank"><img src="https://sharenice.org/images/twitter_com.png" alt="twitter.com_icon" title="twitter.com"></a></li>
-
-        <li class="btn" tooltip="Google Plus" tooltip-placement="bottom"><a ng-href="https://plus.google.com/_/+1/confirm?url={{encodeURI(currentQuestion.url)}}" target="_blank" ><img src="https://sharenice.org/images/plus_google_com.png" alt="plus.google.com_icon" title="plus.google.com"></a></li>
-
-        <li class="btn" tooltip="Delicious" tooltip-placement="bottom"><a ng-href="http://del.icio.us/post?url={{encodeURI(currentQuestion.url)}}" target="_blank" style="margin:0px; padding:0px;"><img src="https://sharenice.org/images/delicious_com.png" alt="delicious.com_icon" title="delicious.com"></a></button>
-
-        <!--
-        <li class="btn" tooltip="Digg" tooltip-placement="bottom"><a ng-href="http://digg.com/submit?phase=2&amp;url={{encodeURI(currentQuestion.url)}}" target="_blank"><img src="https://sharenice.org/images/digg_com.png" alt="digg.com_icon" title="digg.com"></a></li>
-        -->
-      </ul>
-    </div>
-    <div class="modal-footer">
-        <button class="btn btn-warning cancel" ng-click="closeShare()">Close</button>
+      <p>You can share this question using this url<br />
+        <strong>{{currentQuestion.url}}</strong><br />
+        or by using one of these services:
+        <ul class="unstyled inline">
+          <li >
+            <a class="btn" href="mailto:?subject=Mathmo%20Problem&amp;body={{shareText}}" target="_blank" tooltip="Share by email">
+              <span class="share-mail"></span>
+            </a>
+          </li>
+          <li >
+            <a class="btn" href="http://www.facebook.com/sharer.php?u={{shareUrl}}" target="_blank" tooltip="Share on facebook">
+              <span class="share-facebook"></span>
+          </a>
+          </li>
+          <li >
+            <a class="btn" href="http://twitter.com/share?text={{shareText}}" target="_blank" tooltip="Share on twitter">
+              <span class="share-twitter"></span>
+            </a>
+          </li>
+          <li >
+            <a class="btn" href="http://linkedin.com/shareArticle?mini=true?url={{shareUrl}}&amp;title=Mathmo%20Problem" target="_blank" tooltip="Share on LinkedIn">
+              <span class="share-linkedin"></span>
+            </a>
+          </li>
+        </ul>
+      </p>
     </div>
   </div>
 
+
+
   <div modal="addQOpen" close="closeAddQ()" options="addQOpts">
     <div class="modal-header">
+      <button class="btn btn-warning cancel pull-right" ng-click="closeAddQ()">Close</button>
       <h3>Add a question</h3>
       <h4>on topic</h4>
     </div>
@@ -167,14 +172,12 @@
         </accordion-group>
       </accordion>
     </div>
-    <div class="modal-footer">
-      <button class="btn btn-warning cancel" ng-click="closeAddQ()">Close</button>
-    </div>
   </div>
 
   <div modal="aboutOpen" close="closeAbout()" options="aboutOpts">
 
     <div class="modal-header">
+      <button class="btn btn-warning cancel pull-right" ng-click="closeAbout()">Close</button>
       <h4><img src="scripts/pubs/mathmo/img/icon.png" style="width:60px;height:60px"> About Mathmo</h4>
     </div>
     <div class="modal-body">
@@ -194,7 +197,10 @@
        Tom White, Edward Cree, with unit tests by Ben Millwood.
       </p>
       <p>
-      <a href="http://github.com/gmp26/mathmo">HTML5/Angular Implementation:</a> Mike Pearson.
+      Unit tests rewritten for Angular/Karma and extended, new questions added, multiple TeX improvements, and conversion of base problem generators to LiveScript by <a href="https://github.com/alexwlchan">Alex Chan</a>.
+      </p>
+      <p>
+      <a href="http://github.com/gmp26/Apps1">HTML5/Angular Implementation:</a> Mike Pearson.
       </p>
 
       <p>
@@ -209,8 +215,5 @@
 
     </div>
 
-    <div class="modal-footer">
-        <button class="btn btn-warning cancel" ng-click="closeAbout()">Close</button>
-    </div>
   </div>
 </div>
