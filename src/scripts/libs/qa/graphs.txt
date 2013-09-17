@@ -1,2 +1,0 @@
-makeModulus
-  var qString="Sketch the graph of \\(|"+a+"-|x||\\) for \\("+l+"\\leq{x}\\leq"+r+"\\).";

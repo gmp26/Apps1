@@ -1,71 +1,14 @@
 require {
   shim:
-    'libs/qa/helpers':
-      deps:
-        * 'libs/seedrandom'
-        ...
-
-    'libs/qa/complex':
-      deps:
-        * 'libs/seedrandom'
-          'libs/qa/polys'
-          'libs/qa/guessExact'
-          'libs/qa/helpers'
-
-    'libs/qa/fractions':
-      deps:
-        * 'libs/seedrandom'
-          'libs/qa/helpers'
-
-    'libs/qa/polys':
-      deps:
-        * 'libs/seedrandom'
-          'libs/qa/guessExact'
-          'libs/qa/helpers'
-
-    'libs/qa/fpolys':
-      deps:
-        * 'libs/seedrandom'
-          'libs/qa/helpers'
-          'libs/qa/fractions'
-
-    'libs/qa/guessExact':
-      deps:
-        * 'libs/seedrandom'
-          'libs/qa/helpers'
-          'libs/qa/fractions'
-
-    'libs/qa/stats':
-      deps:
-        * 'libs/seedrandom'
-          'libs/qa/helpers'
-
-    'libs/qa/geometry':
-      deps:
-        * 'libs/seedrandom'
-          'libs/qa/helpers'
-
-    'libs/qa/problems':
-      deps:
-        * 'libs/seedrandom'
-          'libs/qa/complex'
-          'libs/qa/fpolys'
-          'libs/qa/fractions'
-          'libs/qa/guessExact'
-          'libs/qa/helpers'
-          'libs/qa/polys'
-          'libs/qa/stats'
-          'libs/qa/geometry'
-
     'pubs/mathmo/services/config':
       deps:
         * 'app'
-          'libs/qa/problems'
+        'libs/qalib'
 
     'pubs/mathmo/services/questionStore':
       deps:
         * 'app'
-          'libs/seedrandom'
+        ...
 
     'pubs/mathmo/controllers/mathmoController':
       deps:
