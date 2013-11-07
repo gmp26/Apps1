@@ -35,8 +35,8 @@ angular.module('app').factory 'd3MultiLineChart', ->
         
         # Update the y-scale.
         yExtent = seriesExtent series, (d) -> d[1]
-        yExtent[0] = -yMax if yExtent[0] < -yMax
-        yExtent[1] = yMax if yExtent[1] > yMax
+        yExtent[0] = Math.floor(yExtent[0]) # nearest integer below
+        yExtent[1] = Math.ceil(yExtent[1]) # nearest integer above
         yScale.domain(yExtent).range [height, 0]
         
         # Select the plot element, if it exists, and join it with the data series
@@ -99,7 +99,7 @@ angular.module('app').factory 'd3MultiLineChart', ->
 
     width = 300
     height = 250
-    yMax = 10 # default extent becomes -yMax to yMax. 
+    yMax = 0 # class variable. Initialise to prevent chart.yMax throwing a wobbly.
     xValue = (d) -> d[0]
     yValue = (d) -> d[1]
 
@@ -136,6 +136,8 @@ angular.module('app').factory 'd3MultiLineChart', ->
 
     # TODO: refactor x and y extents so we can drag the chart around and
     # regenerate the plot area appropriately.
+    # Currently this isn't used usefully - chart bounds are selected from the
+    # extent of the input data.
     chart.yMax = (_) ->
       return yMax  unless arguments.length
       yMax := _
