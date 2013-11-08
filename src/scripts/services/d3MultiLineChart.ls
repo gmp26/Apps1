@@ -19,7 +19,26 @@ angular.module('app').factory 'd3MultiLineChart', ->
         [min, max] = d3.extent(data, accessor)
         extent[0] = min if min < extent[0]
         extent[1] = max if max > extent[1]
+      extent[0] = Math.floor(extent[0]) # nearest integer below
+      extent[1] = Math.ceil(extent[1])  #nearest integer above
       return extent
+
+    # sets the axes of the graph to use the same pixel scale
+    normaliseExtent = (xExtent, yExtent) ->
+      # work out pixel size of one unit in each of x and y axes
+      xSpan = xExtent[1] - xExtent[0]
+      xUnit = width / xSpan
+      ySpan = yExtent[1] - yExtent[0]
+      yUnit = height / ySpan
+
+      if yUnit > xUnit
+        yExtra = (height / xUnit) - ySpan
+        yExtent[0] = yExtent[0] - yExtra / 2
+        yExtent[1] = yExtent[1] + yExtra / 2
+      else if xUnit > yUnit
+        xExtra = (width / yUnit) - xSpan
+        xExtent[0] = xExtent[0] - xExtra / 2
+        xExtent[1] = xExtent[1] + xExtra / 2
 
     chart = (selection) ->
 
@@ -29,14 +48,16 @@ angular.module('app').factory 'd3MultiLineChart', ->
         # this is needed for nondeterministic accessors.
         series = series.map (data) ->
           data.map (d, i) -> [xValue.call(data, d, i), yValue.call(data, d, i)]
-        
+
+        # get axes extent from plot co-ordinates
         xExtent = seriesExtent series, (d) -> d[0]
-        xScale.domain(xExtent).range [0, width]
-        
-        # Update the y-scale.
         yExtent = seriesExtent series, (d) -> d[1]
-        yExtent[0] = Math.floor(yExtent[0]) # nearest integer below
-        yExtent[1] = Math.ceil(yExtent[1]) # nearest integer above
+
+        # set axes to use the same pixel scale
+        normaliseExtent(xExtent, yExtent)
+
+        # Update the axes ranges
+        xScale.domain(xExtent).range [0, width]
         yScale.domain(yExtent).range [height, 0]
         
         # Select the plot element, if it exists, and join it with the data series
