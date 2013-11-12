@@ -4512,7 +4512,7 @@ module.exports = function(problems){
       drawIt = function(parms){
         var d1, i$, i, x, y;
         d1 = [];
-        for (i$ = -1; i$ <= 1; i$ += 0.005) {
+        for (i$ = -2; i$ <= 2; i$ += 0.005) {
           i = i$;
           x = parms[0] * Math.cos(i * Math.PI);
           y = parms[1] * Math.sin(i * Math.PI);
@@ -6102,16 +6102,16 @@ function deepEq$(x, y, type){
     return result;
   }
 }
-},{"./complex":3,"./fpolys":5,"./fractions":6,"./geometry":7,"./guessExact":8,"./helpers":9,"./polys":10,"./stats":14}],"qalib":[function(require,module,exports){
-module.exports=require('gH93sY');
-},{}],"gH93sY":[function(require,module,exports){
+},{"./complex":3,"./fpolys":5,"./fractions":6,"./geometry":7,"./guessExact":8,"./helpers":9,"./polys":10,"./stats":14}],"gH93sY":[function(require,module,exports){
 module.exports = function(qalib){
   require('seedrandom');
   require('./helpers')(qalib);
   require('./config')(qalib);
   return qalib;
 };
-},{"./config":4,"./helpers":9,"seedrandom":"HU2YCy"}],14:[function(require,module,exports){
+},{"./config":4,"./helpers":9,"seedrandom":"HU2YCy"}],"qalib":[function(require,module,exports){
+module.exports=require('gH93sY');
+},{}],14:[function(require,module,exports){
 module.exports = function(stats){
   var facCache, factorial, combi, massBin, massPo, massGeo, massN, massNZ, massExp, genBern, genBin, genPo, genGeo, genExp, genN, genNZ, Phi_Taylor, istr, mktableT, tableT, mktableChi, tableChi, mktableN, tableN;
   facCache = [];
