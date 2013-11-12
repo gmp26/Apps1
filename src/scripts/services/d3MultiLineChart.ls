@@ -19,8 +19,8 @@ angular.module('app').factory 'd3MultiLineChart', ->
         [min, max] = d3.extent(data, accessor)
         extent[0] = min if min < extent[0]
         extent[1] = max if max > extent[1]
-      extent[0] = Math.floor(extent[0]) # nearest integer below
-      extent[1] = Math.ceil(extent[1])  #nearest integer above
+      extent[0] = Math.floor(extent[0]) - 0.5 # nearest integer below plus padding
+      extent[1] = Math.ceil(extent[1]) + 0.5  # nearest integer above plus padding
       return extent
 
     # sets the axes of the graph to use the same pixel scale
