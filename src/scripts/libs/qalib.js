@@ -4024,7 +4024,7 @@ module.exports = function(problems){
     return qa;
   };
   problems.makeParametric = makeParametric = function(){
-    var p, fnf, fnn, which, parms, fn, data, qString, drawIt, aString, qa;
+    var p, fnf, fnn, which, parms, fn, data, xlimit, ylimit, inc, qString, drawIt, aString, qa;
     p = new poly(rand(1, 2));
     p.setrand(2);
     if (p.rank === 1 && p[0] === 0 && p[1] === 1) {
@@ -4040,6 +4040,9 @@ module.exports = function(problems){
     parms = 0;
     fn = 0;
     data = "";
+    xlimit = 12;
+    ylimit = 12;
+    inc = 0.01;
     qString = "Sketch the curve in the \\(xy\\) plane given by \\(x = " + fnn[which[0]].replace(/z/g, 't') + ", y = " + fnn[which[1]].replace(/z/g, 't') + ". t\\) is a real parameter which ranges from \\(";
     if (which[0] && which[1]) {
       qString += " - 10";
@@ -4048,30 +4051,96 @@ module.exports = function(problems){
     }
     qString += " \\mbox{ to } 10.\\)";
     drawIt = function(parms){
-      var f, g, p, l, d1, i$, i, x, y;
+      var f, g, p, l, d1, calcpointx, calcpointy, xprev, yprev, i$, i, x, y, ylimitsigned, yi, xi, gradient, dx, xlimitsigned, dy;
       f = parms[0];
       g = parms[1];
       p = parms[2];
       l = parms[3];
       d1 = [];
-      for (i$ = l; i$ <= 10; i$ += 0.01) {
-        i = i$;
+      calcpointx = function(t){
+        var x;
         if (f) {
-          x = f(i);
+          x = f(t);
         } else {
-          x = p.compute(i);
+          x = p.compute(t);
         }
-        if (Math.abs(x) > 12) {
+        if (Math.abs(x) > xlimit) {
           x = null;
         }
+        return x;
+      };
+      calcpointy = function(t){
+        var y;
         if (g) {
-          y = g(i);
+          y = g(t);
         } else {
-          y = p.compute(i);
+          y = p.compute(t);
         }
-        if (Math.abs(y) > 12) {
+        if (Math.abs(y) > ylimit) {
           y = null;
         }
+        return y;
+      };
+      xprev = calcpointx(l - inc);
+      yprev = calcpointy(l - inc);
+      for (i$ = l; i$ <= 10; i$ += 0.01) {
+        i = i$;
+        x = calcpointx(i);
+        y = calcpointy(i);
+        if (!deepEq$(x, null, '===') && !deepEq$(xprev, null, '===')) {
+          if ((deepEq$(yprev, null, '===') && !deepEq$(y, null, '===')) || (!deepEq$(yprev, null, '===') && deepEq$(y, null, '==='))) {
+            ylimitsigned = ylimit;
+            if (deepEq$(yprev, null, '===')) {
+              if (y < 0) {
+                ylimitsigned = -ylimit;
+              }
+              yi = calcpointy(i + inc);
+              xi = calcpointx(i + inc);
+              gradient = (yi - y) / (xi - x);
+              dx = (y - ylimitsigned) / gradient;
+            } else {
+              if (yprev < 0) {
+                ylimitsigned = -ylimit;
+              }
+              yi = calcpointy(i - inc * 2);
+              xi = calcpointx(i - inc * 2);
+              gradient = (yprev - yi) / (xprev - xi);
+              dx = (ylimitsigned - yprev) / gradient;
+            }
+            xi = x + dx;
+            if (Math.abs(xi) <= xlimit) {
+              d1.push([xi, ylimitsigned]);
+            }
+          }
+        }
+        if (!deepEq$(y, null, '===') && !deepEq$(yprev, null, '===')) {
+          if ((deepEq$(xprev, null, '===') && !deepEq$(x, null, '===')) || (!deepEq$(xprev, null, '===') && deepEq$(x, null, '==='))) {
+            xlimitsigned = xlimit;
+            if (deepEq$(xprev, null, '===')) {
+              if (x < 0) {
+                xlimitsigned = -xlimit;
+              }
+              yi = calcpointy(i + inc);
+              xi = calcpointx(i + inc);
+              gradient = (xi - x) / (yi - y);
+              dy = (x - xlimitsigned) / gradient;
+            } else {
+              if (xprev < 0) {
+                xlimitsigned = -xlimit;
+              }
+              yi = calcpointy(i - inc * 2);
+              xi = calcpointx(i - inc * 2);
+              gradient = (xprev - xi) / (yprev - yi);
+              dy = (xlimitsigned - xprev) / gradient;
+            }
+            yi = y + dy;
+            if (Math.abs(yi) <= ylimit) {
+              d1.push([xlimitsigned, yi]);
+            }
+          }
+        }
+        xprev = x;
+        yprev = y;
         if (x && y) {
           d1.push([x, y]);
         } else {
@@ -6033,16 +6102,16 @@ function deepEq$(x, y, type){
     return result;
   }
 }
-},{"./complex":3,"./fpolys":5,"./fractions":6,"./geometry":7,"./guessExact":8,"./helpers":9,"./polys":10,"./stats":14}],"gH93sY":[function(require,module,exports){
+},{"./complex":3,"./fpolys":5,"./fractions":6,"./geometry":7,"./guessExact":8,"./helpers":9,"./polys":10,"./stats":14}],"qalib":[function(require,module,exports){
+module.exports=require('gH93sY');
+},{}],"gH93sY":[function(require,module,exports){
 module.exports = function(qalib){
   require('seedrandom');
   require('./helpers')(qalib);
   require('./config')(qalib);
   return qalib;
 };
-},{"./config":4,"./helpers":9,"seedrandom":"HU2YCy"}],"qalib":[function(require,module,exports){
-module.exports=require('gH93sY');
-},{}],14:[function(require,module,exports){
+},{"./config":4,"./helpers":9,"seedrandom":"HU2YCy"}],14:[function(require,module,exports){
 module.exports = function(stats){
   var facCache, factorial, combi, massBin, massPo, massGeo, massN, massNZ, massExp, genBern, genBin, genPo, genGeo, genExp, genN, genNZ, Phi_Taylor, istr, mktableT, tableT, mktableChi, tableChi, mktableN, tableN;
   facCache = [];
