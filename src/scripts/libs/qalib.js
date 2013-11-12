@@ -2356,7 +2356,7 @@ module.exports = function(polys){
 };
 },{"./helpers":9,"./stats":14}],11:[function(require,module,exports){
 module.exports = function(problems){
-  var polys, poly, polyexpand, abscoeff, ascoeff, p_linear, p_quadratic, fpolys, fpoly, fcoeff, fbcoeff, geometry, lineEq1, lineEq2, circleEq1, circleEq2, stats, rand, randnz, distrandnz, ranking, pickrand, distrand, massBin, massPo, massGeo, massN, tableN, tableT, tableChi, genN, genBin, genGeo, genPo, helpers, express, gcd, lcm, sinpi, vector, sqroot, ordt, simplifySurd, lincombination, signedNumber, fractions, frac, fmatrix, randfrac, cplex, Complex, gx, guessExact, makePartial, makeBinomial2, makePolyInt, makeTrigInt, makeVector, makeLines, makeLinesEq, makeLineParPerp, makeCircleEq, makeCircLineInter, makeIneq, makeAP, makeFactor, makeQuadratic, makeComplete, makeBinExp, makeLog, makeStationary, makeTriangle, makeCircle, makeSolvingTrig, makeVectorEq, makeModulus, makeTransformation, makeComposition, makeParametric, makeImplicit, makeChainRule, makeProductRule, makeQuotientRule, makeGP, makeImplicitFunction, makeIntegration, makeDE, makePowers, makeHCF, makeLCM, makeDiophantine, makeDistance, makeCircumCircle, makeCArithmetic, makeCPolar, makeDETwoHard, makeMatrixQ, makeMatrix2, makeMatrix3, makeTaylor, makePolarSketch, makeFurtherVector, makeNewtonRaphson, makeFurtherIneq, makeSubstInt, makeRevolution, makeMatXforms, makeDiscreteDistn, makeContinDistn, makeHypTest, makeConfidInt, makeChiSquare, makeProductMoment;
+  var polys, poly, polyexpand, abscoeff, ascoeff, p_linear, p_quadratic, fpolys, fpoly, fcoeff, fbcoeff, geometry, lineEq1, lineEq2, circleEq1, circleEq2, stats, rand, randnz, distrandnz, ranking, pickrand, distrand, massBin, massPo, massGeo, massN, tableN, tableT, tableChi, genN, genBin, genGeo, genPo, helpers, express, gcd, lcm, sinpi, vector, sqroot, ordt, simplifySurd, lincombination, signedNumber, fractions, frac, fmatrix, randfrac, cplex, Complex, gx, guessExact, yinterpolate, calcgradient, calcangle, makePartial, makeBinomial2, makePolyInt, makeTrigInt, makeVector, makeLines, makeLinesEq, makeLineParPerp, makeCircleEq, makeCircLineInter, makeIneq, makeAP, makeFactor, makeQuadratic, makeComplete, makeBinExp, makeLog, makeStationary, makeTriangle, makeCircle, makeSolvingTrig, makeVectorEq, makeModulus, makeTransformation, makeComposition, makeParametric, makeImplicit, makeChainRule, makeProductRule, makeQuotientRule, makeGP, makeImplicitFunction, makeIntegration, makeDE, makePowers, makeHCF, makeLCM, makeDiophantine, makeDistance, makeCircumCircle, makeCArithmetic, makeCPolar, makeDETwoHard, makeMatrixQ, makeMatrix2, makeMatrix3, makeTaylor, makePolarSketch, makeFurtherVector, makeNewtonRaphson, makeFurtherIneq, makeSubstInt, makeRevolution, makeMatXforms, makeDiscreteDistn, makeContinDistn, makeHypTest, makeConfidInt, makeChiSquare, makeProductMoment;
   polys = require('./polys')(problems);
   poly = polys.poly;
   polyexpand = polys.polyexpand;
@@ -2411,6 +2411,42 @@ module.exports = function(problems){
   Complex = cplex.Complex;
   gx = require('./guessExact')(problems);
   guessExact = gx.guessExact;
+  yinterpolate = function(x, y, yprev, ylimit, inc, calcy, l, r, points){
+    var ylimitsigned, yi, gradient, xylimit, xi;
+    if ((deepEq$(yprev, null, '===') && !deepEq$(y, null, '===')) || (!deepEq$(yprev, null, '===') && deepEq$(y, null, '==='))) {
+      ylimitsigned = ylimit;
+      if (deepEq$(yprev, null, '===')) {
+        if (y < 0) {
+          ylimitsigned = -ylimit;
+        }
+        yi = calcy(x + inc);
+        gradient = calcgradient(y, yi, inc);
+        xylimit = (y - ylimitsigned) / gradient;
+      } else {
+        if (yprev < 0) {
+          ylimitsigned = -ylimit;
+        }
+        yi = calcy(x - 2 * inc);
+        gradient = calcgradient(yi, yprev, inc);
+        xylimit = (ylimitsigned - yprev) / gradient;
+      }
+      xi = x + xylimit;
+      if (l <= xi && xi <= r) {
+        points.push([xi, ylimitsigned]);
+        return true;
+      }
+    }
+    return false;
+  };
+  calcgradient = function(y1, y2, dx){
+    return (y2 - y1) / dx;
+  };
+  calcangle = function(p1, p2, p3){
+    if (deepEq$(p1[1], null, '===') || deepEq$(p2[1], null, '===') || deepEq$(p3[1], null, '===')) {
+      return null;
+    }
+    return Math.atan2(p1[1] - p2[1], p1[0] - p2[0]) - Math.atan2(p3[1] - p2[1], p3[0] - p2[0]);
+  };
   problems.makePartial = makePartial = function(){
     var makePartial1, makePartial2, qa;
     makePartial1 = function(){
@@ -3853,7 +3889,7 @@ module.exports = function(problems){
     }
     qString += "x \\leq " + r + "\\).";
     drawIt = function(parms){
-      var p, q, f, l, r, d1, d2, n, i$, i, y1, y2;
+      var p, q, f, l, r, d1, d2, ylimit, inc, n, calcpoint1, calcpoint2, yprev1, yprev2, i$, i, y1, y2;
       p = parms[0];
       q = parms[1];
       f = parms[2];
@@ -3861,20 +3897,38 @@ module.exports = function(problems){
       r = parms[4];
       d1 = [];
       d2 = [];
+      ylimit = 20;
+      inc = 0.01;
       n = 0;
-      for (i$ = l; i$ <= r; i$ += 0.01) {
-        i = i$;
-        n++;
-        y1 = f(i);
-        if (Math.abs(y1) > 20) {
+      calcpoint1 = function(x){
+        var y1;
+        y1 = f(x);
+        if (Math.abs(y1) > ylimit) {
           y1 = null;
         }
-        d1.push([i, y1]);
-        y2 = p.compute(f(q.compute(i)));
-        if (Math.abs(y2) > 20) {
+        return y1;
+      };
+      calcpoint2 = function(x){
+        var y2;
+        y2 = p.compute(f(q.compute(x)));
+        if (Math.abs(y2) > ylimit) {
           y2 = null;
         }
+        return y2;
+      };
+      yprev1 = calcpoint1(l - inc);
+      yprev2 = calcpoint2(l - inc);
+      for (i$ = l; inc < 0 ? i$ >= r : i$ <= r; i$ += inc) {
+        i = i$;
+        y1 = calcpoint1(i);
+        yinterpolate(i, y1, yprev1, ylimit, inc, calcpoint1, l, r, d1);
+        d1.push([i, y1]);
+        yprev1 = y1;
+        y2 = calcpoint2(i);
+        yinterpolate(i, y2, yprev2, ylimit, inc, calcpoint2, l, r, d2);
         d2.push([i, y2]);
+        yprev2 = y2;
+        n++;
         if (n > 2500) {
           i = r;
         }
@@ -3902,7 +3956,7 @@ module.exports = function(problems){
     r = rand(Math.max(l + 5, 2), 8);
     qString = "Let \\(f(x) = " + fnn[which[0]].replace(/z/g, 'x') + ", g(x) = " + fnn[which[1]].replace(/z/g, 'x') + ".\\) Sketch the graph of \\(y = f(g(x))\\) (where it exists) for \\(" + l + "\\leq{x}\\leq" + r + "\\) and \\(-12\\leq{y}\\leq12.\\)";
     drawIt = function(parms){
-      var f, g, p, l, r, incinit, incmin, ylimit, calcpoints, calcpoint, calcgradient, calcangle, d1;
+      var f, g, p, l, r, incinit, incmin, ylimit, calcpoints, calcpoint, d1;
       f = parms[0];
       g = parms[1];
       p = parms[2];
@@ -3912,7 +3966,7 @@ module.exports = function(problems){
       incmin = incinit / 1024;
       ylimit = 12;
       calcpoints = function(l, r, inc){
-        var points, angles, n, yprev, i$, i, y, ylimitsigned, yi, gradient, iylimit, ii, angle, subpoints;
+        var points, angles, n, yprev, i$, i, y, angle, subpoints;
         points = [];
         angles = [null];
         n = 0;
@@ -3923,28 +3977,8 @@ module.exports = function(problems){
           if (Math.abs(y) > ylimit) {
             y = null;
           }
-          if ((deepEq$(yprev, null, '===') && !deepEq$(y, null, '===')) || (!deepEq$(yprev, null, '===') && deepEq$(y, null, '==='))) {
-            ylimitsigned = ylimit;
-            if (deepEq$(yprev, null, '===')) {
-              if (y < 0) {
-                ylimitsigned = -ylimit;
-              }
-              yi = calcpoint(i + inc);
-              gradient = calcgradient(y, yi, inc);
-              iylimit = (y - ylimitsigned) / gradient;
-            } else {
-              if (yprev < 0) {
-                ylimitsigned = -ylimit;
-              }
-              yi = calcpoint(i - 2 * inc);
-              gradient = calcgradient(yi, yprev, inc);
-              iylimit = (ylimitsigned - yprev) / gradient;
-            }
-            ii = i + iylimit;
-            if (l <= ii && ii <= r) {
-              n++;
-              points.push([ii, ylimitsigned]);
-            }
+          if (yinterpolate(i, y, yprev, ylimit, inc, calcpoint, l, r, points)) {
+            n++;
           }
           yprev = y;
           n++;
@@ -3981,15 +4015,6 @@ module.exports = function(problems){
           y3 = null;
         }
         return y3;
-      };
-      calcgradient = function(y1, y2, dx){
-        return (y2 - y1) / dx;
-      };
-      calcangle = function(p1, p2, p3){
-        if (deepEq$(p1[1], null, '===') || deepEq$(p2[1], null, '===') || deepEq$(p3[1], null, '===')) {
-          return null;
-        }
-        return Math.atan2(p1[1] - p2[1], p1[0] - p2[0]) - Math.atan2(p3[1] - p2[1], p3[0] - p2[0]);
       };
       d1 = calcpoints(l, r, incinit);
       return [d1];
@@ -6008,16 +6033,16 @@ function deepEq$(x, y, type){
     return result;
   }
 }
-},{"./complex":3,"./fpolys":5,"./fractions":6,"./geometry":7,"./guessExact":8,"./helpers":9,"./polys":10,"./stats":14}],"qalib":[function(require,module,exports){
-module.exports=require('gH93sY');
-},{}],"gH93sY":[function(require,module,exports){
+},{"./complex":3,"./fpolys":5,"./fractions":6,"./geometry":7,"./guessExact":8,"./helpers":9,"./polys":10,"./stats":14}],"gH93sY":[function(require,module,exports){
 module.exports = function(qalib){
   require('seedrandom');
   require('./helpers')(qalib);
   require('./config')(qalib);
   return qalib;
 };
-},{"./config":4,"./helpers":9,"seedrandom":"HU2YCy"}],14:[function(require,module,exports){
+},{"./config":4,"./helpers":9,"seedrandom":"HU2YCy"}],"qalib":[function(require,module,exports){
+module.exports=require('gH93sY');
+},{}],14:[function(require,module,exports){
 module.exports = function(stats){
   var facCache, factorial, combi, massBin, massPo, massGeo, massN, massNZ, massExp, genBern, genBin, genPo, genGeo, genExp, genN, genNZ, Phi_Taylor, istr, mktableT, tableT, mktableChi, tableChi, mktableN, tableN;
   facCache = [];
