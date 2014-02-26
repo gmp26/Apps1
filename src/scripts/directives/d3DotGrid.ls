@@ -107,6 +107,16 @@ angular.module('app').directive 'd3DotGrid', ->
 
         # We want array nesting here.
         data = [[{x:c, y:r} for r in [0 til @rows]] for c in [0 til @cols]]
+        # parity = false
+        # r3 = Math.sqrt 3
+        # r3_2 = r3 / 2
+        # data = for r from 0 til @rows by r3_2
+        #   parity = !parity
+        #   for c from 0 til @cols
+        #     if parity
+        #       {x:c, y:r}
+        #     else
+        #       {x:c+0.5, y:r}
 
         #
         # d3 magic starts here
