@@ -1,60 +1,56 @@
 {
-  "name": "Apps1",
-  "version": "0.1.6",
-  "author": {
-    "name": "Mike Pearson",
-    "email": "gmp26@cam.ac.uk",
-    "url": "https://github.com/gmp26"
-  },
-  "description": "NRICH App Collection Architecture",
-  "contributors": [
-    {
-      "name": "Alison Kiddle",
-      "email": "ajk44@cam.ac.uk",
-      "url": "https://github.com/ajk44"
+    "name": "Apps1",
+    "version": "0.1.6",
+    "author": {
+        "name": "Mike Pearson",
+        "email": "gmp26@cam.ac.uk",
+        "url": "https://github.com/gmp26"
     },
-    {
-      "name": "Cary Landholt",
-      "email": "cary@landholt.com",
-      "url": "https://github.com/CaryLandholt"
+    "description": "NRICH App Collection Architecture",
+    "contributors": [{
+        "name": "Alison Kiddle",
+        "email": "ajk44@cam.ac.uk",
+        "url": "https://github.com/ajk44"
+    }, {
+        "name": "Cary Landholt",
+        "email": "cary@landholt.com",
+        "url": "https://github.com/CaryLandholt"
+    }, {
+        "name": "David Bochenski",
+        "email": "david@bochenski.co.uk",
+        "url": "https://github.com/Bochenski"
+    }],
+    "main": "./server.coffee",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/gmp26/Apps1.git"
     },
-    {
-      "name": "David Bochenski",
-      "email": "david@bochenski.co.uk",
-      "url": "https://github.com/Bochenski"
+    "dependencies": {
+        "express": "~3.0.3",
+        "grunt-hustler": "~0.7.4"
+    },
+    "devDependencies": {
+        "coffee-script": "~1.6.1",
+        "express": "~3.1.0",
+        "grunt": "~0.4.0",
+        "grunt-contrib-clean": "~0.4.0",
+        "grunt-contrib-coffee": "~0.6.0",
+        "grunt-contrib-copy": "~0.4.0",
+        "grunt-contrib-imagemin": "~0.1.2",
+        "grunt-contrib-less": "~0.5.0",
+        "grunt-contrib-livereload": "~0.1.2",
+        "grunt-contrib-requirejs": "~0.4.0",
+        "grunt-contrib-watch": "~0.3.1",
+        "grunt-express": "~0.2.1",
+        "grunt-hustler": "~0.11.2",
+        "grunt-regarde": "~0.1.1",
+        "grunt-karma": "~0.4",
+        "socket.io": "~0.9.13",
+        "grunt-lsc": "~1.0.1",
+        "prelude-ls": "~0.6.0"
+    },
+    "engines": {
+        "node": "~0.8.x",
+        "npm": "~1.1.x"
     }
-  ],
-  "main": "./server.coffee",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/gmp26/Apps1.git"
-  },
-  "dependencies": {
-    "express": ">=3.0.3",
-    "grunt-hustler": ">=0.7.4"
-  },
-  "devDependencies": {
-    "coffee-script": ">=1.6.1",
-    "express": ">=3.1.0",
-    "grunt": ">=0.4.0",
-    "grunt-contrib-clean": ">=0.4.0",
-    "grunt-contrib-coffee": ">=0.6.0",
-    "grunt-contrib-copy": ">=0.4.0",
-    "grunt-contrib-imagemin": ">=0.1.2",
-    "grunt-contrib-less": ">=0.5.0",
-    "grunt-contrib-livereload": ">=0.1.2",
-    "grunt-contrib-requirejs": ">=0.4.0",
-    "grunt-contrib-watch": ">=0.3.1",
-    "grunt-express": ">=0.2.1",
-    "grunt-hustler": ">=0.11.2",
-    "grunt-regarde": ">=0.1.1",
-    "grunt-karma": ">=0.4",
-    "socket.io": ">=0.9.13",
-    "grunt-lsc": "~1.0.1",
-    "prelude-ls": ">=0.6.0"
-  },
-  "engines": {
-    "node": ">=0.8.x",
-    "npm": ">=1.1.x"
-  }
 }
