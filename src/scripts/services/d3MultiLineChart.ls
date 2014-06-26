@@ -19,7 +19,26 @@ angular.module('app').factory 'd3MultiLineChart', ->
         [min, max] = d3.extent(data, accessor)
         extent[0] = min if min < extent[0]
         extent[1] = max if max > extent[1]
+      extent[0] = Math.floor(extent[0]) - 0.5 # nearest integer below plus padding
+      extent[1] = Math.ceil(extent[1]) + 0.5  # nearest integer above plus padding
       return extent
+
+    # sets the axes of the graph to use the same pixel scale
+    normaliseExtent = (xExtent, yExtent) ->
+      # work out pixel size of one unit in each of x and y axes
+      xSpan = xExtent[1] - xExtent[0]
+      xUnit = width / xSpan
+      ySpan = yExtent[1] - yExtent[0]
+      yUnit = height / ySpan
+
+      if yUnit > xUnit
+        yExtra = (height / xUnit) - ySpan
+        yExtent[0] = yExtent[0] - yExtra / 2
+        yExtent[1] = yExtent[1] + yExtra / 2
+      else if xUnit > yUnit
+        xExtra = (width / yUnit) - xSpan
+        xExtent[0] = xExtent[0] - xExtra / 2
+        xExtent[1] = xExtent[1] + xExtra / 2
 
     chart = (selection) ->
 
@@ -29,14 +48,16 @@ angular.module('app').factory 'd3MultiLineChart', ->
         # this is needed for nondeterministic accessors.
         series = series.map (data) ->
           data.map (d, i) -> [xValue.call(data, d, i), yValue.call(data, d, i)]
-        
+
+        # get axes extent from plot co-ordinates
         xExtent = seriesExtent series, (d) -> d[0]
-        xScale.domain(xExtent).range [0, width]
-        
-        # Update the y-scale.
         yExtent = seriesExtent series, (d) -> d[1]
-        yExtent[0] = -yMax if yExtent[0] < -yMax
-        yExtent[1] = yMax if yExtent[1] > yMax
+
+        # set axes to use the same pixel scale
+        normaliseExtent(xExtent, yExtent)
+
+        # Update the axes ranges
+        xScale.domain(xExtent).range [0, width]
         yScale.domain(yExtent).range [height, 0]
         
         # Select the plot element, if it exists, and join it with the data series
@@ -99,7 +120,7 @@ angular.module('app').factory 'd3MultiLineChart', ->
 
     width = 300
     height = 250
-    yMax = 10 # default extent becomes -yMax to yMax. 
+    yMax = 0 # class variable. Initialise to prevent chart.yMax throwing a wobbly.
     xValue = (d) -> d[0]
     yValue = (d) -> d[1]
 
@@ -136,6 +157,8 @@ angular.module('app').factory 'd3MultiLineChart', ->
 
     # TODO: refactor x and y extents so we can drag the chart around and
     # regenerate the plot area appropriately.
+    # Currently this isn't used usefully - chart bounds are selected from the
+    # extent of the input data.
     chart.yMax = (_) ->
       return yMax  unless arguments.length
       yMax := _

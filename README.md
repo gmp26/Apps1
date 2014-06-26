@@ -81,6 +81,13 @@ Enter the following commands at a command line:
     cd Apps1
     npm install
 
+### Windows users
+As of 07/11/2013 there is a bug in jpegtran-bin v0.2.1 whereby it won't install in npm on Windows.
+This causes installation of grunt-contrib-imagemin to fail.
+
+You may get round this by adding `"jpegtran-bin": "=0.2.0"` to `package.json` before the `grunt-contrib-imagemin` requirement.
+Then run `npm install`.
+
 ## Compile Apps1
 You have three options.
 

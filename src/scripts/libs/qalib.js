@@ -1,4 +1,4 @@
-require=(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({"qSqbQp":[function(require,module,exports){
+require=(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({"HU2YCy":[function(require,module,exports){
 // seedrandom.js version 2.1.
 // Author: David Bau
 // Date: 2013 Mar 16
@@ -299,7 +299,9 @@ mixkey(math.random(), pool);
   52      // digits: there are 52 significant digits in a double
 );
 
-},{}],2:[function(require,module,exports){
+},{}],"seedrandom":[function(require,module,exports){
+module.exports=require('HU2YCy');
+},{}],3:[function(require,module,exports){
 module.exports = function(cplex){
   var stats, rand, gx, guessExact, helpers, ascoeff, complex, Complex, c_poly;
   stats = require('./stats')(cplex);
@@ -573,7 +575,7 @@ module.exports = function(cplex){
   }());
   return cplex;
 };
-},{"./guessExact":7,"./helpers":8,"./stats":14}],3:[function(require,module,exports){
+},{"./guessExact":8,"./helpers":9,"./stats":14}],4:[function(require,module,exports){
 /*
  * mathmo question/answer configuration
  */
@@ -691,7 +693,7 @@ module.exports = function(config){
   }
   return results$;
 };
-},{"./problems":10}],4:[function(require,module,exports){
+},{"./problems":11}],5:[function(require,module,exports){
 module.exports = function(fpolys){
   var fractions, frac, toFrac, fcoeff, fbcoeff, fpoly;
   fractions = require('./fractions')(fpolys);
@@ -912,7 +914,7 @@ module.exports = function(fpolys){
   }());
   return fpolys;
 };
-},{"./fractions":5}],5:[function(require,module,exports){
+},{"./fractions":6}],6:[function(require,module,exports){
 module.exports = function(fractions){
   var helpers, gcd, lcm, stats, rand, randnz, frac, toFrac, randfrac, fmatrix;
   fractions.fractionsLoaded = true;
@@ -1266,7 +1268,7 @@ module.exports = function(fractions){
   }());
   return fractions;
 };
-},{"./helpers":8,"./stats":14}],6:[function(require,module,exports){
+},{"./helpers":9,"./stats":14}],7:[function(require,module,exports){
 module.exports = function(ceq){
   var helpers, gcd, signedNumber, circleEq1, circleEq2, lineEq1, lineEq2;
   helpers = require('./helpers')(ceq);
@@ -1373,7 +1375,7 @@ module.exports = function(ceq){
   };
   return ceq;
 };
-},{"./helpers":8}],7:[function(require,module,exports){
+},{"./helpers":9}],8:[function(require,module,exports){
 module.exports = function(gx){
   var helpers, gcd, sqroot, guessExact, proxInt;
   helpers = require('./helpers')(gx);
@@ -1561,7 +1563,7 @@ module.exports = function(gx){
   };
   return gx;
 };
-},{"./helpers":8}],8:[function(require,module,exports){
+},{"./helpers":9}],9:[function(require,module,exports){
 module.exports = function(helpers){
   var fractions, frac, gcd, lcm, lincombination, sinpi, cospi, rand, randnz, rank, maxel, ranking, distrand, distrandnz, sqroot, vector, ord, ordt, pickrand, epsi, rPad, repeat, signedNumber, simplifySurd;
   helpers.helpersLoaded = true;
@@ -2091,7 +2093,7 @@ function curry$(f, bound){
   };
   return _curry();
 }
-},{"./fractions":5}],9:[function(require,module,exports){
+},{"./fractions":6}],10:[function(require,module,exports){
 module.exports = function(polys){
   var stats, ranking, helpers, gcd, ascoeff, abscoeff, express, polyexpand, p_quadratic, p_linear, p_const, poly;
   stats = require('./stats')(polys);
@@ -2352,9 +2354,9 @@ module.exports = function(polys){
   }());
   return polys;
 };
-},{"./helpers":8,"./stats":14}],10:[function(require,module,exports){
+},{"./helpers":9,"./stats":14}],11:[function(require,module,exports){
 module.exports = function(problems){
-  var polys, poly, polyexpand, abscoeff, ascoeff, p_linear, p_quadratic, fpolys, fpoly, fcoeff, fbcoeff, geometry, lineEq1, lineEq2, circleEq1, circleEq2, stats, rand, randnz, distrandnz, ranking, pickrand, distrand, massBin, massPo, massGeo, massN, tableN, tableT, tableChi, genN, genBin, genGeo, genPo, helpers, express, gcd, lcm, sinpi, vector, sqroot, ordt, simplifySurd, lincombination, signedNumber, fractions, frac, fmatrix, randfrac, cplex, Complex, gx, guessExact, makePartial, makeBinomial2, makePolyInt, makeTrigInt, makeVector, makeLines, makeLinesEq, makeLineParPerp, makeCircleEq, makeCircLineInter, makeIneq, makeAP, makeFactor, makeQuadratic, makeComplete, makeBinExp, makeLog, makeStationary, makeTriangle, makeCircle, makeSolvingTrig, makeVectorEq, makeModulus, makeTransformation, makeComposition, makeParametric, makeImplicit, makeChainRule, makeProductRule, makeQuotientRule, makeGP, makeImplicitFunction, makeIntegration, makeDE, makePowers, makeHCF, makeLCM, makeDiophantine, makeDistance, makeCircumCircle, makeCArithmetic, makeCPolar, makeDETwoHard, makeMatrixQ, makeMatrix2, makeMatrix3, makeTaylor, makePolarSketch, makeFurtherVector, makeNewtonRaphson, makeFurtherIneq, makeSubstInt, makeRevolution, makeMatXforms, makeDiscreteDistn, makeContinDistn, makeHypTest, makeConfidInt, makeChiSquare, makeProductMoment;
+  var polys, poly, polyexpand, abscoeff, ascoeff, p_linear, p_quadratic, fpolys, fpoly, fcoeff, fbcoeff, geometry, lineEq1, lineEq2, circleEq1, circleEq2, stats, rand, randnz, distrandnz, ranking, pickrand, distrand, massBin, massPo, massGeo, massN, tableN, tableT, tableChi, genN, genBin, genGeo, genPo, helpers, express, gcd, lcm, sinpi, vector, sqroot, ordt, simplifySurd, lincombination, signedNumber, fractions, frac, fmatrix, randfrac, cplex, Complex, gx, guessExact, yinterpolate, calcgradient, calcangle, makePartial, makeBinomial2, makePolyInt, makeTrigInt, makeVector, makeLines, makeLinesEq, makeLineParPerp, makeCircleEq, makeCircLineInter, makeIneq, makeAP, makeFactor, makeQuadratic, makeComplete, makeBinExp, makeLog, makeStationary, makeTriangle, makeCircle, makeSolvingTrig, makeVectorEq, makeModulus, makeTransformation, makeComposition, makeParametric, makeImplicit, makeChainRule, makeProductRule, makeQuotientRule, makeGP, makeImplicitFunction, makeIntegration, makeDE, makePowers, makeHCF, makeLCM, makeDiophantine, makeDistance, makeCircumCircle, makeCArithmetic, makeCPolar, makeDETwoHard, makeMatrixQ, makeMatrix2, makeMatrix3, makeTaylor, makePolarSketch, makeFurtherVector, makeNewtonRaphson, makeFurtherIneq, makeSubstInt, makeRevolution, makeMatXforms, makeDiscreteDistn, makeContinDistn, makeHypTest, makeConfidInt, makeChiSquare, makeProductMoment;
   polys = require('./polys')(problems);
   poly = polys.poly;
   polyexpand = polys.polyexpand;
@@ -2409,6 +2411,42 @@ module.exports = function(problems){
   Complex = cplex.Complex;
   gx = require('./guessExact')(problems);
   guessExact = gx.guessExact;
+  yinterpolate = function(x, y, yprev, ylimit, inc, calcy, l, r, points){
+    var ylimitsigned, yi, gradient, xylimit, xi;
+    if ((deepEq$(yprev, null, '===') && !deepEq$(y, null, '===')) || (!deepEq$(yprev, null, '===') && deepEq$(y, null, '==='))) {
+      ylimitsigned = ylimit;
+      if (deepEq$(yprev, null, '===')) {
+        if (y < 0) {
+          ylimitsigned = -ylimit;
+        }
+        yi = calcy(x + inc);
+        gradient = calcgradient(y, yi, inc);
+        xylimit = (y - ylimitsigned) / gradient;
+      } else {
+        if (yprev < 0) {
+          ylimitsigned = -ylimit;
+        }
+        yi = calcy(x - 2 * inc);
+        gradient = calcgradient(yi, yprev, inc);
+        xylimit = (ylimitsigned - yprev) / gradient;
+      }
+      xi = x + xylimit;
+      if (l <= xi && xi <= r) {
+        points.push([xi, ylimitsigned]);
+        return true;
+      }
+    }
+    return false;
+  };
+  calcgradient = function(y1, y2, dx){
+    return (y2 - y1) / dx;
+  };
+  calcangle = function(p1, p2, p3){
+    if (deepEq$(p1[1], null, '===') || deepEq$(p2[1], null, '===') || deepEq$(p3[1], null, '===')) {
+      return null;
+    }
+    return Math.atan2(p1[1] - p2[1], p1[0] - p2[0]) - Math.atan2(p3[1] - p2[1], p3[0] - p2[0]);
+  };
   problems.makePartial = makePartial = function(){
     var makePartial1, makePartial2, qa;
     makePartial1 = function(){
@@ -3851,7 +3889,7 @@ module.exports = function(problems){
     }
     qString += "x \\leq " + r + "\\).";
     drawIt = function(parms){
-      var p, q, f, l, r, d1, d2, n, i$, i, y1, y2;
+      var p, q, f, l, r, d1, d2, ylimit, inc, n, calcpoint1, calcpoint2, yprev1, yprev2, i$, i, y1, y2;
       p = parms[0];
       q = parms[1];
       f = parms[2];
@@ -3859,20 +3897,38 @@ module.exports = function(problems){
       r = parms[4];
       d1 = [];
       d2 = [];
+      ylimit = 20;
+      inc = 0.01;
       n = 0;
-      for (i$ = l; i$ <= r; i$ += 0.01) {
-        i = i$;
-        n++;
-        y1 = f(i);
-        if (Math.abs(y1) > 20) {
+      calcpoint1 = function(x){
+        var y1;
+        y1 = f(x);
+        if (Math.abs(y1) > ylimit) {
           y1 = null;
         }
-        d1.push([i, y1]);
-        y2 = p.compute(f(q.compute(i)));
-        if (Math.abs(y2) > 20) {
+        return y1;
+      };
+      calcpoint2 = function(x){
+        var y2;
+        y2 = p.compute(f(q.compute(x)));
+        if (Math.abs(y2) > ylimit) {
           y2 = null;
         }
+        return y2;
+      };
+      yprev1 = calcpoint1(l - inc);
+      yprev2 = calcpoint2(l - inc);
+      for (i$ = l; inc < 0 ? i$ >= r : i$ <= r; i$ += inc) {
+        i = i$;
+        y1 = calcpoint1(i);
+        yinterpolate(i, y1, yprev1, ylimit, inc, calcpoint1, l, r, d1);
+        d1.push([i, y1]);
+        yprev1 = y1;
+        y2 = calcpoint2(i);
+        yinterpolate(i, y2, yprev2, ylimit, inc, calcpoint2, l, r, d2);
         d2.push([i, y2]);
+        yprev2 = y2;
+        n++;
         if (n > 2500) {
           i = r;
         }
@@ -3900,23 +3956,56 @@ module.exports = function(problems){
     r = rand(Math.max(l + 5, 2), 8);
     qString = "Let \\(f(x) = " + fnn[which[0]].replace(/z/g, 'x') + ", g(x) = " + fnn[which[1]].replace(/z/g, 'x') + ".\\) Sketch the graph of \\(y = f(g(x))\\) (where it exists) for \\(" + l + "\\leq{x}\\leq" + r + "\\) and \\(-12\\leq{y}\\leq12.\\)";
     drawIt = function(parms){
-      var f, g, p, l, r, d1, n, i$, i, y2, y3;
+      var f, g, p, l, r, incinit, incmin, ylimit, calcpoints, calcpoint, d1;
       f = parms[0];
       g = parms[1];
       p = parms[2];
       l = parms[3];
       r = parms[4];
-      d1 = [];
-      n = 0;
-      for (i$ = l; i$ <= r; i$ += 0.01) {
-        i = i$;
-        n++;
-        if (g) {
-          y2 = g(i);
-        } else {
-          y2 = p.compute(i);
+      incinit = 0.01;
+      incmin = incinit / 1024;
+      ylimit = 12;
+      calcpoints = function(l, r, inc){
+        var points, angles, n, yprev, i$, i, y, angle, subpoints;
+        points = [];
+        angles = [null];
+        n = 0;
+        yprev = calcpoint(l - inc);
+        for (i$ = l; inc < 0 ? i$ >= r : i$ <= r; i$ += inc) {
+          i = i$;
+          y = calcpoint(i);
+          if (Math.abs(y) > ylimit) {
+            y = null;
+          }
+          if (yinterpolate(i, y, yprev, ylimit, inc, calcpoint, l, r, points)) {
+            n++;
+          }
+          yprev = y;
+          n++;
+          points.push([i, y]);
+          if (n > 2) {
+            angle = calcangle(points[n - 3], points[n - 2], points[n - 1]);
+            if (!deepEq$(angle, null, '===') && Math.abs(angle) < 1 && inc >= incmin) {
+              subpoints = calcpoints(points[n - 3][0], points[n - 1][0], inc / 2);
+              points.splice(-3, 3);
+              points = points.concat(subpoints);
+              n = n - 3 + subpoints.length;
+            }
+          }
+          if (n > 10000) {
+            i = r;
+          }
         }
-        if (y2) {
+        return points;
+      };
+      calcpoint = function(x){
+        var y2, y3;
+        if (g) {
+          y2 = g(x);
+        } else {
+          y2 = p.compute(x);
+        }
+        if (typeof y2 === 'number') {
           if (f) {
             y3 = f(y2);
           } else {
@@ -3925,14 +4014,9 @@ module.exports = function(problems){
         } else {
           y3 = null;
         }
-        if (Math.abs(y3) > 12) {
-          y3 = null;
-        }
-        d1.push([i, y3]);
-        if (n > 2500) {
-          i = r;
-        }
-      }
+        return y3;
+      };
+      d1 = calcpoints(l, r, incinit);
       return [d1];
     };
     aString = '%GRAPH%';
@@ -3940,7 +4024,7 @@ module.exports = function(problems){
     return qa;
   };
   problems.makeParametric = makeParametric = function(){
-    var p, fnf, fnn, which, parms, fn, data, qString, drawIt, aString, qa;
+    var p, fnf, fnn, which, parms, fn, data, xlimit, ylimit, inc, qString, drawIt, aString, qa;
     p = new poly(rand(1, 2));
     p.setrand(2);
     if (p.rank === 1 && p[0] === 0 && p[1] === 1) {
@@ -3956,6 +4040,9 @@ module.exports = function(problems){
     parms = 0;
     fn = 0;
     data = "";
+    xlimit = 12;
+    ylimit = 12;
+    inc = 0.01;
     qString = "Sketch the curve in the \\(xy\\) plane given by \\(x = " + fnn[which[0]].replace(/z/g, 't') + ", y = " + fnn[which[1]].replace(/z/g, 't') + ". t\\) is a real parameter which ranges from \\(";
     if (which[0] && which[1]) {
       qString += " - 10";
@@ -3964,30 +4051,96 @@ module.exports = function(problems){
     }
     qString += " \\mbox{ to } 10.\\)";
     drawIt = function(parms){
-      var f, g, p, l, d1, i$, i, x, y;
+      var f, g, p, l, d1, calcpointx, calcpointy, xprev, yprev, i$, i, x, y, ylimitsigned, yi, xi, gradient, dx, xlimitsigned, dy;
       f = parms[0];
       g = parms[1];
       p = parms[2];
       l = parms[3];
       d1 = [];
-      for (i$ = l; i$ <= 10; i$ += 0.01) {
-        i = i$;
+      calcpointx = function(t){
+        var x;
         if (f) {
-          x = f(i);
+          x = f(t);
         } else {
-          x = p.compute(i);
+          x = p.compute(t);
         }
-        if (Math.abs(x) > 12) {
+        if (Math.abs(x) > xlimit) {
           x = null;
         }
+        return x;
+      };
+      calcpointy = function(t){
+        var y;
         if (g) {
-          y = g(i);
+          y = g(t);
         } else {
-          y = p.compute(i);
+          y = p.compute(t);
         }
-        if (Math.abs(y) > 12) {
+        if (Math.abs(y) > ylimit) {
           y = null;
         }
+        return y;
+      };
+      xprev = calcpointx(l - inc);
+      yprev = calcpointy(l - inc);
+      for (i$ = l; i$ <= 10; i$ += 0.01) {
+        i = i$;
+        x = calcpointx(i);
+        y = calcpointy(i);
+        if (!deepEq$(x, null, '===') && !deepEq$(xprev, null, '===')) {
+          if ((deepEq$(yprev, null, '===') && !deepEq$(y, null, '===')) || (!deepEq$(yprev, null, '===') && deepEq$(y, null, '==='))) {
+            ylimitsigned = ylimit;
+            if (deepEq$(yprev, null, '===')) {
+              if (y < 0) {
+                ylimitsigned = -ylimit;
+              }
+              yi = calcpointy(i + inc);
+              xi = calcpointx(i + inc);
+              gradient = (yi - y) / (xi - x);
+              dx = (y - ylimitsigned) / gradient;
+            } else {
+              if (yprev < 0) {
+                ylimitsigned = -ylimit;
+              }
+              yi = calcpointy(i - inc * 2);
+              xi = calcpointx(i - inc * 2);
+              gradient = (yprev - yi) / (xprev - xi);
+              dx = (ylimitsigned - yprev) / gradient;
+            }
+            xi = x + dx;
+            if (Math.abs(xi) <= xlimit) {
+              d1.push([xi, ylimitsigned]);
+            }
+          }
+        }
+        if (!deepEq$(y, null, '===') && !deepEq$(yprev, null, '===')) {
+          if ((deepEq$(xprev, null, '===') && !deepEq$(x, null, '===')) || (!deepEq$(xprev, null, '===') && deepEq$(x, null, '==='))) {
+            xlimitsigned = xlimit;
+            if (deepEq$(xprev, null, '===')) {
+              if (x < 0) {
+                xlimitsigned = -xlimit;
+              }
+              yi = calcpointy(i + inc);
+              xi = calcpointx(i + inc);
+              gradient = (xi - x) / (yi - y);
+              dy = (x - xlimitsigned) / gradient;
+            } else {
+              if (xprev < 0) {
+                xlimitsigned = -xlimit;
+              }
+              yi = calcpointy(i - inc * 2);
+              xi = calcpointx(i - inc * 2);
+              gradient = (xprev - xi) / (yprev - yi);
+              dy = (xlimitsigned - xprev) / gradient;
+            }
+            yi = y + dy;
+            if (Math.abs(yi) <= ylimit) {
+              d1.push([xlimitsigned, yi]);
+            }
+          }
+        }
+        xprev = x;
+        yprev = y;
         if (x && y) {
           d1.push([x, y]);
         } else {
@@ -4359,7 +4512,7 @@ module.exports = function(problems){
       drawIt = function(parms){
         var d1, i$, i, x, y;
         d1 = [];
-        for (i$ = -1; i$ <= 1; i$ += 0.005) {
+        for (i$ = -2; i$ <= 2; i$ += 0.005) {
           i = i$;
           x = parms[0] * Math.cos(i * Math.PI);
           y = parms[1] * Math.sin(i * Math.PI);
@@ -5865,18 +6018,100 @@ module.exports = function(problems){
   };
   return problems;
 };
-},{"./complex":2,"./fpolys":4,"./fractions":5,"./geometry":6,"./guessExact":7,"./helpers":8,"./polys":9,"./stats":14}],"seedrandom":[function(require,module,exports){
-module.exports=require('qSqbQp');
-},{}],"qalib":[function(require,module,exports){
-module.exports=require('BisjLa');
-},{}],"BisjLa":[function(require,module,exports){
+function deepEq$(x, y, type){
+  var toString = {}.toString, hasOwnProperty = {}.hasOwnProperty,
+      has = function (obj, key) { return hasOwnProperty.call(obj, key); };
+  var first = true;
+  return eq(x, y, []);
+  function eq(a, b, stack) {
+    var className, length, size, result, alength, blength, r, key, ref, sizeB;
+    if (a == null || b == null) { return a === b; }
+    if (a.__placeholder__ || b.__placeholder__) { return true; }
+    if (a === b) { return a !== 0 || 1 / a == 1 / b; }
+    className = toString.call(a);
+    if (toString.call(b) != className) { return false; }
+    switch (className) {
+      case '[object String]': return a == String(b);
+      case '[object Number]':
+        return a != +a ? b != +b : (a == 0 ? 1 / a == 1 / b : a == +b);
+      case '[object Date]':
+      case '[object Boolean]':
+        return +a == +b;
+      case '[object RegExp]':
+        return a.source == b.source &&
+               a.global == b.global &&
+               a.multiline == b.multiline &&
+               a.ignoreCase == b.ignoreCase;
+    }
+    if (typeof a != 'object' || typeof b != 'object') { return false; }
+    length = stack.length;
+    while (length--) { if (stack[length] == a) { return true; } }
+    stack.push(a);
+    size = 0;
+    result = true;
+    if (className == '[object Array]') {
+      alength = a.length;
+      blength = b.length;
+      if (first) { 
+        switch (type) {
+        case '===': result = alength === blength; break;
+        case '<==': result = alength <= blength; break;
+        case '<<=': result = alength < blength; break;
+        }
+        size = alength;
+        first = false;
+      } else {
+        result = alength === blength;
+        size = alength;
+      }
+      if (result) {
+        while (size--) {
+          if (!(result = size in a == size in b && eq(a[size], b[size], stack))){ break; }
+        }
+      }
+    } else {
+      if ('constructor' in a != 'constructor' in b || a.constructor != b.constructor) {
+        return false;
+      }
+      for (key in a) {
+        if (has(a, key)) {
+          size++;
+          if (!(result = has(b, key) && eq(a[key], b[key], stack))) { break; }
+        }
+      }
+      if (result) {
+        sizeB = 0;
+        for (key in b) {
+          if (has(b, key)) { ++sizeB; }
+        }
+        if (first) {
+          if (type === '<<=') {
+            result = size < sizeB;
+          } else if (type === '<==') {
+            result = size <= sizeB
+          } else {
+            result = size === sizeB;
+          }
+        } else {
+          first = false;
+          result = size === sizeB;
+        }
+      }
+    }
+    stack.pop();
+    return result;
+  }
+}
+},{"./complex":3,"./fpolys":5,"./fractions":6,"./geometry":7,"./guessExact":8,"./helpers":9,"./polys":10,"./stats":14}],"gH93sY":[function(require,module,exports){
 module.exports = function(qalib){
   require('seedrandom');
   require('./helpers')(qalib);
   require('./config')(qalib);
   return qalib;
 };
-},{"./config":3,"./helpers":8,"seedrandom":"qSqbQp"}],14:[function(require,module,exports){
+},{"./config":4,"./helpers":9,"seedrandom":"HU2YCy"}],"qalib":[function(require,module,exports){
+module.exports=require('gH93sY');
+},{}],14:[function(require,module,exports){
 module.exports = function(stats){
   var facCache, factorial, combi, massBin, massPo, massGeo, massN, massNZ, massExp, genBern, genBin, genPo, genGeo, genExp, genN, genNZ, Phi_Taylor, istr, mktableT, tableT, mktableChi, tableChi, mktableN, tableN;
   facCache = [];
@@ -6225,5 +6460,5 @@ String.prototype.rPad = function(n, c){
   }
   return a.join("");
 };
-},{}]},{},["BisjLa"])
+},{}]},{},["gH93sY"])
 ;
