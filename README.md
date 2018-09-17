@@ -103,5 +103,5 @@ To work with plain old JavaScript run the following grunt task.
 ## Running Tests
 You have two options.
 
-1. [Jasmine](http://pivotal.github.com/jasmine/) HTML runner -  run `grunt` - Then open `/test/runner.html` in your browser to run the unit tests using Jasmine.
+1. [Jasmine](https://jasmine.github.io/) HTML runner -  run `grunt` - Then open `/test/runner.html` in your browser to run the unit tests using Jasmine.
 2. [Karma](http://vojtajina.github.com/karma/) - `grunt test` -  Defaults to running the tests in Chrome, but you can easily change this in `karma.conf.js` browsers section as required.
